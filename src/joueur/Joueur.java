@@ -1,6 +1,7 @@
 package joueur;
 
 import jeu.Carte;
+import jeu.Pioche;
 
 /**
  * 
@@ -22,7 +23,7 @@ public class Joueur{
 		this.nom = nom;
 		this.NbPointTotal = 0;
 		this.carteVictoire = null;
-		this.main = null;
+		this.main = new MainJoueur();
 	}
 
 	public Carte getCarteVictoire() {
@@ -65,8 +66,9 @@ public class Joueur{
 		this.main = main;
 	}
 	
-	public Carte piocherCarte() {
-		
+	public Carte piocherCarte(Pioche pioche,MainJoueur main) {
+		Carte newCard = pioche.getRandomCarte();
+		main.ajouterCarte(newCard);
 		return null;
 	}
 	

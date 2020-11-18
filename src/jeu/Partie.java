@@ -3,6 +3,8 @@ package jeu;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import joueur.Joueur;
+
 public class Partie {
 	
 	private boolean estTerminee;
@@ -45,17 +47,20 @@ public class Partie {
 	public void debutPartie(FormePlateau forme) {
 		
 		//permet de jouer la partie
-		
+		Joueur joueur1 = new Joueur("Alex",false);
 		Manche manche = this.creerManche();
 		Plateau plateau = new Plateau(forme);
-		//System.out.println(Arrays.deepToString(plateau.getRemplissage()));
+		Pioche pioche = new Pioche();
+		
 		ArrayList<ArrayList<Carte>> k = plateau.getRemplissage();
 		plateau.afficherPlateau();
 		
-		Pioche pioche = new Pioche();
-		for(int j=0;j<20;j++) {
-			System.out.println(pioche.getRandomCarte());
-		}
+		joueur1.piocherCarte(pioche,joueur1.getMain());
+		joueur1.getMain().afficherMain();
+		joueur1.getMain().retirerCarte(0);
+		joueur1.getMain().afficherMain();
+		
+		
 		
 		
 		

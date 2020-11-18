@@ -20,10 +20,10 @@ public class Pioche {
 		}
 		else {
 			int random = (int)(Math.random()*this.nbCarteRestantes);
-			Carte c = pioche.get(random);
+			Carte randomCard = pioche.get(random);
 			pioche.remove(random);
 			this.nbCarteRestantes -=1;
-			return c;
+			return randomCard;
 		}
 	}
 	

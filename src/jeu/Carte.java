@@ -44,10 +44,10 @@ public class Carte {
 		
 		if(this.rempli) {
 			
-			s = this.forme + " " + this.couleur + " rempli";
+			s = this.forme + " " + this.couleur + " REMPLI";
 		}
 		else {
-			s = this.forme + " " + this.couleur + " vide";
+			s = this.forme + " " + this.couleur + " VIDE";
 		}
 		
 		

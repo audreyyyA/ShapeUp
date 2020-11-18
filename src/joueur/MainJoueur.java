@@ -1,32 +1,33 @@
 package joueur;
 
+import java.util.ArrayList;
+
 import jeu.Carte;
 
 public class MainJoueur {
 	
-	private Carte [] cartes;
+	private ArrayList<Carte> cartes;
 	
 	public MainJoueur() {
-		
+		this.cartes = new ArrayList<Carte>();
 	}
 
-	public void ajouterCarte() {
-		
+	public void ajouterCarte(Carte newCard) {
+		cartes.add(newCard);
 	}
 	
-	public void retirerCrate() {
-		
+	public void retirerCarte(int index) {
+		cartes.remove(index);
 		
 	}
 	
 	public void afficherMain() {
-		
+		System.out.println(cartes);
 		
 	}
 	
-	public Carte getCarte(int i) {
+	public Carte getCarte(int index) {
 		
-		
-		return cartes[i];
+		return cartes.get(index);
 	}
 }
