@@ -12,11 +12,8 @@ public class Appli {
 		System.out.println("Debut partie: ");
 		Regle regle = new Regle();
 		Partie partie = new Partie(2, regle);
-		partie.debutPartie(FormePlateau.TRIANGLE);
-		
-		
-		
-
+		partie.debutPartie(FormePlateau.RECTANGLE);
+	
 	}
 
 }

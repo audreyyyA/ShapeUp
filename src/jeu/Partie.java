@@ -50,19 +50,16 @@ public class Partie {
 		Plateau plateau = new Plateau(forme);
 		//System.out.println(Arrays.deepToString(plateau.getRemplissage()));
 		ArrayList<ArrayList<Carte>> k = plateau.getRemplissage();
+		plateau.afficherPlateau();
 		
-		for(ArrayList p : k){
-            for(int i=0;i<p.size();i++)
-            	System.out.println("["+k.indexOf(p)+"]"+"["+ p.indexOf(p.get(i))+"]  ="+p.get(i) );
-            	//System.out.println(p.get(i) + " ");
-         
-        }
+		Pioche pioche = new Pioche();
+		for(int j=0;j<20;j++) {
+			System.out.println(pioche.getRandomCarte());
+		}
 		
-		/*while(!this.estTerminee) {
-			
-			
-			
-			
+		
+		
+		/*while(!this.estTerminee) {	
 			
 		}*/
 		
