@@ -57,10 +57,8 @@ public class Partie {
 		
 		joueur1.piocherCarte(pioche,joueur1.getMain());
 		joueur1.getMain().afficherMain();
-		joueur1.getMain().retirerCarte(0);
-		joueur1.getMain().afficherMain();
 		
-		
+		System.out.println(joueur1.getMain().getCarte(0));
 		
 		
 		

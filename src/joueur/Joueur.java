@@ -1,7 +1,10 @@
 package joueur;
 
+import java.util.ArrayList;
+
 import jeu.Carte;
 import jeu.Pioche;
+import jeu.Plateau;
 
 /**
  * 
@@ -72,9 +75,21 @@ public class Joueur{
 		return null;
 	}
 	
-	public void poserCarte() {
-		
-		
+	public void poserCarte(Carte carte, Plateau plateauActuel, int x,int y) {
+		if(plateauActuel.getRemplissage().size()<= x || plateauActuel.getRemplissage().get(x).size() <= y) {
+			System.out.println("Nique ta mere t'as pas le droit joué là");
+		}
+		else {
+			ArrayList<ArrayList<Carte>> newRemplissage;
+			newRemplissage = plateauActuel.getRemplissage();
+			if(newRemplissage.get(x).get(y) == null) {
+				newRemplissage.get(x).set(y,carte);
+				System.out.println("La carte : "+carte+" a été posée en "+x+","+y);
+			}
+			else {
+				System.out.println("Cette case est déjà prise");
+			}
+		}
 	}
 	
 	public boolean askDeplacer() {
