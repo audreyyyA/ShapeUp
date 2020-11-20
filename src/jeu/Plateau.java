@@ -44,20 +44,30 @@ public class Plateau {
 			System.out.println("Nique ta mere t'as pas le droit joué là");
 		}
 		else {
-			if(this.remplissage.get(x).get(y) == null) {
-				this.remplissage.get(x).set(y, carte);
-				System.out.println("La carte : "+carte+" a été posée en "+x+","+y);
+			if(this.getCarte(x, y) != null) {
+				System.out.println("Cette case est déjà prise");
 			}
 			else {
-				System.out.println("Cette case est déjà prise");
+				this.setCarte(x, y, carte);
+				System.out.println("La carte : "+carte+" a été posée en "+x+","+y);
+				
 			}
 		}
 	}
 	
 	public void afficherPlateau() {
 		for(int i=0; i < this.remplissage.size(); i++) {
-			
-			System.out.println(this.remplissage.get(i));
+			String s = "|";
+			for(int j=0; j< this.remplissage.get(i).size(); j++) {
+				
+				if(this.remplissage.get(i).get(j) == null) {
+					s+= " ,";
+				}
+				else {
+					s+= this.remplissage.get(i).get(j).toString() + ",";
+				}
+			}
+			System.out.println(s + "|");
 		}
 	}
 	

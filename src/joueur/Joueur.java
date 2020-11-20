@@ -1,5 +1,8 @@
 package joueur;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -77,22 +80,31 @@ public class Joueur{
 		return newCard;
 	}
 	
-	public void poserCarte(Carte carte, Plateau plateauActuel, int x,int y) {
+	public void poserCarte(int index, Plateau plateauActuel, int x,int y) {
 		
 		
-		plateauActuel.setRemplissage(x, y, carte);
+		plateauActuel.setRemplissage(x, y, this.main.getCarte(index));
+		this.main.retirerCarte(index);
 		
 	}
 	
-	public boolean askDeplacer() {
+	public boolean askDeplacer(){
 		
 		System.out.println("Voulez vous déplacer une carte ? (O/N)");
 		Scanner sc = new Scanner(System.in);
+		//String s= "";
+		//s = sc.next();
+		String s = sc.nextLine();
+			
+		System.out.println("la reponse  : " + s);
 		
-		if(sc.next().substring(0, 1).toUpperCase() == "O") {
+		if(s.equals("O") || s.equals("o")) {
+			System.out.println("ta reponse frereee ets un oui et c : " );
+			
 			return true;
 		}
-		else if(sc.next().substring(0, 1).toUpperCase() == "N") {
+		else if(s.equals("N") || s.equals("n")) {
+			System.out.println("ta reponse frereee NON: ");
 			return false;
 		}
 		else {
@@ -100,6 +112,7 @@ public class Joueur{
 			System.out.println("Je n'ai rien capté!!!");
 			return askDeplacer();
 		}
+		
 	}
 	
 	public void finTour() {
@@ -110,7 +123,7 @@ public class Joueur{
 	public void deplacerCarte(int xCarte, int yCarte, int xDeplacer, int yDeplacer, Plateau plateau) {
 		
 		//tester si on peut poser ici (dimension plateau)
-		if(plateau.getCarte(xDeplacer, yDeplacer) == null) {
+		if(plateau.getCarte(xDeplacer, yDeplacer) != null) {
 			System.out.println("La case où tu veux déplacer la carte est déjà prise");
 		}
 		else{

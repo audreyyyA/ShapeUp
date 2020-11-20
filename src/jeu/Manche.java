@@ -77,8 +77,9 @@ public class Manche {
 	public void jouer(Joueur joueur) {
 		
 		Carte c = joueur.piocherCarte(this.pioche);
-		joueur.getMain().ajouterCarte(c);
-		//joueur.getMain().afficherMain(); 
+		joueur.getMain().ajouterCarte(c); 
+		joueur.getMain().afficherMain();
+		plateau.afficherPlateau();
 		
 		if(joueur.askDeplacer()) {
 			
@@ -99,6 +100,20 @@ public class Manche {
 			
 			joueur.deplacerCarte(xCarte,yCarte,xDeplacer,yDeplacer,this.plateau);
 		}
+		
+		joueur.getMain().afficherMain();
+		System.out.println("Quelle carte voulez vous poser ?");
+		Scanner sc = new Scanner(System.in);
+		int index = sc.nextInt();
+		
+		System.out.println("Abscisse de pose : ");
+		int xPose = sc.nextInt();
+		
+		System.out.println("Ordonnée de pose : ");
+		int yPose = sc.nextInt();
+		joueur.poserCarte(index, plateau, xPose, yPose);
+		
+		plateau.afficherPlateau();
 	}
 	
 	public void finManche() {
