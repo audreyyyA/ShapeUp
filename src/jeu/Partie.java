@@ -11,6 +11,7 @@ public class Partie {
 	private int nbManches;
 	private int numManche;
 	private Regle regle;
+	ArrayList<Joueur> tabJoueur;
 	
 	public Partie(int nbM, Regle regle) {
 		
@@ -18,6 +19,7 @@ public class Partie {
 		this.nbManches = nbM;
 		this.numManche = 1;
 		this.regle = regle;
+		this.tabJoueur = new ArrayList<>();
 	}
 
 	public boolean getTerminee() {
@@ -48,17 +50,16 @@ public class Partie {
 		
 		//permet de jouer la partie
 		Joueur joueur1 = new Joueur("Alex",false);
+		this.tabJoueur.add(joueur1);
+		
 		Manche manche = this.creerManche();
-		Plateau plateau = new Plateau(forme);
-		Pioche pioche = new Pioche();
+		manche.demarrerManche(tabJoueur, forme);
 		
-		ArrayList<ArrayList<Carte>> k = plateau.getRemplissage();
-		plateau.afficherPlateau();
 		
-		joueur1.piocherCarte(pioche,joueur1.getMain());
-		joueur1.getMain().afficherMain();
 		
-		System.out.println(joueur1.getMain().getCarte(0));
+		
+		
+		
 		
 		
 		

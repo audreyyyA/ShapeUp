@@ -3,7 +3,7 @@ package jeu;
 public enum FormePlateau {
 	
 	RECTANGLE,
-	TRIANGLE,
+	HEXAGONE,
 	CERCLE;
 
 }

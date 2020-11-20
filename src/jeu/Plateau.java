@@ -23,15 +23,35 @@ public class Plateau {
 	}
 
 	
+	public Carte getCarte(int x, int y) {
+		return this.remplissage.get(x).get(y);
+	}
+	
+	public void setCarte(int x, int y, Carte carte) {
+		this.remplissage.get(x).set(y, carte);
+	}
+	
+	
 	public ArrayList<ArrayList<Carte>> getRemplissage() {
 	
 		return this.remplissage;
 		
 	}
 	
-	public void setRemplissage(ArrayList<ArrayList<Carte>> remplissage) {
+	public void setRemplissage(int x, int y, Carte carte) {
 		
-		this.remplissage = remplissage;
+		if(this.remplissage.size()<= x || this.remplissage.get(x).size() <= y) {
+			System.out.println("Nique ta mere t'as pas le droit joué là");
+		}
+		else {
+			if(this.remplissage.get(x).get(y) == null) {
+				this.remplissage.get(x).set(y, carte);
+				System.out.println("La carte : "+carte+" a été posée en "+x+","+y);
+			}
+			else {
+				System.out.println("Cette case est déjà prise");
+			}
+		}
 	}
 	
 	public void afficherPlateau() {
@@ -56,18 +76,24 @@ public class Plateau {
 			}
 			
 		}
-		else if(this.forme == FormePlateau.TRIANGLE) {
+		else if(this.forme == FormePlateau.HEXAGONE) {
 			
-			int i = 1;
-			for(int k=0; k<4; k++) {
+			int i = 2;
+			
+			for(int k=0; k<5; k++) {
 				ArrayList<Carte> l=new ArrayList<>();
-				
 				for(int j = 0; j<i; j++) {
-				
 					l.add(null);
 				}
+				
 				this.remplissage.add(k,l);
-				i+=2;
+		
+				if(k>1) {
+					i-=1;
+				}
+				else {
+					i+=1;
+				}
 			}
 		}
 		else {

@@ -1,6 +1,7 @@
 package joueur;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import jeu.Carte;
 import jeu.Pioche;
@@ -30,6 +31,7 @@ public class Joueur{
 	}
 
 	public Carte getCarteVictoire() {
+		
 		return carteVictoire;
 	}
 
@@ -69,43 +71,53 @@ public class Joueur{
 		this.main = main;
 	}
 	
-	public Carte piocherCarte(Pioche pioche,MainJoueur main) {
+	public Carte piocherCarte(Pioche pioche) {
 		Carte newCard = pioche.getRandomCarte();
-		main.ajouterCarte(newCard);
-		return null;
+		//this.main.ajouterCarte(newCard);
+		return newCard;
 	}
 	
 	public void poserCarte(Carte carte, Plateau plateauActuel, int x,int y) {
-		if(plateauActuel.getRemplissage().size()<= x || plateauActuel.getRemplissage().get(x).size() <= y) {
-			System.out.println("Nique ta mere t'as pas le droit joué là");
-		}
-		else {
-			ArrayList<ArrayList<Carte>> newRemplissage;
-			newRemplissage = plateauActuel.getRemplissage();
-			if(newRemplissage.get(x).get(y) == null) {
-				newRemplissage.get(x).set(y,carte);
-				System.out.println("La carte : "+carte+" a été posée en "+x+","+y);
-			}
-			else {
-				System.out.println("Cette case est déjà prise");
-			}
-		}
+		
+		
+		plateauActuel.setRemplissage(x, y, carte);
+		
 	}
 	
 	public boolean askDeplacer() {
 		
-		boolean deplacer = false;
-		return deplacer;
+		System.out.println("Voulez vous déplacer une carte ? (O/N)");
+		Scanner sc = new Scanner(System.in);
+		
+		if(sc.next().substring(0, 1).toUpperCase() == "O") {
+			return true;
+		}
+		else if(sc.next().substring(0, 1).toUpperCase() == "N") {
+			return false;
+		}
+		else {
+			
+			System.out.println("Je n'ai rien capté!!!");
+			return askDeplacer();
+		}
 	}
 	
 	public void finTour() {
 		
 		//appellera une autre méthode pour changer de joueur
 	}
-
-	public void deplacerCarte() {
+	
+	public void deplacerCarte(int xCarte, int yCarte, int xDeplacer, int yDeplacer, Plateau plateau) {
 		
-		
+		//tester si on peut poser ici (dimension plateau)
+		if(plateau.getCarte(xDeplacer, yDeplacer) == null) {
+			System.out.println("La case où tu veux déplacer la carte est déjà prise");
+		}
+		else{
+			plateau.setCarte(xDeplacer, yDeplacer, plateau.getCarte(xCarte, yCarte)); // déplace la carte
+			plateau.setCarte(xCarte, yCarte, null); //enlève l'ancinne carte 
+			plateau.afficherPlateau();
+		}
 	}
 	
 	

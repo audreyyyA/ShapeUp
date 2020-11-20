@@ -13,6 +13,8 @@ public class Appli {
 		Regle regle = new Regle();
 		Partie partie = new Partie(2, regle);
 		partie.debutPartie(FormePlateau.RECTANGLE);
+		
+		
 	
 	}
 
