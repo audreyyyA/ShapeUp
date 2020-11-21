@@ -23,11 +23,14 @@ public class MainJoueur {
 	
 	public void afficherMain() {
 		System.out.println(cartes);
-		
 	}
 	
 	public Carte getCarte(int index) {
 		
 		return cartes.get(index);
+	}
+	
+	public ArrayList<Carte> getCartes(){
+		return cartes;
 	}
 }

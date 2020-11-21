@@ -56,18 +56,27 @@ public class Plateau {
 	}
 	
 	public void afficherPlateau() {
+		
+		// Pour le rectangle
 		for(int i=0; i < this.remplissage.size(); i++) {
-			String s = "|";
+			String abcisse = "";
+			String s = (i+1) + " |";
 			for(int j=0; j< this.remplissage.get(i).size(); j++) {
+				if(i == 0 ) {
+					abcisse += "    "+(j+1);
+				}
 				
 				if(this.remplissage.get(i).get(j) == null) {
-					s+= " ,";
+					s+= "    |";
 				}
 				else {
-					s+= this.remplissage.get(i).get(j).toString() + ",";
+					s+= this.remplissage.get(i).get(j).toString() + " |";
 				}
 			}
-			System.out.println(s + "|");
+			if(i==0) {
+				System.out.println(abcisse);	
+			}
+			System.out.println(s);
 		}
 	}
 	

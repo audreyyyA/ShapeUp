@@ -90,26 +90,18 @@ public class Joueur{
 	
 	public boolean askDeplacer(){
 		
-		System.out.println("Voulez vous déplacer une carte ? (O/N)");
+		System.out.print("Voulez vous déplacer une carte ? (O/N) ");
 		Scanner sc = new Scanner(System.in);
-		//String s= "";
-		//s = sc.next();
 		String s = sc.nextLine();
-			
-		System.out.println("la reponse  : " + s);
 		
 		if(s.equals("O") || s.equals("o")) {
-			System.out.println("ta reponse frereee ets un oui et c : " );
-			
 			return true;
 		}
 		else if(s.equals("N") || s.equals("n")) {
-			System.out.println("ta reponse frereee NON: ");
 			return false;
 		}
 		else {
-			
-			System.out.println("Je n'ai rien capté!!!");
+			System.out.println("Rentrez O ou N");
 			return askDeplacer();
 		}
 		
@@ -121,16 +113,21 @@ public class Joueur{
 	}
 	
 	public void deplacerCarte(int xCarte, int yCarte, int xDeplacer, int yDeplacer, Plateau plateau) {
-		
+		if(plateau.getCarte(xDeplacer, yDeplacer) == null) {
+			System.out.println("La case que vous avez ciblé ne contient pas de cartes !");
+			this.askDeplacer();
+		}
+		else {
+			if(plateau.getCarte(xDeplacer, yDeplacer) != null) {
+				System.out.println("La case où tu veux déplacer la carte est déjà prise");
+			}
+			else{
+				plateau.setCarte(xDeplacer, yDeplacer, plateau.getCarte(xCarte, yCarte)); // déplace la carte
+				plateau.setCarte(xCarte, yCarte, null); //enlève l'ancinne carte 
+				plateau.afficherPlateau();
+			}
+		}
 		//tester si on peut poser ici (dimension plateau)
-		if(plateau.getCarte(xDeplacer, yDeplacer) != null) {
-			System.out.println("La case où tu veux déplacer la carte est déjà prise");
-		}
-		else{
-			plateau.setCarte(xDeplacer, yDeplacer, plateau.getCarte(xCarte, yCarte)); // déplace la carte
-			plateau.setCarte(xCarte, yCarte, null); //enlève l'ancinne carte 
-			plateau.afficherPlateau();
-		}
 	}
 	
 	

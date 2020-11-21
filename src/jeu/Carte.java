@@ -39,17 +39,14 @@ public class Carte {
 	}
 	
 	public String toString() {
-		
 		String s = null;
 		
 		if(this.rempli) {
-			
-			s = this.forme + " " + this.couleur + " REMPLI";
+			s = this.forme.toString().toCharArray()[0] +""+ this.couleur.toString().toCharArray()[0] + "R";
 		}
 		else {
-			s = this.forme + " " + this.couleur + " VIDE";
+			s = this.forme.toString().toCharArray()[0] + "" + this.couleur.toString().toCharArray()[0] + "V";
 		}
-		
 		
 		return s;
 	}

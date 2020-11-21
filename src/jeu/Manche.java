@@ -55,9 +55,13 @@ public class Manche {
 			this.carteDefausse = this.pioche.getRandomCarte();
 		}
 		
+		int nbTour = 0;
+		
 		while(this.pioche.getListeCarte().size() != 0) {
 			for(Joueur j : tabJoueur) {
 				if(this.pioche.getListeCarte().size() != 0) {
+					nbTour ++;
+					System.out.println("Tour "+nbTour+"\n");
 					jouer(j);
 				}
 				else {
@@ -82,34 +86,35 @@ public class Manche {
 		plateau.afficherPlateau();
 		
 		if(joueur.askDeplacer()) {
-			
-			System.out.println("Abcisse de la carte? : ");
+			System.out.print("Abcisse de la carte ? : ");
 			Scanner sc = new Scanner(System.in);
 			int xCarte = sc.nextInt();
-			
-			System.out.println("Ordonnée de la carte? : ");
+			System.out.print("Ordonnée de la carte ? : ");
 			int yCarte = sc.nextInt();
-			
 			System.out.println("la carte que tu veux déplacer : " + xCarte + ", " + yCarte);
-			
-			System.out.println("Ou veux tu la poser ? Abcisse: ");
+			System.out.print("Ou veux tu la poser ? Abcisse: ");
 			int xDeplacer = sc.nextInt();
-			
-			System.out.println("Ordonnée: ");
+			System.out.print("Ordonnée: ");
 			int yDeplacer = sc.nextInt();
 			
 			joueur.deplacerCarte(xCarte,yCarte,xDeplacer,yDeplacer,this.plateau);
 		}
 		
 		joueur.getMain().afficherMain();
-		System.out.println("Quelle carte voulez vous poser ?");
+		System.out.print("Quelle carte voulez vous poser ? "); // Pas laisser le choix si une seule carte ?
 		Scanner sc = new Scanner(System.in);
-		int index = sc.nextInt();
+		int index = sc.nextInt(); 
 		
-		System.out.println("Abscisse de pose : ");
+		while (index <0 || index > joueur.getMain().getCartes().size()-1) {
+			System.out.println("Tu as choisis un index incorrect. Chosisi en un autre");
+			System.out.print("Quelle carte voulez vous poser ? ");
+			index = sc.nextInt();
+		}
+		
+		System.out.print("Abscisse de pose : ");
 		int xPose = sc.nextInt();
 		
-		System.out.println("Ordonnée de pose : ");
+		System.out.print("Ordonnée de pose : ");
 		int yPose = sc.nextInt();
 		joueur.poserCarte(index, plateau, xPose, yPose);
 		
