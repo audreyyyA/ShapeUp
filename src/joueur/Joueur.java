@@ -113,7 +113,7 @@ public class Joueur{
 	}
 	
 	public void deplacerCarte(int xCarte, int yCarte, int xDeplacer, int yDeplacer, Plateau plateau) {
-		if(plateau.getCarte(xDeplacer, yDeplacer) == null) {
+		if(plateau.getCarte(xCarte, yCarte) == null) {
 			System.out.println("La case que vous avez ciblé ne contient pas de cartes !");
 			this.askDeplacer();
 		}

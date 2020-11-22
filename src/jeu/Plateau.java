@@ -24,11 +24,14 @@ public class Plateau {
 
 	
 	public Carte getCarte(int x, int y) {
-		return this.remplissage.get(x).get(y);
+		if(y >= this.remplissage.size() || y<0 || x<0 || x >= this.remplissage.get(y).size()-1) {
+			return null;
+		}
+		return this.remplissage.get(y).get(x);
 	}
 	
 	public void setCarte(int x, int y, Carte carte) {
-		this.remplissage.get(x).set(y, carte);
+		this.remplissage.get(y).set(x, carte);
 	}
 	
 	
@@ -40,7 +43,7 @@ public class Plateau {
 	
 	public void setRemplissage(int x, int y, Carte carte) {
 		
-		if(this.remplissage.size()<= x || this.remplissage.get(x).size() <= y) {
+		if(this.remplissage.size()<= y || this.remplissage.get(y).size() <= x) {
 			System.out.println("Nique ta mere t'as pas le droit joué là");
 		}
 		else {
@@ -55,15 +58,24 @@ public class Plateau {
 		}
 	}
 	
+	public boolean checkAdjacent(int x, int y) {
+		boolean adjacence = false;
+		if(this.getCarte(x-1, y) != null || this.getCarte(x+1, y) != null || this.getCarte(x, y+1) != null || this.getCarte(x, y-1) != null) {
+			adjacence = true;
+		}
+		return adjacence; 
+	}
+	
+	
 	public void afficherPlateau() {
 		
 		// Pour le rectangle
 		for(int i=0; i < this.remplissage.size(); i++) {
 			String abcisse = "";
-			String s = (i+1) + " |";
+			String s = (i) + " |";
 			for(int j=0; j< this.remplissage.get(i).size(); j++) {
 				if(i == 0 ) {
-					abcisse += "    "+(j+1);
+					abcisse += "    "+(j);
 				}
 				
 				if(this.remplissage.get(i).get(j) == null) {
@@ -78,6 +90,95 @@ public class Plateau {
 			}
 			System.out.println(s);
 		}
+	}
+	
+	public boolean checkDeplacement(Position position) {
+		
+		if(position == Position.HAUT) {
+			int nbligne = this.remplissage.size() - 1;
+			for(int i=0; i<remplissage.get(nbligne).size(); i++) { //boucle de 0 à la taille de la derniere ligne
+				if(this.getCarte(nbligne,i) != null) {
+					return false;
+				}
+			}
+			return true;
+		}
+		
+		else if(position == Position.BAS) {
+			for(int i=0; i< this.remplissage.get(0).size(); i++) {
+				if(this.getCarte(0,i) != null) {
+					return false;
+				}
+			}
+			return true;
+		}
+		
+		else if(position == Position.GAUCHE) {
+			for(int i=0;i<this.remplissage.size()-1; i++) {
+				if(this.getCarte(i,0) != null) {
+					return false;
+				}
+			}
+			return true;
+		}
+		
+		
+		else if(position == Position.DROITE) {
+			int nbColonne = this.remplissage.size()-1;
+			for(int i=0;i<nbColonne; i++) {
+				if(this.getCarte(i,nbColonne) != null) {
+					return false;
+				}
+			}
+			return true;
+		}
+			
+		return false;
+	}
+	
+	
+	public void deplacerPlateau(Position position) {
+		
+			if(position == Position.HAUT) {
+				int nbligne = this.remplissage.size() - 1;
+				for(int i=nbligne-1; i>=0; i--) {
+					for(int j=0; j<this.remplissage.get(i).size(); j++) {
+						this.setCarte(j, i+1, this.getCarte(j, i));
+						this.setCarte(j, i, null);
+					}
+				}
+			}
+			
+			else if(position == Position.BAS) {
+				int nbligne = this.remplissage.size() - 1;
+				for(int i=1; i<nbligne; i++) {
+					for(int j=0; j<this.remplissage.get(i).size(); j++) {
+						this.setCarte(j, i-1, this.getCarte(j, i));
+						this.setCarte(j, i, null);
+					}
+				}
+			}
+			
+			
+			else if(position == Position.GAUCHE) {
+				for(int i=0; i<this.remplissage.size(); i++) {
+					for(int j=1; j<this.remplissage.get(i).size(); j++) {
+						this.setCarte(j-1, i,this.getCarte(j, i));
+						this.setCarte(j, i, null);
+					}
+				}
+			}
+			
+			
+			else if(position == Position.DROITE) {
+				int nbColonne = this.remplissage.size()-1;
+				for(int i=0; i<this.remplissage.size(); i++) {
+					for(int j=nbColonne-1; j>=0 ; j--) {
+						this.setCarte(j+1, i,this.getCarte(j, i));
+						this.setCarte(j, i, null);
+					}
+				}
+			}
 	}
 	
 	public void initialiser() {

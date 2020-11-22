@@ -73,9 +73,6 @@ public class Manche {
 		
 		/*ArrayList<ArrayList<Carte>> k = plateau.getRemplissage();
 		plateau.afficherPlateau();*/
-		
-		
-		
 	}
 	
 	public void jouer(Joueur joueur) {
@@ -86,12 +83,13 @@ public class Manche {
 		plateau.afficherPlateau();
 		
 		if(joueur.askDeplacer()) {
+
 			System.out.print("Abcisse de la carte ? : ");
 			Scanner sc = new Scanner(System.in);
 			int xCarte = sc.nextInt();
 			System.out.print("Ordonnée de la carte ? : ");
 			int yCarte = sc.nextInt();
-			System.out.println("la carte que tu veux déplacer : " + xCarte + ", " + yCarte);
+			System.out.println("la carte que tu veux déplacer : " + plateau.getCarte(xCarte, yCarte));
 			System.out.print("Ou veux tu la poser ? Abcisse: ");
 			int xDeplacer = sc.nextInt();
 			System.out.print("Ordonnée: ");
@@ -117,7 +115,13 @@ public class Manche {
 		System.out.print("Ordonnée de pose : ");
 		int yPose = sc.nextInt();
 		joueur.poserCarte(index, plateau, xPose, yPose);
-		
+		plateau.afficherPlateau();
+		if(plateau.checkDeplacement(Position.GAUCHE)) {
+			plateau.deplacerPlateau(Position.GAUCHE);
+		}
+		else {
+			System.out.println("Impossible de monter le plateau");
+		}
 		plateau.afficherPlateau();
 	}
 	
