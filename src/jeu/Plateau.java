@@ -58,12 +58,37 @@ public class Plateau {
 		}
 	}
 	
-	public boolean checkAdjacent(int x, int y) {
-		boolean adjacence = false;
-		if(this.getCarte(x-1, y) != null || this.getCarte(x+1, y) != null || this.getCarte(x, y+1) != null || this.getCarte(x, y-1) != null) {
-			adjacence = true;
+	
+	public boolean checkPose(int x, int y) { //Check si une carte est adjacente à l'endroit de pose
+		if(x == -1) { 
+			if(this.getCarte(0, y) !=null && this.checkDeplacement(Position.DROITE)) {
+				this.deplacerPlateau(Position.DROITE);
+				this.afficherPlateau();
+				return true;
+			}
 		}
-		return adjacence; 
+		else if(y == -1) {
+			if(this.getCarte(x,0) != null && this.checkDeplacement(Position.HAUT)) {
+				this.deplacerPlateau(Position.HAUT);
+				return true;
+			}
+		}
+		else if(x == this.remplissage.size()) {
+			if(this.getCarte(x-1, y) != null && this.checkDeplacement(Position.BAS)) {
+				this.deplacerPlateau(Position.BAS);
+				return true;
+			}
+		}
+		else if(y == this.remplissage.get(x).size()) {
+			if(this.getCarte(x, y-1) != null && this.checkDeplacement(Position.GAUCHE)) {
+				this.deplacerPlateau(Position.GAUCHE);
+				return true;
+			}
+		}
+		else if(this.getCarte(x-1, y) != null || this.getCarte(x+1, y) != null || this.getCarte(x, y+1) != null || this.getCarte(x, y-1) != null) {
+			return true;
+		}
+		return false; 
 	}
 	
 	
@@ -90,6 +115,7 @@ public class Plateau {
 			}
 			System.out.println(s);
 		}
+		System.out.print("\n");
 	}
 	
 	public boolean checkDeplacement(Position position) {

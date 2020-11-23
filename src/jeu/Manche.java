@@ -62,7 +62,7 @@ public class Manche {
 				if(this.pioche.getListeCarte().size() != 0) {
 					nbTour ++;
 					System.out.println("Tour "+nbTour+"\n");
-					jouer(j);
+					jouer(j,nbTour);
 				}
 				else {
 					break;
@@ -75,53 +75,75 @@ public class Manche {
 		plateau.afficherPlateau();*/
 	}
 	
-	public void jouer(Joueur joueur) {
+	public void jouer(Joueur joueur, int tour) {
 		
 		Carte c = joueur.piocherCarte(this.pioche);
 		joueur.getMain().ajouterCarte(c); 
 		joueur.getMain().afficherMain();
 		plateau.afficherPlateau();
+		Scanner sc = new Scanner(System.in);
 		
-		if(joueur.askDeplacer()) {
-
+		boolean deplacer = joueur.askDeplacer();
+		while(deplacer) {
 			System.out.print("Abcisse de la carte ? : ");
-			Scanner sc = new Scanner(System.in);
 			int xCarte = sc.nextInt();
 			System.out.print("Ordonnée de la carte ? : ");
 			int yCarte = sc.nextInt();
-			System.out.println("la carte que tu veux déplacer : " + plateau.getCarte(xCarte, yCarte));
-			System.out.print("Ou veux tu la poser ? Abcisse: ");
-			int xDeplacer = sc.nextInt();
-			System.out.print("Ordonnée: ");
-			int yDeplacer = sc.nextInt();
 			
-			joueur.deplacerCarte(xCarte,yCarte,xDeplacer,yDeplacer,this.plateau);
+			if(plateau.getCarte(xCarte, yCarte) != null) {
+				System.out.println("la carte que tu veux déplacer : " + plateau.getCarte(xCarte, yCarte));
+				System.out.print("Ou veux tu la poser ? Abcisse: ");
+				int xDeplacer = sc.nextInt();
+				System.out.print("Ordonnée: ");
+				int yDeplacer = sc.nextInt();
+				
+				joueur.deplacerCarte(xCarte,yCarte,xDeplacer,yDeplacer,this.plateau);
+				deplacer = false;
+			}
+			
+			else{
+				System.out.println("Tu as choisis un emplacement sans cartes !\n");
+				deplacer = joueur.askDeplacer();
+			}
 		}
 		
 		joueur.getMain().afficherMain();
-		System.out.print("Quelle carte voulez vous poser ? "); // Pas laisser le choix si une seule carte ?
-		Scanner sc = new Scanner(System.in);
-		int index = sc.nextInt(); 
+		
+		int index=-1; 
+		boolean incorrectInput = true;
+		int xPose=0 ,yPose=0;
+		
+		System.out.print("Quelle carte voulez vous poser ? ");
+		index = sc.nextInt();
 		
 		while (index <0 || index > joueur.getMain().getCartes().size()-1) {
-			System.out.println("Tu as choisis un index incorrect. Chosisi en un autre");
+			System.out.println("Tu as choisis un index incorrect. Chosis en un autre");
 			System.out.print("Quelle carte voulez vous poser ? ");
 			index = sc.nextInt();
 		}
-		
-		System.out.print("Abscisse de pose : ");
-		int xPose = sc.nextInt();
-		
-		System.out.print("Ordonnée de pose : ");
-		int yPose = sc.nextInt();
-		joueur.poserCarte(index, plateau, xPose, yPose);
-		plateau.afficherPlateau();
-		if(plateau.checkDeplacement(Position.GAUCHE)) {
-			plateau.deplacerPlateau(Position.GAUCHE);
+	
+		while(incorrectInput) {
+			System.out.print("Abscisse de pose : ");
+			xPose = sc.nextInt();
+			System.out.print("Ordonnée de pose : ");
+			yPose = sc.nextInt();
+			if(tour !=1) {
+				System.out.println(plateau.checkDeplacement(Position.DROITE));
+				System.out.println(plateau.getCarte(0, yPose));
+				if(plateau.checkPose(xPose, yPose)) {
+					System.out.println("adjacent");
+					incorrectInput = false;
+				}
+				else {
+					System.out.println("Tu ne peux pas poser de carte ici");
+				}
+			}
+			else {
+				incorrectInput = false;
+			}
 		}
-		else {
-			System.out.println("Impossible de monter le plateau");
-		}
+		
+		joueur.poserCarte(index, plateau, xPose, yPose); //Faire en sorte que xPose et Ypose =0 si initialement à -1 et idem si 1 trop grand
 		plateau.afficherPlateau();
 	}
 	

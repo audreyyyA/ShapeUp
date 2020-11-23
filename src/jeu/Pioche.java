@@ -39,8 +39,8 @@ public class Pioche {
 		listeCarte.add(1,new Carte(Couleur.BLEU,FormeCarte.CARRE,true));
 		listeCarte.add(2,new Carte(Couleur.BLEU,FormeCarte.CERCLE,true));
 		listeCarte.add(3,new Carte(Couleur.BLEU,FormeCarte.TRIANGLE,false));
-		listeCarte.add(4,new Carte(Couleur.BLEU,FormeCarte.TRIANGLE,false));
-		listeCarte.add(5,new Carte(Couleur.BLEU,FormeCarte.TRIANGLE,false));
+		listeCarte.add(4,new Carte(Couleur.BLEU,FormeCarte.CARRE,false));
+		listeCarte.add(5,new Carte(Couleur.BLEU,FormeCarte.CERCLE,false));
 		listeCarte.add(6,new Carte(Couleur.ROUGE,FormeCarte.TRIANGLE,true));
 		listeCarte.add(7,new Carte(Couleur.ROUGE,FormeCarte.CARRE,true));
 		listeCarte.add(8,new Carte(Couleur.ROUGE,FormeCarte.CERCLE,true));

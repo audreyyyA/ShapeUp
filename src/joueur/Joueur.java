@@ -112,20 +112,15 @@ public class Joueur{
 		//appellera une autre méthode pour changer de joueur
 	}
 	
+	
 	public void deplacerCarte(int xCarte, int yCarte, int xDeplacer, int yDeplacer, Plateau plateau) {
-		if(plateau.getCarte(xCarte, yCarte) == null) {
-			System.out.println("La case que vous avez ciblé ne contient pas de cartes !");
-			this.askDeplacer();
+		if(plateau.getCarte(xDeplacer, yDeplacer) != null) {
+			System.out.println("La case où tu veux déplacer la carte est déjà prise");
 		}
-		else {
-			if(plateau.getCarte(xDeplacer, yDeplacer) != null) {
-				System.out.println("La case où tu veux déplacer la carte est déjà prise");
-			}
-			else{
-				plateau.setCarte(xDeplacer, yDeplacer, plateau.getCarte(xCarte, yCarte)); // déplace la carte
-				plateau.setCarte(xCarte, yCarte, null); //enlève l'ancinne carte 
-				plateau.afficherPlateau();
-			}
+		else{
+			plateau.setCarte(xDeplacer, yDeplacer, plateau.getCarte(xCarte, yCarte)); // déplace la carte
+			plateau.setCarte(xCarte, yCarte, null); //enlève l'ancinne carte 
+			plateau.afficherPlateau();
 		}
 		//tester si on peut poser ici (dimension plateau)
 	}
