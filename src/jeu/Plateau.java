@@ -24,7 +24,7 @@ public class Plateau {
 
 	
 	public Carte getCarte(int x, int y) {
-		if(y >= this.remplissage.size() || y<0 || x<0 || x >= this.remplissage.get(y).size()-1) {
+		if(y >= this.remplissage.size() || y<0 || x<0 || x >= this.remplissage.get(y).size()) {
 			return null;
 		}
 		return this.remplissage.get(y).get(x);
@@ -141,7 +141,7 @@ public class Plateau {
 		
 		else if(position == Position.GAUCHE) {
 			for(int i=0;i<this.remplissage.size()-1; i++) {
-				if(this.getCarte(i,0) != null) {
+				if(this.getCarte(0,i) != null) {
 					return false;
 				}
 			}
@@ -150,9 +150,8 @@ public class Plateau {
 		
 		
 		else if(position == Position.DROITE) {
-			int nbColonne = this.remplissage.size()-1;
-			for(int i=0;i<nbColonne; i++) {
-				if(this.getCarte(i,nbColonne) != null) {
+			for(int i=0; i<this.remplissage.size(); i++) {
+				if(this.getCarte(this.remplissage.get(i).size()-1,i) != null) {
 					return false;
 				}
 			}
@@ -197,9 +196,8 @@ public class Plateau {
 			
 			
 			else if(position == Position.DROITE) {
-				int nbColonne = this.remplissage.size()-1;
 				for(int i=0; i<this.remplissage.size(); i++) {
-					for(int j=nbColonne-1; j>=0 ; j--) {
+					for(int j=this.remplissage.get(i).size()-2; j>=0 ; j--) {
 						this.setCarte(j+1, i,this.getCarte(j, i));
 						this.setCarte(j, i, null);
 					}
@@ -224,7 +222,7 @@ public class Plateau {
 		}
 		else if(this.forme == FormePlateau.HEXAGONE) {
 			
-			int i = 2;
+			int i = 3;
 			
 			for(int k=0; k<5; k++) {
 				ArrayList<Carte> l=new ArrayList<>();

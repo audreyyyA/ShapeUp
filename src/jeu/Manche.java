@@ -109,41 +109,7 @@ public class Manche {
 		
 		joueur.getMain().afficherMain();
 		
-		int index=-1; 
-		boolean incorrectInput = true;
-		int xPose=0 ,yPose=0;
-		
-		System.out.print("Quelle carte voulez vous poser ? ");
-		index = sc.nextInt();
-		
-		while (index <0 || index > joueur.getMain().getCartes().size()-1) {
-			System.out.println("Tu as choisis un index incorrect. Chosis en un autre");
-			System.out.print("Quelle carte voulez vous poser ? ");
-			index = sc.nextInt();
-		}
-	
-		while(incorrectInput) {
-			System.out.print("Abscisse de pose : ");
-			xPose = sc.nextInt();
-			System.out.print("Ordonnée de pose : ");
-			yPose = sc.nextInt();
-			if(tour !=1) {
-				System.out.println(plateau.checkDeplacement(Position.DROITE));
-				System.out.println(plateau.getCarte(0, yPose));
-				if(plateau.checkPose(xPose, yPose)) {
-					System.out.println("adjacent");
-					incorrectInput = false;
-				}
-				else {
-					System.out.println("Tu ne peux pas poser de carte ici");
-				}
-			}
-			else {
-				incorrectInput = false;
-			}
-		}
-		
-		joueur.poserCarte(index, plateau, xPose, yPose); //Faire en sorte que xPose et Ypose =0 si initialement à -1 et idem si 1 trop grand
+		joueur.poserCarte(plateau,tour); 
 		plateau.afficherPlateau();
 	}
 	

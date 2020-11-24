@@ -80,10 +80,54 @@ public class Joueur{
 		return newCard;
 	}
 	
-	public void poserCarte(int index, Plateau plateauActuel, int x,int y) {
+	public void poserCarte(Plateau plateauActuel, int tour) {
 		
+		int index=-1; 
+		boolean incorrectInput = true;
+		int xPose=0 ,yPose=0;
+		Scanner sc = new Scanner(System.in);
 		
-		plateauActuel.setRemplissage(x, y, this.main.getCarte(index));
+		System.out.print("Quelle carte voulez vous poser ? ");
+		index = sc.nextInt();
+		
+		while (index <0 || index > this.getMain().getCartes().size()-1) {
+			System.out.println("Tu as choisis un index incorrect. Chosis en un autre");
+			System.out.print("Quelle carte voulez vous poser ? ");
+			index = sc.nextInt();
+		}
+	
+		while(incorrectInput) {
+			System.out.print("Abscisse de pose : ");
+			xPose = sc.nextInt();
+			System.out.print("Ordonnée de pose : ");
+			yPose = sc.nextInt();
+			if(tour !=1) {
+				if(plateauActuel.checkPose(xPose, yPose)) {
+					incorrectInput = false;
+				}
+				else {
+					System.out.println("Tu ne peux pas poser de carte ici");
+				}
+			}
+			else {
+				incorrectInput = false;
+			}
+		}
+		
+		if(xPose == -1) {
+			xPose =0;
+		}
+		if(yPose == -1) {
+			yPose =0;
+		}
+		if(xPose == plateauActuel.getRemplissage().get(yPose).size()) {
+			yPose = plateauActuel.getRemplissage().get(yPose).size() -1;
+		}
+		if(yPose == plateauActuel.getRemplissage().size()) {
+			xPose = plateauActuel.getRemplissage().size()-1;
+		}
+		
+		plateauActuel.setRemplissage(xPose, yPose, this.main.getCarte(index));
 		this.main.retirerCarte(index);
 		
 	}
