@@ -83,33 +83,13 @@ public class Manche {
 		plateau.afficherPlateau();
 		Scanner sc = new Scanner(System.in);
 		
-		boolean deplacer = joueur.askDeplacer();
-		while(deplacer) {
-			System.out.print("Abcisse de la carte ? : ");
-			int xCarte = sc.nextInt();
-			System.out.print("Ordonnée de la carte ? : ");
-			int yCarte = sc.nextInt();
-			
-			if(plateau.getCarte(xCarte, yCarte) != null) {
-				System.out.println("la carte que tu veux déplacer : " + plateau.getCarte(xCarte, yCarte));
-				System.out.print("Ou veux tu la poser ? Abcisse: ");
-				int xDeplacer = sc.nextInt();
-				System.out.print("Ordonnée: ");
-				int yDeplacer = sc.nextInt();
-				
-				joueur.deplacerCarte(xCarte,yCarte,xDeplacer,yDeplacer,this.plateau);
-				deplacer = false;
-			}
-			
-			else{
-				System.out.println("Tu as choisis un emplacement sans cartes !\n");
-				deplacer = joueur.askDeplacer();
-			}
+		if(joueur.askDeplacer()) {
+			joueur.deplacerCarte(plateau);
 		}
 		
 		joueur.getMain().afficherMain();
-		
 		joueur.poserCarte(plateau,tour); 
+
 		plateau.afficherPlateau();
 	}
 	

@@ -94,26 +94,49 @@ public class Plateau {
 	
 	public void afficherPlateau() {
 		
-		// Pour le rectangle
-		for(int i=0; i < this.remplissage.size(); i++) {
-			String abcisse = "";
-			String s = (i) + " |";
-			for(int j=0; j< this.remplissage.get(i).size(); j++) {
-				if(i == 0 ) {
-					abcisse += "    "+(j);
+		if(this.forme == FormePlateau.RECTANGLE){
+			for(int i=0; i < this.remplissage.size(); i++) {
+				String abcisse = "";
+				String s = (i) + " |";
+				for(int j=0; j< this.remplissage.get(i).size(); j++) {
+					if(i == 0 ) {
+						abcisse += "    "+(j);
+					}
+					if(this.remplissage.get(i).get(j) == null) {
+						s+= "    |";
+					}
+					else {
+						s+= this.remplissage.get(i).get(j).toString() + " |";
+					}
 				}
-				
-				if(this.remplissage.get(i).get(j) == null) {
-					s+= "    |";
+				if(i==0) {
+					System.out.println(abcisse);	
+				}
+				System.out.println(s);
+			}
+		}
+		
+		else if(this.forme == FormePlateau.HEXAGONE) {
+			int milieu = this.remplissage.size()/2;
+			for(int i=0; i < this.remplissage.size(); i++) {
+				String espace = "  ";
+				String s ="";
+				if(i == milieu) {
+					s = (i) +" "+ espace.repeat(Math.abs(milieu-i))+"|";
 				}
 				else {
-					s+= this.remplissage.get(i).get(j).toString() + " |";
+					s = (i) +"  "+ espace.repeat(Math.abs(milieu-i))+"|";
 				}
+				for(int j=0; j< this.remplissage.get(i).size(); j++) {
+					if(this.remplissage.get(i).get(j) == null) {
+						s+= "    |";
+					}
+					else {
+						s+= " "+this.remplissage.get(i).get(j).toString() + " |";
+					}
+				}
+				System.out.println(s);
 			}
-			if(i==0) {
-				System.out.println(abcisse);	
-			}
-			System.out.println(s);
 		}
 		System.out.print("\n");
 	}

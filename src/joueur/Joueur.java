@@ -157,7 +157,31 @@ public class Joueur{
 	}
 	
 	
-	public void deplacerCarte(int xCarte, int yCarte, int xDeplacer, int yDeplacer, Plateau plateau) {
+	public void deplacerCarte(Plateau plateau) {
+		boolean deplacer = true;
+		int xDeplacer=0,yDeplacer=0,xCarte=0,yCarte=0;
+		Scanner sc = new Scanner(System.in);
+		while(deplacer) {
+			System.out.print("Abcisse de la carte ? : ");
+			xCarte = sc.nextInt();
+			System.out.print("Ordonnée de la carte ? : ");
+			yCarte = sc.nextInt();
+			
+			if(plateau.getCarte(xCarte, yCarte) != null) {
+				System.out.println("la carte que tu veux déplacer : " + plateau.getCarte(xCarte, yCarte));
+				System.out.print("Ou veux tu la poser ? Abcisse: ");
+				xDeplacer = sc.nextInt();
+				System.out.print("Ordonnée: ");
+				yDeplacer = sc.nextInt();
+				deplacer = false;
+			}
+			
+			else{
+				System.out.println("Tu as choisis un emplacement sans cartes !\n");
+				deplacer = this.askDeplacer();
+			}
+		}
+		
 		if(plateau.getCarte(xDeplacer, yDeplacer) != null) {
 			System.out.println("La case où tu veux déplacer la carte est déjà prise");
 		}
