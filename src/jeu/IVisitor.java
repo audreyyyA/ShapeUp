@@ -1,8 +1,10 @@
 package jeu;
 
+import java.util.ArrayList;
+
 public interface IVisitor {
 
-	public int[] calculnbPoints();
+	public ArrayList<Integer> calculnbPoints();
 	
 	
 }
