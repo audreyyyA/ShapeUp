@@ -22,7 +22,7 @@ public class Joueur{
 	private String nom;
 	private int NbPointTotal;
 	private Carte carteVictoire;
-	private int [] nbPointsManches; //à voir
+	private ArrayList<Integer> nbPointsManches; //à voir
 	private MainJoueur main;
 	
 	public Joueur (String nom, boolean v) {
@@ -31,6 +31,7 @@ public class Joueur{
 		this.NbPointTotal = 0;
 		this.carteVictoire = null;
 		this.main = new MainJoueur();
+		this.nbPointsManches = new ArrayList<>();
 	}
 
 	public Carte getCarteVictoire() {
@@ -58,11 +59,11 @@ public class Joueur{
 		NbPointTotal = nbPointTotal;
 	}
 
-	public int[] getNbPointsManches() {
+	public ArrayList<Integer> getNbPointsManches() {
 		return nbPointsManches;
 	}
 
-	public void setNbPointsManches(int[] nbPointsManches) {
+	public void setNbPointsManches(ArrayList<Integer> nbPointsManches) {
 		this.nbPointsManches = nbPointsManches;
 	}
 

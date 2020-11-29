@@ -18,7 +18,7 @@ public class Manche {
 		
 		this.gagnant = null;
 		this.estTerminé = false;
-		this.visitor = new Visitor();
+		this.visitor = new CalculPointRectangle();
 		
 		//regle normale
 		
@@ -46,7 +46,7 @@ public class Manche {
 		this.plateau = new Plateau(forme);
 		this.pioche = new Pioche();
 		
-		for(Joueur j : tabJoueur) { // = foreach
+		for(Joueur j : tabJoueur) { // = foreach pour set les cartes victoires
 			j.setCarteVictoire(j.piocherCarte(this.pioche));
 		}
 		
