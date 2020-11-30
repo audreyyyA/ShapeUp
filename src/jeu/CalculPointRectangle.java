@@ -26,7 +26,7 @@ public class CalculPointRectangle extends CalculPointForme{
 		
 		int nbPoint = 0;
 
-		for(int y=0; y< remplissage.size(); y++) { //Calcul des points lié à Rempli sur les lignes
+		for(int y=0; y< remplissage.size(); y++) { //Calcul des points sur les lignes
 			int streakRempli = 0;
 			int streakForme = 0;
 			int streakColor = 0;
@@ -74,7 +74,7 @@ public class CalculPointRectangle extends CalculPointForme{
 			}
 		}
 		
-		for(int x=0; x< remplissage.get(0).size(); x++) { //Calcul des points lié à Rempli sur les colonnes
+		for(int x=0; x< remplissage.get(0).size(); x++) { //Calcul des points sur les colonnes
 			int streakRempli = 0;
 			int streakForme = 0;
 			int streakColor = 0;
