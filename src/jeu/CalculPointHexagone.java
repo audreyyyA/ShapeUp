@@ -64,11 +64,12 @@ public class CalculPointHexagone extends CalculPointForme {
 			}
 		}
 		
+		int milieu = remplissage.size()/2;
+		int debutDiago = milieu+1;
+		int finDiago = remplissage.size();
+		
 		for(int nbDiago=0; nbDiago <remplissage.size(); nbDiago ++) {// check les diagos orientées bas droite
 			
-			int milieu = remplissage.size()/2;
-			int debutDiago = milieu;
-			int finDiago = remplissage.size();
 			int streakRempli = 0;
 			int streakForme = 0;
 			int streakColor = 0;
@@ -153,7 +154,7 @@ public class CalculPointHexagone extends CalculPointForme {
 							streakForme =0;
 						}
 						
-						if(i == remplissage.size()-1) {//Au cas où la dernière carte de la colonne continue la streak
+						if(i == finDiago-1) {//Au cas où la dernière carte de la colonne continue la streak
 							nbPoint += super.pointRempli.get(streakRempli);   //Il faut la compter avant de sortir de la boucle et de la reset
 							nbPoint += super.pointForme.get(streakForme);
 							nbPoint += super.pointCouleur.get(streakColor);
@@ -176,7 +177,122 @@ public class CalculPointHexagone extends CalculPointForme {
 				}
 			}
 		}
+
 		
-		return 0;
+		debutDiago = milieu+1;
+		finDiago = remplissage.size();
+		
+		for(int nbDiago=remplissage.size(); nbDiago >0; nbDiago --) {// check les diagos orientées bas gauche
+			
+			int streakRempli = 0;
+			int streakForme = 0;
+			int streakColor = 0;
+			int Xcase = 0;
+			
+			if(nbDiago>=milieu) {
+				Xcase = nbDiago - 1;
+			}
+			
+			if(nbDiago > milieu ) {
+				debutDiago --;
+				for(int i = debutDiago; i < remplissage.size(); i ++) {
+					if (plateau.getCarte(Xcase,i) != null){
+						if(plateau.getCarte(Xcase,i).isRempli() == rempli) { // check streak remplissage
+							streakRempli ++;
+						}
+						else {
+							nbPoint += super.pointRempli.get(streakRempli);
+							streakRempli =0;
+						}
+						if(plateau.getCarte(Xcase,i).getCouleur() == color) { // check streak color
+							streakColor ++;
+						}
+						else {
+							nbPoint += super.pointCouleur.get(streakColor);
+							streakColor =0;
+						}
+						if(plateau.getCarte(Xcase,i).getForme() == forme) { // check streak forme
+							streakForme ++;
+						}
+						else {
+							nbPoint += super.pointForme.get(streakForme);
+							streakForme =0;
+						}
+						
+						if(i == remplissage.size()-1) {//Au cas où la dernière carte de la colonne continue la streak
+							nbPoint += super.pointRempli.get(streakRempli);   //Il faut la compter avant de sortir de la boucle et de la reset
+							nbPoint += super.pointForme.get(streakForme);
+							nbPoint += super.pointCouleur.get(streakColor);
+							streakRempli =0;
+							streakForme = 0;
+							streakColor = 0;
+						}
+					}
+					else { // Si carte nulle, on casse toutes les streaks 
+						nbPoint += super.pointRempli.get(streakRempli); 
+						nbPoint += super.pointForme.get(streakForme);
+						nbPoint += super.pointCouleur.get(streakColor);
+						streakRempli =0;
+						streakForme = 0;
+						streakColor = 0;
+					}
+					if(i>=milieu) {
+						Xcase --;
+					}
+				}
+			}
+			else {
+				finDiago --;
+				
+				for(int i = debutDiago; i < finDiago; i ++) {
+					if (plateau.getCarte(Xcase,i) != null){
+						if(plateau.getCarte(Xcase,i).isRempli() == rempli) { // check streak remplissage
+							streakRempli ++;
+						}
+						else {
+							nbPoint += super.pointRempli.get(streakRempli);
+							streakRempli =0;
+						}
+						if(plateau.getCarte(Xcase,i).getCouleur() == color) { // check streak color
+							streakColor ++;
+						}
+						else {
+							nbPoint += super.pointCouleur.get(streakColor);
+							streakColor =0;
+						}
+						if(plateau.getCarte(Xcase,i).getForme() == forme) { // check streak forme
+							streakForme ++;
+						}
+						else {
+							nbPoint += super.pointForme.get(streakForme);
+							streakForme =0;
+						}
+						
+						if(i == finDiago-1) {//Au cas où la dernière carte de la colonne continue la streak
+							nbPoint += super.pointRempli.get(streakRempli);   //Il faut la compter avant de sortir de la boucle et de la reset
+							nbPoint += super.pointForme.get(streakForme);
+							nbPoint += super.pointCouleur.get(streakColor);
+							streakRempli =0;
+							streakForme = 0;
+							streakColor = 0;
+						}
+					}
+					else { // Si carte nulle, on casse toutes les streaks 
+						nbPoint += super.pointRempli.get(streakRempli); 
+						nbPoint += super.pointForme.get(streakForme);
+						nbPoint += super.pointCouleur.get(streakColor);
+						streakRempli =0;
+						streakForme = 0;
+						streakColor = 0;
+					}
+					if(i>=milieu) {
+						Xcase --;
+					}
+				}
+			}
+		}
+
+		System.out.println(nbPoint);
+		return nbPoint;
 	}
 }

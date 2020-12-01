@@ -46,6 +46,33 @@ public class Manche {
 		this.plateau = new Plateau(forme);
 		this.pioche = new Pioche();
 		
+		Carte test = new Carte(Couleur.BLEU,FormeCarte.CARRE,true);
+		
+		/* Pour tester le calcul des points 
+		plateau.setCarte(0, 0, test);
+		plateau.setCarte(1, 0, test);
+		plateau.setCarte(2, 0, test);
+		plateau.setCarte(0, 1, test);
+		plateau.setCarte(1, 1, test);
+		plateau.setCarte(2, 1, test);
+		plateau.setCarte(3, 1, test);
+		plateau.setCarte(0, 2, test);
+		plateau.setCarte(1, 2, test);
+		plateau.setCarte(2, 2, test);
+		plateau.setCarte(3, 2, test);
+		plateau.setCarte(4, 2, test);
+		plateau.setCarte(0, 3, test);
+		plateau.setCarte(1, 3, test);
+		plateau.setCarte(2, 3, test);
+		plateau.setCarte(3, 3, test);
+		plateau.setCarte(0, 4, test);
+		plateau.setCarte(1, 4, test);
+		plateau.setCarte(2, 4, test);
+		
+		CalculPointHexagone calcul = new CalculPointHexagone(); // A faire varier selon la forme du plateau
+		calcul.calculPointJoueur(test, plateau);
+		*/
+		
 		for(Joueur j : tabJoueur) { // = foreach pour set les cartes victoires
 			j.setCarteVictoire(j.piocherCarte(this.pioche));
 		}
