@@ -138,6 +138,10 @@ public class Plateau {
 				System.out.println(s);
 			}
 		}
+		
+		else if(this.forme == FormePlateau.CERCLE) {
+			System.out.println(this.remplissage);
+		}
 		System.out.print("\n");
 	}
 	
@@ -266,13 +270,13 @@ public class Plateau {
 		else {
 			
 			int i = 1;
-			for(int k=0; k<3; k++) {
+			for(int k=0; k<4; k++) {
 				ArrayList<Carte> l=new ArrayList<>();
 				for(int j = 0; j<i; j++) {
 					l.add(null);
 				}
 				this.remplissage.add(k,l);
-				i=7;
+				i=6;
 			}
 		}
 	}
