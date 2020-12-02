@@ -24,14 +24,15 @@ public class CalculPointCercle extends CalculPointForme {
 		int nbPoint = 0;
 		int milieu = remplissage.size();
 		
-		int Ypos = remplissage.size();
 
-		for(int x =0; x<remplissage.get(remplissage.size()).size()/2;x++){// Calcul des points sur les lignes transverse
+		for(int i =0; i<remplissage.get(remplissage.size()-1).size()/2;i++){// Calcul des points sur les lignes transverse
 			
 			int streakRempli = 0;
 			int streakForme = 0;
 			int streakColor = 0;
 			
+			int x = i;
+			int Ypos = remplissage.size();
 			
 			for(int j = 0; j<(remplissage.size()*2)-1; j++) {
 				
@@ -42,7 +43,12 @@ public class CalculPointCercle extends CalculPointForme {
 					Ypos ++;
 				}
 				
-				System.out.println(Ypos);
+				int oldX = 0;
+				if(Ypos ==0) {
+					oldX = x;
+					x=0;
+				}
+				
 				if(plateau.getCarte(x, Ypos) != null) {
 					if(plateau.getCarte(x, Ypos).isRempli() == rempli) { // check streak remplissage
 						streakRempli ++;
@@ -66,6 +72,7 @@ public class CalculPointCercle extends CalculPointForme {
 						streakForme =0;
 					}
 					
+					
 					if(Ypos == remplissage.size()-1) {//Au cas où la dernière carte de la colonne continue la streak
 						nbPoint += super.pointRempli.get(streakRempli);   //Il faut la compter avant de sortir de la boucle et de la reset
 						nbPoint += super.pointForme.get(streakForme);
@@ -75,10 +82,22 @@ public class CalculPointCercle extends CalculPointForme {
 						streakColor = 0;
 					}
 				}
+				else { // Si carte nulle, on casse toutes les streaks 
+					nbPoint += super.pointRempli.get(streakRempli); 
+					nbPoint += super.pointForme.get(streakForme);
+					nbPoint += super.pointCouleur.get(streakColor);
+					streakRempli =0;
+					streakForme = 0;
+					streakColor = 0;
+				}
+				if(Ypos == 0) {
+					x = oldX + milieu-1;
+				}
+				
 			}
 		}
 		
-		System.out.println(nbPoint);
+		System.out.println("nbPoint :" + nbPoint);
 		return 0;
 	}
 }
