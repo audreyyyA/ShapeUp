@@ -192,12 +192,35 @@ public class Joueur{
 			}
 		}
 		
+		plateau.checkPose(xDeplacer, yDeplacer);
+		
+		if(plateau.getForme() != FormePlateau.CERCLE) {
+			if(xDeplacer == -1) {
+				xDeplacer =0;
+			}
+			if(yDeplacer == -1) {
+				yDeplacer =0;
+			}
+			if(xDeplacer == plateau.getRemplissage().get(yDeplacer).size()) {
+				yDeplacer = plateau.getRemplissage().get(yDeplacer).size() -1;
+			}
+			if(yDeplacer == plateau.getRemplissage().size()) {
+				xDeplacer = plateau.getRemplissage().size()-1;
+			}
+		}
+		else {
+			if(yDeplacer == plateau.getRemplissage().size()) {
+				yDeplacer = plateau.getRemplissage().size()-1;
+			}
+		}
+		
+		
 		if(plateau.getCarte(xDeplacer, yDeplacer) != null) {
 			System.out.println("La case où tu veux déplacer la carte est déjà prise");
 		}
 		else{
 			plateau.setCarte(xDeplacer, yDeplacer, plateau.getCarte(xCarte, yCarte)); // déplace la carte
-			plateau.setCarte(xCarte, yCarte, null); //enlève l'ancinne carte 
+			plateau.setCarte(xCarte, yCarte, null); //enlève l'ancienne carte 
 			plateau.afficherPlateau();
 		}
 		//tester si on peut poser ici (dimension plateau)

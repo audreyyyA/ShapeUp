@@ -93,8 +93,6 @@ public class Plateau {
 		
 		else {
 			if(y == this.remplissage.size()) {
-				System.out.println("carte adja :" + this.getCarte(x, y-1));
-				System.out.println(this.checkDeplacementCercle(x, y));
 				if(this.getCarte(x, y-1) != null && this.checkDeplacementCercle(x, y)) {
 					this.deplacerPlateauCercle(x);
 					return true;

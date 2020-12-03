@@ -24,7 +24,8 @@ public class CalculPointCercle extends CalculPointForme {
 		int nbPoint = 0;
 		int milieu = remplissage.size();
 		
-
+		
+		
 		for(int i =0; i<remplissage.get(remplissage.size()-1).size()/2;i++){// Calcul des points sur les lignes transverse
 			
 			int streakRempli = 0;
