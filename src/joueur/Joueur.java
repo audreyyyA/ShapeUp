@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import jeu.Carte;
+import jeu.FormePlateau;
 import jeu.Pioche;
 import jeu.Plateau;
 
@@ -82,7 +83,6 @@ public class Joueur{
 	}
 	
 	public void poserCarte(Plateau plateauActuel, int tour) {
-		
 		int index=-1; 
 		boolean incorrectInput = true;
 		int xPose=0 ,yPose=0;
@@ -115,18 +115,27 @@ public class Joueur{
 			}
 		}
 		
-		if(xPose == -1) {
-			xPose =0;
+		
+		if(plateauActuel.getForme() != FormePlateau.CERCLE) {
+			if(xPose == -1) {
+				xPose =0;
+			}
+			if(yPose == -1) {
+				yPose =0;
+			}
+			if(xPose == plateauActuel.getRemplissage().get(yPose).size()) {
+				yPose = plateauActuel.getRemplissage().get(yPose).size() -1;
+			}
+			if(yPose == plateauActuel.getRemplissage().size()) {
+				xPose = plateauActuel.getRemplissage().size()-1;
+			}
 		}
-		if(yPose == -1) {
-			yPose =0;
+		else {
+			if(yPose == plateauActuel.getRemplissage().size()) {
+				yPose = plateauActuel.getRemplissage().size()-1;
+			}
 		}
-		if(xPose == plateauActuel.getRemplissage().get(yPose).size()) {
-			yPose = plateauActuel.getRemplissage().get(yPose).size() -1;
-		}
-		if(yPose == plateauActuel.getRemplissage().size()) {
-			xPose = plateauActuel.getRemplissage().size()-1;
-		}
+		
 		
 		plateauActuel.setRemplissage(xPose, yPose, this.main.getCarte(index));
 		this.main.retirerCarte(index);

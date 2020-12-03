@@ -60,34 +60,51 @@ public class Plateau {
 	
 	
 	public boolean checkPose(int x, int y) { //Check si une carte est adjacente à l'endroit de pose
-		if(x == -1) { 
-			if(this.getCarte(0, y) !=null && this.checkDeplacement(Position.DROITE)) {
-				this.deplacerPlateau(Position.DROITE);
-				this.afficherPlateau();
+		if(this.forme != FormePlateau.CERCLE) {
+			if(x == -1) { 
+				if(this.getCarte(0, y) != null && this.checkDeplacement(Position.DROITE)) {
+					this.deplacerPlateau(Position.DROITE);
+					this.afficherPlateau();
+					return true;
+				}
+			}
+			else if(y == -1) {
+				if(this.getCarte(x,0) != null && this.checkDeplacement(Position.HAUT)) {
+					this.deplacerPlateau(Position.HAUT);
+					return true;
+				}
+			}
+			else if(x == this.remplissage.size()) {
+				if(this.getCarte(x-1, y) != null && this.checkDeplacement(Position.BAS)) {
+					this.deplacerPlateau(Position.BAS);
+					return true;
+				}
+			}
+			else if(y == this.remplissage.get(x).size()) {
+				if(this.getCarte(x, y-1) != null && this.checkDeplacement(Position.GAUCHE)) {
+					this.deplacerPlateau(Position.GAUCHE);
+					return true;
+				}
+			}
+			else if(this.getCarte(x-1, y) != null || this.getCarte(x+1, y) != null || this.getCarte(x, y+1) != null || this.getCarte(x, y-1) != null) {
 				return true;
 			}
 		}
-		else if(y == -1) {
-			if(this.getCarte(x,0) != null && this.checkDeplacement(Position.HAUT)) {
-				this.deplacerPlateau(Position.HAUT);
-				return true;
+		
+		else {
+			if(y == this.remplissage.size()) {
+				System.out.println("carte adja :" + this.getCarte(x, y-1));
+				System.out.println(this.checkDeplacementCercle(x, y));
+				if(this.getCarte(x, y-1) != null && this.checkDeplacementCercle(x, y)) {
+					this.deplacerPlateauCercle(x);
+					return true;
+				}
+				else if(this.getCarte(x-1, y) != null || this.getCarte(x+1, y) != null || this.getCarte(x, y+1) != null || this.getCarte(x, y-1) != null) {
+					return true;
+				}
 			}
 		}
-		else if(x == this.remplissage.size()) {
-			if(this.getCarte(x-1, y) != null && this.checkDeplacement(Position.BAS)) {
-				this.deplacerPlateau(Position.BAS);
-				return true;
-			}
-		}
-		else if(y == this.remplissage.get(x).size()) {
-			if(this.getCarte(x, y-1) != null && this.checkDeplacement(Position.GAUCHE)) {
-				this.deplacerPlateau(Position.GAUCHE);
-				return true;
-			}
-		}
-		else if(this.getCarte(x-1, y) != null || this.getCarte(x+1, y) != null || this.getCarte(x, y+1) != null || this.getCarte(x, y-1) != null) {
-			return true;
-		}
+
 		return false; 
 	}
 	
@@ -143,6 +160,25 @@ public class Plateau {
 			System.out.println(this.remplissage);
 		}
 		System.out.print("\n");
+	}
+	
+	public boolean checkDeplacementCercle(int x, int y) { // x et y sont les coordonnées de la case encore dans le plateau
+		
+		int milieu = this.remplissage.size()/2;
+		int xOpposite = 0;
+		
+		if(x < milieu) {
+			 xOpposite = x + milieu;
+		}
+		else {
+			xOpposite = x - milieu;
+		}
+		
+		if(this.getCarte(xOpposite, this.remplissage.size()-1) == null) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public boolean checkDeplacement(Position position) {
@@ -230,6 +266,53 @@ public class Plateau {
 					}
 				}
 			}
+	}
+	
+	public void deplacerPlateauCercle(int x) {
+		
+		int milieu = this.remplissage.get(this.remplissage.size()-1).size()/2;
+		int xOpposite = 0;
+		int xTemp = 0;
+		int yTemp = this.remplissage.size()-1;
+		
+		if(x < milieu) {
+			 xOpposite = x + milieu;
+		}
+		else {
+			xOpposite = x - milieu;
+		}
+		
+		for(int i=0; i<(this.remplissage.size()*2)-1; i++){
+			if(i<this.remplissage.size()-2) {
+				yTemp --;
+				xTemp = xOpposite;
+			}
+			else if(i == this.remplissage.size()-2){
+				yTemp =0;
+				xTemp = 0;
+			}
+			else {
+				xTemp =x;
+				yTemp ++;
+			}
+			
+			
+			if(yTemp ==1 && i>=this.remplissage.size()-1) {
+				this.setCarte(xTemp, yTemp, this.getCarte(0, 0));
+			}
+			else if(yTemp ==0) {
+				this.setCarte(xTemp, yTemp, this.getCarte(x, yTemp+1));
+			}
+			else {
+				if(i<this.remplissage.size()/2) {
+					this.setCarte(xTemp, yTemp+1,this.getCarte(xTemp, yTemp) );
+				}
+				else {
+					this.setCarte(xTemp, yTemp-1, this.getCarte(xTemp, yTemp));
+				}
+			}
+		}
+		this.setCarte(x, this.remplissage.size()-1, null);
 	}
 	
 	public void initialiser() {
