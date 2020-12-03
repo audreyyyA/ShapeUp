@@ -2,10 +2,17 @@ package jeu;
 
 import java.util.ArrayList;
 
+import joueur.Joueur;
+
 public class CalculPointHexagone extends CalculPointForme {
 	
 	public CalculPointHexagone() {
 		super();
+	}
+	
+	public Joueur calculnbPoints(ArrayList <Joueur>tabJoueur, Plateau plateau) {
+		
+		return super.calculnbPoints(tabJoueur, plateau);
 	}
 	
 	public int calculPointJoueur(Carte CV, Plateau plateau) {

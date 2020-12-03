@@ -3,6 +3,8 @@ package jeu;
 import java.util.ArrayList;
 import java.util.Map;
 
+import joueur.Joueur;
+
 public abstract class CalculPointForme implements IVisitor{
 
 	protected Map <Integer,Integer> pointRempli;
@@ -18,11 +20,26 @@ public abstract class CalculPointForme implements IVisitor{
 		
 	} 
 	
+	/**
+	 * retourne le joueur ayant le meilleur score
+	 */
 	@Override
-	public ArrayList<Integer> calculnbPoints() {
-		// TODO Auto-generated method stub
-		return null;
+	public Joueur calculnbPoints(ArrayList <Joueur>tabJoueur, Plateau plateau) {
+		Joueur jGagnant = null;
+		int tmp = 0;
+		for(Joueur j : tabJoueur) {
+			if(tmp < calculPointJoueur(j.getCarteVictoire(),plateau)) {
+				jGagnant = j;
+			}
+			tmp = calculPointJoueur(j.getCarteVictoire(),plateau);
+			j.setPoints(tmp);
+			j.setNbPointTotal(tmp);
+		}
+		
+		return jGagnant;
 	}
+
+	public abstract int calculPointJoueur(Carte carteVictoire, Plateau plateau);
 
 	public Map<Integer, Integer> getPointRempli() {
 		return pointRempli;

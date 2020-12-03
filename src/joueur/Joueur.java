@@ -56,16 +56,16 @@ public class Joueur{
 		return NbPointTotal;
 	}
 
-	public void setNbPointTotal(int nbPointTotal) {
-		NbPointTotal = nbPointTotal;
+	public void setNbPointTotal(int pt) {
+		this.NbPointTotal += pt;
 	}
 
 	public ArrayList<Integer> getNbPointsManches() {
 		return nbPointsManches;
 	}
 
-	public void setNbPointsManches(ArrayList<Integer> nbPointsManches) {
-		this.nbPointsManches = nbPointsManches;
+	public void setPoints(int pt) {
+		this.nbPointsManches.add(pt);
 	}
 
 	public MainJoueur getMain() {

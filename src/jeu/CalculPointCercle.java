@@ -9,10 +9,9 @@ public class CalculPointCercle extends CalculPointForme {
 		super();
 	}
 	
-	public void Calculpoint(ArrayList <Joueur>tabJoueur, Plateau plateau){
-		for(Joueur j : tabJoueur) {
-			j.getNbPointsManches().add(calculPointJoueur(j.getCarteVictoire(),plateau)); // juste changer le getter suffit ou il faut le set aussi ?
-		}
+	public Joueur calculnbPoints(ArrayList <Joueur>tabJoueur, Plateau plateau) {
+		
+		return super.calculnbPoints(tabJoueur, plateau);
 	}
 	
 	public int calculPointJoueur(Carte CV, Plateau plateau) {

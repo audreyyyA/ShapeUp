@@ -11,11 +11,9 @@ public class CalculPointRectangle extends CalculPointForme{
 		super();
 	}
 	
-	public void Calculpoint(ArrayList <Joueur>tabJoueur, Plateau plateau){
+	public Joueur calculnbPoints(ArrayList <Joueur>tabJoueur, Plateau plateau) {
 		
-		for(Joueur j : tabJoueur) {
-			j.getNbPointsManches().add(calculPointJoueur(j.getCarteVictoire(),plateau)); // juste changer le getter suffit ou il faut le set aussi ?
-		}
+		return super.calculnbPoints(tabJoueur, plateau);
 	}
 	
 	public int calculPointJoueur(Carte CV,Plateau plateau) {

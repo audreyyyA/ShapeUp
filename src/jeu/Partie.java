@@ -52,30 +52,35 @@ public class Partie {
 		Joueur joueur1 = new Joueur("Alex",false);
 		this.tabJoueur.add(joueur1);
 		
-		Manche manche = this.creerManche();
-		manche.demarrerManche(tabJoueur, forme);
 		
+		while(!this.estTerminee) {	
+			Manche manche = this.creerManche();
+			manche.demarrerManche(tabJoueur, forme);
 		
-		
-		
-		
-		
-		
-		
-		
-		/*while(!this.estTerminee) {	
-			
-		}*/
-		
+		}
 		
 	}
 	
 	public void finPartie() {
 		
+		int tmp = 0;
+		Joueur gagnant = null;
+		//on détermine le gagnant de la partie
+		for(Joueur j : this.tabJoueur) {
+			if(j.getNbPointTotal() > tmp) {
+				gagnant = j;
+			}
+			tmp = j.getNbPointTotal();
+		}
+		
+		System.out.println("Le joueur gagnant de la partie est : " + gagnant.getNom() + " BRAVO CHAKAL!!");
 	}
 	
 	public void afficherScore() {
 		
+		for(Joueur j : this.tabJoueur) {
+			
+		}
 	}
 	
 	public Manche creerManche() {

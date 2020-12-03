@@ -18,8 +18,6 @@ public class Manche {
 		
 		this.gagnant = null;
 		this.estTerminé = false;
-		this.visitor = new CalculPointRectangle();
-		
 		//regle normale
 		
 	}
@@ -47,35 +45,15 @@ public class Manche {
 		this.pioche = new Pioche();
 		
 		
-		Carte test = new Carte(Couleur.BLEU,FormeCarte.CARRE,true);
-
-		// Pour tester le calcul des points 
-		plateau.setCarte(0, 0, test);
-		plateau.setCarte(0, 1, test);
-		plateau.setCarte(1, 1, test);
-		plateau.setCarte(2, 1, test);
-		plateau.setCarte(3, 1, test);
-		plateau.setCarte(4, 1, test);
-		plateau.setCarte(5, 1, test);
-		plateau.setCarte(0, 2, test); 
-		plateau.setCarte(1, 2, test);
-
-		plateau.setCarte(3, 2, test);
-		plateau.setCarte(4, 2, test);
-		plateau.setCarte(5, 2, test);
-		plateau.setCarte(0, 3, test); 
-		/*
-		plateau.setCarte(1, 3, test);
-		plateau.setCarte(2, 3, test);
-		plateau.setCarte(3, 3, test);
-		*/
-		plateau.setCarte(4, 3, test);
-		plateau.setCarte(5, 3, test);
-
-
-		
-		CalculPointCercle calcul = new CalculPointCercle(); // A faire varier selon la forme du plateau
-		calcul.calculPointJoueur(test, plateau);
+		if(forme.equals(FormePlateau.RECTANGLE)) {
+			this.visitor = new CalculPointRectangle();
+		}
+		else if(forme.equals(FormePlateau.HEXAGONE)) {
+			this.visitor = new CalculPointHexagone();
+		}
+		else {
+			this.visitor = new CalculPointCercle();
+		}
 		
 		
 		
@@ -83,7 +61,7 @@ public class Manche {
 			j.setCarteVictoire(j.piocherCarte(this.pioche));
 		}
 		
-		//on défausse une carte si ils sont que 2
+		
 		if(tabJoueur.size() < 3) {
 			this.carteDefausse = this.pioche.getRandomCarte();
 		}
@@ -102,10 +80,8 @@ public class Manche {
 				}
 			}
 		}
-		System.out.println("Partie terminée");
-		
-		/*ArrayList<ArrayList<Carte>> k = plateau.getRemplissage();
-		plateau.afficherPlateau();*/
+		System.out.println("La manches est terminée");
+		this.finManche(tabJoueur);
 	}
 	
 	public void jouer(Joueur joueur, int tour) {
@@ -126,8 +102,13 @@ public class Manche {
 		plateau.afficherPlateau();
 	}
 	
-	public void finManche() {
+	public void finManche(ArrayList<Joueur> tabJoueur) {
 		
+		//comptage des points des joueurs
+		Joueur j = visitor.calculnbPoints(tabJoueur, this.plateau);
+		this.setGagnant(j);
+		
+		System.out.println("Le joueur gagnant de cette manche est : " + this.gagnant.getNom());
 	}
 
 	
