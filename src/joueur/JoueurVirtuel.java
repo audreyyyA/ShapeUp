@@ -6,7 +6,7 @@ public class JoueurVirtuel extends Joueur{
 	
 	public JoueurVirtuel(String nom, boolean v, Strategie strat) {
 		
-		super(nom, v);
+		super(nom);
 		this.strategie = strat;
 	}
 	

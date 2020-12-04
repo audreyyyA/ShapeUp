@@ -49,13 +49,12 @@ public class Partie {
 	public void debutPartie(FormePlateau forme) {
 		
 		//permet de jouer la partie
-		Joueur joueur1 = new Joueur("Alex",false);
-		this.tabJoueur.add(joueur1);
-		
+		System.out.println("Nombre de manches dans la partie : " + this.nbManches);
+		this.tabJoueur = this.regle.initJoueur();
 		
 		while(!this.estTerminee) {	
 			Manche manche = this.creerManche();
-			manche.demarrerManche(tabJoueur, forme);
+			manche.demarrerManche(tabJoueur, forme, this.regle);
 		
 		}
 		
@@ -78,8 +77,11 @@ public class Partie {
 	
 	public void afficherScore() {
 		
+		System.out.println("Voici le tableau des scores :");
+		
 		for(Joueur j : this.tabJoueur) {
 			
+			System.out.println(j.toString());
 		}
 	}
 	

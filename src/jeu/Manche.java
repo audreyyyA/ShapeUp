@@ -39,7 +39,7 @@ public class Manche {
 		this.estTerminé = estTerminé;
 	}
 	
-	public void demarrerManche(ArrayList<Joueur> tabJoueur, FormePlateau forme) {
+	public void demarrerManche(ArrayList<Joueur> tabJoueur, FormePlateau forme, Regle regle) {
 		
 		this.plateau = new Plateau(forme);
 		this.pioche = new Pioche();
@@ -55,16 +55,21 @@ public class Manche {
 			this.visitor = new CalculPointCercle();
 		}
 		
-		
-		
-		for(Joueur j : tabJoueur) { // = foreach pour set les cartes victoires
-			j.setCarteVictoire(j.piocherCarte(this.pioche));
-		}
+		regle.demarrerManche(tabJoueur, this.pioche);
 		
 		
 		if(tabJoueur.size() < 3) {
 			this.carteDefausse = this.pioche.getRandomCarte();
 		}
+		
+		jouer(tabJoueur, regle);
+		
+		
+		System.out.println("La manches est terminée");
+		this.finManche(tabJoueur);
+	}
+	
+	public void jouer(ArrayList<Joueur> tabJoueur, Regle regle) {
 		
 		int nbTour = 0;
 		
@@ -73,33 +78,15 @@ public class Manche {
 				if(this.pioche.getListeCarte().size() != 0) {
 					nbTour ++;
 					System.out.println("Tour "+nbTour+"\n");
-					jouer(j,nbTour);
+					regle.jouer(j, nbTour, this.pioche, this.plateau);
 				}
 				else {
 					break;
 				}
 			}
 		}
-		System.out.println("La manches est terminée");
-		this.finManche(tabJoueur);
-	}
-	
-	public void jouer(Joueur joueur, int tour) {
 		
-		Carte c = joueur.piocherCarte(this.pioche);
-		joueur.getMain().ajouterCarte(c); 
-		joueur.getMain().afficherMain();
-		plateau.afficherPlateau();
-		Scanner sc = new Scanner(System.in);
 		
-		if(joueur.askDeplacer()) {
-			joueur.deplacerCarte(plateau);
-		}
-		
-		joueur.getMain().afficherMain();
-		joueur.poserCarte(plateau,tour); 
-
-		plateau.afficherPlateau();
 	}
 	
 	public void finManche(ArrayList<Joueur> tabJoueur) {

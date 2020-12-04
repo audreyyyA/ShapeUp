@@ -26,7 +26,7 @@ public class Joueur{
 	private ArrayList<Integer> nbPointsManches; //à voir
 	private MainJoueur main;
 	
-	public Joueur (String nom, boolean v) {
+	public Joueur (String nom) {
 		
 		this.nom = nom;
 		this.NbPointTotal = 0;
@@ -161,12 +161,6 @@ public class Joueur{
 		
 	}
 	
-	public void finTour() {
-		
-		//appellera une autre méthode pour changer de joueur
-	}
-	
-	
 	public void deplacerCarte(Plateau plateau) {
 		boolean deplacer = true;
 		int xDeplacer=0,yDeplacer=0,xCarte=0,yCarte=0;
@@ -226,5 +220,11 @@ public class Joueur{
 		//tester si on peut poser ici (dimension plateau)
 	}
 	
+	public String toString() {
+		
+		String s = this.nom + ", total des points gagnés : " + this.NbPointTotal;
+		return s;
+		
+	}
 	
 }

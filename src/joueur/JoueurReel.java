@@ -5,7 +5,7 @@ public class JoueurReel extends Joueur{
 
 	public JoueurReel(String nom, boolean v) {
 		
-		super(nom, v);
+		super(nom);
 		
 	}
 	
