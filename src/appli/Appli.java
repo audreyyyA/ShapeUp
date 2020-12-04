@@ -13,6 +13,7 @@ public class Appli {
 		// TODO Auto-generated method stub
 		
 		System.out.println("Debut partie: ");
+<<<<<<< HEAD
 		System.out.println("Vous allez jouer une partie classique ");
 		
 		Regle regle = new Variante1();
@@ -37,6 +38,8 @@ public class Appli {
 		
 		Partie partie = new Partie(nb, regle);
 		partie.debutPartie(FormePlateau.RECTANGLE);
+=======
+>>>>>>> 072e0132c8a3c81715c816947b4d08e7f8e0271e
 		partie.finPartie();
 		partie.afficherScore();
 	

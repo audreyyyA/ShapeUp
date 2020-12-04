@@ -85,6 +85,9 @@ public class Manche {
 				}
 			}
 		}
+<<<<<<< HEAD
+=======
+>>>>>>> 072e0132c8a3c81715c816947b4d08e7f8e0271e
 		
 		
 	}
