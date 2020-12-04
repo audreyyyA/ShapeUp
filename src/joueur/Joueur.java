@@ -104,6 +104,12 @@ public class Joueur{
 			yPose = sc.nextInt();
 			if(tour !=1) {
 				if(plateauActuel.checkPose(xPose, yPose)) {
+					if(plateauActuel.getForme()!= FormePlateau.CERCLE) {
+						plateauActuel.deplacerPlateau(xPose,yPose);
+					}
+					else {
+						plateauActuel.deplacerPlateauCercle(xPose);
+					}
 					incorrectInput = false;
 				}
 				else {
@@ -161,7 +167,7 @@ public class Joueur{
 		
 	}
 	
-	public void deplacerCarte(Plateau plateau) {
+	public boolean deplacerCarte(Plateau plateau) {
 		boolean deplacer = true;
 		int xDeplacer=0,yDeplacer=0,xCarte=0,yCarte=0;
 		Scanner sc = new Scanner(System.in);
@@ -186,7 +192,22 @@ public class Joueur{
 			}
 		}
 		
-		plateau.checkPose(xDeplacer, yDeplacer);
+		
+		if(xDeplacer == -1 || xDeplacer == plateau.getRemplissage().get(yDeplacer).size() || yDeplacer ==-1 || yDeplacer == plateau.getRemplissage().size()) {
+			if(plateau.checkPose(xDeplacer, yDeplacer)) {
+				if(plateau.getForme()!= FormePlateau.CERCLE) {
+					plateau.deplacerPlateau(xDeplacer,yDeplacer);
+				}
+				else {
+					plateau.deplacerPlateauCercle(xDeplacer);
+				}
+			}
+			else {
+				System.out.println("Tu n'as pas le droit de poser la carte ici");
+				return false;
+			}
+		}
+		
 		
 		if(plateau.getForme() != FormePlateau.CERCLE) {
 			if(xDeplacer == -1) {
@@ -196,10 +217,10 @@ public class Joueur{
 				yDeplacer =0;
 			}
 			if(xDeplacer == plateau.getRemplissage().get(yDeplacer).size()) {
-				yDeplacer = plateau.getRemplissage().get(yDeplacer).size() -1;
+				xDeplacer = plateau.getRemplissage().get(yDeplacer).size() -1;
 			}
 			if(yDeplacer == plateau.getRemplissage().size()) {
-				xDeplacer = plateau.getRemplissage().size()-1;
+				yDeplacer = plateau.getRemplissage().size()-1;
 			}
 		}
 		else {
@@ -211,13 +232,18 @@ public class Joueur{
 		
 		if(plateau.getCarte(xDeplacer, yDeplacer) != null) {
 			System.out.println("La case où tu veux déplacer la carte est déjà prise");
+			return false;
 		}
-		else{
+		else if(plateau.checkPose(xDeplacer, yDeplacer)){
 			plateau.setCarte(xDeplacer, yDeplacer, plateau.getCarte(xCarte, yCarte)); // déplace la carte
 			plateau.setCarte(xCarte, yCarte, null); //enlève l'ancienne carte 
-			plateau.afficherPlateau();
 		}
-		//tester si on peut poser ici (dimension plateau)
+		else {
+			System.out.println("Tu dois déplacer la carte à côté d'une carte déjà présente");
+			return false;
+		}
+		plateau.afficherPlateau();
+		return true;
 	}
 	
 	public String toString() {

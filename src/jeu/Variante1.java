@@ -15,9 +15,13 @@ public class Variante1 extends Regle{
 		joueur.getMain().afficherMain();
 		plateau.afficherPlateau();
 		Scanner sc = new Scanner(System.in);
+		boolean deplacer = false;
 		
-		if(joueur.askDeplacer()) {
-			joueur.deplacerCarte(plateau);
+		while(joueur.askDeplacer() && !deplacer) {
+			deplacer = joueur.deplacerCarte(plateau);
+			if(deplacer) {
+				break;
+			}
 		}
 		
 		joueur.getMain().afficherMain();

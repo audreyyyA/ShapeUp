@@ -77,7 +77,7 @@ public class Manche {
 			for(Joueur j : tabJoueur) {
 				if(this.pioche.getListeCarte().size() != 0) {
 					nbTour ++;
-					System.out.println("Tour "+nbTour+"\n");
+					System.out.println("Tour "+nbTour/2+" - "+ j.getNom()+ "\n");
 					regle.jouer(j, nbTour, this.pioche, this.plateau);
 				}
 				else {
@@ -85,9 +85,6 @@ public class Manche {
 				}
 			}
 		}
-<<<<<<< HEAD
-=======
->>>>>>> 072e0132c8a3c81715c816947b4d08e7f8e0271e
 		
 		
 	}
