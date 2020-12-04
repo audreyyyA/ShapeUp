@@ -86,6 +86,33 @@ public class Manche {
 	
 	public void jouer(Joueur joueur, int tour) {
 		
+		Carte test = new Carte(Couleur.BLEU,FormeCarte.CARRE,true);
+		 
+		// Pour tester le calcul des points 
+		plateau.setCarte(0, 0, test);
+		plateau.setCarte(0, 1, test);
+		plateau.setCarte(1, 1, test);
+		plateau.setCarte(2, 1, test);
+		plateau.setCarte(3, 1, test);
+		plateau.setCarte(4, 1, test);
+		plateau.setCarte(5, 1, test);
+		plateau.setCarte(0, 2, test); 
+		plateau.setCarte(1, 2, test);
+		plateau.setCarte(2, 2, test);
+		plateau.setCarte(3, 2, test);
+		plateau.setCarte(4, 2, test);
+		plateau.setCarte(5, 2, test);
+		plateau.setCarte(0, 3, test);
+		plateau.setCarte(1, 3, test); 
+		plateau.setCarte(2, 3, test);
+		plateau.setCarte(3, 3, test);
+		plateau.setCarte(4, 3, test);
+		plateau.setCarte(5, 3, test);
+
+		CalculPointCercle calcul = new CalculPointCercle(); // A faire varier selon la forme du plateau
+		calcul.calculPointJoueur(test, plateau);
+		
+		
 		Carte c = joueur.piocherCarte(this.pioche);
 		joueur.getMain().ajouterCarte(c); 
 		joueur.getMain().afficherMain();
