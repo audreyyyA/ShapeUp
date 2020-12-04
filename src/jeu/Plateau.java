@@ -5,8 +5,8 @@ import java.util.Arrays;
 
 public class Plateau {
 	
-	private FormePlateau forme;
-	private ArrayList<ArrayList<Carte>> remplissage;
+	protected FormePlateau forme;
+	protected ArrayList<ArrayList<Carte>> remplissage;
 	
 	public Plateau(FormePlateau forme){
 		
@@ -325,7 +325,6 @@ public class Plateau {
 				}
 				this.remplissage.add(k,l);
 			}
-			
 		}
 		else if(this.forme == FormePlateau.HEXAGONE) {
 			

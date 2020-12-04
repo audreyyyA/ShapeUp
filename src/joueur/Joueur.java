@@ -91,7 +91,7 @@ public class Joueur{
 		System.out.print("Quelle carte voulez vous poser ? ");
 		index = sc.nextInt();
 		
-		while (index <0 || index > this.getMain().getCartes().size()-1) {
+		while (index <0 || index > this.getMain().getCartes().size()-1) { // verif si string
 			System.out.println("Tu as choisis un index incorrect. Chosis en un autre");
 			System.out.print("Quelle carte voulez vous poser ? ");
 			index = sc.nextInt();

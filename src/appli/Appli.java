@@ -26,15 +26,6 @@ public class Appli {
 		}
 		
 		
-		/*boolean tmp = true;
-		while(tmp) {
-			System.out.println("Avec quelle forme de plateau veux-tu jouer ? Rectangle (1) ou Hexagone (2) ou Cercle (3) : ");
-			
-			if
-			Scanner sc = new Scanner(System.in);
-			nb = sc.nextInt();
-		}*/
-		
 		Partie partie = new Partie(nb, regle);
 		partie.debutPartie(FormePlateau.RECTANGLE);
 		partie.finPartie();

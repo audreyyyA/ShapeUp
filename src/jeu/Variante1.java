@@ -16,17 +16,26 @@ public class Variante1 extends Regle{
 		plateau.afficherPlateau();
 		Scanner sc = new Scanner(System.in);
 		boolean deplacer = false;
+		int nbDep = 0;
 		
 		while(joueur.askDeplacer() && !deplacer) {
 			deplacer = joueur.deplacerCarte(plateau);
 			if(deplacer) {
+				nbDep ++;
 				break;
 			}
 		}
 		
 		joueur.getMain().afficherMain();
 		joueur.poserCarte(plateau,tour); 
-
+		
+		while(joueur.askDeplacer() && !deplacer && nbDep <1) {
+			deplacer = joueur.deplacerCarte(plateau);
+			if(deplacer) {
+				break;
+			}
+		}
+		
 		plateau.afficherPlateau();
 		
 	}
@@ -85,6 +94,7 @@ public class Variante1 extends Regle{
 
 		for(Joueur j : tabJoueur) { // = foreach pour set les cartes victoires
 			j.setCarteVictoire(j.piocherCarte(pioche));
+			System.out.println("Carte Victoire de "+j.getNom() +" est : "+j.getCarteVictoire());
 		}
 		
 		
