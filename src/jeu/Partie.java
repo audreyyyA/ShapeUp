@@ -17,7 +17,7 @@ public class Partie {
 		
 		this.estTerminee = false;
 		this.nbManches = nbM;
-		this.numManche = 1;
+		this.numManche = 0;
 		this.regle = regle;
 		this.tabJoueur = new ArrayList<>();
 	}
@@ -53,11 +53,13 @@ public class Partie {
 		this.tabJoueur = this.regle.initJoueur();
 		
 		while(!this.estTerminee) {	
+			this.numManche+=1;
 			Manche manche = this.creerManche();
 			manche.demarrerManche(tabJoueur, forme, this.regle);
-		
+			if(this.numManche==this.nbManches) {
+				this.estTerminee=true;
+			}
 		}
-		
 	}
 	
 	public void finPartie() {

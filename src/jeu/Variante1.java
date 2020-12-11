@@ -82,10 +82,8 @@ public class Variante1 extends Regle{
 					tmp2 = false;
 				}
 			}
-			
 			Joueur j = new JoueurReel(n);
 			t.add(j);
-			
 		}
 		
 		return t;
