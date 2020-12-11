@@ -321,4 +321,10 @@ public class CalculPointCercle extends CalculPointForme {
 		System.out.println("nbPoint :" + nbPoint);
 		return 0;
 	}
+
+	@Override
+	public int[] calculnbPoints() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

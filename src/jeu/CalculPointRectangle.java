@@ -124,6 +124,12 @@ public class CalculPointRectangle extends CalculPointForme{
 															 // détail
 		return nbPoint;
 	}
+
+	@Override
+	public int[] calculnbPoints() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

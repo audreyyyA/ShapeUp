@@ -5,5 +5,5 @@ public enum FormeCarte {
 
 	CARRE,
 	TRIANGLE,
-	CERCLE;
+	ROND;
 }

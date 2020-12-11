@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import joueur.Joueur;
+import joueur.JoueurReel;
 
 public class Variante1 extends Regle{
 	
@@ -18,18 +19,22 @@ public class Variante1 extends Regle{
 		boolean deplacer = false;
 		int nbDep = 0;
 		
+	
 		while(joueur.askDeplacer() && !deplacer) {
 			deplacer = joueur.deplacerCarte(plateau);
 			if(deplacer) {
-				nbDep ++;
+				nbDep = 1;
 				break;
 			}
 		}
 		
+		//mettre condition tour 1
 		joueur.getMain().afficherMain();
 		joueur.poserCarte(plateau,tour); 
+		plateau.afficherPlateau();
 		
-		while(joueur.askDeplacer() && !deplacer && nbDep <1) {
+		//déplace la carte seulement s'il l'a pas fait avant
+		while(joueur.askDeplacer() && !deplacer) {
 			deplacer = joueur.deplacerCarte(plateau);
 			if(deplacer) {
 				break;
@@ -78,7 +83,7 @@ public class Variante1 extends Regle{
 				}
 			}
 			
-			Joueur j = new Joueur(n);
+			Joueur j = new JoueurReel(n);
 			t.add(j);
 			
 		}

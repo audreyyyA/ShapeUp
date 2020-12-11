@@ -17,5 +17,6 @@ public interface IVisitor {
 	public void setPointCouleur(Map<Integer, Integer> pointCouleur);
 	public Map<Integer, Integer> getPointForme();
 	public void setPointForme(Map<Integer, Integer> pointForme);
+	int[] calculnbPoints();
 	
 }

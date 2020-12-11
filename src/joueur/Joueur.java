@@ -96,20 +96,25 @@ public class Joueur{
 			System.out.print("Quelle carte voulez vous poser ? ");
 			index = sc.nextInt();
 		}
-	
+		
 		while(incorrectInput) {
 			System.out.print("Abscisse de pose : ");
 			xPose = sc.nextInt();
 			System.out.print("Ordonnée de pose : ");
 			yPose = sc.nextInt();
 			if(tour !=1) {
+				//on vérifie si c'est possible de poser la carte 
 				if(plateauActuel.checkPose(xPose, yPose)) {
+					
+					//changer ... tout avec le mm nom de méthode plus tard
+					plateauActuel.deplacerPlateau(xPose,yPose);
+					/*
 					if(plateauActuel.getForme()!= FormePlateau.CERCLE) {
 						plateauActuel.deplacerPlateau(xPose,yPose);
 					}
 					else {
 						plateauActuel.deplacerPlateauCercle(xPose);
-					}
+					}*/
 					incorrectInput = false;
 				}
 				else {
@@ -121,28 +126,23 @@ public class Joueur{
 			}
 		}
 		
-		
-		if(plateauActuel.getForme() != FormePlateau.CERCLE) {
-			if(xPose == -1) {
-				xPose =0;
-			}
-			if(yPose == -1) {
-				yPose =0;
-			}
-			if(xPose == plateauActuel.getRemplissage().get(yPose).size()) {
-				yPose = plateauActuel.getRemplissage().get(yPose).size() -1;
-			}
-			if(yPose == plateauActuel.getRemplissage().size()) {
-				xPose = plateauActuel.getRemplissage().size()-1;
-			}
+		//on change les abscisses ou ordonnées si nécessaire
+	
+		if(xPose == -1) {
+			xPose =0;
 		}
-		else {
-			if(yPose == plateauActuel.getRemplissage().size()) {
-				yPose = plateauActuel.getRemplissage().size()-1;
-			}
+		if(yPose == -1) {
+			yPose =0;
+		}
+		if(xPose == plateauActuel.getRemplissage().get(plateauActuel.getRemplissage().size()-1).size()) {
+			xPose = plateauActuel.getRemplissage().get(plateauActuel.getRemplissage().size()-1).size() -1;
+		}
+		if(yPose == plateauActuel.getRemplissage().size()) {
+			yPose = plateauActuel.getRemplissage().size()-1;
 		}
 		
 		
+		//on pose la carte
 		plateauActuel.setRemplissage(xPose, yPose, this.main.getCarte(index));
 		this.main.retirerCarte(index);
 		
@@ -171,78 +171,57 @@ public class Joueur{
 		boolean deplacer = true;
 		int xDeplacer=0,yDeplacer=0,xCarte=0,yCarte=0;
 		Scanner sc = new Scanner(System.in);
-		while(deplacer) {
-			System.out.print("Abcisse de la carte ? : ");
-			xCarte = sc.nextInt();
-			System.out.print("Ordonnée de la carte ? : ");
-			yCarte = sc.nextInt();
-			
-			if(plateau.getCarte(xCarte, yCarte) != null) {
-				System.out.println("la carte que tu veux déplacer : " + plateau.getCarte(xCarte, yCarte));
-				System.out.print("Ou veux tu la poser ? Abcisse: ");
-				xDeplacer = sc.nextInt();
-				System.out.print("Ordonnée: ");
-				yDeplacer = sc.nextInt();
-				deplacer = false;
-			}
-			
-			else{
-				System.out.println("Tu as choisis un emplacement sans cartes !\n");
-				deplacer = this.askDeplacer();
-			}
+		boolean incorrectInput = true;
+		
+		System.out.print("Abcisse de la carte ? : ");
+		xCarte = sc.nextInt();
+		System.out.print("Ordonnée de la carte ? : ");
+		yCarte = sc.nextInt();
+		
+		if(plateau.getCarte(xCarte, yCarte) == null) {
+			System.out.println("Tu as choisis un emplacement sans cartes !\n");
+			return false;
+
 		}
 		
-		
-		if(xDeplacer == -1 || xDeplacer == plateau.getRemplissage().get(yDeplacer).size() || yDeplacer ==-1 || yDeplacer == plateau.getRemplissage().size()) {
+		System.out.println("la carte que tu veux déplacer : " + plateau.getCarte(xCarte, yCarte));
+		Carte carteTemp = plateau.getCarte(xCarte, yCarte);
+			
+		while(incorrectInput) {
+			System.out.print("Abscisse de pose : ");
+			xDeplacer = sc.nextInt();
+			System.out.print("Ordonnée de pose : ");
+			yDeplacer = sc.nextInt();
+			plateau.setCarte(xCarte, yCarte, null);
+				//on vérifie si c'est possible de poser la carte 
 			if(plateau.checkPose(xDeplacer, yDeplacer)) {
-				if(plateau.getForme()!= FormePlateau.CERCLE) {
-					plateau.deplacerPlateau(xDeplacer,yDeplacer);
-				}
-				else {
-					plateau.deplacerPlateauCercle(xDeplacer);
-				}
+				//changer ... tout avec le mm nom de méthode plus tard
+				plateau.deplacerPlateau(xDeplacer,yDeplacer);
+				incorrectInput = false;
 			}
 			else {
-				System.out.println("Tu n'as pas le droit de poser la carte ici");
-				return false;
+				plateau.setCarte(xCarte, yCarte, carteTemp);
+				System.out.println("Tu ne peux pas poser de carte ici");
 			}
+		}
+			
+		
+		if(xDeplacer == -1) {
+			xDeplacer =0;
+		}
+		if(yDeplacer == -1) {
+			yDeplacer =0;
+		}
+		if(xDeplacer == plateau.getRemplissage().get(plateau.getRemplissage().size()-1).size()) {
+			xDeplacer = plateau.getRemplissage().get(plateau.getRemplissage().size()-1).size() -1;
+		}
+		if(yDeplacer == plateau.getRemplissage().size()) {
+			yDeplacer = plateau.getRemplissage().size()-1;
 		}
 		
-		
-		if(plateau.getForme() != FormePlateau.CERCLE) {
-			if(xDeplacer == -1) {
-				xDeplacer =0;
-			}
-			if(yDeplacer == -1) {
-				yDeplacer =0;
-			}
-			if(xDeplacer == plateau.getRemplissage().get(yDeplacer).size()) {
-				xDeplacer = plateau.getRemplissage().get(yDeplacer).size() -1;
-			}
-			if(yDeplacer == plateau.getRemplissage().size()) {
-				yDeplacer = plateau.getRemplissage().size()-1;
-			}
-		}
-		else {
-			if(yDeplacer == plateau.getRemplissage().size()) {
-				yDeplacer = plateau.getRemplissage().size()-1;
-			}
-		}
-		
-		
-		if(plateau.getCarte(xDeplacer, yDeplacer) != null) {
-			System.out.println("La case où tu veux déplacer la carte est déjà prise");
-			return false;
-		}
-		else if(plateau.checkPose(xDeplacer, yDeplacer)){
-			plateau.setCarte(xDeplacer, yDeplacer, plateau.getCarte(xCarte, yCarte)); // déplace la carte
-			plateau.setCarte(xCarte, yCarte, null); //enlève l'ancienne carte 
-		}
-		else {
-			System.out.println("Tu dois déplacer la carte à côté d'une carte déjà présente");
-			return false;
-		}
-		plateau.afficherPlateau();
+		//on pose la carte
+		plateau.setRemplissage(xDeplacer, yDeplacer, carteTemp);
+				plateau.afficherPlateau();
 		return true;
 	}
 	

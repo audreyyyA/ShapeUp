@@ -302,4 +302,10 @@ public class CalculPointHexagone extends CalculPointForme {
 		System.out.println(nbPoint);
 		return nbPoint;
 	}
+
+	@Override
+	public int[] calculnbPoints() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

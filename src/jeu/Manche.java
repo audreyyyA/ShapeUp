@@ -41,7 +41,8 @@ public class Manche {
 	
 	public void demarrerManche(ArrayList<Joueur> tabJoueur, FormePlateau forme, Regle regle) {
 		
-		this.plateau = new Plateau(forme);
+		//this.plateau = new Plateau(forme);
+		this.plateau = new PlateauRectangle(forme);
 		this.pioche = new Pioche();
 		
 		
@@ -96,6 +97,10 @@ public class Manche {
 		this.setGagnant(j);
 		
 		System.out.println("Le joueur gagnant de cette manche est : " + this.gagnant.getNom());
+		for(Joueur t : tabJoueur) {
+			System.out.println("Points de " + t.getNom() + " : " + t.getNbPointsManches());
+		}
+		
 	}
 
 	

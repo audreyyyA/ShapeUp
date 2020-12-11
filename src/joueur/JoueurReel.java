@@ -3,7 +3,7 @@ package joueur;
 public class JoueurReel extends Joueur{
 	
 
-	public JoueurReel(String nom, boolean v) {
+	public JoueurReel(String nom) {
 		
 		super(nom);
 		

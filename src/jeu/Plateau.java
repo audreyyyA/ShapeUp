@@ -3,7 +3,7 @@ package jeu;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Plateau {
+public abstract class Plateau {
 	
 	protected FormePlateau forme;
 	protected ArrayList<ArrayList<Carte>> remplissage;
@@ -11,7 +11,6 @@ public class Plateau {
 	public Plateau(FormePlateau forme){
 		
 		this.forme = forme;
-		this.initialiser();
 	}
 
 	public FormePlateau getForme() {
@@ -41,6 +40,10 @@ public class Plateau {
 		
 	}
 	
+	public abstract boolean checkPose(int x,int y);
+	public abstract void deplacerPlateau(int x,int y);
+	
+	
 	public void setRemplissage(int x, int y, Carte carte) {
 		
 		if(this.remplissage.size()<= y || this.remplissage.get(y).size() <= x) {
@@ -58,7 +61,7 @@ public class Plateau {
 		}
 	}
 	
-	
+	/*
 	public boolean checkPose(int x, int y) { //Check si une carte est adjacente à l'endroit de pose
 		if(this.forme != FormePlateau.CERCLE) {
 			if(x == -1) { 
@@ -218,7 +221,7 @@ public class Plateau {
 		return false;
 	}
 	
-	
+	//rectangle rectangle et hexagone
 	public void deplacerPlateau(int x,int y) {
 		
 		if(x == -1) { 
@@ -310,9 +313,11 @@ public class Plateau {
 			}
 		}
 		this.setCarte(x, this.remplissage.size()-1, null);
-	}
+	}*/
+	public abstract void afficherPlateau();
+	public abstract void initialiser();
 	
-	public void initialiser() {
+	/*public void initialiser() {
 		
 		this.remplissage = new ArrayList<ArrayList<Carte>>();
 		if(this.forme == FormePlateau.RECTANGLE){
@@ -358,5 +363,5 @@ public class Plateau {
 				i=6;
 			}
 		}
-	}
+	}*/
 }
