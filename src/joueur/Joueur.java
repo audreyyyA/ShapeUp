@@ -200,7 +200,8 @@ public class Joueur{
 				incorrectInput = false;
 			}
 			else {
-				plateau.setCarte(xCarte, yCarte, carteTemp);
+				plateau.setRemplissage(xCarte, yCarte, carteTemp);
+				//plateau.setCarte(xCarte, yCarte, carteTemp);
 				System.out.println("Tu ne peux pas poser de carte ici");
 			}
 		}
@@ -221,7 +222,7 @@ public class Joueur{
 		
 		//on pose la carte
 		plateau.setRemplissage(xDeplacer, yDeplacer, carteTemp);
-				plateau.afficherPlateau();
+		plateau.afficherPlateau();
 		return true;
 	}
 	

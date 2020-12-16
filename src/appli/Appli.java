@@ -27,7 +27,10 @@ public class Appli {
 		
 		
 		Partie partie = new Partie(nb, regle);
-		partie.debutPartie(FormePlateau.RECTANGLE);
+		
+		//demander quelle forme de plateau on veut
+		
+		partie.debutPartie(FormePlateau.HEXAGONE);
 		partie.finPartie();
 		partie.afficherScore();
 	

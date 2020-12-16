@@ -10,12 +10,12 @@ public class PlateauRectangle extends Plateau{
 		
 	}
 	
-	public Carte getCarte(int x, int y) {
+	/*public Carte getCarte(int x, int y) {
 		if(y >= this.remplissage.size() || y<0 || x<0 || x >= this.remplissage.get(y).size()) {
 			return null;
 		}
 		return this.remplissage.get(y).get(x);
-	}
+	}*/
 	
 	public boolean checkPose(int x,int y) {
 		if(x == -1 || y == -1 || y == this.remplissage.size() || x == this.remplissage.get(0).size()) {
@@ -141,6 +141,7 @@ public class PlateauRectangle extends Plateau{
 					this.remplissage.add(k,l);
 				}
 			}
+			
 		}
 		
 		public void afficherPlateau() {
