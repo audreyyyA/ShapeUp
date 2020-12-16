@@ -27,7 +27,6 @@ public class Manche {
 	}
 
 	public void setGagnant(Joueur gagnant) {
-		
 		this.gagnant = gagnant;
 	}
 
@@ -73,7 +72,7 @@ public class Manche {
 	public void jouer(ArrayList<Joueur> tabJoueur, Regle regle) {
 		
 		int nbTour = 0;
-		
+		System.out.println(plateau.getRemplissage());
 		while(this.pioche.getListeCarte().size() != 0) {
 			for(Joueur j : tabJoueur) {
 				if(this.pioche.getListeCarte().size() != 0) {

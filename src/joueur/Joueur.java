@@ -134,8 +134,8 @@ public class Joueur{
 		if(yPose == -1) {
 			yPose =0;
 		}
-		if(xPose == plateauActuel.getRemplissage().get(plateauActuel.getRemplissage().size()-1).size()) {
-			xPose = plateauActuel.getRemplissage().get(plateauActuel.getRemplissage().size()-1).size() -1;
+		if(xPose == plateauActuel.getRemplissage().get(yPose).size()) {
+			xPose = plateauActuel.getRemplissage().get(yPose).size() -1;
 		}
 		if(yPose == plateauActuel.getRemplissage().size()) {
 			yPose = plateauActuel.getRemplissage().size()-1;

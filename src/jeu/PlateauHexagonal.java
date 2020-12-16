@@ -20,9 +20,15 @@ public class PlateauHexagonal extends Plateau{
 			System.out.println("T CON YA DEJA UNE CARTE ICI !!!");
 			return false;
 		}
-		if(super.getCarte(x-1, y) != null || super.getCarte(x, y+1) != null || super.getCarte(x+1, y) != null || super.getCarte(x, y-1) != null) {
-			System.out.println("YA AU MOINS UNE CARTE A COTE C BIEN CHAKAL");
-			return true;
+		if(y <= (int) this.remplissage.size()/2) {
+			if(super.getCarte(x-1, y) != null || super.getCarte(x+1, y) != null || super.getCarte(x, y-1)!= null || super.getCarte(x-1, y-1) != null || super.getCarte(x, y+1) != null || super.getCarte(x+1, y+1) != null) {
+				return true;
+			}
+		}
+		else {
+			if(super.getCarte(x-1, y) != null || super.getCarte(x+1, y) != null || super.getCarte(x, y-1)!= null || super.getCarte(x+1, y-1) != null || super.getCarte(x, y+1) != null || super.getCarte(x-1, y+1) != null) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -31,11 +37,43 @@ public class PlateauHexagonal extends Plateau{
 	public boolean checkPosExtremite(int x, int y) {
 		
 		if(y==-1) {
+			boolean lastRowEmpty = true;
 			int nbligne = this.remplissage.size() - 1;
 			for(int i=0; i<remplissage.get(nbligne).size(); i++) { //boucle de 0 à la taille de la derniere ligne
 				if(this.getCarte(i,nbligne) != null) {
-					return false;
+					lastRowEmpty = false;
 				}
+			}
+			
+			if(lastRowEmpty) {
+				boolean breaker = false;
+				for(int j= (int)remplissage.size()/2; j< remplissage.size(); j++) {
+					if(this.getCarte(0, j) != null) {
+						breaker = true;
+						break;
+					}
+				}
+				if(!breaker) {
+					System.out.println("T'as le droit à gauche");
+					return true; //Deplacer le plateau en diago bas gauche
+				}
+			}
+			
+			if(lastRowEmpty) {
+				boolean breaker = false;
+				for(int j= (int)remplissage.size()/2; j< remplissage.size(); j++) {
+					if(this.getCarte(remplissage.get(j).size()-1, j) != null) {
+						breaker = true;
+						break;
+					}
+				}
+				if(!breaker) {
+					System.out.println("T'as le droit à droite");
+					return true; //Deplacer le plateau en diago bas gauche
+				}
+			}
+			else {
+				return false;
 			}
 			return true;
 		}
