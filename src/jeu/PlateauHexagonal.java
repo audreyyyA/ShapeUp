@@ -13,15 +13,25 @@ public class PlateauHexagonal extends Plateau{
 	public boolean checkPose(int x, int y) {
 		if(x == -1 || y == -1 || y == this.remplissage.size() || x == this.remplissage.get(y).size()) {
 			System.out.println("EXTREMITEEE");
-			return checkPosExtremite(x,y);		
+			if (checkPosExtremiteHex(x,y) == null) {
+				return false;
+			}
+			else {
+				return true;
+			}
 		}
 				
 		if(super.getCarte(x, y) != null) { 
 			System.out.println("T CON YA DEJA UNE CARTE ICI !!!");
 			return false;
 		}
-		if(y <= (int) this.remplissage.size()/2) {
+		if(y < (int) this.remplissage.size()/2) {
 			if(super.getCarte(x-1, y) != null || super.getCarte(x+1, y) != null || super.getCarte(x, y-1)!= null || super.getCarte(x-1, y-1) != null || super.getCarte(x, y+1) != null || super.getCarte(x+1, y+1) != null) {
+				return true;
+			}
+		}
+		else if(y == (int) this.remplissage.size()/2) {
+			if(super.getCarte(x-1, y) != null || super.getCarte(x+1, y) != null || super.getCarte(x, y-1)!= null || super.getCarte(x-1, y-1) != null || super.getCarte(x, y+1) != null || super.getCarte(x-1, y+1) != null) {
 				return true;
 			}
 		}
@@ -34,7 +44,7 @@ public class PlateauHexagonal extends Plateau{
 	}
 	
 
-	public boolean checkPosExtremite(int x, int y) {
+	public Direction checkPosExtremiteHex(int x, int y) {
 		
 		if(y==-1) {
 			boolean lastRowEmpty = true;
@@ -55,7 +65,8 @@ public class PlateauHexagonal extends Plateau{
 				}
 				if(!breaker) {
 					System.out.println("T'as le droit à gauche");
-					return true; //Deplacer le plateau en diago bas gauche
+					
+					return Direction.BASGAUCHE; //Deplacer le plateau en diago bas gauche
 				}
 			}
 			
@@ -69,50 +80,81 @@ public class PlateauHexagonal extends Plateau{
 				}
 				if(!breaker) {
 					System.out.println("T'as le droit à droite");
-					return true; //Deplacer le plateau en diago bas gauche
+					
+					return Direction.BASDROITE; //Deplacer le plateau en diago bas droite
 				}
 			}
 			else {
-				return false;
+				return null;
 			}
-			return true;
 		}
 		
 		else if(y == remplissage.size()) {
-			for(int i=0; i< this.remplissage.get(0).size(); i++) {
+			boolean firstRowEmpty = true;
+			for(int i=0; i<remplissage.get(0).size(); i++) { //boucle de 0 à la taille de la derniere ligne
 				if(this.getCarte(i,0) != null) {
-					return false;
+					firstRowEmpty = false;
 				}
 			}
-			return true;
+			
+			if(firstRowEmpty) {
+				boolean breaker = false;
+				for(int j= (int)remplissage.size()/2; j>= 0; j--) {
+					if(this.getCarte(0, j) != null) {
+						breaker = true;
+						break;
+					}
+				}
+				if(!breaker) {
+					System.out.println("T'as le droit à gauche");
+					return Direction.HAUTGAUCHE; //Deplacer le plateau en diago haut gauche
+				}
+			}
+			
+			if(firstRowEmpty) {
+				boolean breaker = false;
+				for(int j= (int)remplissage.size()/2; j>=0 ; j--) {
+					if(this.getCarte(remplissage.get(j).size()-1, j) != null) {
+						breaker = true;
+						break;
+					}
+				}
+				if(!breaker) {
+					System.out.println("T'as le droit à droite");
+					return Direction.HAUTDROITE; //Deplacer le plateau en diago haut droite
+				}
+			}
+			else {
+				return null;
+			}
 		}
 		
 		else if(x == remplissage.get(y).size()) {
 			for(int i=0;i<this.remplissage.size(); i++) {
 				if(this.getCarte(0,i) != null) {
-					return false;
+					return null;
 				}
 			}
-			return true;
+			return Direction.GAUCHE;
 		}
 		
 		
 		else if(x == -1) {
 			for(int i=0; i<this.remplissage.size(); i++) {
-				//int p = this.remplissage.get(0).size()-1;
 				if(this.getCarte(this.remplissage.get(0).size()-1, i) != null) {
-					return false;
+					return null;
 				}
 			}
-			return true;
+			return Direction.DROITE;
 		}
 			
-		return false;
+		return null;
 	}
 
 	@Override
-	public void deplacerPlateau(int x, int y) {
-		if(x == -1) { 
+	public void deplacerPlateau(Direction direction) {
+		
+		if(direction == Direction.DROITE) { 
 			for(int i=0; i<this.remplissage.size(); i++) {
 				for(int j=this.remplissage.get(i).size()-2; j>=0 ; j--) {
 					this.setCarte(j+1, i,this.getCarte(j, i));
@@ -121,39 +163,82 @@ public class PlateauHexagonal extends Plateau{
 			}
 		}
 		
-		
-		else if(y == -1) {
-			int nbligne = this.remplissage.size() - 1;
-			for(int i=nbligne-1; i>=0; i--) {
-				for(int j=0; j<this.remplissage.get(i).size(); j++) {
-					this.setCarte(j, i+1, this.getCarte(j, i));
-					this.setCarte(j, i, null);
+		else if(direction == Direction.HAUTDROITE) {
+			for(int i=1; i<this.remplissage.size();i++) {
+				if(i >(int) this.remplissage.size()/2) {
+					for(int j=0; j<this.remplissage.get(i).size(); j++) {
+						this.setCarte(j+1, i-1, this.getCarte(j, i));
+						this.setCarte(j, i, null);
+					}
+				}
+				else {
+					for(int j=0; j<this.remplissage.get(i).size()-1; j++) {
+						this.setCarte(j, i-1, this.getCarte(j, i));
+						this.setCarte(j, i, null);
+					}
 				}
 			}
 		}
 		
-		
-		else if(y == this.remplissage.size()) {
-			int nbligne = this.remplissage.size();
-			for(int i=1; i<nbligne; i++) {
-				for(int j=0; j<this.remplissage.get(i).size(); j++) {
-					this.setCarte(j, i-1, this.getCarte(j, i));
-					this.setCarte(j, i, null);
+		else if(direction == Direction.HAUTGAUCHE) {
+			for(int i=1; i<this.remplissage.size();i++) {
+				if(i >(int) this.remplissage.size()/2) {
+					for(int j=0; j<this.remplissage.get(i).size(); j++) {
+						this.setCarte(j, i+1, this.getCarte(j, i));
+						this.setCarte(j, i, null);
+					}
+				}
+				else {
+					for(int j=1; j<this.remplissage.get(i).size(); j++) {
+						this.setCarte(j-1, i-1, this.getCarte(j, i));
+						this.setCarte(j, i, null);
+					}
 				}
 			}
 		}
 		
+		else if(direction == Direction.BASDROITE) {
+			for(int i=this.remplissage.size()-2; i>=0; i--) {
+				if(i >=(int) this.remplissage.size()/2) {
+					for(int j=0; j<this.remplissage.get(i).size()-1; j++) {
+						this.setCarte(j, i+1, this.getCarte(j, i));
+						this.setCarte(j, i, null);
+					}
+				}
+				else {
+					for(int j=0; j<this.remplissage.get(i).size(); j++) {
+						this.setCarte(j+1, i+1, this.getCarte(j, i));
+						this.setCarte(j, i, null);
+					}
+				}
+			}
+		}
 		
-		else if(x == this.remplissage.get(y).size()) {
-			int nbligne = this.remplissage.size();
-			for(int i=0; i<nbligne; i++) {
+		else if(direction == Direction.BASGAUCHE) {
+			for(int i=this.remplissage.size()-2; i>=0; i--) {
+				if(i >=(int) this.remplissage.size()/2) {
+					for(int j=1; j<this.remplissage.get(i).size(); j++) {
+						this.setCarte(j-1, i+1, this.getCarte(j, i));
+						this.setCarte(j, i, null);
+					}
+				}
+				else {
+					for(int j=0; j<this.remplissage.get(i).size(); j++) {
+						this.setCarte(j, i+1, this.getCarte(j, i));
+						this.setCarte(j, i, null);
+					}
+				}
+			}
+		}
+		
+		else if(direction == Direction.GAUCHE) {
+			for(int i=0; i<this.remplissage.size(); i++) {
 				for(int j=1; j<this.remplissage.get(i).size(); j++) {
 					this.setCarte(j-1, i, this.getCarte(j, i));
 					this.setCarte(j, i, null);
 				}
 			}
 		}
-		
 	}
 	
 	//FORCEMENT DIFF
@@ -205,6 +290,11 @@ public class PlateauHexagonal extends Plateau{
 			}
 		}
 		
+	}
+
+	@Override
+	public void deplacerPlateau(int x, int y) {
+		// TODO Auto-generated method stub
 	}
 
 }

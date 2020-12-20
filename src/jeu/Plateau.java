@@ -41,7 +41,10 @@ public abstract class Plateau {
 	}
 	
 	public abstract boolean checkPose(int x,int y);
+	public abstract Direction checkPosExtremiteHex(int x,int y);
 	public abstract void deplacerPlateau(int x,int y);
+	public abstract void deplacerPlateau(Direction direction);
+	
 	
 	
 	public void setRemplissage(int x, int y, Carte carte) {

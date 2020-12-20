@@ -107,14 +107,12 @@ public class Joueur{
 				if(plateauActuel.checkPose(xPose, yPose)) {
 					
 					//changer ... tout avec le mm nom de méthode plus tard
-					plateauActuel.deplacerPlateau(xPose,yPose);
-					/*
-					if(plateauActuel.getForme()!= FormePlateau.CERCLE) {
-						plateauActuel.deplacerPlateau(xPose,yPose);
+					if(plateauActuel.getForme() == FormePlateau.HEXAGONE) {
+						plateauActuel.deplacerPlateau(plateauActuel.checkPosExtremiteHex(xPose,yPose));
 					}
 					else {
-						plateauActuel.deplacerPlateauCercle(xPose);
-					}*/
+						plateauActuel.deplacerPlateau(xPose,yPose);
+					}
 					incorrectInput = false;
 				}
 				else {
@@ -131,18 +129,20 @@ public class Joueur{
 		if(xPose == -1) {
 			xPose =0;
 		}
-		if(yPose == -1) {
+		else if(yPose == -1) {
 			yPose =0;
 		}
-		if(xPose == plateauActuel.getRemplissage().get(yPose).size()) {
-			xPose = plateauActuel.getRemplissage().get(yPose).size() -1;
-		}
-		if(yPose == plateauActuel.getRemplissage().size()) {
+		else if(yPose == plateauActuel.getRemplissage().size()) {
 			yPose = plateauActuel.getRemplissage().size()-1;
 		}
+		else if(xPose == plateauActuel.getRemplissage().get(yPose).size()) {
+			xPose = plateauActuel.getRemplissage().get(yPose).size() -1;
+		}
+
 		
 		
 		//on pose la carte
+		System.out.println(xPose + ","+yPose);
 		plateauActuel.setRemplissage(xPose, yPose, this.main.getCarte(index));
 		this.main.retirerCarte(index);
 		

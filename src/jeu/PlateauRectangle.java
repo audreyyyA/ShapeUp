@@ -36,7 +36,7 @@ public class PlateauRectangle extends Plateau{
 	
 	//changer en size au lieu de l'index précis pour la 2e condition... A VERIFIER
 	
-	public boolean checkPosExtremite(int x, int y) {
+	private boolean checkPosExtremite(int x, int y) {
 		
 		if(y==-1) {
 			int nbligne = this.remplissage.size() - 1;
@@ -167,5 +167,17 @@ public class PlateauRectangle extends Plateau{
 					System.out.println(s);
 				}
 			}
+		}
+
+		@Override
+		public void deplacerPlateau(Direction direction) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Direction checkPosExtremiteHex(int x, int y) {
+			// TODO Auto-generated method stub
+			return null;
 		}
 }
