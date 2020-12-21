@@ -194,12 +194,19 @@ public class Joueur{
 			yDeplacer = sc.nextInt();
 			plateau.setCarte(xCarte, yCarte, null);
 				//on vérifie si c'est possible de poser la carte 
-			if(plateau.checkPose(xDeplacer, yDeplacer)) {
-				//changer ... tout avec le mm nom de méthode plus tard
-				plateau.deplacerPlateau(xDeplacer,yDeplacer);
+			if(plateau.getForme() == FormePlateau.HEXAGONE) {
+				plateau.deplacerPlateau(plateau.checkPosExtremiteHex(xDeplacer,yDeplacer));
 				incorrectInput = false;
 			}
 			else {
+				if(plateau.checkPose(xDeplacer, yDeplacer)) {
+					//changer ... tout avec le mm nom de méthode plus tard
+					plateau.deplacerPlateau(xDeplacer,yDeplacer);
+					incorrectInput = false;
+				}
+			}
+
+			if(incorrectInput){
 				plateau.setRemplissage(xCarte, yCarte, carteTemp);
 				//plateau.setCarte(xCarte, yCarte, carteTemp);
 				System.out.println("Tu ne peux pas poser de carte ici");
