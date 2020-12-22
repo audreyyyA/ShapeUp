@@ -110,7 +110,7 @@ public class Joueur{
 					if(plateauActuel.getForme() == FormePlateau.HEXAGONE) {
 						plateauActuel.deplacerPlateau(plateauActuel.checkPosExtremiteHex(xPose,yPose));
 					}
-					else {
+					else if((xPose == -1) || (yPose == -1) || (xPose == plateauActuel.getRemplissage().get(1).size()) || (yPose == plateauActuel.getRemplissage().size())){
 						plateauActuel.deplacerPlateau(xPose,yPose);
 					}
 					incorrectInput = false;
@@ -139,7 +139,6 @@ public class Joueur{
 			xPose = plateauActuel.getRemplissage().get(yPose).size() -1;
 		}
 
-		
 		
 		//on pose la carte
 		System.out.println(xPose + ","+yPose);

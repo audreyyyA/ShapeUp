@@ -41,7 +41,7 @@ public class Manche {
 	public void demarrerManche(ArrayList<Joueur> tabJoueur, FormePlateau forme, Regle regle) {
 		
 		//this.plateau = new Plateau(forme);
-		this.plateau = new PlateauHexagonal(forme);
+		this.plateau = new PlateauCercle(forme);
 		this.pioche = new Pioche();
 		
 		

@@ -30,7 +30,7 @@ public class Appli {
 		
 		//demander quelle forme de plateau on veut
 		
-		partie.debutPartie(FormePlateau.HEXAGONE);
+		partie.debutPartie(FormePlateau.CERCLE);
 		partie.finPartie();
 		partie.afficherScore();
 	
