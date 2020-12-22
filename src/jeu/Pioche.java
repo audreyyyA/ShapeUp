@@ -23,7 +23,6 @@ public class Pioche {
 			Carte randomCard = listeCarte.get(random);
 			listeCarte.remove(random);
 			this.nbCarteRestantes -=1;
-			System.out.println(this.listeCarte);
 			return randomCard;
 		}
 	}

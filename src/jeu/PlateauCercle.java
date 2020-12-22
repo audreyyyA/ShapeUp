@@ -22,20 +22,30 @@ public class PlateauCercle extends Plateau{
 				return false;
 			}
 		}
-		else if(this.getCarte(x-1, y) != null || this.getCarte(x+1, y) != null || this.getCarte(x, y+1) != null || this.getCarte(x, y-1) != null) {
+		if(this.getCarte(x-1, y) != null || this.getCarte(x+1, y) != null || this.getCarte(x, y+1) != null || this.getCarte(x, y-1) != null) {
 			return true;
 		}
-		else if(y ==1) {
+		if(x == this.remplissage.get(1).size()-1) {
+			if(this.getCarte(0, y) != null) {
+				return true;
+			}
+		}
+		if(y ==1) {
 			if(this.getCarte(0, 0) != null) {
 				return true;
 			}
 		}
-		else if(y == 0 && x == 0) {
+		if(y == 0 && x == 0) {
 			 for(int i=0; i<this.remplissage.get(1).size(); i++) {
 				 if(this.getCarte(i, 1) != null) {
 					 return true;
 				 }
 			 }
+		}
+		if(x ==0) {
+			if(this.getCarte(this.remplissage.get(1).size()-1, y) != null) {
+				return true;
+			}
 		}
 		
 		return false;

@@ -294,7 +294,6 @@ public class CalculPointCercle extends CalculPointForme {
 					
 					
 					if(Ypos == remplissage.size()-1 && x>=remplissage.get(Ypos).size()/2) {//Au cas où la dernière carte de la colonne continue la streak
-						System.out.println(streakRempli + ";" + streakForme);
 						nbPoint += super.pointRempli.get(streakRempli);   //Il faut la compter avant de sortir de la boucle et de la reset
 						nbPoint += super.pointForme.get(streakForme);
 						nbPoint += super.pointCouleur.get(streakColor);
@@ -317,9 +316,7 @@ public class CalculPointCercle extends CalculPointForme {
 				
 			}
 		}
-		
-		System.out.println("nbPoint :" + nbPoint);
-		return 0;
+		return nbPoint;
 	}
 
 	@Override
