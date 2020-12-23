@@ -10,7 +10,10 @@ public class Variante1 extends Regle{
 	
 	@Override
 	public void jouer(Joueur joueur, int tour, Pioche pioche, Plateau plateau) {
-		
+		/*
+		 * On va appeler la methode algo de strategie si le joueur est virtuel
+		 * mettre condition ou Switch
+		 */
 		Carte c = joueur.piocherCarte(pioche);
 		joueur.getMain().ajouterCarte(c); 
 		joueur.getMain().afficherMain();
