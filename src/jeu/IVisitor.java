@@ -7,7 +7,7 @@ import joueur.Joueur;
 
 public interface IVisitor {
 
-	public Joueur calculnbPoints(ArrayList <Joueur>tabJoueur, Plateau plateau);
+	public ArrayList<Joueur> calculnbPoints(ArrayList <Joueur>tabJoueur, Plateau plateau);
 	public int calculPointJoueur(Carte carteVictoire, Plateau plateau);
 	public Map<Integer, Integer> getPointRempli();
 

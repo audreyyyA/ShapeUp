@@ -14,7 +14,7 @@ public class Visitor implements IVisitor{
 	}
 
 	@Override
-	public Joueur calculnbPoints(ArrayList<Joueur> tabJoueur, Plateau plateau) {
+	public ArrayList<Joueur> calculnbPoints(ArrayList<Joueur> tabJoueur, Plateau plateau) {
 		// TODO Auto-generated method stub
 		return null;
 	}

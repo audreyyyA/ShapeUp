@@ -22,9 +22,9 @@ public class MainJoueur {
 	}
 	
 	public void afficherMain() {
-		System.out.print("       ");
+		System.out.print("        ");
 		for(int i=0; i<this.cartes.size(); i++) {
-			System.out.print("     "+i);
+			System.out.print("    "+i);
 		}
 		System.out.println("\nTa main : " + this.cartes+"\n");
 	}

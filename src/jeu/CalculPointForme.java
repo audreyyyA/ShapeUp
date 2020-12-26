@@ -24,12 +24,16 @@ public abstract class CalculPointForme implements IVisitor{
 	 * retourne le joueur ayant le meilleur score
 	 */
 	@Override
-	public Joueur calculnbPoints(ArrayList <Joueur>tabJoueur, Plateau plateau) {
-		Joueur jGagnant = null;
+	public ArrayList<Joueur> calculnbPoints(ArrayList <Joueur>tabJoueur, Plateau plateau) {
+		ArrayList <Joueur> jGagnant = new ArrayList<Joueur>();
 		int tmp = 0;
 		for(Joueur j : tabJoueur) {
 			if(tmp < calculPointJoueur(j.getCarteVictoire(),plateau)) {
-				jGagnant = j;
+				jGagnant.clear();
+				jGagnant.add(j);
+			}
+			else if(tmp == calculPointJoueur(j.getCarteVictoire(),plateau)) {
+				jGagnant.add(j);
 			}
 			tmp = calculPointJoueur(j.getCarteVictoire(),plateau);
 			j.setPoints(tmp);
