@@ -58,9 +58,14 @@ public class Appli {
 		
 		int nb = 0;
 		while(nb<=0) {
-			
-			Scanner sc = new Scanner(System.in);
-			nb = sc.nextInt();
+			try {
+				Scanner sc = new Scanner(System.in);
+				nb = sc.nextInt();
+			}
+			catch (Exception e){
+				System.out.println("Veuillez rentrer un chiffre");
+				System.out.println("combien de manches voulez-vous jouer?");
+			}
 		}
 		
 		
@@ -68,6 +73,7 @@ public class Appli {
 		
 		//demander quelle forme de plateau on veut
 		
+		incorrectInput = true;
 		
 		while(incorrectInput) {
 			
@@ -85,15 +91,19 @@ public class Appli {
 			switch(choix) {
 			case "1" :
 				partie.debutPartie(FormePlateau.RECTANGLE);
+				incorrectInput = false;
 				break;
 			case "2" :
 				partie.debutPartie(FormePlateau.HEXAGONE);
+				incorrectInput = false;
 				break;
 			case "3" :
 				partie.debutPartie(FormePlateau.CERCLE);
+				incorrectInput = false;
 				break;
 			case "4" :
 				// Rajouter le mode libre
+				incorrectInput = false;
 				break;
 			default :
 				incorrectInput = true;

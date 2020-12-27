@@ -57,22 +57,28 @@ public abstract class Regle {
 		
 		System.out.println("Dans une partie classique, vous pouvez jouer à maximum 3 joueurs.");
 		System.out.println("Choisissez le nombre de joueurs : ");
-		int nb = 0;
+		int nbJoueur = 0;
 		boolean tmp = true;
 		while(tmp) {
-			Scanner sc =  new Scanner(System.in);
-			nb = sc.nextInt();
-			
-			if(nb <= 0 || nb > 3) {
-				
-				System.out.println("Le nombre de joueurs est incorrect ! Recommence ");
+			try {
+				Scanner sc =  new Scanner(System.in);
+				nbJoueur = sc.nextInt();	
+				if(nbJoueur >0 && nbJoueur<4) {
+					tmp = false;
+				}
+				else {
+					System.out.println("Veuillez choisir un nombre de joueur entre 1 et 3");
+					System.out.println("Choisissez le nombre de joueurs : ");
+				}
 			}
-			else {
-				tmp = false;
+			catch(Exception e) {
+				System.out.println("Veuillez rentrer un chiffre");
+				System.out.println("Choisissez le nombre de joueurs : ");
 			}
 		}
 		
-		for(int i = 1; i<= nb; i++) {
+		
+		for(int i = 1; i<= nbJoueur; i++) {
 			
 			System.out.println("Entrez le nom du joueur " + i);
 			String n = "";
