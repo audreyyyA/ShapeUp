@@ -11,7 +11,7 @@ public class CalculPointRectangle extends CalculPointForme{
 		super();
 	}
 	
-	public Joueur calculnbPoints(ArrayList <Joueur>tabJoueur, Plateau plateau) {
+	public ArrayList<Joueur> calculnbPoints(ArrayList <Joueur>tabJoueur, Plateau plateau) {
 		
 		return super.calculnbPoints(tabJoueur, plateau);
 	}

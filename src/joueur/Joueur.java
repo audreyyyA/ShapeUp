@@ -89,12 +89,19 @@ public class Joueur{
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.print("Quelle carte voulez vous poser ? ");
-		index = sc.nextInt();
-		
-		while (index <0 || index > this.getMain().getCartes().size()-1) { // verif si string
-			System.out.println("Tu as choisis un index incorrect. Chosis en un autre");
-			System.out.print("Quelle carte voulez vous poser ? ");
+		try {
 			index = sc.nextInt();
+		}
+		catch(Exception e) {}
+		
+		while (index <0 || index > this.getMain().getCartes().size()-1) {
+			System.out.println("Tu as choisis un index incorrect. Chosis en un entre 0 et " + (this.getMain().getCartes().size()-1));// verif si string
+			System.out.print("Quelle carte voulez vous poser ? ");
+			try {
+				sc = new Scanner(System.in);
+				index = sc.nextInt();
+			}
+			catch(Exception e) {}
 		}
 		
 		while(incorrectInput) {

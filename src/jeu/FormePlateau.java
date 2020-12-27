@@ -4,6 +4,7 @@ public enum FormePlateau {
 	
 	RECTANGLE,
 	HEXAGONE,
-	CERCLE;
-
+	CERCLE,
+	LIBRE;
+	
 }

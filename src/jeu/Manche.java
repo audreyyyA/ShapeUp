@@ -7,12 +7,13 @@ import joueur.Joueur;
 
 public class Manche {
 	
-	private Joueur gagnant;
+	private ArrayList<Joueur> gagnant;
 	private boolean estTerminé;
 	private IVisitor visitor;
 	private Carte carteDefausse;
 	private Pioche pioche;
 	private Plateau plateau;
+	ArrayList<Joueur> tabJoueurs;
 	
 	public Manche() {
 		
@@ -22,12 +23,20 @@ public class Manche {
 		
 	}
 
-	public Joueur getGagnant() {
+	public ArrayList<Joueur> getGagnant() {
 		return gagnant;
 	}
 
-	public void setGagnant(Joueur gagnant) {
-		this.gagnant = gagnant;
+	public void setGagnant(ArrayList<Joueur> j) {
+		this.gagnant = j;
+	}
+
+	public Pioche getPioche() {
+		return pioche;
+	}
+
+	public void setPioche(Pioche pioche) {
+		this.pioche = pioche;
 	}
 
 	public boolean isEstTerminé() {
@@ -38,22 +47,33 @@ public class Manche {
 		this.estTerminé = estTerminé;
 	}
 	
+	public void creerPlateau(FormePlateau forme) {
+		switch(forme) {
+		case RECTANGLE:
+			 this.plateau = new PlateauRectangle(forme);
+			 this.visitor = new CalculPointRectangle();
+			 break;
+		case HEXAGONE:
+			this.plateau = new PlateauHexagonal(forme);
+			this.visitor = new CalculPointHexagone();
+			 break;
+		case CERCLE:
+			this.plateau = new PlateauHexagonal(forme);
+			this.visitor = new CalculPointCercle();
+			 break;
+		case LIBRE:
+			 // creer un plateau libre rectangulaire
+			 break;
+		default :
+			break;
+		}	
+	}
+	
 	public void demarrerManche(ArrayList<Joueur> tabJoueur, FormePlateau forme, Regle regle) {
 		
-		//this.plateau = new Plateau(forme);
-		this.plateau = new PlateauCercle(forme);
+		this.creerPlateau(forme);
 		this.pioche = new Pioche();
-		
-		
-		if(forme.equals(FormePlateau.RECTANGLE)) {
-			this.visitor = new CalculPointRectangle();
-		}
-		else if(forme.equals(FormePlateau.HEXAGONE)) {
-			this.visitor = new CalculPointHexagone();
-		}
-		else {
-			this.visitor = new CalculPointCercle();
-		}
+		this.tabJoueurs = tabJoueur;
 		
 		regle.demarrerManche(tabJoueur, this.pioche);
 		
@@ -73,9 +93,9 @@ public class Manche {
 		
 		int nbTour = 0;
 		System.out.println(plateau.getRemplissage());
-		while(this.pioche.getListeCarte().size() != 0) {
+		while(regle.isDone(this) == false) {
 			for(Joueur j : tabJoueur) {
-				if(this.pioche.getListeCarte().size() != 0) {
+				if(regle.isDone(this) == false) {
 					nbTour ++;
 					System.out.println("Tour "+nbTour/2+" - "+ j.getNom()+ "\n");
 					regle.jouer(j, nbTour, this.pioche, this.plateau);
@@ -91,12 +111,22 @@ public class Manche {
 	
 	public void finManche(ArrayList<Joueur> tabJoueur) {
 		
+		System.out.println("La carte défaussée était : " + this.carteDefausse);
 		//comptage des points des joueurs
-		Joueur j = visitor.calculnbPoints(tabJoueur, this.plateau);
+		ArrayList<Joueur> j = visitor.calculnbPoints(tabJoueur, this.plateau);
 		this.setGagnant(j);
 		
-		System.out.println("Le joueur gagnant de cette manche est : " + this.gagnant.getNom());
+		if(this.gagnant.size()>1) { // égalité
+			System.out.print("Les joueurs gagnants à égalité de cette manche sont : ");
+			for(Joueur g : this.gagnant) {
+				System.out.print(g.getNom());
+			}
+		}
+		else {
+			System.out.println("Le joueur gagnant de cette manche est : " + this.gagnant.get(0).getNom());
+		}
 		for(Joueur t : tabJoueur) {
+			System.out.println("Carte victoire de " + t.getNom() + "à cette manche était : " + t.getCarteVictoire());
 			System.out.println("Points de " + t.getNom() + " : " + t.getNbPointsManches());
 		}
 		
