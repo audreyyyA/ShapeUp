@@ -5,49 +5,64 @@ import java.util.Scanner;
 
 import joueur.Joueur;
 import joueur.JoueurReel;
+import joueur.JoueurVirtuel;
+import joueur.Strategie;
+import joueur.StrategieDifficile;
+import joueur.StrategieFacile;
 
 public abstract class Regle {
 	
 	public abstract void demarrerManche(ArrayList<Joueur> tabJoueur, Pioche pioche);
 	public abstract boolean isDone(Manche manche);
 
-	public void jouer(Joueur joueur, int tour, Pioche pioche, Plateau plateau) {
+	public void jouer(Joueur joueur, int tour, Pioche pioche, Plateau plateau, IVisitor visitor) {
 
-		/*
-		 * On va appeler la methode algo de strategie si le joueur est virtuel
-		 * mettre condition ou Switch
-		 */
 		Carte c = joueur.piocherCarte(pioche);
 		joueur.getMain().ajouterCarte(c); 
 		joueur.getMain().afficherMain();
 		plateau.afficherPlateau();
-		Scanner sc = new Scanner(System.in);
-		boolean deplacer = false;
-		int nbDep = 0;
 		
-	
-		while(joueur.askDeplacer() && !deplacer) {
-			deplacer = joueur.deplacerCarte(plateau);
-			if(deplacer) {
-				nbDep = 1;
-				break;
+		if(joueur.getIsVirtuel()) {
+			
+			try {
+				((JoueurVirtuel) joueur).getStrategie().Algorithme(plateau, joueur, tour, visitor);
+			} catch (CloneNotSupportedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+			
 		}
+		else {
+			
+			Scanner sc = new Scanner(System.in);
+			boolean deplacer = false;
+			int nbDep = 0;
+			
 		
-		//mettre condition tour 1
-		joueur.getMain().afficherMain();
-		joueur.poserCarte(plateau,tour); 
-		plateau.afficherPlateau();
-		
-		//déplace la carte seulement s'il l'a pas fait avant
-		while(joueur.askDeplacer() && !deplacer) {
-			deplacer = joueur.deplacerCarte(plateau);
-			if(deplacer) {
-				break;
+			while(((JoueurReel) joueur).askDeplacer() && !deplacer) {
+				deplacer = joueur.deplacerCarte(plateau);
+				if(deplacer) {
+					nbDep = 1;
+					break;
+				}
 			}
+			
+			//mettre condition tour 1
+			joueur.getMain().afficherMain();
+			joueur.poserCarte(plateau,tour); 
+			plateau.afficherPlateau();
+			
+			//déplace la carte seulement s'il l'a pas fait avant
+			while(((JoueurReel) joueur).askDeplacer() && !deplacer) {
+				deplacer = joueur.deplacerCarte(plateau);
+				if(deplacer) {
+					break;
+				}
+			}
+			
+			plateau.afficherPlateau();
+			
 		}
-		
-		plateau.afficherPlateau();
 		
 	}
 	
@@ -77,10 +92,66 @@ public abstract class Regle {
 			}
 		}
 		
+		if(nbJoueur != 1) {
+			
+			boolean inputNul = true;
+			while(inputNul) {
+				
+				System.out.println("Combien de joueurs virtuels voulez-vous ? : ");
+				Scanner scvirtuel = new Scanner(System.in);
+				int nbVirtuel = scvirtuel.nextInt();
+				
+				if(nbVirtuel >= nbJoueur) {
+					
+					System.out.println("Veuillez choisir un nombre de joueur virtuel correct");
+					inputNul = true;
+				}else if(nbVirtuel == 0) {
+					System.out.println("Vous voulez jouer sans joueur virtuel");
+					inputNul = false;
+				}
+				else{
+					inputNul = false;
+					nbJoueur -= nbVirtuel;
+					
+					System.out.println("Quelle stratégie ? : 1 : FACILE ou 2 : AVANCEE");
+					
+					//verifier si c pas une mauvaise entrée..
+					Scanner scStrat = new Scanner(System.in);
+					int typeStrat = scStrat.nextInt();
+
+					for(int i = 1; i<= nbVirtuel; i++) {
+						System.out.println("Entrez le nom du joueur viturel " + i);
+						String n = "";
+						boolean tmp2 = true;
+						while(tmp2) {
+							Scanner sc2 = new Scanner(System.in);
+							n = sc2.next();
+							if(n.isEmpty()) {
+								System.out.println("il te faut un nom pour ce joueur !");
+							}
+							else {
+								tmp2 = false;
+							}
+						}
+						if(typeStrat == 1) {
+							Strategie facile = new StrategieFacile();
+							Joueur j = new JoueurVirtuel(n, true, facile);
+							t.add(j);
+						}else {
+							Strategie difficile = new StrategieDifficile();
+							Joueur j = new JoueurVirtuel(n, true, difficile);
+							t.add(j);
+						}
+
+					}
+				}
+			}
+		}
+	
 		
 		for(int i = 1; i<= nbJoueur; i++) {
 			
-			System.out.println("Entrez le nom du joueur " + i);
+			System.out.println("Entrez le nom du joueur reel " + i);
 			String n = "";
 			boolean tmp2 = true;
 			while(tmp2) {

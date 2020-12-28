@@ -141,6 +141,16 @@ public class PlateauCercle extends Plateau{
 		}
 	}
 
+	public  Plateau copiePlateau() {
+		
+		FormePlateau copieForme = FormePlateau.CERCLE;
+		Plateau pCopie = new PlateauCercle(copieForme);
+		
+		pCopie.setRemplissageTotalCopie(this.getRemplissage());
+
+		return pCopie;
+	}
+
 	@Override
 	public Direction checkPosExtremiteHex(int x, int y) {
 		// TODO Auto-generated method stub

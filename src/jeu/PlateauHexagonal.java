@@ -291,6 +291,16 @@ public class PlateauHexagonal extends Plateau{
 		}
 		
 	}
+	
+	public  Plateau copiePlateau() {
+		
+		FormePlateau copieForme = FormePlateau.HEXAGONE;
+		Plateau pCopie = new PlateauHexagonal(copieForme);
+		
+		pCopie.setRemplissageTotalCopie(this.getRemplissage());
+
+		return pCopie;
+	}
 
 	@Override
 	public void deplacerPlateau(int x, int y) {

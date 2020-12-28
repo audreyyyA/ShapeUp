@@ -3,7 +3,7 @@ package jeu;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public abstract class Plateau {
+public abstract class Plateau implements Cloneable{
 	
 	protected FormePlateau forme;
 	protected ArrayList<ArrayList<Carte>> remplissage;
@@ -40,6 +40,26 @@ public abstract class Plateau {
 		
 	}
 	
+	public void setRemplissageTotalCopie(ArrayList<ArrayList<Carte>> liste) {
+		
+		for(int y = 0; y < liste.size(); y++) {
+			
+			for(int x = 0; x < liste.get(y).size(); x++) {
+				
+				if(liste.get(y).get(x) != null) {
+					FormeCarte fCopie = liste.get(y).get(x).getForme();
+					Couleur couleurCopie = liste.get(y).get(x).getCouleur();
+					boolean rempliCopie = liste.get(y).get(x).isRempli();
+					Carte carteCopie = new Carte(couleurCopie, fCopie, rempliCopie);
+					
+					this.setCarte(x, y, carteCopie);
+				}
+	
+			}
+		}
+		
+	}
+	
 	public abstract boolean checkPose(int x,int y);
 	public abstract Direction checkPosExtremiteHex(int x,int y);
 	public abstract void deplacerPlateau(int x,int y);
@@ -63,6 +83,15 @@ public abstract class Plateau {
 			}
 		}
 	}
+	
+	public abstract void afficherPlateau();
+	public abstract void initialiser();
+	/*
+	 * Methode de clonage d'un plateau
+	 * @return : une instance clone d'un plateau 
+	 */
+	
+	public abstract Plateau copiePlateau();
 	
 	/*
 	public boolean checkPose(int x, int y) { //Check si une carte est adjacente à l'endroit de pose
@@ -317,8 +346,6 @@ public abstract class Plateau {
 		}
 		this.setCarte(x, this.remplissage.size()-1, null);
 	}*/
-	public abstract void afficherPlateau();
-	public abstract void initialiser();
 	
 	/*public void initialiser() {
 		
