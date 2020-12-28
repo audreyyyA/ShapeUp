@@ -112,6 +112,15 @@ public class Controller {
 				
 				forme = FormePlateau.HEXAGONE;
 			}
+			public void mouseEntered(MouseEvent e) {
+				Hexagone.setIcon(new ImageIcon(GraphicInterface.class.getResource("/images/hexagone_green.png")));
+			}
+			
+			public void mouseExited(MouseEvent e) {
+				if(forme != FormePlateau.HEXAGONE) {
+					Hexagone.setIcon(new ImageIcon(GraphicInterface.class.getResource("/images/hexagone2.png")));
+				}
+			}
 		});
 		
 		this.Rectangle.addMouseListener(new MouseAdapter() {
@@ -123,6 +132,17 @@ public class Controller {
 				
 				forme = FormePlateau.RECTANGLE;
 			}
+			
+			public void mouseEntered(MouseEvent e) {
+				Rectangle.setIcon(new ImageIcon(GraphicInterface.class.getResource("/images/rectangle_green.png")));
+			}
+			
+			public void mouseExited(MouseEvent e) {
+				if(forme != FormePlateau.RECTANGLE) {
+					Rectangle.setIcon(new ImageIcon(GraphicInterface.class.getResource("/images/rectangle.png")));
+				}
+			}
+			
 		});
 		
 		this.Cercle.addMouseListener(new MouseAdapter() {
@@ -133,6 +153,15 @@ public class Controller {
 				jeuLibre.setForeground(Color.WHITE);
 				
 				forme = FormePlateau.CERCLE;
+			}
+			public void mouseEntered(MouseEvent e) {
+				Cercle.setIcon(new ImageIcon(GraphicInterface.class.getResource("/images/cercle_green.png")));
+			}
+			
+			public void mouseExited(MouseEvent e) {
+				if(forme != FormePlateau.CERCLE) {
+					Cercle.setIcon(new ImageIcon(GraphicInterface.class.getResource("/images/cercle_reverse.png")));
+				}
 			}
 		});
 		
