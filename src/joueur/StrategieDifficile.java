@@ -96,13 +96,7 @@ public class StrategieDifficile extends Strategie{
 		
 		int nbCartePlacee = listeIndex.size();
 		
-		//adapter pour connaitre le nb de carte à placer sur chaque type de plateau
-		//MODIF A FAIREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-		
-		
-		
-		
-		if(nbCartePlacee != 0 || nbCartePlacee != 14) {
+		if(nbCartePlacee != 0) {
 			
 			int randomCarteIndex = (int)(Math.random()*(listeIndex.size()-1));
 			Carte carte = p.getCarte(listeIndex.get(randomCarteIndex).get(1), listeIndex.get(randomCarteIndex).get(0));
