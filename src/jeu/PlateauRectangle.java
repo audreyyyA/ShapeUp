@@ -2,7 +2,7 @@ package jeu;
 
 import java.util.ArrayList;
 
-public class PlateauRectangle extends Plateau{
+public class PlateauRectangle extends Plateau implements Cloneable{
 
 	public PlateauRectangle(FormePlateau forme) {
 		super(forme);
@@ -167,6 +167,28 @@ public class PlateauRectangle extends Plateau{
 					System.out.println(s);
 				}
 			}
+		}
+		
+		/*public Object clone() throws CloneNotSupportedException{
+			
+			PlateauRectangle plateauClone = null;
+			
+			    // On récupère l'instance à renvoyer par l'appel de la 
+				// méthode super.clone()
+				plateauClone = (PlateauRectangle) this.clone();
+			
+			return plateauClone;
+			
+		}*/
+		
+		public  Plateau copiePlateau() {
+			
+			FormePlateau copieForme = FormePlateau.RECTANGLE;
+			Plateau pCopie = new PlateauRectangle(copieForme);
+			
+			pCopie.setRemplissageTotalCopie(this.getRemplissage());
+	
+			return pCopie;
 		}
 
 		@Override

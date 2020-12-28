@@ -98,7 +98,7 @@ public class Manche {
 				if(regle.isDone(this) == false) {
 					nbTour ++;
 					System.out.println("Tour "+nbTour/2+" - "+ j.getNom()+ "\n");
-					regle.jouer(j, nbTour, this.pioche, this.plateau);
+					regle.jouer(j, nbTour, this.pioche, this.plateau, this.visitor);
 				}
 				else {
 					break;
