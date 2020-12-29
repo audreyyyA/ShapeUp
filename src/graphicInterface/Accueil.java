@@ -1,4 +1,4 @@
-package Vue;
+package graphicInterface;
 
 import java.awt.EventQueue;
 
@@ -35,8 +35,10 @@ import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import javax.swing.JProgressBar;
+import java.awt.Canvas;
 
-public class GraphicInterface {
+public class Accueil {
 
 	private JFrame frmShapeUp;
 	private JTextField askName1;
@@ -51,7 +53,7 @@ public class GraphicInterface {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GraphicInterface window = new GraphicInterface();
+					Accueil window = new Accueil();
 					window.frmShapeUp.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -63,7 +65,7 @@ public class GraphicInterface {
 	/**
 	 * Create the application.
 	 */
-	public GraphicInterface() {
+	public Accueil() {
 		initialize();
 	}
 
@@ -72,7 +74,6 @@ public class GraphicInterface {
 	 */
 	private void initialize() {
 		frmShapeUp = new JFrame();
-		frmShapeUp.setResizable(false);
 		frmShapeUp.setTitle("Shape Up");
 		frmShapeUp.getContentPane().setForeground(Color.DARK_GRAY);
 		frmShapeUp.getContentPane().setBackground(Color.DARK_GRAY);
@@ -81,9 +82,17 @@ public class GraphicInterface {
 		frmShapeUp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmShapeUp.getContentPane().setLayout(null);
 		
+		JTextPane Signature = new JTextPane();
+		Signature.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 13));
+		Signature.setForeground(Color.WHITE);
+		Signature.setText("Audrey ALCARAZ & Alexandre DUTOUR");
+		Signature.setBounds(521, 660, 237, 21);
+		Signature.setOpaque(false);
+		frmShapeUp.getContentPane().add(Signature);
+		
 		JPanel Conteneur = new JPanel();
 		Conteneur.setBackground(new Color(65,65,65));
-		Conteneur.setBounds(264, 137, 747, 518);
+		Conteneur.setBounds(266, 137, 747, 518);
 		frmShapeUp.getContentPane().add(Conteneur);
 		Conteneur.setLayout(null);
 		
@@ -123,18 +132,19 @@ public class GraphicInterface {
 		
 		JLabel Hexagone = new JLabel("");
 		Hexagone.setHorizontalAlignment(SwingConstants.CENTER);
-		Hexagone.setIcon(new ImageIcon(GraphicInterface.class.getResource("/images/hexagone2.png")));
+		Hexagone.setIcon(new ImageIcon(Accueil.class.getResource("/images/hexagone2.png")));
 		Hexagone.setBounds(75, 344, 100, 95);
 		Hexagone.setBackground(Color.RED);
 		Conteneur.add(Hexagone);
 		
 		JLabel Rectangle = new JLabel("");
-		Rectangle.setIcon(new ImageIcon(GraphicInterface.class.getResource("/images/rectangle.png")));
+		Rectangle.setIcon(new ImageIcon(Accueil.class.getResource("/images/rectangle_green.png")));
 		Rectangle.setBounds(241, 344, 132, 95);
 		Conteneur.add(Rectangle);
 		
+		
 		JLabel Cercle = new JLabel("");
-		Cercle.setIcon(new ImageIcon(GraphicInterface.class.getResource("/images/cercle_reverse.png")));
+		Cercle.setIcon(new ImageIcon(Accueil.class.getResource("/images/cercle_reverse.png")));
 		Cercle.setBounds(433, 344, 95, 95);
 		Conteneur.add(Cercle);
 		
@@ -219,13 +229,28 @@ public class GraphicInterface {
 		lblNewLabel_2_1_2.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 24));
 		nbManches.add(lblNewLabel_2_1_2);
 		
+		JButton btnMoins = new JButton("-");
+		btnMoins.setBackground(Color.DARK_GRAY);
+		btnMoins.setForeground(Color.WHITE);
+		btnMoins.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 16));
+		btnMoins.setVerticalAlignment(SwingConstants.TOP);
+		nbManches.add(btnMoins);
+		
 		nbManche = new JTextField();
+		nbManche.setText("3");
 		nbManche.setHorizontalAlignment(SwingConstants.CENTER);
 		nbManche.setForeground(Color.WHITE);
 		nbManche.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 16));
-		nbManche.setColumns(10);
+		nbManche.setColumns(4);
 		nbManche.setBackground(Color.DARK_GRAY);
 		nbManches.add(nbManche);
+		
+		
+		JButton btnPlus = new JButton("+");
+		btnPlus.setBackground(Color.DARK_GRAY);
+		btnPlus.setForeground(Color.WHITE);
+		btnPlus.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 16));
+		nbManches.add(btnPlus);
 		
 		JSeparator separator2_1 = new JSeparator();
 		separator2_1.setBounds(75, 245, 597, 2);
@@ -233,12 +258,12 @@ public class GraphicInterface {
 		
 		JLabel Titre = new JLabel("");
 		Titre.setHorizontalAlignment(SwingConstants.CENTER);
-		Titre.setIcon(new ImageIcon(GraphicInterface.class.getResource("/images/titre2.png")));
+		Titre.setIcon(new ImageIcon(Accueil.class.getResource("/images/titre2.png")));
 		Titre.setBounds(0, 10, 1276, 117);
 		frmShapeUp.getContentPane().add(Titre);
 		
 		JLabel background = new JLabel("");
-		background.setIcon(new ImageIcon(GraphicInterface.class.getResource("/images/background.png")));
+		background.setIcon(new ImageIcon(Accueil.class.getResource("/images/background.png")));
 		background.setBounds(0, 0, 1276, 692);
 		frmShapeUp.getContentPane().add(background);
 		
@@ -247,7 +272,7 @@ public class GraphicInterface {
 		CreerPartie.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 20));
 		CreerPartie.setBackground(new Color(78,168,50));
 		
-		CreerPartie.setBounds(301, 465, 169, 40);
+		CreerPartie.setBounds(289, 465, 169, 40);
 		Conteneur.add(CreerPartie);
 		
 		JCheckBox checkAdvance = new JCheckBox("  Mode avanc\u00E9");
@@ -259,11 +284,13 @@ public class GraphicInterface {
 		Conteneur.add(checkAdvance);
 		
 		JCheckBox checkNormal = new JCheckBox("  Mode normal");
+		checkNormal.setSelected(true);
 		checkNormal.setForeground(Color.WHITE);
 		checkNormal.setHorizontalAlignment(SwingConstants.CENTER);
 		checkNormal.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 20));
 		checkNormal.setBounds(192, 258, 181, 21);
-		checkNormal.setOpaque(false);
+		checkNormal.setOpaque(true);
+		checkNormal.setBackground(new Color(78,168,50));
 		Conteneur.add(checkNormal);
 		
 		JSeparator separator2_1_1 = new JSeparator();
@@ -271,6 +298,7 @@ public class GraphicInterface {
 		Conteneur.add(separator2_1_1);
 		
 		JTextPane jeuLibre = new JTextPane();
+		jeuLibre.setEditable(false);
 		jeuLibre.setForeground(Color.WHITE);
 		jeuLibre.setFont(new Font("Ka Blam", Font.PLAIN, 34));
 		jeuLibre.setText(" JEU LIBRE");
@@ -278,28 +306,84 @@ public class GraphicInterface {
 		jeuLibre.setOpaque(false);
 		Conteneur.add(jeuLibre);
 		
-		Controller controller = new Controller(nbManche,jeuLibre, CreerPartie, checkNormal,checkAdvance,Conteneur,name1,name2,name3,Cercle,Rectangle,Hexagone,btnNewButton,btnNewButton_1,btnNewButton_2,askName1,askName2,askName3);
 		
 		JCheckBox chckbxIa_2 = new JCheckBox(" IA");
 		chckbxIa_2.setOpaque(false);
 		chckbxIa_2.setHorizontalAlignment(SwingConstants.CENTER);
 		chckbxIa_2.setForeground(Color.WHITE);
 		chckbxIa_2.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 20));
+		chckbxIa_2.setBackground(new Color(78,168,50));
 		name3.add(chckbxIa_2);
+		
+		JCheckBox IAFacile1_2 = new JCheckBox("Facile");
+		IAFacile1_2.setOpaque(false);
+		IAFacile1_2.setHorizontalAlignment(SwingConstants.CENTER);
+		IAFacile1_2.setForeground(Color.WHITE);
+		IAFacile1_2.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 20));
+		IAFacile1_2.setVisible(false);
+		IAFacile1_2.setBackground(new Color(78,168,50));
+		name3.add(IAFacile1_2);
+		
+		JCheckBox IADifficile2_2 = new JCheckBox("Difficile");
+		IADifficile2_2.setOpaque(false);
+		IADifficile2_2.setHorizontalAlignment(SwingConstants.CENTER);
+		IADifficile2_2.setForeground(Color.WHITE);
+		IADifficile2_2.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 20));
+		IADifficile2_2.setVisible(false);
+		IADifficile2_2.setBackground(new Color(78,168,50));
+		name3.add(IADifficile2_2);
 		
 		JCheckBox chckbxIa_1 = new JCheckBox(" IA");
 		chckbxIa_1.setOpaque(false);
 		chckbxIa_1.setHorizontalAlignment(SwingConstants.CENTER);
 		chckbxIa_1.setForeground(Color.WHITE);
 		chckbxIa_1.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 20));
+		chckbxIa_1.setBackground(new Color(78,168,50));
 		name2.add(chckbxIa_1);
+		
+		JCheckBox IAFacile1_1 = new JCheckBox("Facile");
+		IAFacile1_1.setOpaque(false);
+		IAFacile1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		IAFacile1_1.setForeground(Color.WHITE);
+		IAFacile1_1.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 20));
+		IAFacile1_1.setVisible(false);
+		IAFacile1_1.setBackground(new Color(78,168,50));
+		name2.add(IAFacile1_1);
+		
+		JCheckBox IADifficile2_1 = new JCheckBox("Difficile");
+		IADifficile2_1.setOpaque(false);
+		IADifficile2_1.setHorizontalAlignment(SwingConstants.CENTER);
+		IADifficile2_1.setForeground(Color.WHITE);
+		IADifficile2_1.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 20));
+		IADifficile2_1.setVisible(false);
+		IADifficile2_1.setBackground(new Color(78,168,50));
+		name2.add(IADifficile2_1);
 		
 		JCheckBox chckbxIa = new JCheckBox(" IA");
 		chckbxIa.setOpaque(false);
 		chckbxIa.setHorizontalAlignment(SwingConstants.CENTER);
 		chckbxIa.setForeground(Color.WHITE);
 		chckbxIa.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 20));
+		chckbxIa.setBackground(new Color(78,168,50));
 		name1.add(chckbxIa);
+		
+		JCheckBox IAFacile1 = new JCheckBox("Facile");
+		IAFacile1.setOpaque(false);
+		IAFacile1.setHorizontalAlignment(SwingConstants.CENTER);
+		IAFacile1.setForeground(Color.WHITE);
+		IAFacile1.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 20));
+		IAFacile1.setVisible(false);
+		IAFacile1.setBackground(new Color(78,168,50));
+		name1.add(IAFacile1);
+		
+		JCheckBox IADifficile2 = new JCheckBox("Difficile");
+		IADifficile2.setOpaque(false);
+		IADifficile2.setHorizontalAlignment(SwingConstants.CENTER);
+		IADifficile2.setForeground(Color.WHITE);
+		IADifficile2.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 20));
+		IADifficile2.setVisible(false);
+		IADifficile2.setBackground(new Color(78,168,50));
+		name1.add(IADifficile2);
 		
 		JLabel lblSlectionneUnPlateau = new JLabel("S\u00E9lectionne un plateau en cliquant dessus");
 		lblSlectionneUnPlateau.setHorizontalAlignment(SwingConstants.CENTER);
@@ -307,6 +391,11 @@ public class GraphicInterface {
 		lblSlectionneUnPlateau.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 24));
 		lblSlectionneUnPlateau.setBounds(0, 300, 747, 28);
 		Conteneur.add(lblSlectionneUnPlateau);
+		
+		Controller controller = new Controller(btnPlus, btnMoins, chckbxIa_2, IAFacile1_2, IADifficile2_2, chckbxIa_1, IAFacile1_1, IADifficile2_1, chckbxIa, IAFacile1, IADifficile2,nbManche,jeuLibre, CreerPartie, checkNormal,checkAdvance,Conteneur,name1,name2,name3,Cercle,Rectangle,Hexagone,btnNewButton,btnNewButton_1,btnNewButton_2,askName1,askName2,askName3);
+
+		
+		
 		
 	}
 }
