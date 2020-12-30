@@ -20,6 +20,9 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.Box;
 import javax.swing.SwingConstants;
+
+import appli.Appli;
+
 import javax.swing.DropMode;
 import java.awt.Panel;
 import java.awt.FlowLayout;
@@ -27,6 +30,9 @@ import javax.swing.JSeparator;
 import java.awt.CardLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.util.Observable;
+import java.util.Observer;
 import java.awt.Component;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.GroupLayout;
@@ -38,8 +44,8 @@ import java.awt.Insets;
 import javax.swing.JProgressBar;
 import java.awt.Canvas;
 
-public class Accueil {
-
+public class Accueil implements Observer {
+	
 	private JFrame frmShapeUp;
 	private JTextField askName1;
 	private JTextField askName2;
@@ -50,6 +56,7 @@ public class Accueil {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -392,10 +399,13 @@ public class Accueil {
 		lblSlectionneUnPlateau.setBounds(0, 300, 747, 28);
 		Conteneur.add(lblSlectionneUnPlateau);
 		
-		Controller controller = new Controller(btnPlus, btnMoins, chckbxIa_2, IAFacile1_2, IADifficile2_2, chckbxIa_1, IAFacile1_1, IADifficile2_1, chckbxIa, IAFacile1, IADifficile2,nbManche,jeuLibre, CreerPartie, checkNormal,checkAdvance,Conteneur,name1,name2,name3,Cercle,Rectangle,Hexagone,btnNewButton,btnNewButton_1,btnNewButton_2,askName1,askName2,askName3);
+		ControllerAccueil controller = new ControllerAccueil(frmShapeUp, btnPlus, btnMoins, chckbxIa_2, IAFacile1_2, IADifficile2_2, chckbxIa_1, IAFacile1_1, IADifficile2_1, chckbxIa, IAFacile1, IADifficile2,nbManche,jeuLibre, CreerPartie, checkNormal,checkAdvance,Conteneur,name1,name2,name3,Cercle,Rectangle,Hexagone,btnNewButton,btnNewButton_1,btnNewButton_2,askName1,askName2,askName3);
 
-		
-		
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
 		
 	}
 }

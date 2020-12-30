@@ -12,14 +12,16 @@ public class Partie {
 	private int numManche;
 	private Regle regle;
 	ArrayList<Joueur> tabJoueur;
+	private FormePlateau forme;
 	
-	public Partie(int nbM, Regle regle) {
+	public Partie(int nbM, Regle regle,FormePlateau forme, ArrayList tabJoueur) {
 		
+		this.forme = forme;
 		this.estTerminee = false;
 		this.nbManches = nbM;
 		this.numManche = 0;
 		this.regle = regle;
-		this.tabJoueur = new ArrayList<>();
+		this.tabJoueur = tabJoueur;
 	}
 
 	public boolean getTerminee() {
@@ -47,10 +49,6 @@ public class Partie {
 	}
 	
 	public void debutPartie(FormePlateau forme) {
-		
-		//permet de jouer la partie
-		System.out.println("Nombre de manches dans la partie : " + this.nbManches);
-		this.tabJoueur = this.regle.initJoueur();
 		
 		while(!this.estTerminee) {	
 			this.numManche+=1;

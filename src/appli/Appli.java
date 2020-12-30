@@ -1,15 +1,39 @@
 package appli;
 
+import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Scanner;
 
+import graphicInterface.Accueil;
 import jeu.FormePlateau;
 import jeu.Partie;
 import jeu.Regle;
 import jeu.Variante1;
 import jeu.Variante2;
 
-public class Appli {
+public class Appli implements Observer,Runnable {
 
+	public static String QUITTER = "Quit";
+    public static String COMMUTER = "C";
+    public static String PROMPT = ">";
+    private int nb;
+    private Regle regle;
+    private FormePlateau forme;
+    private ArrayList tabJoueur;
+    
+    public Appli(int nb, Regle regle,FormePlateau forme,ArrayList tabJoueur) {
+      // A compléter    
+    	this.nb = nb;
+    	this.regle = regle;
+    	this.forme = forme;
+    	this.tabJoueur = tabJoueur;
+    	
+    	Thread t = new Thread(this);
+    	t.start();
+    }
+	
+	/*
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		boolean incorrectInput = true;
@@ -116,4 +140,21 @@ public class Appli {
 		partie.afficherScore();
 	
 	}
+*/
+	
+    @Override
+	public void run() {
+		Partie partie = new Partie(this.nb, this.regle, this.forme, this.tabJoueur);
+		partie.debutPartie(this.forme);
+		partie.finPartie();
+		partie.afficherScore();
+		
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

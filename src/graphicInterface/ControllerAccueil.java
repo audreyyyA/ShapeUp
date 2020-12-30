@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
+import appli.Appli;
 import jeu.FormePlateau;
 import jeu.Partie;
 import jeu.Regle;
@@ -29,7 +30,7 @@ import joueur.JoueurVirtuel;
 import joueur.StrategieDifficile;
 import joueur.StrategieFacile;
 
-public class Controller {
+public class ControllerAccueil {
 	
 	private JPanel name1;
 	private JPanel name2;
@@ -59,6 +60,7 @@ public class Controller {
 	private JCheckBox IADifficile1;
 	private JButton btnPlus;
 	private JButton btnMoins;
+	private JFrame frame;
 
 	
 	private FormePlateau forme = FormePlateau.RECTANGLE;
@@ -72,7 +74,7 @@ public class Controller {
 	ArrayList<Joueur> tabJoueur = new ArrayList<>();
 	
 	
-	public Controller(JButton btnPlus, JButton btnMoins, JCheckBox chckbxIa3, JCheckBox IAFacile3, JCheckBox IADifficile3, JCheckBox chckbxIa2, JCheckBox IAFacile2, JCheckBox IADifficile2, JCheckBox chckbxIa1, JCheckBox IAFacile1, JCheckBox IADifficile1, JTextField nbManche, JTextPane jeuLibre, JButton CreerPartie, JCheckBox checkNormal, JCheckBox checkAdvance, JPanel Conteneur, JPanel name1, JPanel name2, JPanel name3,JLabel Cercle,JLabel Rectangle, JLabel Hexagone, JButton button1, JButton button2,JButton button3,JTextField askName1,JTextField askName2,JTextField askName3) {
+	public ControllerAccueil(JFrame frame, JButton btnPlus, JButton btnMoins, JCheckBox chckbxIa3, JCheckBox IAFacile3, JCheckBox IADifficile3, JCheckBox chckbxIa2, JCheckBox IAFacile2, JCheckBox IADifficile2, JCheckBox chckbxIa1, JCheckBox IAFacile1, JCheckBox IADifficile1, JTextField nbManche, JTextPane jeuLibre, JButton CreerPartie, JCheckBox checkNormal, JCheckBox checkAdvance, JPanel Conteneur, JPanel name1, JPanel name2, JPanel name3,JLabel Cercle,JLabel Rectangle, JLabel Hexagone, JButton button1, JButton button2,JButton button3,JTextField askName1,JTextField askName2,JTextField askName3) {
 		this.name1 = name1;
 		this.name2 = name2;
 		this.name3 = name3;
@@ -101,6 +103,7 @@ public class Controller {
 		this.IADifficile1 = IADifficile1;
 		this.btnMoins = btnMoins;
 		this.btnPlus = btnPlus;
+		this.frame = frame;
 		
 		askNames.addAll(Arrays.asList(askName1,askName2,askName3));
 		IAFacile.addAll(Arrays.asList(IAFacile1,IAFacile2,IAFacile3));
@@ -427,8 +430,6 @@ public class Controller {
 		
 		this.creerPartie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
 				Regle regle = null;
 				int nb;
 				
@@ -486,12 +487,10 @@ public class Controller {
 					tabJoueur.add(j);
 				}
 				
-				System.out.print(tabJoueur);
+				new Appli(nb, regle, forme, tabJoueur);
+				frame.dispose();
 				
-				Partie partie = new Partie(nb, regle);
-				partie.debutPartie(forme);
-				partie.finPartie();
-				partie.afficherScore();
+				new InterfacePlateau();
 			}
 		});
 	}
