@@ -1,10 +1,11 @@
 package joueur;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 import jeu.Carte;
 
-public class MainJoueur {
+public class MainJoueur extends Observable{
 	
 	private ArrayList<Carte> cartes;
 	

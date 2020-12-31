@@ -13,6 +13,7 @@ public class Partie {
 	private Regle regle;
 	ArrayList<Joueur> tabJoueur;
 	private FormePlateau forme;
+	private Manche manche;
 	
 	public Partie(int nbM, Regle regle,FormePlateau forme, ArrayList tabJoueur) {
 		
@@ -22,6 +23,7 @@ public class Partie {
 		this.numManche = 0;
 		this.regle = regle;
 		this.tabJoueur = tabJoueur;
+		this.manche = new Manche(forme);
 	}
 
 	public boolean getTerminee() {
@@ -48,18 +50,25 @@ public class Partie {
 		this.numManche = numManche;
 	}
 	
-	public void debutPartie(FormePlateau forme) {
+	public void debutPartie() {
 		
 		while(!this.estTerminee) {	
 			this.numManche+=1;
-			Manche manche = this.creerManche();
-			manche.demarrerManche(tabJoueur, forme, this.regle);
+			this.manche.demarrerManche(tabJoueur, this.regle);
 			if(this.numManche==this.nbManches) {
 				this.estTerminee=true;
 			}
 		}
 	}
 	
+	public Manche getManche() {
+		return manche;
+	}
+
+	public void setManche(Manche manche) {
+		this.manche = manche;
+	}
+
 	public void finPartie() {
 		
 		int tmp = 0;
@@ -84,11 +93,6 @@ public class Partie {
 			System.out.println(j.toString());
 		}
 	}
-	
-	public Manche creerManche() {
-		
-		Manche manche = new Manche();
-		return manche;
-	}
+
 
 }

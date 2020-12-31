@@ -6,11 +6,14 @@ import java.util.Observer;
 import java.util.Scanner;
 
 import graphicInterface.Accueil;
+import graphicInterface.InterfacePlateau;
 import jeu.FormePlateau;
 import jeu.Partie;
 import jeu.Regle;
 import jeu.Variante1;
 import jeu.Variante2;
+import joueur.Joueur;
+import joueur.MainJoueur;
 
 public class Appli implements Observer,Runnable {
 
@@ -20,14 +23,31 @@ public class Appli implements Observer,Runnable {
     private int nb;
     private Regle regle;
     private FormePlateau forme;
-    private ArrayList tabJoueur;
+    private ArrayList<Joueur> tabJoueur;
+    private Partie partie;
+    private InterfacePlateau interfacePlateau;
     
-    public Appli(int nb, Regle regle,FormePlateau forme,ArrayList tabJoueur) {
+    public Appli(InterfacePlateau interfacePlateau,int nb, Regle regle,FormePlateau forme,ArrayList<Joueur> tabJoueur) {
       // A compléter    
     	this.nb = nb;
     	this.regle = regle;
     	this.forme = forme;
     	this.tabJoueur = tabJoueur;
+    	this.interfacePlateau = interfacePlateau;
+    	
+    	this.partie = new Partie(this.nb, this.regle, this.forme, this.tabJoueur);
+    	
+    	for(Joueur j : tabJoueur) {
+    		j.getMain().addObserver(this);
+    	}
+    	
+    	this.partie.getManche().addObserver(this.interfacePlateau);
+    	this.partie.getManche().getPlateau().addObserver(this.interfacePlateau);
+    	this.partie.getManche().getPioche().addObserver(this.interfacePlateau);
+    	
+    	this.partie.getManche().addObserver(this);
+    	this.partie.getManche().getPlateau().addObserver(this);
+    	this.partie.getManche().getPioche().addObserver(this);
     	
     	Thread t = new Thread(this);
     	t.start();
@@ -144,8 +164,7 @@ public class Appli implements Observer,Runnable {
 	
     @Override
 	public void run() {
-		Partie partie = new Partie(this.nb, this.regle, this.forme, this.tabJoueur);
-		partie.debutPartie(this.forme);
+		partie.debutPartie();
 		partie.finPartie();
 		partie.afficherScore();
 		

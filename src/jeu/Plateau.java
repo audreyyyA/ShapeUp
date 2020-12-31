@@ -2,8 +2,9 @@ package jeu;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Observable;
 
-public abstract class Plateau implements Cloneable{
+public abstract class Plateau extends Observable implements Cloneable {
 	
 	protected FormePlateau forme;
 	protected ArrayList<ArrayList<Carte>> remplissage;

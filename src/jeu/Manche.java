@@ -1,11 +1,12 @@
 package jeu;
 
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.Scanner;
 
 import joueur.Joueur;
 
-public class Manche {
+public class Manche extends Observable{
 	
 	private ArrayList<Joueur> gagnant;
 	private boolean estTerminé;
@@ -15,12 +16,24 @@ public class Manche {
 	private Plateau plateau;
 	ArrayList<Joueur> tabJoueurs;
 	
-	public Manche() {
+	public Manche(FormePlateau forme) {
 		
 		this.gagnant = null;
 		this.estTerminé = false;
+		this.pioche = new Pioche();
+		this.creerPlateau(forme);
 		//regle normale
 		
+	}
+
+	
+	
+	public Plateau getPlateau() {
+		return plateau;
+	}
+
+	public void setPlateau(Plateau plateau) {
+		this.plateau = plateau;
 	}
 
 	public ArrayList<Joueur> getGagnant() {
@@ -69,14 +82,13 @@ public class Manche {
 		}	
 	}
 	
-	public void demarrerManche(ArrayList<Joueur> tabJoueur, FormePlateau forme, Regle regle) {
+	public void demarrerManche(ArrayList<Joueur> tabJoueur, Regle regle) {
 		
-		this.creerPlateau(forme);
-		this.pioche = new Pioche();
+		this.setChanged();
+		this.notifyObservers("initialize");
+		
 		this.tabJoueurs = tabJoueur;
-		
 		regle.demarrerManche(tabJoueur, this.pioche);
-		
 		
 		if(tabJoueur.size() < 3) {
 			this.carteDefausse = this.pioche.getRandomCarte();

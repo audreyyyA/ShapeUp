@@ -1,4 +1,4 @@
-package graphicInterface;
+package Controller;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -19,6 +19,8 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
 import appli.Appli;
+import graphicInterface.Accueil;
+import graphicInterface.InterfacePlateau;
 import jeu.FormePlateau;
 import jeu.Partie;
 import jeu.Regle;
@@ -487,10 +489,11 @@ public class ControllerAccueil {
 					tabJoueur.add(j);
 				}
 				
-				new Appli(nb, regle, forme, tabJoueur);
+				InterfacePlateau interfacePlateau = new InterfacePlateau();
+				new Appli(interfacePlateau, nb, regle, forme, tabJoueur);
 				frame.dispose();
 				
-				new InterfacePlateau();
+				
 			}
 		});
 	}

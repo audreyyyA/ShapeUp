@@ -37,6 +37,9 @@ import java.awt.Component;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+
+import Controller.ControllerAccueil;
+
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -400,7 +403,6 @@ public class Accueil implements Observer {
 		Conteneur.add(lblSlectionneUnPlateau);
 		
 		ControllerAccueil controller = new ControllerAccueil(frmShapeUp, btnPlus, btnMoins, chckbxIa_2, IAFacile1_2, IADifficile2_2, chckbxIa_1, IAFacile1_1, IADifficile2_1, chckbxIa, IAFacile1, IADifficile2,nbManche,jeuLibre, CreerPartie, checkNormal,checkAdvance,Conteneur,name1,name2,name3,Cercle,Rectangle,Hexagone,btnNewButton,btnNewButton_1,btnNewButton_2,askName1,askName2,askName3);
-
 	}
 
 	@Override

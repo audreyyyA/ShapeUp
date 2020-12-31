@@ -1,7 +1,8 @@
 package jeu;
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class Pioche {
+public class Pioche extends Observable{
 	
 	private int nbCarteRestantes;
 	private ArrayList<Carte> listeCarte;
