@@ -15,10 +15,12 @@ import jeu.Manche;
 import java.awt.Label;
 import javax.swing.JLabel;
 
+@SuppressWarnings("deprecation")
 public class InterfacePlateau implements Observer {
 
 	private JFrame frame;
-	private ArrayList<JPanel> remplissagePlateau = new ArrayList<>();
+	private ArrayList<ArrayList<JPanel>> remplissagePlateau = new ArrayList<>();
+	private int width, height;
 
 	/**
 	 * Launch the application.
@@ -45,46 +47,59 @@ public class InterfacePlateau implements Observer {
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
 		frame.getContentPane().setLayout(null);
 		frame.setBackground(Color.DARK_GRAY);
-		frame.setBounds(0, 0, 1600, 900);
+		frame.setBounds(0, 0, 1280, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		this.drawPlateau(70);
+		height = frame.getHeight();
+		width = frame.getWidth();	
 		
+		this.drawPlateau(70);
+		frame.repaint();
+		
+		JPanel carte = new Triangle(0,0,80,Color.blue);
+		carte.setBounds(30,30,80,80);
+		
+		remplissagePlateau.get(0).get(1).setLayout(null);
+		remplissagePlateau.get(0).get(1).add(carte);
 		
 		new ControllerPlateau(remplissagePlateau);
 	}
 
 	public void drawPlateau(int size) {
 		int i = 3;
-		int x = 400;
-		int y = -5;
+		int x = 415;
+		int y = 45;
+		int xEcartement = 10;
+		int yEcartement = 10;
+		
 		for(int k=0; k<5; k++) {
-			ArrayList<JPanel> l =new ArrayList<>();
+			ArrayList<JPanel> l = new ArrayList<>();
 			int xTemp = x;
 			for(int j = 0; j<i; j++) {
 				JPanel cases = new Hexagone(0,0,size);
-				cases.setBounds(xTemp, y, size*2, (int) (size*2 + size*Math.cos(Math.toRadians(30))));
+				cases.setBounds(xTemp, y, (int)(size*2*Math.cos(Math.toRadians(30))), size*2);
 				cases.setOpaque(false);
 				frame.getContentPane().add(cases);
 				frame.repaint();
-				xTemp += size*2;
+				xTemp += (int) (size*2*Math.cos(Math.toRadians(30))) +xEcartement;
 				l.add(cases);
 			}
 			
-			this.remplissagePlateau.addAll(l);
+			this.remplissagePlateau.add(l);
 	
 			if(k>1) {
 				i-=1;
-				x+= size;
-				y+= size*2-20;
+				x+= size*Math.cos(Math.toRadians(30))+ xEcartement/2;
+				y+= size*2 - (int) size*Math.sin(Math.toRadians(30)) + yEcartement;
 			}
 			else {
-				x-= size;
-				y+= size*2-20;
+				x-= size*Math.cos(Math.toRadians(30)) + xEcartement/2;
+				y+= size*2 - (int) size*Math.sin(Math.toRadians(30)) + yEcartement;
 				i+=1;
 				
 			}
 		}
+		System.out.print(remplissagePlateau);
 	}
 	
 	@Override

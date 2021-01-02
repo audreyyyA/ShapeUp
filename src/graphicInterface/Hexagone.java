@@ -12,8 +12,8 @@ public class Hexagone extends JPanel{
 	private int x, y, size;
 	
 	public Hexagone(int x, int y, int size) {
-		  this.x = (int) (x+ size*Math.cos(Math.toRadians(30)));;
-	      this.y = (int) (y+ size*Math.cos(Math.toRadians(30)));
+		  this.x = x+ (int) (size*Math.cos(Math.toRadians(30)));
+	      this.y = y+size;
 	      this.size = size;
 	}
 	
@@ -24,8 +24,7 @@ public class Hexagone extends JPanel{
     		Hexagone.addPoint((int) (x + size * Math.cos(i * 2 * Math.PI / 6)),
     				  (int) (y + size * Math.sin(i * 2 * Math.PI / 6)));
     	}
-    	g2d.rotate(Math.toRadians(30));
-    	g2d.translate(size*Math.cos(Math.toRadians(30)), 0);
+    	g2d.rotate(Math.toRadians(30),x,y);
     	g2d.setColor(new Color(173, 173, 173));
     	g2d.fill(Hexagone);
     }

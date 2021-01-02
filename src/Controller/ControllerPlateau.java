@@ -13,23 +13,16 @@ import jeu.FormePlateau;
 
 public class ControllerPlateau {
 
-	private ArrayList<JPanel> remplissagePlateau;
+	private ArrayList<ArrayList<JPanel>> remplissagePlateau;
 	
-	public ControllerPlateau(ArrayList<JPanel> remplissagePlateau) {
+	public ControllerPlateau(ArrayList<ArrayList<JPanel>> remplissagePlateau2) {
 		
-		this.remplissagePlateau=remplissagePlateau;
+		this.remplissagePlateau=remplissagePlateau2;
 		initializeHandler();
 	}
 	
 	public void initializeHandler() {
 		
-		for(JPanel panel : remplissagePlateau) {
-			panel.addMouseListener(new MouseAdapter() {
-				public void mouseEntered(MouseEvent e) {
-					
-				}
-			});
-		}
 		
 	}
 	
