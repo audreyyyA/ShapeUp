@@ -9,26 +9,30 @@ import javax.swing.JPanel;
 
 public class Hexagone extends JPanel{
 	
+	private Color color;
 	private int x, y, size;
 	
-	public Hexagone(int x, int y, int size) {
+	public Hexagone(int x, int y, int size,Color color) {
 		  this.x = x+ (int) (size*Math.cos(Math.toRadians(30)));
 	      this.y = y+size;
 	      this.size = size;
+	      this.color = color;
 	}
 	
 	public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         Polygon Hexagone = new Polygon();
-    	for (int i = 0; i < 6; i++){
-    		Hexagone.addPoint((int) (x + size * Math.cos(i * 2 * Math.PI / 6)),
-    				  (int) (y + size * Math.sin(i * 2 * Math.PI / 6)));
-    	}
-    	g2d.rotate(Math.toRadians(30),x,y);
-    	g2d.setColor(new Color(173, 173, 173));
+        int petiteDiago = size /2;
+        int diagoSecond = (int) (size*Math.cos(Math.toRadians(30)));
+        Hexagone.addPoint(0, petiteDiago);
+        Hexagone.addPoint(diagoSecond, 0);
+        Hexagone.addPoint(diagoSecond*2, petiteDiago);
+        Hexagone.addPoint(diagoSecond*2, petiteDiago+ size);
+        Hexagone.addPoint(diagoSecond, size*2);
+        Hexagone.addPoint(0, size + petiteDiago);
+    	g2d.setColor(color);
     	g2d.fill(Hexagone);
     }
-	
 	
 	@Override
     protected void paintComponent(Graphics g) {

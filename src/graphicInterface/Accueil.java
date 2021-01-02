@@ -310,9 +310,9 @@ public class Accueil implements Observer {
 		JTextPane jeuLibre = new JTextPane();
 		jeuLibre.setEditable(false);
 		jeuLibre.setForeground(Color.WHITE);
-		jeuLibre.setFont(new Font("Ka Blam", Font.PLAIN, 34));
-		jeuLibre.setText(" JEU LIBRE");
-		jeuLibre.setBounds(590, 344, 82, 86);
+		jeuLibre.setFont(new Font("Cooper Black", Font.PLAIN, 27));
+		jeuLibre.setText("  JEU LIBRE");
+		jeuLibre.setBounds(590, 357, 95, 70);
 		jeuLibre.setOpaque(false);
 		Conteneur.add(jeuLibre);
 		
