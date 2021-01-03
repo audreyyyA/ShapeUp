@@ -50,24 +50,24 @@ public class InterfacePlateau implements Observer {
 		frame.setTitle("Shape Up");
 		frame.getContentPane().setForeground(Color.DARK_GRAY);
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
-		frame.setBounds(0, 0, 1600, 900);
+		frame.setBounds(0, 0, 1280, 720);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel Plateau = new JPanel();
-		Plateau.setBounds(0, 0, 1600, 900);
+		Plateau.setBounds(0, 0, 1280, 720);
 		Plateau.setOpaque(false);
 		Plateau.setLayout(null);
 		
 		height = frame.getHeight();
 		width = frame.getWidth();	
 		
-		this.drawPlateau(70, Plateau);
+		this.drawPlateau(50, Plateau);
 		
 		JPanel panel = new JPanel();
 		Plateau.add(panel);
 		
-		JPanel carte = new Triangle(0,0,80,new Color(0,91,171));
-		carte.setBounds(20,30,80,70);
+		JPanel carte = new Triangle(0,0,60,new Color(0,91,171));
+		carte.setBounds(15,20,70,60);
 		carte.setOpaque(false);
 		remplissagePlateau.get(0).get(0).add(carte);
 		
@@ -78,16 +78,13 @@ public class InterfacePlateau implements Observer {
 		background.setBounds(0, 0, 1600, 900);
 		frame.getContentPane().add(background);
 		
-		JPanel test = remplissagePlateau.get(0).set(1,new Hexagone(0,0,70,Color.blue));
-		test.setOpaque(true);
-		Plateau.add(test);
 		
 		new ControllerPlateau(remplissagePlateau);
 	}
 
 	public void drawPlateau(int size, JPanel Plateau) {
 		int i = 3;
-		int x = 590;
+		int x = 470;
 		int y = 120;
 		int xEcartement = 10;
 		int yEcartement = 10;
