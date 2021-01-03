@@ -50,11 +50,11 @@ public class InterfacePlateau implements Observer {
 		frame.setTitle("Shape Up");
 		frame.getContentPane().setForeground(Color.DARK_GRAY);
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
-		frame.setBounds(0, 0, 1280, 720);
+		frame.setBounds(0, 0, 1295, 758);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel Plateau = new JPanel();
-		Plateau.setBounds(0, 0, 1280, 720);
+		Plateau.setBounds(0, 0, 1295, 758);
 		Plateau.setOpaque(false);
 		Plateau.setLayout(null);
 		
@@ -74,8 +74,8 @@ public class InterfacePlateau implements Observer {
 		frame.getContentPane().add(Plateau);
 		
 		JLabel background = new JLabel("");
-		background.setIcon(new ImageIcon(InterfacePlateau.class.getResource("/images/background_extended.png")));
-		background.setBounds(0, 0, 1600, 900);
+		background.setIcon(new ImageIcon(InterfacePlateau.class.getResource("/images/backgroundPlateau.jpg")));
+		background.setBounds(0, 0, 1280, 720);
 		frame.getContentPane().add(background);
 		
 		
@@ -84,8 +84,8 @@ public class InterfacePlateau implements Observer {
 
 	public void drawPlateau(int size, JPanel Plateau) {
 		int i = 3;
-		int x = 470;
-		int y = 120;
+		int x = 500;
+		int y = 140;
 		int xEcartement = 10;
 		int yEcartement = 10;
 		
@@ -128,6 +128,7 @@ public class InterfacePlateau implements Observer {
 			System.out.println("Pas d'arguments");
 		}
 		else {
+			
 		}
 
 	}
