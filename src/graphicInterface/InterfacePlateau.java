@@ -15,6 +15,8 @@ import Controller.ControllerPlateau;
 import jeu.Carte;
 import jeu.Manche;
 import java.awt.Label;
+import java.awt.Toolkit;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
@@ -24,7 +26,7 @@ public class InterfacePlateau implements Observer {
 	private JFrame frame;
 	private ArrayList<ArrayList<JPanel>> remplissagePlateau = new ArrayList<>();
 	private int width, height;
-
+	
 	/**
 	 * Launch the application.
 	 */

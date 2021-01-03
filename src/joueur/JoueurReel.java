@@ -8,10 +8,12 @@ import jeu.Plateau;
 
 public class JoueurReel extends Joueur{
 	
-
+	private boolean CVchang;
+	
 	public JoueurReel(String nom) {
 		
 		super(nom);
+		this.setCVchang(false);
 		
 	}
 	
@@ -180,6 +182,15 @@ public class JoueurReel extends Joueur{
 		plateau.setRemplissage(xDeplacer, yDeplacer, carteTemp);
 		plateau.afficherPlateau();
 		return true;
+	}
+	
+	public boolean isCVchang() {
+		return CVchang;
+	}
+
+
+	public void setCVchang(boolean cVchang) {
+		CVchang = cVchang;
 	}
 
 }

@@ -16,6 +16,13 @@ public class Variante3 extends Regle{
 	public void demarrerManche(ArrayList<Joueur> tabJoueur, Pioche pioche) {
 		// TODO Auto-generated method stub
 		
+		System.out.println("Dans le mode ultime, tu pioches deux cartes par tour et choisis laquelle tu veux poser. Tu défausses l'autre.");
+		System.out.println("1 fois dans la partie, tu as le droit de changer de carte victoire.");
+		for(Joueur j : tabJoueur) {
+			for(int i=0; i<3; i++) {
+				j.getMain().ajouterCarte(j.piocherCarte(pioche));
+			}
+		}
 	}
 
 	@Override
@@ -24,10 +31,13 @@ public class Variante3 extends Regle{
 		return false;
 	}
 	
-public void jouer(Joueur joueur, int tour, Pioche pioche, Plateau plateau, IVisitor visitor) {
+	public void jouer(Joueur joueur, int tour, Pioche pioche, Plateau plateau, IVisitor visitor) {
 		
-		Carte c = joueur.piocherCarte(pioche);
-		joueur.getMain().ajouterCarte(c); 
+		Carte carte1 = joueur.piocherCarte(pioche);
+		Carte carte2 = joueur.piocherCarte(pioche);
+		joueur.getMain().ajouterCarte(carte1);
+		joueur.getMain().ajouterCarte(carte2);
+		
 		joueur.getMain().afficherMain();
 		plateau.afficherPlateau();
 		
@@ -46,7 +56,6 @@ public void jouer(Joueur joueur, int tour, Pioche pioche, Plateau plateau, IVisi
 			Scanner sc = new Scanner(System.in);
 			boolean deplacer = false;
 			int nbDep = 0;
-			
 		
 			while(((JoueurReel) joueur).askDeplacer() && !deplacer) {
 				deplacer = joueur.deplacerCarte(plateau);
@@ -54,131 +63,77 @@ public void jouer(Joueur joueur, int tour, Pioche pioche, Plateau plateau, IVisi
 					nbDep = 1;
 					break;
 				}
-			}
-			
-			//mettre condition tour 1
-			joueur.getMain().afficherMain();
-			joueur.poserCarte(plateau,tour); 
-			plateau.afficherPlateau();
-			
-			//déplace la carte seulement s'il l'a pas fait avant
-			while(((JoueurReel) joueur).askDeplacer() && !deplacer) {
-				deplacer = joueur.deplacerCarte(plateau);
-				if(deplacer) {
-					break;
-				}
-			}
-			
-			plateau.afficherPlateau();
-			
 		}
+
+		if(!((JoueurReel) joueur).isCVchang()) {
+			boolean repp = true;
+			while(repp) {
+				
+				System.out.println("Voulez-vous changer de carte victoire (O/N) ?");
+				Scanner scVictoire = new Scanner(System.in);
+				String rep = scVictoire.nextLine();
+				
+				if(rep.equals("O") || rep.equals("o")) {
+					((JoueurReel) joueur).setCVchang(true);
+					changerCarteVictoire(joueur, pioche);
+					repp = false;
+				}
+				else if(rep.equals("N") || rep.equals("n")) {
+					repp = false;
+				}
+				else {
+					System.out.println("Rentrez O ou N");
+					repp = true;
+				}
+			}	
+		}
+
+		//mettre condition tour 1
+		joueur.getMain().afficherMain();
+		joueur.poserCarte(plateau,tour);
+		
+		//vider main et remettre dans la pioche
+		Carte c = joueur.getMain().getCarte(0);
+		pioche.getListeCarte().add(c);
+		joueur.getMain().retirerCarte(0);
+		plateau.afficherPlateau();
+		
+		//déplace la carte seulement s'il l'a pas fait avant
+		while(((JoueurReel) joueur).askDeplacer() && !deplacer) {
+			deplacer = joueur.deplacerCarte(plateau);
+			if(deplacer) {
+				break;
+			}
+		}
+		
+			plateau.afficherPlateau();
+			
+		}	
+	}
+	
+	public void changerCarteVictoire(Joueur j, Pioche pioche) {
+		
+		System.out.println("Quelle carte veux-tu pour remplacer ta carte victoire ?");
+		int index = 0;
+		Scanner sc = new Scanner(System.in);
+		
+		try {
+			index = sc.nextInt();
+		}
+		catch(Exception e) {}
+		
+		while (index <0 || index > j.getMain().getCartes().size()-1) {
+			System.out.println("Tu as choisis un index incorrect. Chosis en un entre 0 et " + (j.getMain().getCartes().size()-1));// verif si string
+			changerCarteVictoire(j, pioche);
+		}
+		
+		Carte c = j.getCarteVictoire();
+		Carte cv = j.getMain().getCarte(index);
+		pioche.getListeCarte().add(c);
+		j.setCarteVictoire(cv);
+		
+		System.out.println("Ta nouvelle carte victoire est : " + j.getCarteVictoire());
 		
 	}
 	
-	@Override
-	public ArrayList<Joueur> initJoueur(){
-		
-		ArrayList<Joueur> t = new ArrayList<>();
-		
-		System.out.println("Dans une partie spéciale, vous pouvez jouer à maximum 5 joueurs.");
-		System.out.println("Choisissez le nombre de joueurs : ");
-		int nbJoueur = 0;
-		boolean tmp = true;
-		while(tmp) {
-			try {
-				Scanner sc =  new Scanner(System.in);
-				nbJoueur = sc.nextInt();	
-				if(nbJoueur >0 && nbJoueur<6) {
-					tmp = false;
-				}
-				else {
-					System.out.println("Veuillez choisir un nombre de joueur entre 1 et 3");
-					System.out.println("Choisissez le nombre de joueurs : ");
-				}
-			}
-			catch(Exception e) {
-				System.out.println("Veuillez rentrer un chiffre");
-				System.out.println("Choisissez le nombre de joueurs : ");
-			}
-		}
-		
-		if(nbJoueur != 1) {
-			
-			boolean inputNul = true;
-			while(inputNul) {
-				
-				System.out.println("Combien de joueurs virtuels voulez-vous ? : ");
-				Scanner scvirtuel = new Scanner(System.in);
-				int nbVirtuel = scvirtuel.nextInt();
-				
-				if(nbVirtuel >= nbJoueur) {
-					
-					System.out.println("Veuillez choisir un nombre de joueur virtuel correct");
-					inputNul = true;
-				}else if(nbVirtuel == 0) {
-					System.out.println("Vous voulez jouer sans joueur virtuel");
-					inputNul = false;
-				}
-				else{
-					inputNul = false;
-					nbJoueur -= nbVirtuel;
-					
-					System.out.println("Quelle stratégie ? : 1 : FACILE ou 2 : AVANCEE");
-					
-					//verifier si c pas une mauvaise entrée..
-					Scanner scStrat = new Scanner(System.in);
-					int typeStrat = scStrat.nextInt();
-
-					for(int i = 1; i<= nbVirtuel; i++) {
-						System.out.println("Entrez le nom du joueur viturel " + i);
-						String n = "";
-						boolean tmp2 = true;
-						while(tmp2) {
-							Scanner sc2 = new Scanner(System.in);
-							n = sc2.next();
-							if(n.isEmpty()) {
-								System.out.println("il te faut un nom pour ce joueur !");
-							}
-							else {
-								tmp2 = false;
-							}
-						}
-						if(typeStrat == 1) {
-							Strategie facile = new StrategieFacile();
-							Joueur j = new JoueurVirtuel(n, true, facile);
-							t.add(j);
-						}else {
-							Strategie difficile = new StrategieDifficile();
-							Joueur j = new JoueurVirtuel(n, true, difficile);
-							t.add(j);
-						}
-
-					}
-				}
-			}
-		}
-	
-		
-		for(int i = 1; i<= nbJoueur; i++) {
-			
-			System.out.println("Entrez le nom du joueur reel " + i);
-			String n = "";
-			boolean tmp2 = true;
-			while(tmp2) {
-				Scanner sc2 = new Scanner(System.in);
-				n = sc2.next();
-				if(n.isEmpty()) {
-					System.out.println("il te faut un nom pour ce joueur !");
-				}
-				else {
-					tmp2 = false;
-				}
-			}
-			Joueur j = new JoueurReel(n);
-			t.add(j);
-		}
-		
-		return t;
-	}
-
 }
