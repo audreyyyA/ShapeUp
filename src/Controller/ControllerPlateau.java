@@ -9,21 +9,29 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import graphicInterface.Accueil;
+import graphicInterface.Shapes;
 import jeu.FormePlateau;
 
 public class ControllerPlateau {
 
-	private ArrayList<ArrayList<JPanel>> remplissagePlateau;
+	private ArrayList<ArrayList<Shapes>> remplissagePlateau;
 	
-	public ControllerPlateau(ArrayList<ArrayList<JPanel>> remplissagePlateau2) {
+	public ControllerPlateau(ArrayList<ArrayList<Shapes>> remplissagePlateau2) {
 		
 		this.remplissagePlateau=remplissagePlateau2;
 		initializeHandler();
 	}
-	
+
 	public void initializeHandler() {
-		
-		
+		for(ArrayList<Shapes> substring : remplissagePlateau) {
+			for(Shapes cases : substring) {
+				cases.addMouseListener(new MouseAdapter() {
+					public void mouseClicked(MouseEvent e) {
+						
+					}
+				});
+			}
+		}
 	}
 	
 }

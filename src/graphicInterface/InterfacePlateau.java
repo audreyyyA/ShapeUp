@@ -24,7 +24,7 @@ import javax.swing.ImageIcon;
 public class InterfacePlateau implements Observer {
 
 	private JFrame frame;
-	private ArrayList<ArrayList<JPanel>> remplissagePlateau = new ArrayList<>();
+	private ArrayList<ArrayList<Shapes>> remplissagePlateau = new ArrayList<>();
 	private int width, height;
 	
 	/**
@@ -83,18 +83,24 @@ public class InterfacePlateau implements Observer {
 	}
 
 	public void drawPlateau(int size, JPanel Plateau) {
-		int i = 3;
-		int x = 500;
+		int i = 5;
+		int x = 407;
 		int y = 140;
 		int xEcartement = 10;
 		int yEcartement = 10;
 		
 		
 		for(int k=0; k<5; k++) {
-			ArrayList<JPanel> l = new ArrayList<>();
+			ArrayList<Shapes> l = new ArrayList<>();
 			int xTemp = x;
 			for(int j = 0; j<i; j++) {
-				JPanel cases = new Hexagone(0,0,size, new Color(173, 173, 173));
+				Shapes cases;
+				if(j ==0 || j==i-1) {
+					cases = new Shapes(0,0,size, new Color(173, 173, 173),true, Formes.HEXAGONE);
+				}
+				else {
+					cases = new Shapes(0,0,size, new Color(173, 173, 173),false, Formes.HEXAGONE);
+				}
 				cases.setBounds(xTemp, y, (int)(size*2*Math.cos(Math.toRadians(30))), size*2);
 				cases.setOpaque(false);
 				cases.setLayout(null);
@@ -118,6 +124,7 @@ public class InterfacePlateau implements Observer {
 				
 			}
 		}
+		
 	}
 	
 	@Override

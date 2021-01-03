@@ -1,6 +1,7 @@
 package graphicInterface;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
@@ -12,7 +13,7 @@ public class Hexagone extends JPanel{
 	private Color color;
 	private int x, y, size;
 	
-	public Hexagone(int x, int y, int size,Color color) {
+	public Hexagone(int x, int y, int size,Color color, boolean pointille) {
 		  this.x = x+ (int) (size*Math.cos(Math.toRadians(30)));
 	      this.y = y+size;
 	      this.size = size;
@@ -33,6 +34,12 @@ public class Hexagone extends JPanel{
     	g2d.setColor(color);
     	g2d.fill(Hexagone);
     }
+	
+	public void changeColor(Component c, Color color) {
+		this.color = color;
+		Graphics g = c.getGraphics();
+		paintComponent(g);
+	}
 	
 	@Override
     protected void paintComponent(Graphics g) {
