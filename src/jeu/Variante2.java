@@ -1,7 +1,14 @@
 package jeu;
 
 import java.util.ArrayList;
+import java.util.Scanner;
+
 import joueur.Joueur;
+import joueur.JoueurReel;
+import joueur.JoueurVirtuel;
+import joueur.Strategie;
+import joueur.StrategieDifficile;
+import joueur.StrategieFacile;
 
 public class Variante2 extends Regle{
 
@@ -28,15 +35,4 @@ public class Variante2 extends Regle{
 		return true;
 	}
 
-	@Override
-	public void jouer(Joueur joueur, int tour, Pioche pioche, Plateau plateau, IVisitor visitor) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public ArrayList<Joueur> initJoueur() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

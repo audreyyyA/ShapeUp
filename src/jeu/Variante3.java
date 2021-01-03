@@ -10,12 +10,21 @@ import joueur.Strategie;
 import joueur.StrategieDifficile;
 import joueur.StrategieFacile;
 
-public abstract class Regle {
+public class Variante3 extends Regle{
+
+	@Override
+	public void demarrerManche(ArrayList<Joueur> tabJoueur, Pioche pioche) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isDone(Manche manche) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
-	public abstract void demarrerManche(ArrayList<Joueur> tabJoueur, Pioche pioche);
-	public abstract boolean isDone(Manche manche);
-	
-	public void jouer(Joueur joueur, int tour, Pioche pioche, Plateau plateau, IVisitor visitor) {
+public void jouer(Joueur joueur, int tour, Pioche pioche, Plateau plateau, IVisitor visitor) {
 		
 		Carte c = joueur.piocherCarte(pioche);
 		joueur.getMain().ajouterCarte(c); 
@@ -66,11 +75,12 @@ public abstract class Regle {
 		
 	}
 	
+	@Override
 	public ArrayList<Joueur> initJoueur(){
 		
 		ArrayList<Joueur> t = new ArrayList<>();
 		
-		System.out.println("Dans une partie classique, vous pouvez jouer à maximum 3 joueurs.");
+		System.out.println("Dans une partie spéciale, vous pouvez jouer à maximum 5 joueurs.");
 		System.out.println("Choisissez le nombre de joueurs : ");
 		int nbJoueur = 0;
 		boolean tmp = true;
@@ -78,7 +88,7 @@ public abstract class Regle {
 			try {
 				Scanner sc =  new Scanner(System.in);
 				nbJoueur = sc.nextInt();	
-				if(nbJoueur >0 && nbJoueur<4) {
+				if(nbJoueur >0 && nbJoueur<6) {
 					tmp = false;
 				}
 				else {
@@ -170,4 +180,5 @@ public abstract class Regle {
 		
 		return t;
 	}
+
 }

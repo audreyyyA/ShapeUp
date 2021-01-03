@@ -3,6 +3,7 @@ package graphicInterface;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
