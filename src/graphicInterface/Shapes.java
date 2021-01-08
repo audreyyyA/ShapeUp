@@ -46,7 +46,6 @@ public class Shapes extends JPanel{
 	        Hexagone.addPoint(diagoSecond, size*2);
 	        Hexagone.addPoint(0, size + petiteDiago);
 	        
-	        System.out.println(this.pointille);
 	        if(this.pointille) {
 	        	g2d.setColor(color);
 	 	        g2d.setStroke(new BasicStroke(2));

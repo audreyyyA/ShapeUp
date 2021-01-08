@@ -29,13 +29,23 @@ public abstract class Joueur{
 	private ArrayList<Integer> nbPointsManches; //à voir
 	protected MainJoueur main;
 	protected boolean isVirtuel;
+	private int num;
 	
-	public Joueur (String nom) {
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+	public Joueur (String nom, int num) {
 		
+		this.num = num;
 		this.nom = nom;
 		this.NbPointTotal = 0;
 		this.carteVictoire = null;
-		this.main = new MainJoueur();
+		this.main = new MainJoueur(num);
 		this.nbPointsManches = new ArrayList<>();
 		this.isVirtuel = false;
 	}

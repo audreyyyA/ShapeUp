@@ -14,6 +14,7 @@ public class Manche extends Observable{
 	private Carte carteDefausse;
 	private Pioche pioche;
 	private Plateau plateau;
+	private int nbTour;
 	ArrayList<Joueur> tabJoueurs;
 	
 	public Manche(FormePlateau forme) {
@@ -103,14 +104,16 @@ public class Manche extends Observable{
 	
 	public void jouer(ArrayList<Joueur> tabJoueur, Regle regle) {
 		
-		int nbTour = 0;
+		this.nbTour = 0;
 		System.out.println(plateau.getRemplissage());
 		while(regle.isDone(this) == false) {
 			for(Joueur j : tabJoueur) {
 				if(regle.isDone(this) == false) {
-					nbTour ++;
-					System.out.println("Tour "+nbTour/2+" - "+ j.getNom()+ "\n");
-					regle.jouer(j, nbTour, this.pioche, this.plateau, this.visitor);
+					this.nbTour ++;
+					System.out.println("Tour "+this.nbTour/2+" - "+ j.getNom()+ "\n");
+					this.setChanged();
+					this.notifyObservers(j);
+					regle.jouer(j, this.nbTour, this.pioche, this.plateau, this.visitor);
 				}
 				else {
 					break;
@@ -121,6 +124,18 @@ public class Manche extends Observable{
 		
 	}
 	
+	public int getNbTour() {
+		return nbTour;
+	}
+
+
+
+	public void setNbTour(int nbTour) {
+		this.nbTour = nbTour;
+	}
+
+
+
 	public void finManche(ArrayList<Joueur> tabJoueur) {
 		
 		System.out.println("La carte défaussée était : " + this.carteDefausse);

@@ -8,18 +8,31 @@ import jeu.Carte;
 public class MainJoueur extends Observable{
 	
 	private ArrayList<Carte> cartes;
+	private int num;
 	
-	public MainJoueur() {
+	public MainJoueur(int num) {
 		this.cartes = new ArrayList<Carte>();
+		this.num = num;
+	}
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
 	}
 
 	public void ajouterCarte(Carte newCard) {
 		cartes.add(newCard);
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	public void retirerCarte(int index) {
+		this.setChanged();
+		this.notifyObservers();
 		cartes.remove(index);
-		
 	}
 	
 	public void afficherMain() {

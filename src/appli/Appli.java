@@ -38,7 +38,7 @@ public class Appli implements Observer,Runnable {
     	this.partie = new Partie(this.nb, this.regle, this.forme, this.tabJoueur);
     	
     	for(Joueur j : tabJoueur) {
-    		j.getMain().addObserver(this);
+    		j.getMain().addObserver(this.interfacePlateau);
     	}
     	
     	this.partie.getManche().addObserver(this.interfacePlateau);

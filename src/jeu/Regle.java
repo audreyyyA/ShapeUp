@@ -135,11 +135,11 @@ public abstract class Regle {
 						}
 						if(typeStrat == 1) {
 							Strategie facile = new StrategieFacile();
-							Joueur j = new JoueurVirtuel(n, true, facile);
+							Joueur j = new JoueurVirtuel(n, true, facile,0);
 							t.add(j);
 						}else {
 							Strategie difficile = new StrategieDifficile();
-							Joueur j = new JoueurVirtuel(n, true, difficile);
+							Joueur j = new JoueurVirtuel(n, true, difficile,0);
 							t.add(j);
 						}
 
@@ -164,7 +164,7 @@ public abstract class Regle {
 					tmp2 = false;
 				}
 			}
-			Joueur j = new JoueurReel(n);
+			Joueur j = new JoueurReel(n,0);
 			t.add(j);
 		}
 		

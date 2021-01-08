@@ -9,17 +9,21 @@ import javax.swing.JPanel;
 
 public class Cercle extends JPanel{
 	
-	private int x, y, size;
+	private int x, y, rayon;
+	private Color color;
 	
-	public Cercle(int x, int y, int rayon) {
-
+	public Cercle(int x, int y, int rayon, Color color) {
+		this.x = x;
+		this.y = y;
+		this.rayon = rayon;
+		this.color = color;
 	}
 	
 	public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.drawOval(50, 50, 50 , 50);
-    	g2d.setColor(new Color(173, 173, 173));
-    	g2d.fillOval(50, 100, 100, 50);
+        g2d.drawOval(this.x,this.y, this.rayon*2, this.rayon*2);
+    	g2d.setColor(color);
+    	g2d.fillOval(this.x,this.y, this.rayon*2, this.rayon*2);
     }
 	
 	

@@ -10,9 +10,9 @@ public class JoueurReel extends Joueur{
 	
 	private boolean CVchang;
 	
-	public JoueurReel(String nom) {
+	public JoueurReel(String nom, int num) {
 		
-		super(nom);
+		super(nom,num);
 		this.setCVchang(false);
 		
 	}

@@ -11,9 +11,9 @@ public class JoueurVirtuel extends Joueur{
 	private Strategie strategie;
 	
 	
-	public JoueurVirtuel(String nom, boolean v, Strategie strat) {
+	public JoueurVirtuel(String nom, boolean v, Strategie strat, int num) {
 		
-		super(nom);
+		super(nom, num);
 		super.isVirtuel = true;
 		this.setStrategie(strat);
 	}

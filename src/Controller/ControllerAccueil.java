@@ -477,14 +477,14 @@ public class ControllerAccueil {
 					Joueur j = null;
 					if(IACheckbox.get(i).isSelected()) {
 						if(IAFacile.get(i).isSelected()) {
-							j = new JoueurVirtuel(askNames.get(i).getText(),true, new StrategieFacile());
+							j = new JoueurVirtuel(askNames.get(i).getText(),true, new StrategieFacile(),i);
 						}
 						else{
-							j = new JoueurVirtuel(askNames.get(i).getText(),true, new StrategieDifficile());					
+							j = new JoueurVirtuel(askNames.get(i).getText(),true, new StrategieDifficile(),i);					
 						}
 					}
 					else {
-						j = new JoueurReel(askNames.get(i).getText());
+						j = new JoueurReel(askNames.get(i).getText(),i);
 					}
 					tabJoueur.add(j);
 				}
