@@ -5,15 +5,15 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
 
-import graphicInterface.Accueil;
-import graphicInterface.InterfacePlateau;
-import jeu.FormePlateau;
-import jeu.Partie;
-import jeu.Regle;
-import jeu.Variante1;
-import jeu.Variante2;
-import joueur.Joueur;
-import joueur.MainJoueur;
+import Modèle.FormePlateau;
+import Modèle.Joueur;
+import Modèle.MainJoueur;
+import Modèle.Partie;
+import Modèle.Regle;
+import Modèle.Variante1;
+import Modèle.Variante2;
+import Vue.Accueil;
+import Vue.InterfacePlateau;
 
 public class Appli implements Observer,Runnable {
 
@@ -39,6 +39,7 @@ public class Appli implements Observer,Runnable {
     	
     	for(Joueur j : tabJoueur) {
     		j.getMain().addObserver(this.interfacePlateau);
+    		j.addObserver(this.interfacePlateau);
     	}
     	
     	this.partie.getManche().addObserver(this.interfacePlateau);

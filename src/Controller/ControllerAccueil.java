@@ -18,19 +18,19 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
+import Modèle.FormePlateau;
+import Modèle.Joueur;
+import Modèle.JoueurReel;
+import Modèle.JoueurVirtuel;
+import Modèle.Partie;
+import Modèle.Regle;
+import Modèle.StrategieDifficile;
+import Modèle.StrategieFacile;
+import Modèle.Variante1;
+import Modèle.Variante2;
+import Vue.Accueil;
+import Vue.InterfacePlateau;
 import appli.Appli;
-import graphicInterface.Accueil;
-import graphicInterface.InterfacePlateau;
-import jeu.FormePlateau;
-import jeu.Partie;
-import jeu.Regle;
-import jeu.Variante1;
-import jeu.Variante2;
-import joueur.Joueur;
-import joueur.JoueurReel;
-import joueur.JoueurVirtuel;
-import joueur.StrategieDifficile;
-import joueur.StrategieFacile;
 
 public class ControllerAccueil {
 	
