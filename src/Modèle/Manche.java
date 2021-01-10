@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Scanner;
 
+import Vue.VueTexte;
+
 public class Manche extends Observable{
 	
 	private ArrayList<Joueur> gagnant;
@@ -14,6 +16,7 @@ public class Manche extends Observable{
 	private Plateau plateau;
 	private int nbTour;
 	ArrayList<Joueur> tabJoueurs;
+	private VueTexte vueTexte = new VueTexte();
 	
 	public Manche(FormePlateau forme) {
 		
@@ -100,6 +103,7 @@ public class Manche extends Observable{
 		this.finManche(tabJoueur);
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void jouer(ArrayList<Joueur> tabJoueur, Regle regle) {
 		
 		this.nbTour = 0;
@@ -108,7 +112,7 @@ public class Manche extends Observable{
 			for(Joueur j : tabJoueur) {
 				if(regle.isDone(this) == false) {
 					this.nbTour ++;
-					System.out.println("Tour "+this.nbTour/2+" - "+ j.getNom()+ "\n");
+					this.vueTexte.printTour(this.nbTour,j.getNom());
 					this.setChanged();
 					this.notifyObservers(j);
 					regle.jouer(j, this.nbTour, this.pioche, this.plateau, this.visitor);
@@ -126,36 +130,16 @@ public class Manche extends Observable{
 		return nbTour;
 	}
 
-
-
 	public void setNbTour(int nbTour) {
 		this.nbTour = nbTour;
 	}
 
-
-
 	public void finManche(ArrayList<Joueur> tabJoueur) {
-		
-		System.out.println("La carte défaussée était : " + this.carteDefausse);
+		this.vueTexte.carteDefausse(this.carteDefausse);
 		//comptage des points des joueurs
 		ArrayList<Joueur> j = visitor.calculnbPoints(tabJoueur, this.plateau);
 		this.setGagnant(j);
-		
-		if(this.gagnant.size()>1) { // égalité
-			System.out.print("Les joueurs gagnants à égalité de cette manche sont : ");
-			for(Joueur g : this.gagnant) {
-				System.out.print(g.getNom());
-			}
-		}
-		else {
-			System.out.println("Le joueur gagnant de cette manche est : " + this.gagnant.get(0).getNom());
-		}
-		for(Joueur t : tabJoueur) {
-			System.out.println("Carte victoire de " + t.getNom() + "à cette manche était : " + t.getCarteVictoire());
-			System.out.println("Points de " + t.getNom() + " : " + t.getNbPointsManches());
-		}
-		
+		this.vueTexte.printGagnantManche(this.gagnant);
+		this.vueTexte.printPoints(tabJoueur);
 	}
-
-	
 }

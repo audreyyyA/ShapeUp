@@ -2,10 +2,13 @@ package Modèle;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import Vue.VueTexte;
+
 public class Pioche extends Observable{
 	
 	private int nbCarteRestantes;
 	private ArrayList<Carte> listeCarte;
+	private VueTexte vueTexte = new VueTexte();
 	
 	public Pioche() {
 		
@@ -16,7 +19,7 @@ public class Pioche extends Observable{
 	
 	public Carte getRandomCarte() {
 		if(this.nbCarteRestantes == 0) {
-			System.out.println("La pioche est vide");
+			this.vueTexte.piocheVide();
 			return null;
 		}
 		else {

@@ -19,16 +19,13 @@ public class PlateauRectangle extends Plateau implements Cloneable{
 	
 	public boolean checkPose(int x,int y) {
 		if(x == -1 || y == -1 || y == this.remplissage.size() || x == this.remplissage.get(0).size()) {
-			System.out.println("EXTREMITEEE");
 			return checkPosExtremite(x,y);		
 		}
 				
 		if(super.getCarte(x, y) != null) { 
-			System.out.println("T CON YA DEJA UNE CARTE ICI !!!");
 			return false;
 		}
 		if(super.getCarte(x-1, y) != null || super.getCarte(x, y+1) != null || super.getCarte(x+1, y) != null || super.getCarte(x, y-1) != null) {
-			System.out.println("YA AU MOINS UNE CARTE A COTE C BIEN CHAKAL");
 			return true;
 		}
 		return false;
@@ -168,18 +165,6 @@ public class PlateauRectangle extends Plateau implements Cloneable{
 				}
 			}
 		}
-		
-		/*public Object clone() throws CloneNotSupportedException{
-			
-			PlateauRectangle plateauClone = null;
-			
-			    // On récupère l'instance à renvoyer par l'appel de la 
-				// méthode super.clone()
-				plateauClone = (PlateauRectangle) this.clone();
-			
-			return plateauClone;
-			
-		}*/
 		
 		public  Plateau copiePlateau() {
 			

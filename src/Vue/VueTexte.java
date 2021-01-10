@@ -1,24 +1,36 @@
 package Vue;
 
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.Scanner;
 
 import Modèle.Carte;
+import Modèle.Joueur;
 import Modèle.MainJoueur;
 
 
 
-public class VueTexte implements Runnable {
+public class VueTexte extends Observable implements Runnable {
 
 	public static String QUITTER = "Quit";
-    public static String COMMUTER = "C";
-    public static String PROMPT = ">";
-    
-    public VueTexte() {
-    	Thread t = new Thread(this);
-    	t.start();
-    }
-    
+	public static String COMMUTER = "C";
+	public static String PROMPT = ">";
+	private Thread thread;
+	
+	public VueTexte() {
+		Thread t = new Thread(this);
+		this.thread = t;
+		t.start();
+	}
+
+	public Thread getThread() {
+		return thread;
+	}
+
+	public void setThread(Thread thread) {
+		this.thread = thread;
+	}
+
 	public int choixCartePose(MainJoueur main) {
 		int index = 0;
 		Scanner sc = new Scanner(System.in);
@@ -49,7 +61,7 @@ public class VueTexte implements Runnable {
 			System.out.println("Veuillez rentrer un chiffre");
 			return choixXPose();
 		}
-		
+
 		return xPose;
 	}
 
@@ -86,7 +98,7 @@ public class VueTexte implements Runnable {
 			return askDeplacer();
 		}
 	}
-	
+
 	public int choixYDeplacer() {
 		int yDeplacer = 0;
 		Scanner sc = new Scanner(System.in);
@@ -99,7 +111,7 @@ public class VueTexte implements Runnable {
 		}
 		return yDeplacer;
 	}
-	
+
 	public int choixXDeplacer() {
 		int xDeplacer = 0;
 		Scanner sc = new Scanner(System.in);
@@ -112,11 +124,11 @@ public class VueTexte implements Runnable {
 		}
 		return xDeplacer;
 	}
-	
+
 	public void noCard() {
 		System.out.println("Tu as choisis un emplacement sans cartes !\n");
 	}
-	
+
 	public void carteVoulue(Carte carte) {
 		System.out.println("la carte que tu veux déplacer : " + carte);
 	}
@@ -128,11 +140,62 @@ public class VueTexte implements Runnable {
 		}
 		System.out.println("\nTa main : " + cartes+"\n");
 	}
+
+	public void printTour(int nbTour, String name) {
+		System.out.println("Tour "+nbTour/2+" - "+ name+ "\n");
+	}
+
+	public void carteDefausse(Carte carte) {
+		System.out.println("La carte défaussée était "+ carte);
+	}
+
+	public void printGagnantManche(ArrayList<Joueur> gagnant) {
+		if(gagnant.size()>1) { // égalité
+			System.out.print("Les joueurs gagnants à égalité de cette manche sont : ");
+			for(Joueur g : gagnant) {
+				System.out.print(g.getNom());
+			}
+		}
+		else {
+			System.out.println("Le joueur gagnant de cette manche est : " + gagnant.get(0).getNom());
+		}
+	}
+
+	public void printPoints(ArrayList<Joueur> tabJoueur) {
+		for(Joueur t : tabJoueur) {
+			System.out.println("Carte victoire de " + t.getNom() + "à cette manche était : " + t.getCarteVictoire());
+			System.out.println("Points de " + t.getNom() + " : " + t.getNbPointsManches());
+		}
+	}
+
+	public void printGagnantPartie(Joueur gagnant) {
+		System.out.println("Bravo ! Le joueur gagnant de la partie est : " + gagnant.getNom());
+	}
+
+	public void afficherScore(ArrayList<Joueur> tabJoueur) {
+		System.out.println("Voici le tableau des scores :");
+		for(Joueur j : tabJoueur) {
+			System.out.println(j.toString());
+		}
+	}
+
+	public void piocheVide() {
+		System.out.println("La pioche est vide");
+	}
+	
+	public void poseCarte(Carte carte, int x, int y) {
+		System.out.println("La carte : "+carte+" a été posée en "+x+","+y);
+	}
+	
+	public void casePrise() {
+		System.out.println("Cette case est déjà prise");
+	}
+	
 	
 	@Override
 	public void run() {
 		
 	}
-	
-	
+
+
 }

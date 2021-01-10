@@ -3,6 +3,8 @@ package Modèle;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import Vue.VueTexte;
+
 public class Partie {
 	
 	private boolean estTerminee;
@@ -12,6 +14,7 @@ public class Partie {
 	ArrayList<Joueur> tabJoueur;
 	private FormePlateau forme;
 	private Manche manche;
+	private VueTexte vueTexte = new VueTexte();
 	
 	public Partie(int nbM, Regle regle,FormePlateau forme, ArrayList tabJoueur) {
 		
@@ -78,18 +81,12 @@ public class Partie {
 			}
 			tmp = j.getNbPointTotal();
 		}
+
 		
-		System.out.println("Le joueur gagnant de la partie est : " + gagnant.getNom() + " BRAVO CHAKAL!!");
 	}
 	
 	public void afficherScore() {
-		
-		System.out.println("Voici le tableau des scores :");
-		
-		for(Joueur j : this.tabJoueur) {
-			
-			System.out.println(j.toString());
-		}
+		this.vueTexte.afficherScore(this.tabJoueur);
 	}
 
 

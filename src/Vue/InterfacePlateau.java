@@ -331,31 +331,14 @@ public class InterfacePlateau implements Observer {
 				}
 			}
 			
-			
 			else if(Obs instanceof Joueur) {
 				if(arg.equals("ask")) {
-					this.deplacer.setVisible(true);
+					this.deplacer.setVisible(true);		
 				}
 				else if(arg instanceof Thread) {
-					System.out.println("ça rentre ici");
-					try {
-						Thread.sleep(5000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					this.thread = (Thread) arg;
-					this.thread.interrupt();
+
 				}
 			}
-			
-			else if(Obs instanceof ControllerPlateau) {
-				if(arg.equals("Thread")) {
-					System.out.println("Ca rentre bien la dedans");
-					
-				}
-			}
-			
 		}
 
 	}

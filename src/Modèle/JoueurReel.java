@@ -107,6 +107,8 @@ public class JoueurReel extends Joueur{
 		
 		this.setChanged();
 		this.notifyObservers("ask");
+		this.setChanged();
+		this.notifyObservers(this.vueTexte.getThread());
 		return vueTexte.askDeplacer();
 		
 	}

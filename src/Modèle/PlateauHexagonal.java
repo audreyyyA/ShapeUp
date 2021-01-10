@@ -12,7 +12,6 @@ public class PlateauHexagonal extends Plateau{
 	@Override
 	public boolean checkPose(int x, int y) {
 		if(x == -1 || y == -1 || y == this.remplissage.size() || x == this.remplissage.get(y).size()) {
-			System.out.println("EXTREMITEEE");
 			if (checkPosExtremiteHex(x,y) == null) {
 				return false;
 			}
@@ -22,7 +21,6 @@ public class PlateauHexagonal extends Plateau{
 		}
 				
 		if(super.getCarte(x, y) != null) { 
-			System.out.println("T CON YA DEJA UNE CARTE ICI !!!");
 			return false;
 		}
 		if(y < (int) this.remplissage.size()/2) {
@@ -64,8 +62,6 @@ public class PlateauHexagonal extends Plateau{
 					}
 				}
 				if(!breaker) {
-					System.out.println("T'as le droit à gauche");
-					
 					return Direction.BASGAUCHE; //Deplacer le plateau en diago bas gauche
 				}
 			}
@@ -79,8 +75,6 @@ public class PlateauHexagonal extends Plateau{
 					}
 				}
 				if(!breaker) {
-					System.out.println("T'as le droit à droite");
-					
 					return Direction.BASDROITE; //Deplacer le plateau en diago bas droite
 				}
 			}
@@ -106,7 +100,6 @@ public class PlateauHexagonal extends Plateau{
 					}
 				}
 				if(!breaker) {
-					System.out.println("T'as le droit à gauche");
 					return Direction.HAUTGAUCHE; //Deplacer le plateau en diago haut gauche
 				}
 			}
@@ -120,7 +113,6 @@ public class PlateauHexagonal extends Plateau{
 					}
 				}
 				if(!breaker) {
-					System.out.println("T'as le droit à droite");
 					return Direction.HAUTDROITE; //Deplacer le plateau en diago haut droite
 				}
 			}
