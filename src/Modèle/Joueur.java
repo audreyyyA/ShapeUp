@@ -24,7 +24,7 @@ public abstract class Joueur extends Observable{
 	private Carte carteVictoire;
 	private ArrayList<Integer> nbPointsManches; //à voir
 	protected MainJoueur main;
-	protected boolean isVirtuel;
+	protected boolean isVirtuel, deplacer;
 	private int num;
 	protected boolean scanClose;
 	
@@ -34,6 +34,14 @@ public abstract class Joueur extends Observable{
 
 	public void setScanClose(boolean scanClose) {
 		this.scanClose = scanClose;
+	}
+
+	public boolean isDeplacer() {
+		return deplacer;
+	}
+
+	public void setDeplacer(boolean deplacer) {
+		this.deplacer = deplacer;
 	}
 
 	public int getNum() {

@@ -1,5 +1,8 @@
 package Vue;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Scanner;
@@ -30,11 +33,20 @@ public class VueTexte extends Observable implements Runnable {
 	public void setThread(Thread thread) {
 		this.thread = thread;
 	}
-
+	
+	public void closeThread() {
+		this.thread.interrupt();
+	}
+	
 	public int choixCartePose(MainJoueur main) {
 		int index = 0;
-		Scanner sc = new Scanner(System.in);
 		System.out.print("Quelle carte voulez vous poser ? ");
+		String s = null;
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		Scanner sc = new Scanner(reader);
+		this.setChanged();
+		this.notifyObservers();
+		
 		try {
 			index = sc.nextInt();
 		}
@@ -44,6 +56,7 @@ public class VueTexte extends Observable implements Runnable {
 			System.out.print("Quelle carte voulez vous poser ? ");
 			try {
 				sc = new Scanner(System.in);
+				
 				index = sc.nextInt();
 			}
 			catch(Exception e) {}
@@ -82,27 +95,49 @@ public class VueTexte extends Observable implements Runnable {
 		System.out.println("Tu ne peux pas poser de carte ici");
 	}
 
-	public boolean askDeplacer() {
+	public void askDeplacer(Joueur j) {
 		System.out.print("Voulez vous déplacer une carte ? (O/N) ");
-
-		Scanner sc = new Scanner(System.in);
-		String s = sc.nextLine();
+		String s = null;
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		Scanner sc = new Scanner(reader);
+		this.setChanged();
+		this.notifyObservers();
+		try {
+			while(!reader.ready() && !this.thread.isInterrupted()) {
+				try {
+					this.thread.sleep(100);
+				} catch (InterruptedException e) {
+					System.out.println("interrupt");
+					// TODO Auto-generated catch block
+					return;
+				}
+			}
+			if(this.thread.isInterrupted()) {
+				return;
+			}
+			else {
+				s = sc.nextLine();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(s.equals("O") || s.equals("o")) {
-			return true;
+			j.setDeplacer(true);
 		}
 		else if(s.equals("N") || s.equals("n")) {
-			return false;
+			j.setDeplacer(false);
 		}
 		else {
 			System.out.println("Veuillez répondre par O ou N");
-			return askDeplacer();
+			askDeplacer(j);
 		}
 	}
 
 	public int choixYDeplacer() {
 		int yDeplacer = 0;
 		Scanner sc = new Scanner(System.in);
-		System.out.print("Ordonnée de pose : ");
+		System.out.println("Ordonnée de la carte à deplacer : ");
 		try {
 			yDeplacer = sc.nextInt();
 		}catch(Exception e) {
@@ -115,7 +150,7 @@ public class VueTexte extends Observable implements Runnable {
 	public int choixXDeplacer() {
 		int xDeplacer = 0;
 		Scanner sc = new Scanner(System.in);
-		System.out.print("Abcisse de pose : ");
+		System.out.println("Abcisse de la carte à deplacer : ");
 		try {
 			xDeplacer = sc.nextInt();
 		}catch(Exception e) {
@@ -134,7 +169,7 @@ public class VueTexte extends Observable implements Runnable {
 	}
 
 	public void afficherMain(ArrayList<Carte> cartes) {
-		System.out.print("        ");
+		System.out.print("\n        ");
 		for(int i=0; i<cartes.size(); i++) {
 			System.out.print("    "+i);
 		}
@@ -194,7 +229,13 @@ public class VueTexte extends Observable implements Runnable {
 	
 	@Override
 	public void run() {
-		
+		while(!this.thread.isInterrupted()) {
+			try {
+				this.thread.sleep(100);
+			} catch (InterruptedException e) {
+				this.thread.interrupt();
+			}
+		}
 	}
 
 

@@ -8,28 +8,7 @@ import Vue.VueTexte;
 public class JoueurReel extends Joueur{
 	
 	private boolean CVchang;
-	private boolean askChange, stopThread;
 	private VueTexte vueTexte = new VueTexte();
-	
-	public boolean isAskChange() {
-		return askChange;
-	}
-
-
-	public void setAskChange(boolean askChange) {
-		this.askChange = askChange;
-	}
-
-
-	public boolean isStopThread() {
-		return stopThread;
-	}
-
-
-	public void setStopThread(boolean stopThread) {
-		this.stopThread = stopThread;
-	}
-
 
 	public JoueurReel(String nom, int num) {
 		
@@ -52,6 +31,9 @@ public class JoueurReel extends Joueur{
 		int index=-1; 
 		boolean incorrectInput = true;
 		int xPose=0 ,yPose=0;
+		
+		this.setChanged();
+		this.notifyObservers("Pose");
 		
 		index = this.vueTexte.choixCartePose(this.getMain());
 		
@@ -102,15 +84,16 @@ public class JoueurReel extends Joueur{
 		super.main.retirerCarte(index);
 		
 	}
-	
+
+
 	public boolean askDeplacer(){
 		
 		this.setChanged();
 		this.notifyObservers("ask");
 		this.setChanged();
 		this.notifyObservers(this.vueTexte.getThread());
-		return vueTexte.askDeplacer();
-		
+		vueTexte.askDeplacer(this);
+		return this.deplacer;	
 	}
 	
 	public boolean deplacerCarte(Plateau plateau) {
@@ -132,8 +115,8 @@ public class JoueurReel extends Joueur{
 		Carte carteTemp = plateau.getCarte(xCarte, yCarte);
 			
 		while(incorrectInput) {
-			xCarte = this.vueTexte.choixXPose();
-			yCarte = this.vueTexte.choixYPose();
+			xDeplacer = this.vueTexte.choixXPose();
+			yDeplacer = this.vueTexte.choixYPose();
 			plateau.setCarte(xCarte, yCarte, null);
 				//on vérifie si c'est possible de poser la carte 
 			if(plateau.getForme() == FormePlateau.HEXAGONE) {
