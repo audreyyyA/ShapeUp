@@ -20,8 +20,10 @@ import Modèle.Carte;
 import Modèle.Couleur;
 import Modèle.FormeCarte;
 import Modèle.Joueur;
+import Modèle.JoueurReel;
 import Modèle.MainJoueur;
 import Modèle.Manche;
+import Modèle.Plateau;
 
 import java.awt.Label;
 import java.awt.RenderingHints;
@@ -43,9 +45,10 @@ public class InterfacePlateau implements Observer {
 	private ControllerPlateau controller;
 	private JPanel mainJoueur,deplacer, info;
 	private JLabel infoText;
-	private Joueur joueur;
+	private JoueurReel joueur;
 	private Thread thread;
 	private ArrayList<JPanel> cartes = new ArrayList<>();
+	private Plateau plateau;
 
 	/**
 	 * Launch the application.
@@ -349,6 +352,7 @@ public class InterfacePlateau implements Observer {
 
 	@Override
 	public void update(Observable Obs, Object arg) {
+		
 		// TODO Auto-generated method stub
 		if(arg == null) {
 			if(Obs instanceof MainJoueur) {
@@ -356,7 +360,14 @@ public class InterfacePlateau implements Observer {
 				this.drawMain(((MainJoueur) Obs).getCartes(),((MainJoueur) Obs).getNum());
 				frame.repaint();
 			}
+			
+			else if(Obs instanceof Plateau) {
+				System.out.println("Modification du plateau");
+				plateau.afficherPlateau();
+				this.plateau = (Plateau) Obs;
+			}
 		}
+		
 		else {
 			if(arg.equals("initialize")) {
 				frame.setVisible(true);
@@ -368,8 +379,8 @@ public class InterfacePlateau implements Observer {
 				}
 			}
 
-			else if(Obs instanceof Joueur) {
-				this.joueur = (Joueur) Obs; 
+			else if(Obs instanceof JoueurReel) {
+				this.joueur = (JoueurReel) Obs; 
 				if(arg.equals("ask")) {
 					this.deplacer.setVisible(true);		
 				}
@@ -385,12 +396,18 @@ public class InterfacePlateau implements Observer {
 			else if(Obs instanceof ControllerPlateau) {
 				if(arg.equals("Thread")) {
 					this.thread.interrupt();
+					this.joueur.setVueTexte(new VueTexte());
 				}
 				else if(arg.equals("Deplacer")) {
 					this.joueur.setDeplacer(true);
 				}
 				else if(arg.equals("PasDeplacer")) {
 					this.joueur.setDeplacer(false);
+				}
+				else if(arg instanceof ArrayList) {
+					int x = (int) ((ArrayList) arg).get(0);
+					int y = (int) ((ArrayList) arg).get(1);
+					System.out.println(plateau.checkPose(x,y));
 				}
 			}
 		}

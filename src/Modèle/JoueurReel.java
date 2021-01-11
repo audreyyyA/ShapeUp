@@ -10,6 +10,16 @@ public class JoueurReel extends Joueur{
 	private boolean CVchang;
 	private VueTexte vueTexte = new VueTexte();
 
+	public VueTexte getVueTexte() {
+		return vueTexte;
+	}
+
+
+	public void setVueTexte(VueTexte vueTexte) {
+		this.vueTexte = vueTexte;
+	}
+
+
 	public JoueurReel(String nom, int num) {
 		
 		super(nom,num);
@@ -35,12 +45,16 @@ public class JoueurReel extends Joueur{
 		this.setChanged();
 		this.notifyObservers("Pose");
 		
-		index = this.vueTexte.choixCartePose(this.getMain());
-		
+		this.vueTexte.choixCartePose(this.getMain());
+		index = this.vueTexte.getIndexCarte();
 		
 		while(incorrectInput) {
-			xPose = this.vueTexte.choixXPose();
-			yPose = this.vueTexte.choixYPose();
+			this.vueTexte.choixXPose();
+			xPose = this.vueTexte.getxPose();
+			System.out.println(xPose);
+			
+			this.vueTexte.choixYPose();
+			yPose = this.vueTexte.getyPose();
 			if(tour !=1) {
 				//on vérifie si c'est possible de poser la carte 
 				if(plateauActuel.checkPose(xPose, yPose)) {
@@ -115,8 +129,12 @@ public class JoueurReel extends Joueur{
 		Carte carteTemp = plateau.getCarte(xCarte, yCarte);
 			
 		while(incorrectInput) {
-			xDeplacer = this.vueTexte.choixXPose();
-			yDeplacer = this.vueTexte.choixYPose();
+			this.vueTexte.choixXPose();
+			xDeplacer = this.vueTexte.getxPose();
+			
+			this.vueTexte.choixYPose();
+			yDeplacer = this.vueTexte.getyPose();
+			
 			plateau.setCarte(xCarte, yCarte, null);
 				//on vérifie si c'est possible de poser la carte 
 			if(plateau.getForme() == FormePlateau.HEXAGONE) {

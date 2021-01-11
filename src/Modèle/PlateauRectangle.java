@@ -138,7 +138,8 @@ public class PlateauRectangle extends Plateau implements Cloneable{
 					this.remplissage.add(k,l);
 				}
 			}
-			
+			this.setChanged();
+			this.notifyObservers();
 		}
 		
 		public void afficherPlateau() {

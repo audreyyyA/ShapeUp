@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import Modèle.Carte;
 import Modèle.FormePlateau;
 import Modèle.Joueur;
+import Modèle.Plateau;
 import Vue.Accueil;
 import Vue.Shapes;
 
@@ -31,13 +32,22 @@ public class ControllerPlateau extends Observable{
 	private JPanel deplacer, info;
 	private ArrayList<JPanel> cartes;
 	private JPanel mainJoueur;
+	private Plateau plateau;
 
 	private void NotifyThread() {
 		this.setChanged();
 		this.notifyObservers("Thread");
 	}
-
-	public void NotifyDeplacer(boolean deplacer) {
+	
+	private void NotifyCheck(int x,int y) {
+		ArrayList<Integer> l = new ArrayList<>();
+		l.add(x);
+		l.add(y);
+		this.setChanged();
+		this.notifyObservers(l);
+	}
+	
+	private void NotifyDeplacer(boolean deplacer) {
 		this.setChanged();
 		if(deplacer) {
 			this.notifyObservers("Deplacer");
@@ -67,7 +77,9 @@ public class ControllerPlateau extends Observable{
 			for(Shapes cases : substring) {
 				cases.addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent e) {
-						cases.changeColor(Color.red);
+						int y = remplissagePlateau.indexOf(substring)-1;
+						int x = substring.indexOf(cases)-1;
+						System.out.println(plateau.checkPose(x, y));
 					}
 				});
 			}

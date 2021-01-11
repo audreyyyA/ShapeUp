@@ -13,8 +13,9 @@ public abstract class Plateau extends Observable implements Cloneable {
 	private VueTexte vueTexte = new VueTexte();
 	
 	public Plateau(FormePlateau forme){
-		
 		this.forme = forme;
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 	public FormePlateau getForme() {
@@ -35,6 +36,8 @@ public abstract class Plateau extends Observable implements Cloneable {
 	
 	public void setCarte(int x, int y, Carte carte) {
 		this.remplissage.get(y).set(x, carte);
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	

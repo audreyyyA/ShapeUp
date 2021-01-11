@@ -18,6 +18,35 @@ public class VueTexte extends Observable implements Runnable {
 	public static String QUITTER = "Quit";
 	public static String COMMUTER = "C";
 	public static String PROMPT = ">";
+	private int indexCarte,xPose,yPose;
+	
+	
+	
+	public int getyPose() {
+		return yPose;
+	}
+
+	public void setyPose(int yPose) {
+		this.yPose = yPose;
+	}
+
+	public int getxPose() {
+		return xPose;
+	}
+
+	public void setxPose(int xPose) {
+		this.xPose = xPose;
+	}
+
+	public int getIndexCarte() {
+		return indexCarte;
+	}
+
+	public void setIndexCarte(int indexCarte) {
+		this.indexCarte = indexCarte;
+	}
+
+
 	private Thread thread;
 	
 	public VueTexte() {
@@ -38,57 +67,129 @@ public class VueTexte extends Observable implements Runnable {
 		this.thread.interrupt();
 	}
 	
-	public int choixCartePose(MainJoueur main) {
+	public void choixCartePose(MainJoueur main) {
 		int index = 0;
 		System.out.print("Quelle carte voulez vous poser ? ");
-		String s = null;
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		Scanner sc = new Scanner(reader);
-		this.setChanged();
-		this.notifyObservers();
+		
+		try {
+			while(!reader.ready() && !this.thread.isInterrupted()) {
+				try {
+					this.thread.sleep(100);
+				} catch (InterruptedException e) {
+					System.out.println("interrupt");
+					return;
+				}
+			}
+			if(this.thread.isInterrupted()) {
+				return;
+			}
+			else {
+				try {
+					this.indexCarte = sc.nextInt();
+					return;
+				}catch(Exception e) {}
+				
+			}
+		} catch (IOException e) {}
+		
 		
 		try {
 			index = sc.nextInt();
 		}
 		catch(Exception e) {}
+		
 		while (index <0 || index > main.getCartes().size()-1) {
 			System.out.println("Tu as choisis un index incorrect. Chosis en un entre 0 et " + (main.getCartes().size()-1));// verif si string
 			System.out.print("Quelle carte voulez vous poser ? ");
 			try {
+				reader = new BufferedReader(new InputStreamReader(System.in));
 				sc = new Scanner(System.in);
-				
-				index = sc.nextInt();
+				try {
+					while(!reader.ready() && !this.thread.isInterrupted()) {
+						try {
+							this.thread.sleep(100);
+						} catch (InterruptedException e) {
+							System.out.println("interrupt");
+							return;
+						}
+					}
+					if(this.thread.isInterrupted()) {
+						return;
+					}
+					else {
+						try {
+							this.indexCarte = sc.nextInt();
+						}catch(Exception e) {}
+						
+					}
+				} catch (IOException e) {}
 			}
 			catch(Exception e) {}
 		}
-		return index;
 	}
 
-	public int choixXPose() {
-		int xPose = 0;
-		Scanner sc = new Scanner(System.in);
+	
+	public void choixXPose() {
+		this.xPose = 0;
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		Scanner sc = new Scanner(reader);
 		System.out.print("Abscisse de pose : ");
 		try {
-			xPose = sc.nextInt();
-		}catch(Exception e) {
-			System.out.println("Veuillez rentrer un chiffre");
-			return choixXPose();
-		}
-
-		return xPose;
+			while(!reader.ready() && !this.thread.isInterrupted()) {
+				try {
+					this.thread.sleep(100);
+				} catch (InterruptedException e) {
+					System.out.println("interrupt");
+					return;
+				}
+			}
+			if(this.thread.isInterrupted()) {
+				return;
+			}
+			else {
+				try {
+					this.xPose = sc.nextInt();
+					return;
+				}catch(Exception e) {
+					System.out.println("Veuillez rentrer un chiffre");
+					choixXPose();
+					return;
+				}
+			}
+		} catch (IOException e) {}
 	}
 
-	public int choixYPose() {
-		int yPose = 0;
-		Scanner sc = new Scanner(System.in);
+	
+	public void choixYPose() {
+		this.yPose = 0;
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		Scanner sc = new Scanner(reader);
 		System.out.print("Ordonnée de pose : ");
 		try {
-			yPose = sc.nextInt();
-		}catch(Exception e) {
-			System.out.println("Veuillez rentrer un chiffre");
-			return choixYPose();
-		}
-		return yPose;
+			while(!reader.ready() && !this.thread.isInterrupted()) {
+				try {
+					this.thread.sleep(100);
+				} catch (InterruptedException e) {
+					System.out.println("interrupt");
+					return;
+				}
+			}
+			if(this.thread.isInterrupted()) {
+				return;
+			}
+			else {
+				try {
+					this.yPose = sc.nextInt();
+					return;
+				}catch(Exception e) {
+					System.out.println("Veuillez rentrer un chiffre");
+					choixYPose();
+					return;
+				}
+			}
+		} catch (IOException e) {}
 	}
 
 	public void poseCarteImpossible() {
@@ -100,8 +201,7 @@ public class VueTexte extends Observable implements Runnable {
 		String s = null;
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		Scanner sc = new Scanner(reader);
-		this.setChanged();
-		this.notifyObservers();
+
 		try {
 			while(!reader.ready() && !this.thread.isInterrupted()) {
 				try {
@@ -120,7 +220,6 @@ public class VueTexte extends Observable implements Runnable {
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		if(s.equals("O") || s.equals("o")) {
 			j.setDeplacer(true);

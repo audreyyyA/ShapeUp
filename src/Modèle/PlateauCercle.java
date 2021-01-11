@@ -139,6 +139,8 @@ public class PlateauCercle extends Plateau{
 			this.remplissage.add(k,l);
 			i=6;
 		}
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 	public  Plateau copiePlateau() {

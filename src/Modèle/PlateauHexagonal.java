@@ -281,7 +281,8 @@ public class PlateauHexagonal extends Plateau{
 				i+=1;
 			}
 		}
-		
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	public  Plateau copiePlateau() {
