@@ -14,8 +14,7 @@ public abstract class Plateau extends Observable implements Cloneable {
 	
 	public Plateau(FormePlateau forme){
 		this.forme = forme;
-		this.setChanged();
-		this.notifyObservers();
+		System.out.println("Le plateau est déjà crée");
 	}
 
 	public FormePlateau getForme() {

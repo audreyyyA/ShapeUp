@@ -40,7 +40,7 @@ public class JoueurReel extends Joueur{
 	public void poserCarte(Plateau plateauActuel, int tour) {
 		int index=-1; 
 		boolean incorrectInput = true;
-		int xPose=0 ,yPose=0;
+		int xPose=-2 ,yPose=-2;
 		
 		this.setChanged();
 		this.notifyObservers("Pose");
@@ -51,10 +51,10 @@ public class JoueurReel extends Joueur{
 		while(incorrectInput) {
 			this.vueTexte.choixXPose();
 			xPose = this.vueTexte.getxPose();
-			System.out.println(xPose);
 			
 			this.vueTexte.choixYPose();
 			yPose = this.vueTexte.getyPose();
+			
 			if(tour !=1) {
 				//on vérifie si c'est possible de poser la carte 
 				if(plateauActuel.checkPose(xPose, yPose)) {

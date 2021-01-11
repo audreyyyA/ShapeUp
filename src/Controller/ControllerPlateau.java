@@ -33,6 +33,8 @@ public class ControllerPlateau extends Observable{
 	private ArrayList<JPanel> cartes;
 	private JPanel mainJoueur;
 	private Plateau plateau;
+	private int index;
+	
 
 	private void NotifyThread() {
 		this.setChanged();
@@ -41,6 +43,16 @@ public class ControllerPlateau extends Observable{
 	
 	private void NotifyCheck(int x,int y) {
 		ArrayList<Integer> l = new ArrayList<>();
+		l.add(0);
+		l.add(x);
+		l.add(y);
+		this.setChanged();
+		this.notifyObservers(l);
+	}
+	
+	private void NotifyPose(int x,int y) {
+		ArrayList<Integer> l = new ArrayList<>();
+		l.add(1);
 		l.add(x);
 		l.add(y);
 		this.setChanged();
@@ -79,7 +91,16 @@ public class ControllerPlateau extends Observable{
 					public void mouseClicked(MouseEvent e) {
 						int y = remplissagePlateau.indexOf(substring)-1;
 						int x = substring.indexOf(cases)-1;
-						System.out.println(plateau.checkPose(x, y));
+						NotifyPose(x,y);
+					}
+					
+					public void mouseEntered(MouseEvent e) {
+						int y = remplissagePlateau.indexOf(substring)-1;
+						int x = substring.indexOf(cases)-1;
+						NotifyCheck(x,y);
+					}
+					public void mouseExited(MouseEvent e){
+						cases.changeColor(new Color(173, 173, 173));
 					}
 				});
 			}
@@ -131,16 +152,20 @@ public class ControllerPlateau extends Observable{
 					for(JPanel carte : cartes) {
 						carte.setBorder(BorderFactory.createLineBorder(Color.black));
 						carte.setBounds(carte.getX(),15,carte.getWidth(),190);
+						
 					}
 					if(carteSelected == null) {
+						index = cartes.indexOf(carte);
 						carteSelected = carte;
 						carte.setBounds(carte.getX(), carte.getY()-15, carte.getWidth(), carte.getHeight()+15);
 						carte.setBorder(BorderFactory.createMatteBorder(5,5,5,5,new Color(78,168,50)));
 					}
 					else if(carteSelected.equals(carte)) {
 						carteSelected = null;
+						index =-1;
 					}
 					else {
+						index = cartes.indexOf(carte);
 						carteSelected = carte;
 						carte.setBorder(BorderFactory.createMatteBorder(5,5,5,5,new Color(78,168,50)));
 						carte.setBounds(carte.getX(), carte.getY()-15, carte.getWidth(), carte.getHeight()+15);
@@ -160,6 +185,14 @@ public class ControllerPlateau extends Observable{
 			});
 			
 		}
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
 	}
 
 	public void updateTurn(int tour, String name) {

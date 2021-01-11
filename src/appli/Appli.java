@@ -44,6 +44,7 @@ public class Appli implements Observer,Runnable {
     	
     	this.partie.getManche().addObserver(this.interfacePlateau);
     	this.partie.getManche().getPlateau().addObserver(this.interfacePlateau);
+    	this.partie.getManche().getPlateau().setCarte(0, 0, null);
     	this.partie.getManche().getPioche().addObserver(this.interfacePlateau);
     	
     	this.partie.getManche().addObserver(this);

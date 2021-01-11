@@ -24,6 +24,7 @@ import Modèle.JoueurReel;
 import Modèle.MainJoueur;
 import Modèle.Manche;
 import Modèle.Plateau;
+import Modèle.PlateauRectangle;
 
 import java.awt.Label;
 import java.awt.RenderingHints;
@@ -41,7 +42,7 @@ public class InterfacePlateau implements Observer {
 
 	private JFrame frame;
 	private ArrayList<ArrayList<Shapes>> remplissagePlateau = new ArrayList<>();
-	private int width, height;
+	private int width, height,tour;
 	private ControllerPlateau controller;
 	private JPanel mainJoueur,deplacer, info;
 	private JLabel infoText;
@@ -362,8 +363,6 @@ public class InterfacePlateau implements Observer {
 			}
 			
 			else if(Obs instanceof Plateau) {
-				System.out.println("Modification du plateau");
-				plateau.afficherPlateau();
 				this.plateau = (Plateau) Obs;
 			}
 		}
@@ -375,6 +374,7 @@ public class InterfacePlateau implements Observer {
 
 			else if(Obs instanceof Manche) {
 				if(arg instanceof Joueur) {
+					this.tour = ((Manche) Obs).getNbTour();
 					this.controller.updateTurn(((Manche) Obs).getNbTour(), ((Joueur) arg).getNom());
 				}
 			}
@@ -405,9 +405,38 @@ public class InterfacePlateau implements Observer {
 					this.joueur.setDeplacer(false);
 				}
 				else if(arg instanceof ArrayList) {
-					int x = (int) ((ArrayList) arg).get(0);
-					int y = (int) ((ArrayList) arg).get(1);
-					System.out.println(plateau.checkPose(x,y));
+					if((int)((ArrayList) arg).get(0) == 0) {
+						int x = (int) ((ArrayList) arg).get(0);
+						int y = (int) ((ArrayList) arg).get(1);
+						System.out.println(this.plateau.checkPose(x,y));
+						if(tour !=1) {
+							if(this.plateau.checkPose(x,y)) {
+								this.remplissagePlateau.get(y+1).get(x+1).changeColor(new Color(112,173,71));
+							}
+							else{
+								this.remplissagePlateau.get(y+1).get(x+1).changeColor(new Color(255, 86, 86));
+							};
+						}
+						else {
+							if(!(x == -1 || y ==-1 || y == this.remplissagePlateau.size() || x == this.remplissagePlateau.get(y+1).size() -2)) {
+								this.remplissagePlateau.get(y+1).get(x+1).changeColor(new Color(112,173,71));
+							}
+							else {
+								this.remplissagePlateau.get(y+1).get(x+1).changeColor(new Color(255, 86, 86));
+							}
+						}
+					}
+					
+					else if((int)((ArrayList) arg).get(0) == 1) {
+						int x = (int) ((ArrayList) arg).get(0);
+						int y = (int) ((ArrayList) arg).get(1);
+						if(tour!=1) {
+							if(this.plateau.checkPose(x,y)) {
+								this.joueur.getVueTexte().setIndexCarte(this.controller.getIndex());
+							}
+						}
+					}
+					
 				}
 			}
 		}
