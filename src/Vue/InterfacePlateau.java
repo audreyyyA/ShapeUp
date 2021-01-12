@@ -43,6 +43,7 @@ public class InterfacePlateau implements Observer {
 	private JFrame frame;
 	private ArrayList<ArrayList<Shapes>> remplissagePlateau = new ArrayList<>();
 	private int width, height,tour;
+	private boolean pose = false;
 	private ControllerPlateau controller;
 	private JPanel mainJoueur,deplacer, info;
 	private JLabel infoText;
@@ -171,7 +172,7 @@ public class InterfacePlateau implements Observer {
 		int nbCarte = mainJoueur.size();
 		int compteur = 0;
 		int start = (410 - mainJoueur.size()*130)/2;
-		
+
 
 		for(Carte c : mainJoueur) {
 
@@ -353,7 +354,7 @@ public class InterfacePlateau implements Observer {
 
 	@Override
 	public void update(Observable Obs, Object arg) {
-		
+
 		// TODO Auto-generated method stub
 		if(arg == null) {
 			if(Obs instanceof MainJoueur) {
@@ -361,12 +362,12 @@ public class InterfacePlateau implements Observer {
 				this.drawMain(((MainJoueur) Obs).getCartes(),((MainJoueur) Obs).getNum());
 				frame.repaint();
 			}
-			
+
 			else if(Obs instanceof Plateau) {
 				this.plateau = (Plateau) Obs;
 			}
 		}
-		
+
 		else {
 			if(arg.equals("initialize")) {
 				frame.setVisible(true);
@@ -390,6 +391,12 @@ public class InterfacePlateau implements Observer {
 				else if(arg.equals("Pose")){
 					this.infoText.setText("Cliquez sur la carte que vous voulez poser");
 					this.info.setVisible(true);
+				}
+				else if(arg.equals("XPoseChoice")) {
+
+				}
+				else if(arg.equals("YPoseChoice")) {
+
 				}
 			}
 
@@ -426,7 +433,7 @@ public class InterfacePlateau implements Observer {
 							}
 						}
 					}
-					
+
 					else if((int)((ArrayList) arg).get(0) == 1) {
 						int x = (int) ((ArrayList) arg).get(0);
 						int y = (int) ((ArrayList) arg).get(1);
@@ -436,7 +443,7 @@ public class InterfacePlateau implements Observer {
 							}
 						}
 					}
-					
+
 				}
 			}
 		}

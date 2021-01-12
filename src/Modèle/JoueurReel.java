@@ -40,7 +40,7 @@ public class JoueurReel extends Joueur{
 	public void poserCarte(Plateau plateauActuel, int tour) {
 		int index=-1; 
 		boolean incorrectInput = true;
-		int xPose=-2 ,yPose=-2;
+		int xPose=0 ,yPose=0;
 		
 		this.setChanged();
 		this.notifyObservers("Pose");
@@ -49,9 +49,13 @@ public class JoueurReel extends Joueur{
 		index = this.vueTexte.getIndexCarte();
 		
 		while(incorrectInput) {
+			this.setChanged();
+			this.notifyObservers("XPoseChoice");
 			this.vueTexte.choixXPose();
 			xPose = this.vueTexte.getxPose();
 			
+			this.setChanged();
+			this.notifyObservers("YPoseChoice");
 			this.vueTexte.choixYPose();
 			yPose = this.vueTexte.getyPose();
 			
