@@ -18,9 +18,7 @@ public class PlateauCercle extends Plateau{
 			if(this.getCarte(x, y-1) != null && this.checkPosExtremite(x, y)) {
 				return true;
 			}
-			else {
-				return false;
-			}
+			
 		}
 		if(this.getCarte(x-1, y) != null || this.getCarte(x+1, y) != null || this.getCarte(x, y+1) != null || this.getCarte(x, y-1) != null) {
 			return true;

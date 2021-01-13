@@ -15,9 +15,7 @@ public class PlateauHexagonal extends Plateau{
 			if (checkPosExtremiteHex(x,y) == null) {
 				return false;
 			}
-			else {
-				return true;
-			}
+			
 		}
 				
 		if(super.getCarte(x, y) != null) { 
