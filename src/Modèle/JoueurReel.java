@@ -133,6 +133,7 @@ public class JoueurReel extends Joueur{
 		Carte carteTemp = plateau.getCarte(xCarte, yCarte);
 			
 		while(incorrectInput) {
+			
 			this.vueTexte.choixXPose();
 			xDeplacer = this.vueTexte.getxPose();
 			
@@ -157,6 +158,10 @@ public class JoueurReel extends Joueur{
 				plateau.setRemplissage(xCarte, yCarte, carteTemp);
 				//plateau.setCarte(xCarte, yCarte, carteTemp);
 				this.vueTexte.poseCarteImpossible();
+				
+				if(!askDeplacer()) {
+					return false;
+				}
 			}
 		}
 			
