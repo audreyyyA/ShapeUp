@@ -69,6 +69,7 @@ public class VueTexte extends Observable implements Runnable {
 	
 	public void choixCartePose(MainJoueur main) {
 		int index = 0;
+		System.out.println("VOICI LA TAILLE DE TA MAIN :" + main.getCartes().size());
 		System.out.print("Quelle carte voulez vous poser ? ");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		Scanner sc = new Scanner(reader);
@@ -88,17 +89,14 @@ public class VueTexte extends Observable implements Runnable {
 			else {
 				try {
 					this.indexCarte = sc.nextInt();
-					return;
+					//return;
 				}catch(Exception e) {}
 				
 			}
 		} catch (IOException e) {}
 		
-		
-		try {
-			index = sc.nextInt();
-		}
-		catch(Exception e) {}
+		index = this.indexCarte;
+		System.out.println(index);
 		
 		while (index <0 || index > main.getCartes().size()-1) {
 			System.out.println("Tu as choisis un index incorrect. Chosis en un entre 0 et " + (main.getCartes().size()-1));// verif si string
@@ -121,6 +119,7 @@ public class VueTexte extends Observable implements Runnable {
 					else {
 						try {
 							this.indexCarte = sc.nextInt();
+							index = this.indexCarte;
 						}catch(Exception e) {}
 						
 					}
