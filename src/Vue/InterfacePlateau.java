@@ -42,10 +42,10 @@ public class InterfacePlateau implements Observer {
 
 	private JFrame frame;
 	private ArrayList<ArrayList<Shapes>> remplissagePlateau = new ArrayList<>();
-	private int width, height,tour;
-	private boolean pose = false;
+	private int tour,x,y;
+	private boolean first = true;
 	private ControllerPlateau controller;
-	private JPanel mainJoueur,deplacer, info;
+	private JPanel mainJoueur,deplacer, info, plateauPanel,plateauCarte;
 	private JLabel infoText;
 	private JoueurReel joueur;
 	private Thread thread;
@@ -75,24 +75,27 @@ public class InterfacePlateau implements Observer {
 		frame.setBounds(0, 0, 1295, 758);
 		frame.getContentPane().setLayout(null);
 
-		JPanel Plateau = new JPanel();
-		Plateau.setBounds(0, 0, 1295, 758);
-		Plateau.setOpaque(false);
-		Plateau.setLayout(null);
+		this.plateauPanel = new JPanel();
+		this.plateauPanel.setBounds(0, 0, 1295, 758);
+		this.plateauPanel.setOpaque(false);
+		this.plateauPanel.setLayout(null);
+		
+		this.plateauCarte = new JPanel();
+		this.plateauCarte.setBounds(0, 0, 1295, 758);
+		this.plateauCarte.setOpaque(false);
+		this.plateauPanel.add(plateauCarte);
+		this.plateauCarte.setLayout(null);
 
-		height = frame.getHeight();
-		width = frame.getWidth();	
-
-		this.drawPlateau(50, Plateau);
+		this.drawPlateau(50, plateauCarte,null);
 
 
-		frame.getContentPane().add(Plateau);
+		frame.getContentPane().add(plateauPanel);
 
 		this.info = new JPanel();
 		this.info.setBounds(10, 463, 410, 49);
 		this.info.setBackground(new Color(32,32,32,200));
 		this.info.setVisible(false);
-		Plateau.add(this.info);
+		plateauPanel.add(this.info);
 		this.info.setLayout(null);
 
 		this.infoText = new JLabel("Cliquez sur la carte que vous voulez poser");
@@ -106,11 +109,11 @@ public class InterfacePlateau implements Observer {
 		JLabel pioche_1 = new JLabel("");
 		pioche_1.setIcon(new ImageIcon(InterfacePlateau.class.getResource("/images/pioche.png")));
 		pioche_1.setBounds(240, 265, 137, 190);
-		Plateau.add(pioche_1);
+		plateauPanel.add(pioche_1);
 
 		JLabel turn = new JLabel("  Tour 0 - Name");
 		turn.setBounds(0, 216, 390, 36);
-		Plateau.add(turn);
+		plateauPanel.add(turn);
 		turn.setForeground(Color.WHITE);
 		turn.setBackground(new Color(122, 20, 12));
 		turn.setOpaque(true);
@@ -118,18 +121,18 @@ public class InterfacePlateau implements Observer {
 
 		JLabel regle = new JLabel("");
 		regle.setBounds(10, 11, 410, 195);
-		Plateau.add(regle);
+		plateauPanel.add(regle);
 		regle.setIcon(new ImageIcon(InterfacePlateau.class.getResource("/images/regle.png")));
 
 		JLabel pioche = new JLabel("");
 		pioche.setIcon(new ImageIcon(InterfacePlateau.class.getResource("/images/pioche.png")));
 		pioche.setBounds(50, 265, 137, 190);
-		Plateau.add(pioche);
+		plateauPanel.add(pioche);
 
 		this.mainJoueur = new JPanel();
 		this.mainJoueur.setBounds(10, 514, 410, 220);
 		this.mainJoueur.setOpaque(false);
-		Plateau.add(this.mainJoueur);
+		plateauPanel.add(this.mainJoueur);
 		this.mainJoueur.setLayout(null);
 
 		this.deplacer = new JPanel();
@@ -137,7 +140,7 @@ public class InterfacePlateau implements Observer {
 		this.deplacer.setBackground(new Color(32,32,32,200));
 		this.deplacer.setVisible(false);
 
-		Plateau.add(this.deplacer);
+		plateauPanel.add(this.deplacer);
 		this.deplacer.setLayout(null);
 
 		JLabel askDeplacer = new JLabel("Voulez-vous d\u00E9placer une carte ? ");
@@ -164,6 +167,8 @@ public class InterfacePlateau implements Observer {
 		background.setBounds(0, 0, 1280, 720);
 		frame.getContentPane().add(background);
 
+
+		
 		this.controller = new ControllerPlateau(this.mainJoueur,this.info,infoText,this.joueur,this.thread, remplissagePlateau, turn,valide,refuse,deplacer);
 		this.controller.addObserver(this);
 	}
@@ -183,7 +188,7 @@ public class InterfacePlateau implements Observer {
 			carte.setOpaque(true);
 			carte.setLayout(null);
 
-			JPanel content = createContent(c);
+			JPanel content = CarteToJPanel(c,100);
 			content.setBounds(10,45,110,110);
 			content.setOpaque(false);
 			carte.add(content);
@@ -197,28 +202,28 @@ public class InterfacePlateau implements Observer {
 	}
 
 
-	public JPanel createContent(Carte c) {
+	public JPanel CarteToJPanel(Carte c,int size) {
 		if(c.getForme() == FormeCarte.ROND) {
 			if(c.isRempli()) {
 				if(c.getCouleur() == Couleur.BLEU) {
-					return new Shapes(0,0,100,Color.BLUE,false,Formes.CERCLE);
+					return new Shapes(0,0,size,Color.BLUE,false,Formes.CERCLE);
 				}
 				else if(c.getCouleur() == Couleur.ROUGE) {
-					return new Shapes(0,0,100,Color.RED,false,Formes.CERCLE);
+					return new Shapes(0,0,size,Color.RED,false,Formes.CERCLE);
 				}
 				else if(c.getCouleur() == Couleur.VERT) {
-					return new Shapes(0,0,100,Color.GREEN,false,Formes.CERCLE);
+					return new Shapes(0,0,size,Color.GREEN,false,Formes.CERCLE);
 				}
 			}
 			else {
 				if(c.getCouleur() == Couleur.BLEU) {
-					return new Shapes(0,0,100,Color.BLUE,true,Formes.CERCLE);
+					return new Shapes(0,0,size,Color.BLUE,true,Formes.CERCLE);
 				}
 				else if(c.getCouleur() == Couleur.ROUGE) {
-					return new Shapes(0,0,100,Color.RED,true,Formes.CERCLE);
+					return new Shapes(0,0,size,Color.RED,true,Formes.CERCLE);
 				}
 				else if(c.getCouleur() == Couleur.VERT) {
-					return new Shapes(0,0,100,Color.GREEN,true,Formes.CERCLE);
+					return new Shapes(0,0,size,Color.GREEN,true,Formes.CERCLE);
 				}
 			}
 		}
@@ -226,24 +231,24 @@ public class InterfacePlateau implements Observer {
 		else if(c.getForme() == FormeCarte.TRIANGLE) {
 			if(c.isRempli()) {
 				if(c.getCouleur() == Couleur.BLEU) {
-					return new Shapes(0,0,100,Color.BLUE,false,Formes.TRIANGLE);
+					return new Shapes(0,0,size,Color.BLUE,false,Formes.TRIANGLE);
 				}
 				else if(c.getCouleur() == Couleur.ROUGE) {
-					return new Shapes(0,0,100,Color.RED,false,Formes.TRIANGLE);
+					return new Shapes(0,0,size,Color.RED,false,Formes.TRIANGLE);
 				}
 				else if(c.getCouleur() == Couleur.VERT) {
-					return new Shapes(0,0,100,Color.GREEN,false,Formes.TRIANGLE);
+					return new Shapes(0,0,size,Color.GREEN,false,Formes.TRIANGLE);
 				}
 			}
 			else {
 				if(c.getCouleur() == Couleur.BLEU) {
-					return new Shapes(0,0,100,Color.BLUE,true,Formes.TRIANGLE);
+					return new Shapes(0,0,size,Color.BLUE,true,Formes.TRIANGLE);
 				}
 				else if(c.getCouleur() == Couleur.ROUGE) {
-					return new Shapes(0,0,100,Color.RED,true,Formes.TRIANGLE);
+					return new Shapes(0,0,size,Color.RED,true,Formes.TRIANGLE);
 				}
 				else if(c.getCouleur() == Couleur.VERT) {
-					return new Shapes(0,0,100,Color.GREEN,true,Formes.TRIANGLE);
+					return new Shapes(0,0,size,Color.GREEN,true,Formes.TRIANGLE);
 				}
 			}
 
@@ -252,32 +257,32 @@ public class InterfacePlateau implements Observer {
 		else if(c.getForme() == FormeCarte.CARRE) {
 			if(c.isRempli()) {
 				if(c.getCouleur() == Couleur.BLEU) {
-					return new Shapes(0,0,100,Color.BLUE,false,Formes.CARRE);
+					return new Shapes(0,0,size,Color.BLUE,false,Formes.CARRE);
 				}
 				else if(c.getCouleur() == Couleur.ROUGE) {
-					return new Shapes(0,0,100,Color.RED,false,Formes.CARRE);
+					return new Shapes(0,0,size,Color.RED,false,Formes.CARRE);
 				}
 				else if(c.getCouleur() == Couleur.VERT) {
-					return new Shapes(0,0,100,Color.GREEN,false,Formes.CARRE);
+					return new Shapes(0,0,size,Color.GREEN,false,Formes.CARRE);
 				}
 			}
 			else {
 				if(c.getCouleur() == Couleur.BLEU) {
-					return new Shapes(0,0,100,Color.BLUE,true,Formes.CARRE);
+					return new Shapes(0,0,size,Color.BLUE,true,Formes.CARRE);
 				}
 				else if(c.getCouleur() == Couleur.ROUGE) {
-					return new Shapes(0,0,100,Color.RED,true,Formes.CARRE);
+					return new Shapes(0,0,size,Color.RED,true,Formes.CARRE);
 				}
 				else if(c.getCouleur() == Couleur.VERT) {
-					return new Shapes(0,0,100,Color.GREEN,true,Formes.CARRE);
+					return new Shapes(0,0,size,Color.GREEN,true,Formes.CARRE);
 				}
 			}
 		}
 
 		return null;
 	}
-
-	public void drawPlateau(int size, JPanel Plateau) {
+	
+	public void drawPlateau(int size, JPanel Plateau, ArrayList<ArrayList<Carte>> remplissage) {
 		int i = 5;
 		int x = 659;
 		int y = 60;
@@ -350,8 +355,31 @@ public class InterfacePlateau implements Observer {
 			x += (int) (size*2*Math.cos(Math.toRadians(30))) +xEcartement;
 			temp.add(cases);
 		}
+		
+		
 	}
 
+	
+	public void updatePlateau(ArrayList<ArrayList<Carte>> remplissageCarte) {
+		for(ArrayList<Shapes> subList : remplissagePlateau) {
+			for(Shapes cases : subList) {
+				cases.setLayout(null);
+				int x=subList.indexOf(cases);
+				int y= remplissagePlateau.indexOf(subList);
+				if(!(y == 0 || y == remplissagePlateau.size() || x ==0 || x == subList.size()-1)) {
+					if(remplissageCarte.get(y-1).get(x-1) != null) {
+						JPanel carte = this.CarteToJPanel(remplissageCarte.get(y-1).get(x-1), 50);
+						carte.setBounds(13, 20, 70, 70);
+						carte.setOpaque(false);
+						cases.add(carte);
+						cases.repaint();
+					}
+				}
+			}
+		}
+		this.plateauCarte.repaint();
+	}
+	
 	@Override
 	public void update(Observable Obs, Object arg) {
 
@@ -359,12 +387,17 @@ public class InterfacePlateau implements Observer {
 		if(arg == null) {
 			if(Obs instanceof MainJoueur) {
 				this.mainJoueur.removeAll();
+				this.cartes.clear();
+				System.out.println("La main change");
+				System.out.println(((MainJoueur) Obs).getCartes());
 				this.drawMain(((MainJoueur) Obs).getCartes(),((MainJoueur) Obs).getNum());
 				frame.repaint();
 			}
 
 			else if(Obs instanceof Plateau) {
 				this.plateau = (Plateau) Obs;
+				System.out.println("Modification du plateau");
+				this.updatePlateau(this.plateau.getRemplissage());
 			}
 		}
 
@@ -380,6 +413,8 @@ public class InterfacePlateau implements Observer {
 				}
 			}
 
+
+			
 			else if(Obs instanceof JoueurReel) {
 				this.joueur = (JoueurReel) Obs; 
 				if(arg.equals("ask")) {
@@ -388,16 +423,12 @@ public class InterfacePlateau implements Observer {
 				else if(arg instanceof Thread) {
 					this.thread = (Thread) arg; 
 				}
+				
 				else if(arg.equals("Pose")){
 					this.infoText.setText("Cliquez sur la carte que vous voulez poser");
 					this.info.setVisible(true);
 				}
-				else if(arg.equals("XPoseChoice")) {
-
-				}
-				else if(arg.equals("YPoseChoice")) {
-
-				}
+				
 			}
 
 			else if(Obs instanceof ControllerPlateau) {
@@ -413,10 +444,9 @@ public class InterfacePlateau implements Observer {
 				}
 				else if(arg instanceof ArrayList) {
 					if((int)((ArrayList) arg).get(0) == 0) {
-						int x = (int) ((ArrayList) arg).get(0);
-						int y = (int) ((ArrayList) arg).get(1);
-						System.out.println(this.plateau.checkPose(x,y));
-						if(tour !=1) {
+						int x = (int) ((ArrayList) arg).get(1);
+						int y = (int) ((ArrayList) arg).get(2);
+						if(!first) {
 							if(this.plateau.checkPose(x,y)) {
 								this.remplissagePlateau.get(y+1).get(x+1).changeColor(new Color(112,173,71));
 							}
@@ -435,15 +465,37 @@ public class InterfacePlateau implements Observer {
 					}
 
 					else if((int)((ArrayList) arg).get(0) == 1) {
-						int x = (int) ((ArrayList) arg).get(0);
-						int y = (int) ((ArrayList) arg).get(1);
-						if(tour!=1) {
-							if(this.plateau.checkPose(x,y)) {
+						
+						this.x = (int) ((ArrayList) arg).get(1);
+						this.y = (int) ((ArrayList) arg).get(2);
+						System.out.println(this.controller.getIndex());
+						System.out.println("Abcisse de pose: "+x);
+						System.out.println("Ordonnée de pose: "+y);
+						if(!first) {
+							if(this.plateau.checkPose(this.x,this.y)) {
+								this.thread.interrupt();
+								this.joueur.setPose(true);
+								this.joueur.setVueTexte(new VueTexte());
 								this.joueur.getVueTexte().setIndexCarte(this.controller.getIndex());
+								this.thread = this.joueur.getVueTexte().getThread();
+								this.joueur.setxPose(this.x);
+								this.joueur.setyPose(this.y);
+								this.info.setVisible(false);
 							}
 						}
+						else {
+							this.thread.interrupt();
+							this.joueur.setPose(true);
+							this.first = false;
+							this.joueur.setVueTexte(new VueTexte());
+							this.joueur.getVueTexte().setIndexCarte(this.controller.getIndex());
+							this.thread = this.joueur.getVueTexte().getThread();
+							this.joueur.setxPose(this.x);
+							this.joueur.setyPose(this.y);
+							this.info.setVisible(false);
+						}
 					}
-
+					
 				}
 			}
 		}

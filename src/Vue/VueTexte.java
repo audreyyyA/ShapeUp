@@ -19,8 +19,7 @@ public class VueTexte extends Observable implements Runnable {
 	public static String COMMUTER = "C";
 	public static String PROMPT = ">";
 	private int indexCarte,xPose,yPose;
-	
-	
+	private Thread thread;
 	
 	public int getyPose() {
 		return yPose;
@@ -30,6 +29,8 @@ public class VueTexte extends Observable implements Runnable {
 		this.yPose = yPose;
 	}
 
+	
+	
 	public int getxPose() {
 		return xPose;
 	}
@@ -46,8 +47,6 @@ public class VueTexte extends Observable implements Runnable {
 		this.indexCarte = indexCarte;
 	}
 
-
-	private Thread thread;
 	
 	public VueTexte() {
 		Thread t = new Thread(this);
@@ -88,9 +87,7 @@ public class VueTexte extends Observable implements Runnable {
 			else {
 				try {
 					this.indexCarte = sc.nextInt();
-					return;
 				}catch(Exception e) {}
-				
 			}
 		} catch (IOException e) {}
 		
@@ -136,16 +133,19 @@ public class VueTexte extends Observable implements Runnable {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		Scanner sc = new Scanner(reader);
 		System.out.print("Abscisse de pose : ");
+		System.out.print(this.thread.isInterrupted());
 		try {
 			while(!reader.ready() && !this.thread.isInterrupted()) {
 				try {
 					this.thread.sleep(100);
+					System.out.println("J'attends");
 				} catch (InterruptedException e) {
 					System.out.println("interrupt");
 					return;
 				}
 			}
 			if(this.thread.isInterrupted()) {
+				System.out.print("interrupt");
 				return;
 			}
 			else {
@@ -164,6 +164,10 @@ public class VueTexte extends Observable implements Runnable {
 	
 	public void choixYPose() {
 		this.yPose = 0;
+		this.setChanged();
+		this.notifyObservers(this.thread);
+		this.setChanged();
+		this.notifyObservers("YPoseChoice");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		Scanner sc = new Scanner(reader);
 		System.out.print("Ordonnée de pose : ");

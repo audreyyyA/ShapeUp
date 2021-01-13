@@ -30,9 +30,9 @@ public class MainJoueur extends Observable{
 	}
 	
 	public void retirerCarte(int index) {
+		cartes.remove(index);
 		this.setChanged();
 		this.notifyObservers();
-		cartes.remove(index);
 	}
 	
 	public void afficherMain() {

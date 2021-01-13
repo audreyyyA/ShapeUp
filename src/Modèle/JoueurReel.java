@@ -9,6 +9,50 @@ public class JoueurReel extends Joueur{
 	
 	private boolean CVchang;
 	private VueTexte vueTexte = new VueTexte();
+	private int xPose,yPose,index;
+	private boolean pose;
+	
+	
+	
+	public int getIndex() {
+		return index;
+	}
+
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
+
+	public int getxPose() {
+		return xPose;
+	}
+
+
+	public void setxPose(int xPose) {
+		this.xPose = xPose;
+	}
+
+
+	public int getyPose() {
+		return yPose;
+	}
+
+
+	public void setyPose(int yPose) {
+		this.yPose = yPose;
+	}
+	
+	
+	public boolean isPose() {
+		return pose;
+	}
+
+
+	public void setPose(boolean pose) {
+		this.pose = pose;
+	}
+
 
 	public VueTexte getVueTexte() {
 		return vueTexte;
@@ -38,27 +82,27 @@ public class JoueurReel extends Joueur{
 	}
 	
 	public void poserCarte(Plateau plateauActuel, int tour) {
-		int index=-1; 
+		this.index=-1; 
 		boolean incorrectInput = true;
-		int xPose=0 ,yPose=0;
+		this.xPose=0;
+		this.yPose=0;
 		
 		this.setChanged();
 		this.notifyObservers("Pose");
+		this.setChanged();
+		this.notifyObservers(this.vueTexte.getThread());
 		
 		this.vueTexte.choixCartePose(this.getMain());
 		index = this.vueTexte.getIndexCarte();
 		
 		while(incorrectInput) {
-			this.setChanged();
-			this.notifyObservers("XPoseChoice");
-			this.vueTexte.choixXPose();
-			xPose = this.vueTexte.getxPose();
-			
-			this.setChanged();
-			this.notifyObservers("YPoseChoice");
-			this.vueTexte.choixYPose();
-			yPose = this.vueTexte.getyPose();
-			
+			if(!this.pose) {
+				this.vueTexte.choixXPose();
+				this.xPose = this.vueTexte.getxPose();
+
+				this.vueTexte.choixYPose();
+				this.yPose = this.vueTexte.getyPose();
+			}
 			if(tour !=1) {
 				//on vérifie si c'est possible de poser la carte 
 				if(plateauActuel.checkPose(xPose, yPose)) {
@@ -70,6 +114,8 @@ public class JoueurReel extends Joueur{
 					else if((xPose == -1) || (yPose == -1) || (xPose == plateauActuel.getRemplissage().get(1).size()) || (yPose == plateauActuel.getRemplissage().size())){
 						plateauActuel.deplacerPlateau(xPose,yPose);
 					}
+					this.setChanged();
+					this.notifyObservers("PoseRealisee");
 					incorrectInput = false;
 				}
 				else {

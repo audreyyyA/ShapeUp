@@ -85,18 +85,20 @@ public class ControllerPlateau extends Observable{
 	}
 
 	public void initializeHandler() {
-		for(ArrayList<Shapes> substring : remplissagePlateau) {
-			for(Shapes cases : substring) {
+		for(ArrayList<Shapes> subList : remplissagePlateau) {
+			for(Shapes cases : subList) {
 				cases.addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent e) {
-						int y = remplissagePlateau.indexOf(substring)-1;
-						int x = substring.indexOf(cases)-1;
-						NotifyPose(x,y);
+						if(carteSelected != null) {
+							int y = remplissagePlateau.indexOf(subList)-1;
+							int x = subList.indexOf(cases)-1;
+							NotifyPose(x,y);
+						}
 					}
 					
 					public void mouseEntered(MouseEvent e) {
-						int y = remplissagePlateau.indexOf(substring)-1;
-						int x = substring.indexOf(cases)-1;
+						int y = remplissagePlateau.indexOf(subList)-1;
+						int x = subList.indexOf(cases)-1;
 						NotifyCheck(x,y);
 					}
 					public void mouseExited(MouseEvent e){

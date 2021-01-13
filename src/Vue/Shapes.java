@@ -73,6 +73,8 @@ public class Shapes extends JPanel{
 			}
 			else {
 				g2d.setColor(color);
+				g2d.setStroke(new BasicStroke(5));
+				g2d.draw(Carre); 
 				g2d.fill(Carre);
 			}
 		}
@@ -88,8 +90,8 @@ public class Shapes extends JPanel{
 			*/
 			
 			Triangle.addPoint(5+size/2, 10);
-			Triangle.addPoint(5, (int) (10+size*Math.cos(Math.toRadians(30))));
-			Triangle.addPoint(size+5,(int) (10+size*Math.cos(Math.toRadians(30))));
+			Triangle.addPoint(5, size);
+			Triangle.addPoint(size+5,size);
 			
 			if(this.pointille) {
 				g2d.setColor(color);
@@ -98,6 +100,8 @@ public class Shapes extends JPanel{
 			}
 			else { 
 				g2d.setColor(color);
+				g2d.setStroke(new BasicStroke(5));
+				g2d.draw(Triangle); 
 				g2d.fill(Triangle);
 			}
 		}
@@ -111,6 +115,8 @@ public class Shapes extends JPanel{
 			}
 			else {
 				g2d.setColor(color);
+				g2d.setStroke(new BasicStroke(7));
+				g2d.drawOval(5,5, this.size-2, this.size-2);
 				g2d.fillOval(5,5, this.size, this.size);
 			}
 
