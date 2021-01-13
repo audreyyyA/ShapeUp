@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Scanner;
 
-import Modï¿½le.Carte;
-import Modï¿½le.Joueur;
-import Modï¿½le.MainJoueur;
+import Modèle.Carte;
+import Modèle.Joueur;
+import Modèle.MainJoueur;
 
 
 
@@ -200,7 +200,7 @@ public class VueTexte extends Observable implements Runnable {
 	}
 
 	public void askDeplacer(Joueur j) {
-		System.out.print("Voulez vous dï¿½placer une carte ? (O/N) ");
+		System.out.print("Voulez vous déplacer une carte ? (O/N) ");
 		String s = null;
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		Scanner sc = new Scanner(reader);
@@ -231,7 +231,7 @@ public class VueTexte extends Observable implements Runnable {
 			j.setDeplacer(false);
 		}
 		else {
-			System.out.println("Veuillez rï¿½pondre par O ou N");
+			System.out.println("Veuillez répondre par O ou N");
 			askDeplacer(j);
 		}
 	}
@@ -239,7 +239,7 @@ public class VueTexte extends Observable implements Runnable {
 	public int choixYDeplacer() {
 		int yDeplacer = 0;
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Ordonnï¿½e de la carte ï¿½ deplacer : ");
+		System.out.println("Ordonnée de la carte à deplacer : ");
 		try {
 			yDeplacer = sc.nextInt();
 		}catch(Exception e) {
@@ -252,7 +252,7 @@ public class VueTexte extends Observable implements Runnable {
 	public int choixXDeplacer() {
 		int xDeplacer = 0;
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Abcisse de la carte ï¿½ deplacer : ");
+		System.out.println("Abcisse de la carte à deplacer : ");
 		try {
 			xDeplacer = sc.nextInt();
 		}catch(Exception e) {
@@ -267,7 +267,7 @@ public class VueTexte extends Observable implements Runnable {
 	}
 
 	public void carteVoulue(Carte carte) {
-		System.out.println("la carte que tu veux dï¿½placer : " + carte);
+		System.out.println("la carte que tu veux déplacer : " + carte);
 	}
 
 	public void afficherMain(ArrayList<Carte> cartes) {
@@ -283,12 +283,12 @@ public class VueTexte extends Observable implements Runnable {
 	}
 
 	public void carteDefausse(Carte carte) {
-		System.out.println("La carte dï¿½faussï¿½e ï¿½tait "+ carte);
+		System.out.println("La carte défaussée était "+ carte);
 	}
 
 	public void printGagnantManche(ArrayList<Joueur> gagnant) {
 		if(gagnant.size()>1) { // ï¿½galitï¿½
-			System.out.print("Les joueurs gagnants ï¿½ ï¿½galitï¿½ de cette manche sont : ");
+			System.out.print("Les joueurs gagnants à égalité de cette manche sont : ");
 			for(Joueur g : gagnant) {
 				System.out.print(g.getNom());
 			}
@@ -300,7 +300,7 @@ public class VueTexte extends Observable implements Runnable {
 
 	public void printPoints(ArrayList<Joueur> tabJoueur) {
 		for(Joueur t : tabJoueur) {
-			System.out.println("Carte victoire de " + t.getNom() + "ï¿½ cette manche ï¿½tait : " + t.getCarteVictoire());
+			System.out.println("Carte victoire de " + t.getNom() + "à cette manche était : " + t.getCarteVictoire());
 			System.out.println("Points de " + t.getNom() + " : " + t.getNbPointsManches());
 		}
 	}
@@ -321,11 +321,11 @@ public class VueTexte extends Observable implements Runnable {
 	}
 	
 	public void poseCarte(Carte carte, int x, int y) {
-		System.out.println("La carte : "+carte+" a ï¿½tï¿½ posï¿½e en "+x+","+y);
+		System.out.println("La carte : "+carte+" a été posée en "+x+","+y);
 	}
 	
 	public void casePrise() {
-		System.out.println("Cette case est dï¿½jï¿½ prise");
+		System.out.println("Cette case est déjà prise");
 	}
 	
 	
