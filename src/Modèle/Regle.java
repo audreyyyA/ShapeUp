@@ -31,14 +31,16 @@ public abstract class Regle {
 			boolean deplacer = false;
 			int nbDep = 0;
 			
-		
-			while(((JoueurReel) joueur).askDeplacer() && !deplacer) {
-				deplacer = joueur.deplacerCarte(plateau);
-				if(deplacer) {
-					nbDep = 1;
-					break;
+			if(tour != 1) {
+				while(((JoueurReel) joueur).askDeplacer() && !deplacer) {
+					deplacer = joueur.deplacerCarte(plateau);
+					if(deplacer) {
+						nbDep = 1;
+						break;
+					}
 				}
 			}
+			
 			
 			//mettre condition tour 1
 			joueur.getMain().afficherMain();
@@ -47,10 +49,12 @@ public abstract class Regle {
 			plateau.afficherPlateau();
 			
 			//déplace la carte seulement s'il l'a pas fait avant
-			while(((JoueurReel) joueur).askDeplacer() && !deplacer) {
-				deplacer = joueur.deplacerCarte(plateau);
-				if(deplacer) {
-					break;
+			if(nbDep == 0 && tour != 1) {
+				while(((JoueurReel) joueur).askDeplacer() && !deplacer) {
+					deplacer = joueur.deplacerCarte(plateau);
+					if(deplacer) {
+						break;
+					}
 				}
 			}
 			
