@@ -24,6 +24,7 @@ import Modèle.Joueur;
 import Modèle.JoueurReel;
 import Modèle.MainJoueur;
 import Modèle.Manche;
+import Modèle.Pioche;
 import Modèle.Plateau;
 import Modèle.PlateauRectangle;
 
@@ -47,13 +48,14 @@ public class InterfacePlateau implements Observer {
 	private boolean first = true;
 	private boolean deplacement = false;
 	private ControllerPlateau controller;
-	private JPanel mainJoueur,deplacer, info, plateauPanel,plateauCarte;
-	private JLabel infoText;
+	private JPanel mainJoueur,deplacer, info, plateauPanel,plateauCarte,carteVictoireRecto;
+	private JLabel infoText,nbCarte,carteVictoireDos;
 	private JoueurReel joueur;
 	private Thread thread;
 	private ArrayList<JPanel> cartes = new ArrayList<>();
 	private Plateau plateau;
 	private FormePlateau forme;
+	
 
 	/**
 	 * Launch the application.
@@ -108,12 +110,39 @@ public class InterfacePlateau implements Observer {
 		this.infoText.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 18));
 		this.infoText.setHorizontalAlignment(SwingConstants.CENTER);
 		this.info.add(this.infoText);
+		
+		this.nbCarte = new JLabel("18");
+		this.nbCarte.setHorizontalAlignment(SwingConstants.CENTER);
+		this.nbCarte.setOpaque(true);
+		this.nbCarte.setForeground(Color.WHITE);
+		this.nbCarte.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 24));
+		this.nbCarte.setBackground(new Color(122, 20, 12));
+		this.nbCarte.setBounds(52, 420, 130, 30);
+		plateauPanel.add(this.nbCarte);
+		
+		JLabel VictoryCard = new JLabel("Carte Victoire");
+		VictoryCard.setOpaque(true);
+		VictoryCard.setHorizontalAlignment(SwingConstants.CENTER);
+		VictoryCard.setForeground(Color.WHITE);
+		VictoryCard.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 18));
+		VictoryCard.setBackground(new Color(122, 20, 12));
+		VictoryCard.setBounds(242, 420, 130, 30);
+		plateauPanel.add(VictoryCard);
 
-		JLabel pioche_1 = new JLabel("");
-		pioche_1.setIcon(new ImageIcon(InterfacePlateau.class.getResource("/images/pioche.png")));
-		pioche_1.setBounds(240, 265, 137, 190);
-		plateauPanel.add(pioche_1);
-
+		this.carteVictoireDos = new JLabel("");
+		this.carteVictoireDos.setIcon(new ImageIcon(InterfacePlateau.class.getResource("/images/pioche.png")));
+		this.carteVictoireDos.setBounds(240, 265, 137, 190);
+		plateauPanel.add(this.carteVictoireDos);
+		
+		this.carteVictoireRecto = new JPanel();
+		this.carteVictoireRecto.setBounds(242,265,130,190);
+		this.carteVictoireRecto.setBorder(BorderFactory.createLineBorder(Color.black));
+		this.carteVictoireRecto.setBackground(new Color(255, 245, 208));
+		this.carteVictoireRecto.setOpaque(true);
+		this.carteVictoireRecto.setLayout(null);
+		this.carteVictoireRecto.setVisible(false);
+		plateauPanel.add(this.carteVictoireRecto);
+		
 		JLabel turn = new JLabel("  Tour 0 - Name");
 		turn.setBounds(0, 216, 390, 36);
 		plateauPanel.add(turn);
@@ -170,18 +199,16 @@ public class InterfacePlateau implements Observer {
 		background.setBounds(0, 0, 1280, 720);
 		frame.getContentPane().add(background);
 
-		this.controller = new ControllerPlateau(this.forme,this.mainJoueur,this.info,infoText,this.joueur,this.thread, remplissagePlateau, turn,valide,refuse,deplacer);
+		this.controller = new ControllerPlateau(carteVictoireRecto,carteVictoireDos,this.forme,this.mainJoueur,this.info,infoText,this.joueur,this.thread, remplissagePlateau, turn,valide,refuse,deplacer);
 		this.controller.addObserver(this);
 	}
 
 	public void drawMain(ArrayList<Carte> mainJoueur,int num) {
-		System.out.println(mainJoueur);
 		for(int i=0; i<mainJoueur.size();i++) {
 			if(mainJoueur.get(i) == null) {
 				mainJoueur.remove(i);
 			}
 		}
-		System.out.println(mainJoueur);
 		int nbCarte = mainJoueur.size();
 		int compteur = 0;
 		int start = (410 - mainJoueur.size()*130)/2;
@@ -457,7 +484,11 @@ public class InterfacePlateau implements Observer {
 			if(arg.equals("initialize")) {
 				frame.setVisible(true);
 			}
-
+			
+			else if(Obs instanceof Pioche) {
+				this.nbCarte.setText(arg.toString());
+			}
+			
 			else if(Obs instanceof Manche) {
 				if(arg instanceof Joueur) {
 					this.tour = ((Manche) Obs).getNbTour();
@@ -514,6 +545,23 @@ public class InterfacePlateau implements Observer {
 				}
 				else if(arg.equals("PasDeplacer")) {
 					this.joueur.setDeplacer(false);
+				}
+				
+				else if(arg.equals("CV")) {
+					if(this.carteVictoireRecto.isVisible()) {
+						this.carteVictoireRecto.setVisible(false);
+						this.carteVictoireDos.setVisible(true);
+					}
+					else {
+						this.carteVictoireDos.setVisible(false);
+						this.carteVictoireRecto.removeAll();
+						this.carteVictoireRecto.setVisible(true);
+						JPanel content = CarteToJPanel(this.joueur.getCarteVictoire(),100);
+						content.setBounds(10,45,110,110);
+						content.setOpaque(false);
+						carteVictoireRecto.add(content);
+						carteVictoireRecto.repaint();
+					}
 				}
 
 				else if(arg instanceof ArrayList) {

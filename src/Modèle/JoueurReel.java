@@ -258,8 +258,6 @@ public class JoueurReel extends Joueur{
 			}
 
 			
-			System.out.println(xDeplacer+","+yDeplacer+","+this.xCarte +","+this.yCarte);
-			
 			plateau.setCarte(this.xCarte, this.yCarte, null);
 				//on vérifie si c'est possible de poser la carte 
 			if(plateau.getForme() == FormePlateau.HEXAGONE) {

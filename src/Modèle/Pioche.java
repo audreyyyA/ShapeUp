@@ -27,6 +27,8 @@ public class Pioche extends Observable{
 			Carte randomCard = listeCarte.get(random);
 			listeCarte.remove(random);
 			this.nbCarteRestantes -=1;
+			this.setChanged();
+			this.notifyObservers(nbCarteRestantes);
 			return randomCard;
 		}
 	}
