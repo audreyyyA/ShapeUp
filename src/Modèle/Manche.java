@@ -27,8 +27,6 @@ public class Manche extends Observable{
 		//regle normale
 		
 	}
-
-	
 	
 	public Plateau getPlateau() {
 		return plateau;
@@ -107,7 +105,7 @@ public class Manche extends Observable{
 	public void jouer(ArrayList<Joueur> tabJoueur, Regle regle) {
 		
 		this.nbTour = 0;
-		System.out.println(plateau.getRemplissage());
+		
 		while(regle.isDone(this) == false) {
 			for(Joueur j : tabJoueur) {
 				if(regle.isDone(this) == false) {

@@ -2,18 +2,27 @@ package Modèle;
 
 import java.util.ArrayList;
 
-public class StrategieDifficile extends Strategie{
+public class StrategieDifficile extends Strategie implements Runnable{
 	
 	/*
 	 * de manière random va choisir de déplacer une carte
 	 * va poser une carte en fonction du nombre de pts max que cela permet de créer 
 	 */
+	
+	private Thread thread;
+	
+	public StrategieDifficile() {
+		Thread t = new Thread(this);
+		this.thread = t;
+		t.start();
+	}
 
 	@Override
 	public void Algorithme(Plateau p, Joueur j, int tour, IVisitor visitor) throws CloneNotSupportedException {
 
-		int random = (int)(Math.random()*5);
-		if(random >2 && tour > 2) {
+		int random = (int)(Math.random()*10);
+		
+		if(random >3 && tour > 2) {
 			AlgorithmeDeplacement(p, j, tour, visitor);
 		}
 
@@ -23,7 +32,7 @@ public class StrategieDifficile extends Strategie{
 		boolean tour1boucle = true;
 		Carte carte = j.getMain().getCarte(0);
 		
-		System.out.println("Le joueur virtuel " + j.getNom() + " va poser une carte ...");
+		j.vueTexte.avantPoseIA(j);
 		
 		for(int y = 0; y<p.getRemplissage().size(); y++) {
 			for(int x = 0; x<p.getRemplissage().get(y).size(); x++) {
@@ -47,8 +56,6 @@ public class StrategieDifficile extends Strategie{
 				if(!incorrectInput) {
 					
 					Plateau plateauTmp = p.copiePlateau();
-					plateauTmp.afficherPlateau();
-					
 					int ptTest = visitor.calculPointJoueur(j.getCarteVictoire(), plateauTmp);
 
 					if(ptTest > nbPtMax) {
@@ -67,7 +74,14 @@ public class StrategieDifficile extends Strategie{
 			}
 		}
 		
-		System.out.println("il pose la carte : " + carte + " en : " + xMax + " , " + yMax);
+		try {
+			this.thread.sleep(2000);
+		} catch (InterruptedException e) {
+			System.out.println("interrupt");
+			return;
+		}
+		j.vueTexte.poseIA(carte, xMax, yMax);
+		
 		p.setCarte(xMax, yMax, carte);
 		j.getMain().retirerCarte(0);
 		
@@ -102,8 +116,6 @@ public class StrategieDifficile extends Strategie{
 			int yMax = 0;
 			boolean tour1boucle = true;
 			
-			System.out.println("Le joueur virtuel " + j.getNom() + " va deplacer la carte : " + carte);
-			
 			for(int y = 0; y<p.getRemplissage().size(); y++) {
 				for(int x = 0; x<p.getRemplissage().get(y).size(); x++) {
 					
@@ -126,7 +138,7 @@ public class StrategieDifficile extends Strategie{
 					if(!incorrectInput) {
 						
 						Plateau plateauTmp = p.copiePlateau();
-						plateauTmp.afficherPlateau();
+					
 						
 						int ptTest = visitor.calculPointJoueur(j.getCarteVictoire(), plateauTmp);
 
@@ -148,9 +160,16 @@ public class StrategieDifficile extends Strategie{
 				}
 			}
 			
-			System.out.println("il deplace la carte : " + carte + " en : " + xMax + " , " + yMax);
+			
+			j.vueTexte.deplacementIA(carte, xMax, yMax);
 			p.setCarte(xMax, yMax, carte);
 		}
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

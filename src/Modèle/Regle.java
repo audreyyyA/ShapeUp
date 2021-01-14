@@ -41,10 +41,6 @@ public abstract class Regle {
 				}
 			}
 			
-			
-			//mettre condition tour 1
-			joueur.getMain().afficherMain();
-			
 			joueur.poserCarte(plateau,tour); 
 			plateau.afficherPlateau();
 			
@@ -57,8 +53,6 @@ public abstract class Regle {
 					}
 				}
 			}
-			
-			plateau.afficherPlateau();
 			
 		}
 		

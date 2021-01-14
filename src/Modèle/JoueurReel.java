@@ -8,7 +8,7 @@ import Vue.VueTexte;
 public class JoueurReel extends Joueur{
 	
 	private boolean CVchang;
-	private VueTexte vueTexte = new VueTexte();
+	//private VueTexte vueTexte = new VueTexte();
 	private int xPose,yPose,index,xCarte,xDep,yDep;
 	private int yCarte = -1;
 	private boolean pose;
@@ -105,16 +105,6 @@ public class JoueurReel extends Joueur{
 
 	public void setPose(boolean pose) {
 		this.pose = pose;
-	}
-
-
-	public VueTexte getVueTexte() {
-		return vueTexte;
-	}
-
-
-	public void setVueTexte(VueTexte vueTexte) {
-		this.vueTexte = vueTexte;
 	}
 
 
