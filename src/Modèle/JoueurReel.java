@@ -9,14 +9,68 @@ public class JoueurReel extends Joueur{
 	
 	private boolean CVchang;
 	private VueTexte vueTexte = new VueTexte();
-	private int xPose,yPose,index;
+	private int xPose,yPose,index,xCarte,xDep,yDep;
+	private int yCarte = -1;
 	private boolean pose;
+	private boolean choixPosDep = false;
 	
 	
 	
+	public int getxDep() {
+		return xDep;
+	}
+
+
+	public void setxDep(int xDep) {
+		this.xDep = xDep;
+	}
+
+
+	public int getyDep() {
+		return yDep;
+	}
+
+
+	public void setyDep(int yDep) {
+		this.yDep = yDep;
+	}
+
+
 	public int getIndex() {
 		return index;
 	}
+	
+
+	public int getxCarte() {
+		return xCarte;
+	}
+
+	public boolean isChoixPosDep() {
+		return choixPosDep;
+	}
+
+
+	public void setChoixPosDep(boolean choixPosDep) {
+		this.choixPosDep = choixPosDep;
+	}
+
+
+	public void setxCarte(int xCarte) {
+		this.xCarte = xCarte;
+	}
+
+
+
+	public int getyCarte() {
+		return yCarte;
+	}
+
+
+
+	public void setyCarte(int yCarte) {
+		this.yCarte = yCarte;
+	}
+
 
 
 	public void setIndex(int index) {
@@ -103,6 +157,7 @@ public class JoueurReel extends Joueur{
 				this.vueTexte.choixYPose();
 				this.yPose = this.vueTexte.getyPose();
 			}
+			this.pose = false;
 			if(tour !=1) {
 				//on vérifie si c'est possible de poser la carte 
 				if(plateauActuel.checkPose(xPose, yPose)) {
@@ -114,8 +169,6 @@ public class JoueurReel extends Joueur{
 					else if((xPose == -1) || (yPose == -1) || (xPose == plateauActuel.getRemplissage().get(1).size()) || (yPose == plateauActuel.getRemplissage().size())){
 						plateauActuel.deplacerPlateau(xPose,yPose);
 					}
-					this.setChanged();
-					this.notifyObservers("PoseRealisee");
 					incorrectInput = false;
 				}
 				else {
@@ -166,27 +219,48 @@ public class JoueurReel extends Joueur{
 		Scanner sc = new Scanner(System.in);
 		boolean incorrectInput = true;
 		
-		xCarte = this.vueTexte.choixXDeplacer();
-		yCarte = this.vueTexte.choixYDeplacer();
+		this.setChanged();
+		this.notifyObservers("ChoixCarteDeplacer");
+		this.setChanged();
+		this.notifyObservers(this.vueTexte.getThread());
 		
-		if(plateau.getCarte(xCarte, yCarte) == null) {
-			this.vueTexte.noCard();
-			return false;
-
+		this.vueTexte.choixXDeplacer();
+		
+		if(this.yCarte == -1) {
+			this.xCarte = this.vueTexte.getxDeplacer();
+			this.vueTexte.choixYDeplacer();
+			this.yCarte = this.vueTexte.getyDeplacer();
 		}
 		
-		this.vueTexte.carteVoulue(plateau.getCarte(xCarte, yCarte));
-		Carte carteTemp = plateau.getCarte(xCarte, yCarte);
+		System.out.println(this.xCarte+","+this.yCarte);
+		
+		if(plateau.getCarte(this.xCarte, this.yCarte) == null) {
+			this.vueTexte.noCard();
+			return false;
+		}
+		
+		this.vueTexte.carteVoulue(plateau.getCarte(this.xCarte, this.yCarte));
+		Carte carteTemp = plateau.getCarte(this.xCarte, this.yCarte);
 			
 		while(incorrectInput) {
 			
-			this.vueTexte.choixXPose();
-			xDeplacer = this.vueTexte.getxPose();
+			this.vueTexte.choixXPose();			
+			System.out.println(this.choixPosDep);
 			
-			this.vueTexte.choixYPose();
-			yDeplacer = this.vueTexte.getyPose();
+			if(!this.choixPosDep) {
+				xDeplacer = this.vueTexte.getxPose();
+				yDeplacer = this.vueTexte.getyPose();
+				this.vueTexte.choixYPose();
+			}
+			else {
+				xDeplacer = this.xDep;
+				yDeplacer = this.yDep;
+			}
+
 			
-			plateau.setCarte(xCarte, yCarte, null);
+			System.out.println(xDeplacer+","+yDeplacer+","+this.xCarte +","+this.yCarte);
+			
+			plateau.setCarte(this.xCarte, this.yCarte, null);
 				//on vérifie si c'est possible de poser la carte 
 			if(plateau.getForme() == FormePlateau.HEXAGONE) {
 				plateau.deplacerPlateau(plateau.checkPosExtremiteHex(xDeplacer,yDeplacer));
@@ -201,7 +275,7 @@ public class JoueurReel extends Joueur{
 			}
 
 			if(incorrectInput){
-				plateau.setRemplissage(xCarte, yCarte, carteTemp);
+				plateau.setRemplissage(this.xCarte, this.yCarte, carteTemp);
 				//plateau.setCarte(xCarte, yCarte, carteTemp);
 				this.vueTexte.poseCarteImpossible();
 				
@@ -228,6 +302,8 @@ public class JoueurReel extends Joueur{
 		//on pose la carte
 		plateau.setRemplissage(xDeplacer, yDeplacer, carteTemp);
 		plateau.afficherPlateau();
+		this.setChanged();
+		this.notifyObservers("EndDeplacement");
 		return true;
 	}
 	

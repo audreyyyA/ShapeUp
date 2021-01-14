@@ -19,6 +19,14 @@ public class Shapes extends JPanel{
 	private Graphics2D g2d;
 	private boolean pointille;
 
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
 	public Shapes(int x, int y, int size,Color color, boolean pointille, Formes forme) {
 
 		this.size = size;

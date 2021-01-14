@@ -18,7 +18,7 @@ public class VueTexte extends Observable implements Runnable {
 	public static String QUITTER = "Quit";
 	public static String COMMUTER = "C";
 	public static String PROMPT = ">";
-	private int indexCarte,xPose,yPose;
+	private int indexCarte,xPose,yPose,yDeplacer,xDeplacer;
 	private Thread thread;
 	
 	public int getyPose() {
@@ -29,8 +29,22 @@ public class VueTexte extends Observable implements Runnable {
 		this.yPose = yPose;
 	}
 
-	
-	
+		public int getyDeplacer() {
+		return yDeplacer;
+	}
+
+	public void setyDeplacer(int yDeplacer) {
+		this.yDeplacer = yDeplacer;
+	}
+
+	public int getxDeplacer() {
+		return xDeplacer;
+	}
+
+	public void setxDeplacer(int xDeplacer) {
+		this.xDeplacer = xDeplacer;
+	}
+
 	public int getxPose() {
 		return xPose;
 	}
@@ -137,7 +151,6 @@ public class VueTexte extends Observable implements Runnable {
 			while(!reader.ready() && !this.thread.isInterrupted()) {
 				try {
 					this.thread.sleep(100);
-					System.out.println("J'attends");
 				} catch (InterruptedException e) {
 					System.out.println("interrupt");
 					return;
@@ -169,7 +182,7 @@ public class VueTexte extends Observable implements Runnable {
 		this.notifyObservers("YPoseChoice");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		Scanner sc = new Scanner(reader);
-		System.out.print("Ordonnï¿½e de pose : ");
+		System.out.print("Ordonnée de pose : ");
 		try {
 			while(!reader.ready() && !this.thread.isInterrupted()) {
 				try {
@@ -236,30 +249,72 @@ public class VueTexte extends Observable implements Runnable {
 		}
 	}
 
-	public int choixYDeplacer() {
-		int yDeplacer = 0;
-		Scanner sc = new Scanner(System.in);
+	public void choixYDeplacer() {
+		this.yDeplacer = 0;
+		this.setChanged();
+		this.notifyObservers(this.thread);
+		this.setChanged();
+		this.notifyObservers("YMoveChoice");
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		Scanner sc = new Scanner(reader);
 		System.out.println("Ordonnée de la carte à deplacer : ");
 		try {
-			yDeplacer = sc.nextInt();
-		}catch(Exception e) {
-			System.out.println("Veuillez rentrer un chiffre");
-			return choixYDeplacer();
-		}
-		return yDeplacer;
+			while(!reader.ready() && !this.thread.isInterrupted()) {
+				try {
+					this.thread.sleep(100);
+				} catch (InterruptedException e) {
+					System.out.println("interrupt");
+					return;
+				}
+			}
+			if(this.thread.isInterrupted()) {
+				return;
+			}
+			else {
+				try {
+					this.yDeplacer = sc.nextInt();
+					return;
+				}catch(Exception e) {
+					System.out.println("Veuillez rentrer un chiffre");
+					choixYDeplacer();
+					return;
+				}
+			}
+		} catch (IOException e) {}
 	}
 
-	public int choixXDeplacer() {
-		int xDeplacer = 0;
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Abcisse de la carte à deplacer : ");
+	public void choixXDeplacer() {
+		this.xDeplacer = 0;
+		this.setChanged();
+		this.notifyObservers(this.thread);
+		this.setChanged();
+		this.notifyObservers("YMoveChoice");
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		Scanner sc = new Scanner(reader);
+		System.out.print("Abcisse de la carte à deplacer : ");
 		try {
-			xDeplacer = sc.nextInt();
-		}catch(Exception e) {
-			System.out.println("Veuillez rentrer un chiffre");
-			xDeplacer = choixXDeplacer();
-		}
-		return xDeplacer;
+			while(!reader.ready() && !this.thread.isInterrupted()) {
+				try {
+					this.thread.sleep(100);
+				} catch (InterruptedException e) {
+					System.out.println("interrupt");
+					return;
+				}
+			}
+			if(this.thread.isInterrupted()) {
+				return;
+			}
+			else {
+				try {
+					this.xDeplacer = sc.nextInt();
+					return;
+				}catch(Exception e) {
+					System.out.println("Veuillez rentrer un chiffre");
+					choixXDeplacer();
+					return;
+				}
+			}
+		} catch (IOException e) {}
 	}
 
 	public void noCard() {

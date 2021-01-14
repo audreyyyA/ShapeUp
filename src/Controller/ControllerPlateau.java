@@ -33,17 +33,60 @@ public class ControllerPlateau extends Observable{
 	private ArrayList<JPanel> cartes;
 	private JPanel mainJoueur;
 	private Plateau plateau;
+	private boolean deplacement,carteDepSelected;
 	private int index;
 	
+	public boolean isCarteDepSelected() {
+		return carteDepSelected;
+	}
+
+	public void setCarteDepSelected(boolean carteDepSelected) {
+		this.carteDepSelected = carteDepSelected;
+	}
+
+	public boolean isDeplacement() {
+		return deplacement;
+	}
+
+	public void setDeplacement(boolean deplacement) {
+		this.deplacement = deplacement;
+	}
 
 	private void NotifyThread() {
 		this.setChanged();
 		this.notifyObservers("Thread");
 	}
+
+	private void NotifyChoixCarteDeplacer(int x,int y) {
+		ArrayList<Integer> l = new ArrayList<>();
+		l.add(3);
+		l.add(x);
+		l.add(y);
+		this.setChanged();
+		this.notifyObservers(l);
+	}
+	
+	private void NotifyChoixPlacement(int x,int y) {
+		ArrayList<Integer> l = new ArrayList<>();
+		l.add(4);
+		l.add(x);
+		l.add(y);
+		this.setChanged();
+		this.notifyObservers(l);
+	}
 	
 	private void NotifyCheck(int x,int y) {
 		ArrayList<Integer> l = new ArrayList<>();
 		l.add(0);
+		l.add(x);
+		l.add(y);
+		this.setChanged();
+		this.notifyObservers(l);
+	}
+
+	private void NotifyCheckDeplacement(int x,int y) {
+		ArrayList<Integer> l = new ArrayList<>();
+		l.add(2);
 		l.add(x);
 		l.add(y);
 		this.setChanged();
@@ -58,7 +101,7 @@ public class ControllerPlateau extends Observable{
 		this.setChanged();
 		this.notifyObservers(l);
 	}
-	
+
 	private void NotifyDeplacer(boolean deplacer) {
 		this.setChanged();
 		if(deplacer) {
@@ -89,17 +132,32 @@ public class ControllerPlateau extends Observable{
 			for(Shapes cases : subList) {
 				cases.addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent e) {
-						if(carteSelected != null) {
+						if(carteSelected != null && !deplacement && !carteDepSelected) {
 							int y = remplissagePlateau.indexOf(subList)-1;
 							int x = subList.indexOf(cases)-1;
 							NotifyPose(x,y);
 						}
+						else if(deplacement && !carteDepSelected) {
+							int y = remplissagePlateau.indexOf(subList)-1;
+							int x = subList.indexOf(cases)-1;
+							NotifyChoixCarteDeplacer(x,y);
+						}
+						else if(carteDepSelected) {
+							int y = remplissagePlateau.indexOf(subList)-1;
+							int x = subList.indexOf(cases)-1;
+							NotifyChoixPlacement(x,y);
+						}
 					}
-					
+
 					public void mouseEntered(MouseEvent e) {
 						int y = remplissagePlateau.indexOf(subList)-1;
 						int x = subList.indexOf(cases)-1;
-						NotifyCheck(x,y);
+						if(deplacement) {
+							NotifyCheckDeplacement(x,y);
+						}
+						else {
+							NotifyCheck(x,y);
+						}
 					}
 					public void mouseExited(MouseEvent e){
 						cases.changeColor(new Color(173, 173, 173));
@@ -151,41 +209,43 @@ public class ControllerPlateau extends Observable{
 		for(JPanel carte : cartes) {
 			carte.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
-					for(JPanel carte : cartes) {
-						carte.setBorder(BorderFactory.createLineBorder(Color.black));
-						carte.setBounds(carte.getX(),15,carte.getWidth(),190);
-						
-					}
-					if(carteSelected == null) {
-						index = cartes.indexOf(carte);
-						carteSelected = carte;
-						carte.setBounds(carte.getX(), carte.getY()-15, carte.getWidth(), carte.getHeight()+15);
-						carte.setBorder(BorderFactory.createMatteBorder(5,5,5,5,new Color(78,168,50)));
-					}
-					else if(carteSelected.equals(carte)) {
-						carteSelected = null;
-						index =-1;
-					}
-					else {
-						index = cartes.indexOf(carte);
-						carteSelected = carte;
-						carte.setBorder(BorderFactory.createMatteBorder(5,5,5,5,new Color(78,168,50)));
-						carte.setBounds(carte.getX(), carte.getY()-15, carte.getWidth(), carte.getHeight()+15);
+					if(!deplacer.isVisible()) {
+						for(JPanel carte : cartes) {
+							carte.setBorder(BorderFactory.createLineBorder(Color.black));
+							carte.setBounds(carte.getX(),15,carte.getWidth(),190);
+
+						}
+						if(carteSelected == null) {
+							index = cartes.indexOf(carte);
+							carteSelected = carte;
+							carte.setBounds(carte.getX(), carte.getY()-15, carte.getWidth(), carte.getHeight()+15);
+							carte.setBorder(BorderFactory.createMatteBorder(5,5,5,5,new Color(78,168,50)));
+						}
+						else if(carteSelected.equals(carte)) {
+							carteSelected = null;
+							index =-1;
+						}
+						else {
+							index = cartes.indexOf(carte);
+							carteSelected = carte;
+							carte.setBorder(BorderFactory.createMatteBorder(5,5,5,5,new Color(78,168,50)));
+							carte.setBounds(carte.getX(), carte.getY()-15, carte.getWidth(), carte.getHeight()+15);
+						}
 					}
 				}
 				public void mouseEntered(MouseEvent e) {
-					if(!(carte.equals(carteSelected))) {
+					if(!(carte.equals(carteSelected)) && !deplacer.isVisible()) {
 						carte.setBounds(carte.getX(), carte.getY()-15, carte.getWidth(), carte.getHeight()+15);
 					}	
 				}
 
 				public void mouseExited(MouseEvent e) {
-					if(!(carte.equals(carteSelected))) {
+					if(!(carte.equals(carteSelected)) && !deplacer.isVisible()) {
 						carte.setBounds(carte.getX(), carte.getY()+15, carte.getWidth(), carte.getHeight()-15);
 					}
 				}
 			});
-			
+
 		}
 	}
 
