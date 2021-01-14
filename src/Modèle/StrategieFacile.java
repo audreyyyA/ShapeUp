@@ -14,7 +14,7 @@ public class StrategieFacile extends Strategie{
 		int xMax = 0;
 		int yMax = 0;
 		boolean tour1boucle = true;
-		Carte carte = j.getMain().getCarte(0);
+		Carte carte = j.getMain().getCarte(j.getMain().getCartes().size()-1);
 		
 		System.out.println("Le joueur virtuel " + j.getNom() + " va poser une carte ...");
 		

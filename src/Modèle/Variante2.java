@@ -12,6 +12,9 @@ public class Variante2 extends Regle{
 			for(int i=0; i<2; i++) {
 				j.getMain().ajouterCarte(j.piocherCarte(pioche));
 			}
+			if(j.getIsVirtuel()) {
+				j.setCarteVictoire(j.getMain().getCarte(0));
+			}
 		}
 	}
 

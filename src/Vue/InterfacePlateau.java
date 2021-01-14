@@ -19,6 +19,7 @@ import Controller.ControllerPlateau;
 import Modèle.Carte;
 import Modèle.Couleur;
 import Modèle.FormeCarte;
+import Modèle.FormePlateau;
 import Modèle.Joueur;
 import Modèle.JoueurReel;
 import Modèle.MainJoueur;
@@ -52,6 +53,7 @@ public class InterfacePlateau implements Observer {
 	private Thread thread;
 	private ArrayList<JPanel> cartes = new ArrayList<>();
 	private Plateau plateau;
+	private FormePlateau forme;
 
 	/**
 	 * Launch the application.
@@ -61,7 +63,8 @@ public class InterfacePlateau implements Observer {
 	/**
 	 * Create the application.
 	 */
-	public InterfacePlateau() {
+	public InterfacePlateau(FormePlateau forme) {
+		this.forme = forme;
 		this.initialize();
 	}
 
@@ -87,8 +90,7 @@ public class InterfacePlateau implements Observer {
 		this.plateauPanel.add(plateauCarte);
 		this.plateauCarte.setLayout(null);
 
-		this.drawPlateau(50, plateauCarte,null);
-
+		this.drawPlateau(50, plateauCarte,this.forme);
 
 		frame.getContentPane().add(plateauPanel);
 
@@ -168,9 +170,7 @@ public class InterfacePlateau implements Observer {
 		background.setBounds(0, 0, 1280, 720);
 		frame.getContentPane().add(background);
 
-
-
-		this.controller = new ControllerPlateau(this.mainJoueur,this.info,infoText,this.joueur,this.thread, remplissagePlateau, turn,valide,refuse,deplacer);
+		this.controller = new ControllerPlateau(this.forme,this.mainJoueur,this.info,infoText,this.joueur,this.thread, remplissagePlateau, turn,valide,refuse,deplacer);
 		this.controller.addObserver(this);
 	}
 
@@ -290,81 +290,119 @@ public class InterfacePlateau implements Observer {
 		return null;
 	}
 
-	public void drawPlateau(int size, JPanel Plateau, ArrayList<ArrayList<Carte>> remplissage) {
-		int i = 5;
-		int x = 659;
-		int y = 60;
-		int xEcartement = 10;
-		int yEcartement = 10;
+	public void drawPlateau(int size, JPanel Plateau, FormePlateau forme) {
+		if(forme == FormePlateau.HEXAGONE) {
+			int i = 5;
+			int x = 659;
+			int y = 60;
+			int xEcartement = 10;
+			int yEcartement = 10;
 
-		ArrayList<Shapes> temp = new ArrayList<>();
-		for(int l=0;l<3;l++) {
-			Shapes cases;
-			cases = new Shapes(0,0,size, new Color(173, 173, 173),true, Formes.HEXAGONE);
-			cases.setBounds(x, y, (int)(size*2*Math.cos(Math.toRadians(30))), size*2);
-			cases.setOpaque(false);
-			cases.setLayout(null);
-			Plateau.add(cases);
-			Plateau.repaint();
-			x += (int) (size*2*Math.cos(Math.toRadians(30))) +xEcartement;
-			temp.add(cases);
-		}
-
-		x = 612;
-		y+= size*2 - (int) size*Math.sin(Math.toRadians(30)) + yEcartement;
-
-		this.remplissagePlateau.add(temp);
-
-		for(int k=0; k<5; k++) {
-			ArrayList<Shapes> l = new ArrayList<>();
-			int xTemp = x;
-			for(int j = 0; j<i; j++) {
+			ArrayList<Shapes> temp = new ArrayList<>();
+			for(int l=0;l<3;l++) {
 				Shapes cases;
-				if(j ==0 || j==i-1) {
-					cases = new Shapes(0,0,size, new Color(173, 173, 173),true, Formes.HEXAGONE);
-				}
-				else {
-					cases = new Shapes(0,0,size, new Color(173, 173, 173),false, Formes.HEXAGONE);
-				}
-				cases.setBounds(xTemp, y, (int)(size*2*Math.cos(Math.toRadians(30))), size*2);
+				cases = new Shapes(0,0,size, new Color(173, 173, 173),true, Formes.HEXAGONE);
+				cases.setBounds(x, y, (int)(size*2*Math.cos(Math.toRadians(30))), size*2);
 				cases.setOpaque(false);
 				cases.setLayout(null);
 				Plateau.add(cases);
 				Plateau.repaint();
-				xTemp += (int) (size*2*Math.cos(Math.toRadians(30))) +xEcartement;
-				l.add(cases);
+				x += (int) (size*2*Math.cos(Math.toRadians(30))) +xEcartement;
+				temp.add(cases);
 			}
 
-			this.remplissagePlateau.add(l);
+			x = 612;
+			y+= size*2 - (int) size*Math.sin(Math.toRadians(30)) + yEcartement;
 
-			if(k>1) {
-				i-=1;
-				x+= size*Math.cos(Math.toRadians(30))+ xEcartement/2;
-				y+= size*2 - (int) size*Math.sin(Math.toRadians(30)) + yEcartement;
+			this.remplissagePlateau.add(temp);
+			temp.clear();
+			
+			for(int k=0; k<5; k++) {
+				ArrayList<Shapes> l = new ArrayList<>();
+				int xTemp = x;
+				for(int j = 0; j<i; j++) {
+					Shapes cases;
+					if(j ==0 || j==i-1) {
+						cases = new Shapes(0,0,size, new Color(173, 173, 173),true, Formes.HEXAGONE);
+					}
+					else {
+						cases = new Shapes(0,0,size, new Color(173, 173, 173),false, Formes.HEXAGONE);
+					}
+					cases.setBounds(xTemp, y, (int)(size*2*Math.cos(Math.toRadians(30))), size*2);
+					cases.setOpaque(false);
+					cases.setLayout(null);
+					Plateau.add(cases);
+					Plateau.repaint();
+					xTemp += (int) (size*2*Math.cos(Math.toRadians(30))) +xEcartement;
+					l.add(cases);
+				}
+
+				this.remplissagePlateau.add(l);
+
+				if(k>1) {
+					i-=1;
+					x+= size*Math.cos(Math.toRadians(30))+ xEcartement/2;
+					y+= size*2 - (int) size*Math.sin(Math.toRadians(30)) + yEcartement;
+				}
+				else {
+					x-= size*Math.cos(Math.toRadians(30)) + xEcartement/2;
+					y+= size*2 - (int) size*Math.sin(Math.toRadians(30)) + yEcartement;
+					i+=1;
+
+				}
 			}
-			else {
-				x-= size*Math.cos(Math.toRadians(30)) + xEcartement/2;
-				y+= size*2 - (int) size*Math.sin(Math.toRadians(30)) + yEcartement;
-				i+=1;
 
-			}
-		}
-
-		x += (int) (size*2*Math.cos(Math.toRadians(30))) +xEcartement;
-
-		for(int l=0;l<3;l++) {
-			Shapes cases;
-			cases = new Shapes(0,0,size, new Color(173, 173, 173),true, Formes.HEXAGONE);
-			cases.setBounds(x, y, (int)(size*2*Math.cos(Math.toRadians(30))), size*2);
-			cases.setOpaque(false);
-			cases.setLayout(null);
-			Plateau.add(cases);
-			Plateau.repaint();
 			x += (int) (size*2*Math.cos(Math.toRadians(30))) +xEcartement;
-			temp.add(cases);
+
+			ArrayList<Shapes> temp2 = new ArrayList<>();
+			for(int l=0;l<3;l++) {
+				Shapes cases;
+				cases = new Shapes(0,0,size, new Color(173, 173, 173),true, Formes.HEXAGONE);
+				cases.setBounds(x, y, (int)(size*2*Math.cos(Math.toRadians(30))), size*2);
+				cases.setOpaque(false);
+				cases.setLayout(null);
+				Plateau.add(cases);
+				Plateau.repaint();
+				x += (int) (size*2*Math.cos(Math.toRadians(30))) +xEcartement;
+				temp2.add(cases);
+			}
+
+			this.remplissagePlateau.add(temp2);
+			System.out.println(this.remplissagePlateau);
 		}
-
-
+		else if(forme == FormePlateau.RECTANGLE) {
+			int y=65;
+			int x=500;
+			int xTemp =0;
+			for(int k=0; k<5;k++) {
+				ArrayList<Shapes> l = new ArrayList<>();
+				int i=7;
+				xTemp = x;
+				if(k ==0 || k==4) {
+					xTemp += 100;
+					i -=2;
+				}
+				for(int j=0; j<i; j++) {
+					
+					Shapes cases;
+					if(j==0 || j == 6 || k== 0 || k ==4) {
+						cases = new Shapes(0,0,90, new Color(173, 173, 173),true, Formes.RECTANGLE);
+					}
+					else {
+						cases = new Shapes(0,0,90, new Color(173, 173, 173),false, Formes.RECTANGLE);
+					}
+					cases.setBounds(xTemp, y, 95, 115);
+					cases.setOpaque(false);
+					cases.setLayout(null);
+					Plateau.add(cases);
+					Plateau.repaint();
+					l.add(cases);
+					xTemp +=100;
+				}
+				this.remplissagePlateau.add(l);
+				y+=120;
+			}
+		}
 	}
 
 
@@ -374,10 +412,16 @@ public class InterfacePlateau implements Observer {
 				cases.setLayout(null);
 				int x=subList.indexOf(cases);
 				int y= remplissagePlateau.indexOf(subList);
-				if(!(y == 0 || y == remplissagePlateau.size() || x ==0 || x == subList.size()-1)) {
+				if(!(y == 0 || y == remplissagePlateau.size()-1 || x ==0 || x == subList.size()-1)) {
 					if(remplissageCarte.get(y-1).get(x-1) != null) {
 						JPanel carte = this.CarteToJPanel(remplissageCarte.get(y-1).get(x-1), 50);
-						carte.setBounds(13, 20, 70, 70);
+						if(this.forme == FormePlateau.HEXAGONE) {
+							carte.setBounds(13, 20, 70, 70);
+						}
+						else if(this.forme == FormePlateau.RECTANGLE) {
+							carte.setBounds(20, 30, 70, 70);
+						}
+						
 						carte.setOpaque(false);
 						cases.add(carte);
 						cases.repaint();
@@ -399,15 +443,12 @@ public class InterfacePlateau implements Observer {
 			if(Obs instanceof MainJoueur) {
 				this.mainJoueur.removeAll();
 				this.cartes.clear();
-				System.out.println("La main change");
-				System.out.println(((MainJoueur) Obs).getCartes());
 				this.drawMain(((MainJoueur) Obs).getCartes(),((MainJoueur) Obs).getNum());
 				frame.repaint();
 			}
 
 			else if(Obs instanceof Plateau) {
 				this.plateau = (Plateau) Obs;
-				System.out.println("Modification du plateau");
 				this.updatePlateau(this.plateau.getRemplissage());
 			}
 		}
@@ -481,18 +522,33 @@ public class InterfacePlateau implements Observer {
 						int y = (int) ((ArrayList) arg).get(2);
 						if(!first) {
 							if(this.plateau.checkPose(x,y)) {
-								this.remplissagePlateau.get(y+1).get(x+1).changeColor(new Color(112,173,71));
+								if(y==-1 || y == remplissagePlateau.size()-2) {
+									this.remplissagePlateau.get(y+1).get(x).changeColor(new Color(112,173,71));
+								}
+								else {
+									this.remplissagePlateau.get(y+1).get(x+1).changeColor(new Color(112,173,71));
+								}
 							}
 							else{
-								this.remplissagePlateau.get(y+1).get(x+1).changeColor(new Color(255, 86, 86));
+								if(y==-1 || y == remplissagePlateau.size()-2) {
+									this.remplissagePlateau.get(y+1).get(x).changeColor(new Color(255, 86, 86));
+								}
+								else {
+									this.remplissagePlateau.get(y+1).get(x+1).changeColor(new Color(255, 86, 86));
+								}
 							};
 						}
 						else {
-							if(!(x == -1 || y ==-1 || y == this.remplissagePlateau.size() || x == this.remplissagePlateau.get(y+1).size() -2)) {
+							if(!(x == -1 || y ==-1 || y == this.remplissagePlateau.size()-2 || x == this.remplissagePlateau.get(y+1).size() -2)) {
 								this.remplissagePlateau.get(y+1).get(x+1).changeColor(new Color(112,173,71));
 							}
 							else {
-								this.remplissagePlateau.get(y+1).get(x+1).changeColor(new Color(255, 86, 86));
+								if(y==-1 || y == remplissagePlateau.size()-2) {
+									this.remplissagePlateau.get(y+1).get(x).changeColor(new Color(255, 86, 86));
+								}
+								else {
+									this.remplissagePlateau.get(y+1).get(x+1).changeColor(new Color(255, 86, 86));
+								}
 							}
 						}
 					}
@@ -501,11 +557,11 @@ public class InterfacePlateau implements Observer {
 
 						this.x = (int) ((ArrayList) arg).get(1);
 						this.y = (int) ((ArrayList) arg).get(2);
-						System.out.println(this.controller.getIndex());
-						System.out.println("Abcisse de pose: "+x);
-						System.out.println("Ordonnée de pose: "+y);
 						if(!first) {
 							if(this.plateau.checkPose(this.x,this.y)) {
+								System.out.println(this.controller.getIndex());
+								System.out.println("Abcisse de pose: "+x);
+								System.out.println("Ordonnée de pose: "+y);
 								this.thread.interrupt();
 								this.joueur.setPose(true);
 								this.joueur.setVueTexte(new VueTexte());
@@ -517,6 +573,9 @@ public class InterfacePlateau implements Observer {
 							}
 						}
 						else {
+							System.out.println(this.controller.getIndex());
+							System.out.println("Abcisse de pose: "+x);
+							System.out.println("Ordonnée de pose: "+y);
 							this.thread.interrupt();
 							this.joueur.setPose(true);
 							this.first = false;
@@ -540,6 +599,9 @@ public class InterfacePlateau implements Observer {
 					}
 
 					else if((int)((ArrayList) arg).get(0) == 3) {
+						this.info.setVisible(false);
+						this.infoText.setText("Cliquez sur la case cible");
+						this.info.setVisible(true);
 						this.x = (int) ((ArrayList) arg).get(1);
 						this.y = (int) ((ArrayList) arg).get(2);
 						if(!(x == -1 || y ==-1 || y == this.remplissagePlateau.size() || x == this.remplissagePlateau.get(y+1).size() -2)) {

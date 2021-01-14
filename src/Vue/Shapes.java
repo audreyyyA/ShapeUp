@@ -127,8 +127,27 @@ public class Shapes extends JPanel{
 				g2d.drawOval(5,5, this.size-2, this.size-2);
 				g2d.fillOval(5,5, this.size, this.size);
 			}
+		}
+		else if(forme == Formes.RECTANGLE) {
+			Graphics2D g2d = (Graphics2D) g;
+			Polygon Rectangle = new Polygon();
 
+			Rectangle.addPoint(5, 5);
+			Rectangle.addPoint(size+5, 5);
+			Rectangle.addPoint(size+5, (int) (size*1.22+5));
+			Rectangle.addPoint(5, (int) (size*1.22+5));
 
+			if(this.pointille) {
+				g2d.setColor(color);
+				g2d.setStroke(new BasicStroke(2));
+				g2d.draw(Rectangle); 
+			}
+			else {
+				g2d.setColor(color);
+				g2d.setStroke(new BasicStroke(2));
+				g2d.draw(Rectangle); 
+				g2d.fill(Rectangle);
+			}
 		}
 	}
 

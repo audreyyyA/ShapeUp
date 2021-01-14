@@ -35,6 +35,7 @@ public class ControllerPlateau extends Observable{
 	private Plateau plateau;
 	private boolean deplacement,carteDepSelected;
 	private int index;
+	private FormePlateau forme;
 	
 	public boolean isCarteDepSelected() {
 		return carteDepSelected;
@@ -112,7 +113,7 @@ public class ControllerPlateau extends Observable{
 		}
 	}
 
-	public ControllerPlateau(JPanel mainJoueur, JPanel info, JLabel infoText, Joueur joueur, Thread thread, ArrayList<ArrayList<Shapes>> remplissagePlateau2, JLabel turn,JLabel valide,JLabel refuse,JPanel deplacer) {
+	public ControllerPlateau(FormePlateau forme, JPanel mainJoueur, JPanel info, JLabel infoText, Joueur joueur, Thread thread, ArrayList<ArrayList<Shapes>> remplissagePlateau2, JLabel turn,JLabel valide,JLabel refuse,JPanel deplacer) {
 
 		this.turn = turn;
 		this.remplissagePlateau=remplissagePlateau2;
@@ -124,17 +125,22 @@ public class ControllerPlateau extends Observable{
 		this.infoText = infoText;
 		this.info = info;
 		this.mainJoueur = mainJoueur;
+		this.forme = forme;
 		initializeHandler();
 	}
 
 	public void initializeHandler() {
 		for(ArrayList<Shapes> subList : remplissagePlateau) {
 			for(Shapes cases : subList) {
+				System.out.println((subList.indexOf(cases)-1) + ","+(remplissagePlateau.indexOf(subList)-1));
 				cases.addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent e) {
 						if(carteSelected != null && !deplacement && !carteDepSelected) {
 							int y = remplissagePlateau.indexOf(subList)-1;
 							int x = subList.indexOf(cases)-1;
+							if((y==-1 || y == remplissagePlateau.size()-2)) {
+								x ++;
+							}
 							NotifyPose(x,y);
 						}
 						else if(deplacement && !carteDepSelected) {
@@ -152,6 +158,9 @@ public class ControllerPlateau extends Observable{
 					public void mouseEntered(MouseEvent e) {
 						int y = remplissagePlateau.indexOf(subList)-1;
 						int x = subList.indexOf(cases)-1;
+						if(y==-1 || y == remplissagePlateau.size()-2) {
+							x ++;
+						}
 						if(deplacement) {
 							NotifyCheckDeplacement(x,y);
 						}
