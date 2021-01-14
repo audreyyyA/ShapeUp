@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Scanner;
 
+import Vue.VueTexte;
+
 /**
  * 
  * @author dedeyy
@@ -27,6 +29,7 @@ public abstract class Joueur extends Observable{
 	protected boolean isVirtuel, deplacer;
 	private int num;
 	protected boolean scanClose;
+	protected VueTexte vueTexte = new VueTexte();
 	
 	public boolean isScanClose() {
 		return scanClose;
@@ -113,6 +116,15 @@ public abstract class Joueur extends Observable{
 	public boolean getIsVirtuel() {
 		
 		return this.isVirtuel;
+	}
+	
+	public VueTexte getVueTexte() {
+		return this.vueTexte;
+	}
+
+
+	public void setVueTexte(VueTexte vueTexte) {
+		this.vueTexte = vueTexte;
 	}
 	
 	/*

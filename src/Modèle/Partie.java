@@ -3,7 +3,9 @@ package Modèle;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import Vue.InterfacePlateau;
 import Vue.VueTexte;
+import appli.Appli;
 
 public class Partie {
 	
@@ -24,7 +26,7 @@ public class Partie {
 		this.numManche = 0;
 		this.regle = regle;
 		this.tabJoueur = tabJoueur;
-		this.manche = new Manche(forme);
+		//this.manche = new Manche(forme);
 	}
 
 	public boolean getTerminee() {
@@ -51,11 +53,23 @@ public class Partie {
 		this.numManche = numManche;
 	}
 	
-	public void debutPartie() {
+	public void debutPartie(InterfacePlateau interfacePlateau, Appli app) {
 		
 		while(!this.estTerminee) {	
 			this.numManche+=1;
-			this.manche.demarrerManche(tabJoueur, this.regle);
+			
+			Manche manche = new Manche(this.forme);
+			
+			manche.addObserver(interfacePlateau);
+	    	manche.getPlateau().addObserver(interfacePlateau);
+	    	manche.getPlateau().setCarte(0, 0, null);
+	    	manche.getPioche().addObserver(interfacePlateau);
+	    	
+	    	manche.addObserver(app);
+	    	manche.getPlateau().addObserver(app);
+	    	manche.getPioche().addObserver(app);
+			
+			manche.demarrerManche(tabJoueur, this.regle);
 			if(this.numManche==this.nbManches) {
 				this.estTerminee=true;
 			}

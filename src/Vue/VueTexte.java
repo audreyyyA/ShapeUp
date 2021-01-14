@@ -82,7 +82,7 @@ public class VueTexte extends Observable implements Runnable {
 	
 	public void choixCartePose(MainJoueur main) {
 		int index = 0;
-		System.out.println("VOICI LA TAILLE DE TA MAIN :" + main.getCartes().size());
+		
 		System.out.print("Quelle carte voulez vous poser ? ");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		Scanner sc = new Scanner(reader);
@@ -383,6 +383,17 @@ public class VueTexte extends Observable implements Runnable {
 		System.out.println("Cette case est déjà prise");
 	}
 	
+	public void avantPoseIA(Joueur j) {
+		System.out.println("Le joueur virtuel " + j.getNom() + " va poser une carte ...");
+	}
+	
+	public void poseIA(Carte carte, int xMax, int yMax) {
+		System.out.println("il pose la carte : " + carte + " en : " + xMax + " , " + yMax);
+	}
+	
+	public void deplacementIA(Carte carte, int xMax, int yMax) {
+		System.out.println("il deplace la carte : " + carte + " en : " + xMax + " , " + yMax);
+	}
 	
 	@Override
 	public void run() {
