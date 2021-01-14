@@ -42,6 +42,7 @@ public class Appli implements Observer,Runnable {
     		j.addObserver(this.interfacePlateau);
     	}
     	
+    	/*
     	this.partie.getManche().addObserver(this.interfacePlateau);
     	this.partie.getManche().getPlateau().addObserver(this.interfacePlateau);
     	this.partie.getManche().getPlateau().setCarte(0, 0, null);
@@ -49,7 +50,7 @@ public class Appli implements Observer,Runnable {
     	
     	this.partie.getManche().addObserver(this);
     	this.partie.getManche().getPlateau().addObserver(this);
-    	this.partie.getManche().getPioche().addObserver(this);
+    	this.partie.getManche().getPioche().addObserver(this);*/
     	
     	Thread t = new Thread(this);
     	t.start();
@@ -166,7 +167,7 @@ public class Appli implements Observer,Runnable {
 	
     @Override
 	public void run() {
-		partie.debutPartie();
+		partie.debutPartie(this.interfacePlateau, this);
 		partie.finPartie();
 		partie.afficherScore();
 		

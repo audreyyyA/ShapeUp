@@ -97,7 +97,7 @@ public class Manche extends Observable{
 		jouer(tabJoueur, regle);
 		
 		
-		System.out.println("La manches est terminée");
+		System.out.println("La manche est terminée");
 		this.finManche(tabJoueur);
 	}
 	
