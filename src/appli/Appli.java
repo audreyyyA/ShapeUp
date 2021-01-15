@@ -170,7 +170,6 @@ public class Appli implements Observer,Runnable {
 		partie.debutPartie(this.interfacePlateau, this);
 		partie.finPartie();
 		partie.afficherScore();
-		
 	}
 
 	@Override
