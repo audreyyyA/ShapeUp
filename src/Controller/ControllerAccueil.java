@@ -492,8 +492,6 @@ public class ControllerAccueil {
 				InterfacePlateau interfacePlateau = new InterfacePlateau(forme);
 				new Appli(interfacePlateau, nb, regle, forme, tabJoueur);
 				frame.dispose();
-				
-				
 			}
 		});
 	}

@@ -25,13 +25,13 @@ import Vue.Shapes;
 public class ControllerPlateau extends Observable{
 
 	private ArrayList<ArrayList<Shapes>> remplissagePlateau;
-	private JLabel turn,valide,refuse, infoText;
+	private JLabel turn,newPartie,valide,refuse, infoText,carteVictoireDos;
 	private Thread thread;
 	private Joueur joueur;
 	private JPanel carteSelected = null;
 	private JPanel deplacer, info;
 	private ArrayList<JPanel> cartes;
-	private JPanel mainJoueur;
+	private JPanel mainJoueur,carteVictoireRecto;
 	private Plateau plateau;
 	private boolean deplacement,carteDepSelected;
 	private int index;
@@ -58,6 +58,11 @@ public class ControllerPlateau extends Observable{
 		this.notifyObservers("Thread");
 	}
 
+	private void NotifyNew() {
+		this.setChanged();
+		this.notifyObservers("New");
+	}
+	
 	private void NotifyChoixCarteDeplacer(int x,int y) {
 		ArrayList<Integer> l = new ArrayList<>();
 		l.add(3);
@@ -74,6 +79,11 @@ public class ControllerPlateau extends Observable{
 		l.add(y);
 		this.setChanged();
 		this.notifyObservers(l);
+	}
+	
+	private void NotifySeeCV() {
+		this.setChanged();
+		this.notifyObservers("CV");
 	}
 	
 	private void NotifyCheck(int x,int y) {
@@ -113,7 +123,7 @@ public class ControllerPlateau extends Observable{
 		}
 	}
 
-	public ControllerPlateau(FormePlateau forme, JPanel mainJoueur, JPanel info, JLabel infoText, Joueur joueur, Thread thread, ArrayList<ArrayList<Shapes>> remplissagePlateau2, JLabel turn,JLabel valide,JLabel refuse,JPanel deplacer) {
+	public ControllerPlateau(JLabel newPartie, JPanel carteVictoireRecto,JLabel carteVictoireDos,FormePlateau forme, JPanel mainJoueur, JPanel info, JLabel infoText, Joueur joueur, Thread thread, ArrayList<ArrayList<Shapes>> remplissagePlateau2, JLabel turn,JLabel valide,JLabel refuse,JPanel deplacer) {
 
 		this.turn = turn;
 		this.remplissagePlateau=remplissagePlateau2;
@@ -126,13 +136,15 @@ public class ControllerPlateau extends Observable{
 		this.info = info;
 		this.mainJoueur = mainJoueur;
 		this.forme = forme;
+		this.carteVictoireDos = carteVictoireDos;
+		this.carteVictoireRecto = carteVictoireRecto;
+		this.newPartie = newPartie;
 		initializeHandler();
 	}
 
 	public void initializeHandler() {
 		for(ArrayList<Shapes> subList : remplissagePlateau) {
 			for(Shapes cases : subList) {
-				System.out.println((subList.indexOf(cases)-1) + ","+(remplissagePlateau.indexOf(subList)-1));
 				cases.addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent e) {
 						if(carteSelected != null && !deplacement && !carteDepSelected) {
@@ -175,6 +187,25 @@ public class ControllerPlateau extends Observable{
 			}
 		}
 
+		this.carteVictoireDos.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				NotifySeeCV();
+			}
+		});
+		
+		this.carteVictoireRecto.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				NotifySeeCV();
+			}
+		});
+		
+		this.newPartie.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				NotifyNew();
+				new Accueil().main(null);;
+			}
+		});
+		
 		this.valide.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				deplacer.setVisible(false);

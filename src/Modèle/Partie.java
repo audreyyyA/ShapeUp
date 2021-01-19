@@ -2,12 +2,13 @@ package Modèle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Observable;
 
 import Vue.InterfacePlateau;
 import Vue.VueTexte;
 import appli.Appli;
 
-public class Partie {
+public class Partie extends Observable {
 	
 	private boolean estTerminee;
 	private int nbManches;
@@ -59,6 +60,7 @@ public class Partie {
 			this.numManche+=1;
 			
 			Manche manche = new Manche(this.forme);
+			this.addObserver(interfacePlateau);
 			
 			manche.addObserver(interfacePlateau);
 	    	manche.getPlateau().addObserver(interfacePlateau);
@@ -95,8 +97,8 @@ public class Partie {
 			}
 			tmp = j.getNbPointTotal();
 		}
-
-		
+		this.setChanged();
+		this.notifyObservers(gagnant);
 	}
 	
 	public void afficherScore() {
