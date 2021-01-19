@@ -29,7 +29,7 @@ public class VueTexte extends Observable implements Runnable {
 		this.yPose = yPose;
 	}
 
-		public int getyDeplacer() {
+	public int getyDeplacer() {
 		return yDeplacer;
 	}
 
@@ -142,7 +142,8 @@ public class VueTexte extends Observable implements Runnable {
 
 	
 	public void choixXPose() {
-		this.xPose = 0;
+		
+		int x = 0;
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		Scanner sc = new Scanner(reader);
 		System.out.print("Abscisse de pose : ");
@@ -162,7 +163,8 @@ public class VueTexte extends Observable implements Runnable {
 			}
 			else {
 				try {
-					this.xPose = sc.nextInt();
+					x = sc.nextInt();
+					this.setxPose(x);
 					return;
 				}catch(Exception e) {
 					System.out.println("Veuillez rentrer un chiffre");
@@ -175,7 +177,8 @@ public class VueTexte extends Observable implements Runnable {
 
 	
 	public void choixYPose() {
-		this.yPose = 0;
+		//this.yPose = 0;
+		int y = 0;
 		this.setChanged();
 		this.notifyObservers(this.thread);
 		this.setChanged();
@@ -197,7 +200,8 @@ public class VueTexte extends Observable implements Runnable {
 			}
 			else {
 				try {
-					this.yPose = sc.nextInt();
+					y = sc.nextInt();
+					this.setyPose(y);
 					return;
 				}catch(Exception e) {
 					System.out.println("Veuillez rentrer un chiffre");
@@ -369,6 +373,8 @@ public class VueTexte extends Observable implements Runnable {
 		for(Joueur j : tabJoueur) {
 			System.out.println(j.toString());
 		}
+		
+		
 	}
 
 	public void piocheVide() {

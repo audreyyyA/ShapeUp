@@ -207,12 +207,14 @@ public class JoueurReel extends Joueur{
 		boolean deplacer = true;
 		int xDeplacer=0,yDeplacer=0,xCarte=0,yCarte=0;
 		Scanner sc = new Scanner(System.in);
+		boolean incorrectInput1 = true;
 		boolean incorrectInput = true;
 		
 		this.setChanged();
 		this.notifyObservers("ChoixCarteDeplacer");
 		this.setChanged();
 		this.notifyObservers(this.vueTexte.getThread());
+		
 		
 		this.vueTexte.choixXDeplacer();
 		
@@ -229,10 +231,11 @@ public class JoueurReel extends Joueur{
 			return false;
 		}
 		
+		
 		this.vueTexte.carteVoulue(plateau.getCarte(this.xCarte, this.yCarte));
 		Carte carteTemp = plateau.getCarte(this.xCarte, this.yCarte);
 			
-		while(incorrectInput) {
+		/*while(incorrectInput) {
 			
 			this.vueTexte.choixXPose();			
 			System.out.println(this.choixPosDep);
@@ -262,19 +265,51 @@ public class JoueurReel extends Joueur{
 					plateau.deplacerPlateau(xDeplacer,yDeplacer);
 					incorrectInput = false;
 				}
+			}*/
+		while(incorrectInput) {
+			
+			this.vueTexte.choixXPose();			
+			//System.out.println(this.choixPosDep);
+			
+			if(!this.choixPosDep) {
+				xDeplacer = this.vueTexte.getxPose();
+				yDeplacer = this.vueTexte.getyPose();
+				System.out.println(xDeplacer + " " + yDeplacer);
+				this.vueTexte.choixYPose();
+			}
+			else {
+				xDeplacer = this.xDep;
+				yDeplacer = this.yDep;
 			}
 
-			if(incorrectInput){
-				plateau.setRemplissage(this.xCarte, this.yCarte, carteTemp);
-				//plateau.setCarte(xCarte, yCarte, carteTemp);
-				this.vueTexte.poseCarteImpossible();
-				
-				if(!askDeplacer()) {
-					return false;
+			
+			//System.out.println(xDeplacer+","+yDeplacer+","+this.xCarte +","+this.yCarte);
+			
+			plateau.setCarte(this.xCarte, this.yCarte, null);
+				//on vérifie si c'est possible de poser la carte 
+			if(plateau.getForme() == FormePlateau.HEXAGONE) {
+				plateau.deplacerPlateau(plateau.checkPosExtremiteHex(xDeplacer,yDeplacer));
+				incorrectInput = false;
+			}
+			else {
+				if(plateau.checkPose(xDeplacer, yDeplacer)) {
+					//changer ... tout avec le mm nom de méthode plus tard
+					plateau.deplacerPlateau(xDeplacer,yDeplacer);
+					incorrectInput = false;
+				}
+			
+				if(incorrectInput){
+					plateau.setRemplissage(this.xCarte, this.yCarte, carteTemp);
+					//plateau.setCarte(xCarte, yCarte, carteTemp);
+					this.vueTexte.poseCarteImpossible();
+					
+					if(!askDeplacer()) {
+						return true;
+					}
 				}
 			}
 		}
-			
+		
 		
 		if(xDeplacer == -1) {
 			xDeplacer =0;
