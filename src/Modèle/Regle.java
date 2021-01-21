@@ -44,7 +44,6 @@ public abstract class Regle {
 			joueur.poserCarte(plateau,tour); 
 			plateau.afficherPlateau();
 			
-			//déplace la carte seulement s'il l'a pas fait avant
 			if(nbDep == 0 && tour != 1) {
 				while(((JoueurReel) joueur).askDeplacer() && !deplacer) {
 					deplacer = joueur.deplacerCarte(plateau);
@@ -106,8 +105,6 @@ public abstract class Regle {
 					nbJoueur -= nbVirtuel;
 					
 					System.out.println("Quelle stratégie ? : 1 : FACILE ou 2 : AVANCEE");
-					
-					//verifier si c pas une mauvaise entrée..
 					Scanner scStrat = new Scanner(System.in);
 					int typeStrat = scStrat.nextInt();
 

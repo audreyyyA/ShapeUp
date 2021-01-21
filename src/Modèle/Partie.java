@@ -26,7 +26,6 @@ public class Partie {
 		this.numManche = 0;
 		this.regle = regle;
 		this.tabJoueur = tabJoueur;
-		//this.manche = new Manche(forme);
 	}
 
 	public boolean getTerminee() {
@@ -88,7 +87,6 @@ public class Partie {
 		
 		int tmp = 0;
 		Joueur gagnant = null;
-		//on détermine le gagnant de la partie
 		for(Joueur j : this.tabJoueur) {
 			if(j.getNbPointTotal() > tmp) {
 				gagnant = j;

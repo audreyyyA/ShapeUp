@@ -292,8 +292,8 @@ public class CalculPointCercle extends CalculPointForme {
 					}
 					
 					
-					if(Ypos == remplissage.size()-1 && x>=remplissage.get(Ypos).size()/2) {//Au cas où la dernière carte de la colonne continue la streak
-						nbPoint += super.pointRempli.get(streakRempli);   //Il faut la compter avant de sortir de la boucle et de la reset
+					if(Ypos == remplissage.size()-1 && x>=remplissage.get(Ypos).size()/2) {
+						nbPoint += super.pointRempli.get(streakRempli);   
 						nbPoint += super.pointForme.get(streakForme);
 						nbPoint += super.pointCouleur.get(streakColor);
 						streakRempli =0;
@@ -301,7 +301,7 @@ public class CalculPointCercle extends CalculPointForme {
 						streakColor = 0;
 					}
 				}
-				else { // Si carte nulle, on casse toutes les streaks 
+				else {  
 					nbPoint += super.pointRempli.get(streakRempli); 
 					nbPoint += super.pointForme.get(streakForme);
 					nbPoint += super.pointCouleur.get(streakColor);

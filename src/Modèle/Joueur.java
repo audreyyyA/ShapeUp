@@ -18,13 +18,10 @@ import Vue.VueTexte;
 
 public abstract class Joueur extends Observable{
 	
-	/*
-	 * changer tout en protected??
-	 */
 	private String nom;
 	private int NbPointTotal;
 	private Carte carteVictoire;
-	private ArrayList<Integer> nbPointsManches; //à voir
+	private ArrayList<Integer> nbPointsManches; 
 	protected MainJoueur main;
 	protected boolean isVirtuel, deplacer;
 	private int num;

@@ -8,7 +8,6 @@ import Vue.VueTexte;
 public class JoueurReel extends Joueur{
 	
 	private boolean CVchang;
-	//private VueTexte vueTexte = new VueTexte();
 	private int xPose,yPose,index,xCarte,xDep,yDep;
 	private int yCarte = -1;
 	private boolean pose;
@@ -149,10 +148,7 @@ public class JoueurReel extends Joueur{
 			}
 			this.pose = false;
 			if(tour !=1) {
-				//on vérifie si c'est possible de poser la carte 
 				if(plateauActuel.checkPose(xPose, yPose)) {
-					
-					//changer ... tout avec le mm nom de méthode plus tard
 					if(plateauActuel.getForme() == FormePlateau.HEXAGONE) {
 						plateauActuel.deplacerPlateau(plateauActuel.checkPosExtremiteHex(xPose,yPose));
 					}
@@ -170,7 +166,6 @@ public class JoueurReel extends Joueur{
 			}
 		}
 		
-		//on change les abscisses ou ordonnées si nécessaire
 	
 		if(xPose == -1) {
 			xPose =0;
@@ -185,8 +180,6 @@ public class JoueurReel extends Joueur{
 			xPose = plateauActuel.getRemplissage().get(yPose).size() -1;
 		}
 
-		
-		//on pose la carte
 		plateauActuel.setRemplissage(xPose, yPose, this.main.getCarte(index));
 		super.main.retirerCarte(index);
 		
@@ -235,40 +228,9 @@ public class JoueurReel extends Joueur{
 		this.vueTexte.carteVoulue(plateau.getCarte(this.xCarte, this.yCarte));
 		Carte carteTemp = plateau.getCarte(this.xCarte, this.yCarte);
 			
-		/*while(incorrectInput) {
-			
-			this.vueTexte.choixXPose();			
-			System.out.println(this.choixPosDep);
-			
-			if(!this.choixPosDep) {
-				xDeplacer = this.vueTexte.getxPose();
-				yDeplacer = this.vueTexte.getyPose();
-				this.vueTexte.choixYPose();
-			}
-			else {
-				xDeplacer = this.xDep;
-				yDeplacer = this.yDep;
-			}
-
-			
-			plateau.setCarte(this.xCarte, this.yCarte, null);
-				//on vérifie si c'est possible de poser la carte 
-			if(plateau.getForme() == FormePlateau.HEXAGONE) {
-				plateau.deplacerPlateau(plateau.checkPosExtremiteHex(xDeplacer,yDeplacer));
-				incorrectInput = false;
-			}
-			else {
-				if(plateau.checkPose(xDeplacer, yDeplacer)) {
-					//changer ... tout avec le mm nom de méthode plus tard
-					plateau.deplacerPlateau(xDeplacer,yDeplacer);
-					incorrectInput = false;
-				}
-			}*/
 		while(incorrectInput) {
 			
 			this.vueTexte.choixXPose();			
-			//System.out.println(this.choixPosDep);
-			
 			if(!this.choixPosDep) {
 				xDeplacer = this.vueTexte.getxPose();
 				yDeplacer = this.vueTexte.getyPose();
@@ -281,24 +243,19 @@ public class JoueurReel extends Joueur{
 			}
 
 			
-			//System.out.println(xDeplacer+","+yDeplacer+","+this.xCarte +","+this.yCarte);
-			
 			plateau.setCarte(this.xCarte, this.yCarte, null);
-				//on vérifie si c'est possible de poser la carte 
 			if(plateau.getForme() == FormePlateau.HEXAGONE) {
 				plateau.deplacerPlateau(plateau.checkPosExtremiteHex(xDeplacer,yDeplacer));
 				incorrectInput = false;
 			}
 			else {
 				if(plateau.checkPose(xDeplacer, yDeplacer)) {
-					//changer ... tout avec le mm nom de méthode plus tard
 					plateau.deplacerPlateau(xDeplacer,yDeplacer);
 					incorrectInput = false;
 				}
 			
 				if(incorrectInput){
 					plateau.setRemplissage(this.xCarte, this.yCarte, carteTemp);
-					//plateau.setCarte(xCarte, yCarte, carteTemp);
 					this.vueTexte.poseCarteImpossible();
 					
 					if(!askDeplacer()) {
@@ -322,7 +279,6 @@ public class JoueurReel extends Joueur{
 			yDeplacer = plateau.getRemplissage().size()-1;
 		}
 		
-		//on pose la carte
 		plateau.setRemplissage(xDeplacer, yDeplacer, carteTemp);
 		plateau.afficherPlateau();
 		this.setChanged();

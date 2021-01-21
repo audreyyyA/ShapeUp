@@ -346,7 +346,7 @@ public class VueTexte extends Observable implements Runnable {
 	}
 
 	public void printGagnantManche(ArrayList<Joueur> gagnant) {
-		if(gagnant.size()>1) { // ï¿½galitï¿½
+		if(gagnant.size()>1) { 
 			System.out.print("Les joueurs gagnants à égalité de cette manche sont : ");
 			for(Joueur g : gagnant) {
 				System.out.print(g.getNom());

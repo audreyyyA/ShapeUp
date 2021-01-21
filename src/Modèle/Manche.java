@@ -24,7 +24,6 @@ public class Manche extends Observable{
 		this.estTerminé = false;
 		this.pioche = new Pioche();
 		this.creerPlateau(forme);
-		//regle normale
 		
 	}
 	
@@ -75,7 +74,6 @@ public class Manche extends Observable{
 			this.visitor = new CalculPointCercle();
 			 break;
 		case LIBRE:
-			 // creer un plateau libre rectangulaire
 			 break;
 		default :
 			break;

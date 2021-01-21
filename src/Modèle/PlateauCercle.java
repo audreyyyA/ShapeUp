@@ -7,13 +7,12 @@ public class PlateauCercle extends Plateau{
 	public PlateauCercle(FormePlateau forme) {
 		super(forme);
 		this.initialiser();
-		// TODO Auto-generated constructor stub
 	}
 
 	
 	@Override
 	public boolean checkPose(int x, int y) {
-		// TODO Auto-generated method stub
+	
 		if(y == this.remplissage.size()) { 
 			if(this.getCarte(x, y-1) != null && this.checkPosExtremite(x, y)) {
 				return true;

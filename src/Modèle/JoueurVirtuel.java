@@ -28,7 +28,6 @@ public class JoueurVirtuel extends Joueur{
 	
 	public void poserCarte(Plateau plateauActuel, int tour) {
 		
-		//voir si on met qqchose ici
 	}
 	
 	/*

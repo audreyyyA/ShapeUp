@@ -45,7 +45,7 @@ public class PlateauHexagonal extends Plateau{
 		if(y==-1) {
 			boolean lastRowEmpty = true;
 			int nbligne = this.remplissage.size() - 1;
-			for(int i=0; i<remplissage.get(nbligne).size(); i++) { //boucle de 0 à la taille de la derniere ligne
+			for(int i=0; i<remplissage.get(nbligne).size(); i++) { 
 				if(this.getCarte(i,nbligne) != null) {
 					lastRowEmpty = false;
 				}
@@ -60,7 +60,7 @@ public class PlateauHexagonal extends Plateau{
 					}
 				}
 				if(!breaker) {
-					return Direction.BASGAUCHE; //Deplacer le plateau en diago bas gauche
+					return Direction.BASGAUCHE; 
 				}
 			}
 			
@@ -73,7 +73,7 @@ public class PlateauHexagonal extends Plateau{
 					}
 				}
 				if(!breaker) {
-					return Direction.BASDROITE; //Deplacer le plateau en diago bas droite
+					return Direction.BASDROITE; 
 				}
 			}
 			else {
@@ -83,7 +83,7 @@ public class PlateauHexagonal extends Plateau{
 		
 		else if(y == remplissage.size()) {
 			boolean firstRowEmpty = true;
-			for(int i=0; i<remplissage.get(0).size(); i++) { //boucle de 0 à la taille de la derniere ligne
+			for(int i=0; i<remplissage.get(0).size(); i++) { 
 				if(this.getCarte(i,0) != null) {
 					firstRowEmpty = false;
 				}
@@ -98,7 +98,7 @@ public class PlateauHexagonal extends Plateau{
 					}
 				}
 				if(!breaker) {
-					return Direction.HAUTGAUCHE; //Deplacer le plateau en diago haut gauche
+					return Direction.HAUTGAUCHE; 
 				}
 			}
 			
@@ -111,7 +111,7 @@ public class PlateauHexagonal extends Plateau{
 					}
 				}
 				if(!breaker) {
-					return Direction.HAUTDROITE; //Deplacer le plateau en diago haut droite
+					return Direction.HAUTDROITE; 
 				}
 			}
 			else {
@@ -231,7 +231,6 @@ public class PlateauHexagonal extends Plateau{
 		}
 	}
 	
-	//FORCEMENT DIFF
 
 	@Override
 	public void afficherPlateau() {

@@ -81,17 +81,14 @@ public class Variante3 extends Regle{
 			}	
 		}
 
-		//mettre condition tour 1
 		joueur.getMain().afficherMain();
 		joueur.poserCarte(plateau,tour);
 		
-		//vider main et remettre dans la pioche
 		Carte c = joueur.getMain().getCarte(0);
 		pioche.getListeCarte().add(c);
 		joueur.getMain().retirerCarte(0);
 		plateau.afficherPlateau();
 		
-		//déplace la carte seulement s'il l'a pas fait avant
 		while(((JoueurReel) joueur).askDeplacer() && !deplacer) {
 			deplacer = joueur.deplacerCarte(plateau);
 			if(deplacer) {

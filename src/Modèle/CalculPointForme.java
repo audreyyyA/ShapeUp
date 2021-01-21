@@ -11,7 +11,6 @@ public abstract class CalculPointForme implements IVisitor{
 	
 	public CalculPointForme() {
 		
-		// Pour fixer les points associés aux différentes streaks
 		this.pointRempli =  Map.of(0, 0, 1, 0, 2, 0, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7);
 		this.pointForme =  Map.of(0, 0, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 6, 5, 7, 6);
 		this.pointCouleur = Map.of(0, 0, 1, 0, 2, 0, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8);
@@ -19,7 +18,7 @@ public abstract class CalculPointForme implements IVisitor{
 	} 
 	
 	/**
-	 * retourne le joueur ayant le meilleur score
+	 * retourne le joueur ayec le meilleur score
 	 */
 	@Override
 	public ArrayList<Joueur> calculnbPoints(ArrayList <Joueur>tabJoueur, Plateau plateau) {

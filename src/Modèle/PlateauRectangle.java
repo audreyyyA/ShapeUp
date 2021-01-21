@@ -10,13 +10,6 @@ public class PlateauRectangle extends Plateau implements Cloneable{
 
 	}
 
-	/*public Carte getCarte(int x, int y) {
-		if(y >= this.remplissage.size() || y<0 || x<0 || x >= this.remplissage.get(y).size()) {
-			return null;
-		}
-		return this.remplissage.get(y).get(x);
-	}*/
-
 	public boolean checkPose(int x,int y) {
 		if(x == -1 || y == -1 || y == this.remplissage.size() || x == this.remplissage.get(0).size()) {
 			return checkPosExtremite(x,y);		
@@ -31,14 +24,12 @@ public class PlateauRectangle extends Plateau implements Cloneable{
 		return false;
 	}
 
-	//changer en size au lieu de l'index précis pour la 2e condition... A VERIFIER
-
 	private boolean checkPosExtremite(int x, int y) {
 
 		if(y==-1) {
 			if(this.getCarte(x, y+1) != null) {
 				int nbligne = this.remplissage.size() - 1;
-				for(int i=0; i<remplissage.get(nbligne).size(); i++) { //boucle de 0 à la taille de la derniere ligne
+				for(int i=0; i<remplissage.get(nbligne).size(); i++) { 
 					if(this.getCarte(i,nbligne) != null) {
 						return false;
 					}
@@ -82,7 +73,6 @@ public class PlateauRectangle extends Plateau implements Cloneable{
 		else if(x == -1) {
 			if(this.getCarte(x+1, y) != null) {
 				for(int i=0; i<this.remplissage.size(); i++) {
-					//int p = this.remplissage.get(0).size()-1;
 					if(this.getCarte(this.remplissage.get(0).size()-1, i) != null) {
 						return false;
 					}
@@ -97,7 +87,6 @@ public class PlateauRectangle extends Plateau implements Cloneable{
 		return false;
 	}
 
-	//rectangle rectangle et hexagone A VERIFIER
 	public void deplacerPlateau(int x,int y) {
 
 		if(x == -1) { 
