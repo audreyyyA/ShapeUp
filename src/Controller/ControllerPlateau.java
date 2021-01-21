@@ -25,7 +25,7 @@ import Vue.Shapes;
 public class ControllerPlateau extends Observable{
 
 	private ArrayList<ArrayList<Shapes>> remplissagePlateau;
-	private JLabel turn,newPartie,valide,refuse, infoText,carteVictoireDos;
+	private JLabel turn,valide,refuse, infoText,carteVictoireDos;
 	private Thread thread;
 	private Joueur joueur;
 	private JPanel carteSelected = null;
@@ -58,11 +58,6 @@ public class ControllerPlateau extends Observable{
 		this.notifyObservers("Thread");
 	}
 
-	private void NotifyNew() {
-		this.setChanged();
-		this.notifyObservers("New");
-	}
-	
 	private void NotifyChoixCarteDeplacer(int x,int y) {
 		ArrayList<Integer> l = new ArrayList<>();
 		l.add(3);
@@ -123,7 +118,7 @@ public class ControllerPlateau extends Observable{
 		}
 	}
 
-	public ControllerPlateau(JLabel newPartie, JPanel carteVictoireRecto,JLabel carteVictoireDos,FormePlateau forme, JPanel mainJoueur, JPanel info, JLabel infoText, Joueur joueur, Thread thread, ArrayList<ArrayList<Shapes>> remplissagePlateau2, JLabel turn,JLabel valide,JLabel refuse,JPanel deplacer) {
+	public ControllerPlateau(JPanel carteVictoireRecto,JLabel carteVictoireDos,FormePlateau forme, JPanel mainJoueur, JPanel info, JLabel infoText, Joueur joueur, Thread thread, ArrayList<ArrayList<Shapes>> remplissagePlateau2, JLabel turn,JLabel valide,JLabel refuse,JPanel deplacer) {
 
 		this.turn = turn;
 		this.remplissagePlateau=remplissagePlateau2;
@@ -138,7 +133,6 @@ public class ControllerPlateau extends Observable{
 		this.forme = forme;
 		this.carteVictoireDos = carteVictoireDos;
 		this.carteVictoireRecto = carteVictoireRecto;
-		this.newPartie = newPartie;
 		initializeHandler();
 	}
 
@@ -196,13 +190,6 @@ public class ControllerPlateau extends Observable{
 		this.carteVictoireRecto.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				NotifySeeCV();
-			}
-		});
-		
-		this.newPartie.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				NotifyNew();
-				new Accueil().main(null);;
 			}
 		});
 		

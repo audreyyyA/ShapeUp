@@ -24,7 +24,6 @@ import Modèle.Joueur;
 import Modèle.JoueurReel;
 import Modèle.MainJoueur;
 import Modèle.Manche;
-import Modèle.Partie;
 import Modèle.Pioche;
 import Modèle.Plateau;
 import Modèle.PlateauRectangle;
@@ -56,9 +55,6 @@ public class InterfacePlateau implements Observer {
 	private ArrayList<JPanel> cartes = new ArrayList<>();
 	private Plateau plateau;
 	private FormePlateau forme;
-	private JPanel Gagnant;
-	private JLabel TexteVainqueur;
-	private JLabel newPartie;
 	
 
 	/**
@@ -84,35 +80,6 @@ public class InterfacePlateau implements Observer {
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
 		frame.setBounds(0, 0, 1295, 758);
 		frame.getContentPane().setLayout(null);
-		
-		this.Gagnant = new JPanel();
-		this.Gagnant.setBounds(245, 110, 800, 500);
-		this.Gagnant.setBackground(Color.DARK_GRAY);
-		this.Gagnant.setVisible(false);
-		frame.getContentPane().add(this.Gagnant);
-		this.Gagnant.setLayout(null);
-		
-		this.TexteVainqueur = new JLabel("New label");
-		this.TexteVainqueur.setForeground(Color.WHITE);
-		this.TexteVainqueur.setFont(new Font("Berlin Sans FB Demi", Font.PLAIN, 30));
-		this.TexteVainqueur.setHorizontalAlignment(SwingConstants.CENTER);
-		this.TexteVainqueur.setBounds(0, 0, 799, 150);
-		Gagnant.add(this.TexteVainqueur);
-		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setIcon(new ImageIcon(InterfacePlateau.class.getResource("/images/coupe.png")));
-		lblNewLabel_1.setBounds(0, 147, 799, 193);
-		Gagnant.add(lblNewLabel_1);
-		
-		JLabel label = new JLabel("New label");
-		label.setBounds(0, 0, 48, 14);
-		Gagnant.add(label);
-		
-		newPartie = new JLabel("");
-		newPartie.setIcon(new ImageIcon(InterfacePlateau.class.getResource("/images/newPartie.png")));
-		newPartie.setBounds(506, 403, 284, 73);
-		Gagnant.add(newPartie);
 
 		this.plateauPanel = new JPanel();
 		this.plateauPanel.setBounds(0, 0, 1295, 758);
@@ -232,7 +199,7 @@ public class InterfacePlateau implements Observer {
 		background.setBounds(0, 0, 1280, 720);
 		frame.getContentPane().add(background);
 
-		this.controller = new ControllerPlateau(newPartie, carteVictoireRecto,carteVictoireDos,this.forme,this.mainJoueur,this.info,infoText,this.joueur,this.thread, remplissagePlateau, turn,valide,refuse,deplacer);
+		this.controller = new ControllerPlateau(carteVictoireRecto,carteVictoireDos,this.forme,this.mainJoueur,this.info,infoText,this.joueur,this.thread, remplissagePlateau, turn,valide,refuse,deplacer);
 		this.controller.addObserver(this);
 	}
 
@@ -518,11 +485,6 @@ public class InterfacePlateau implements Observer {
 				frame.setVisible(true);
 			}
 			
-			else if(Obs instanceof Partie) {
-				this.Gagnant.setVisible(true);
-				this.TexteVainqueur.setText(((Joueur) arg).getNom() + " a gagné la partie avec "+ ((Joueur) arg).getNbPointTotal() + " points !");
-			}
-			
 			else if(Obs instanceof Pioche) {
 				this.nbCarte.setText(arg.toString());
 			}
@@ -570,11 +532,7 @@ public class InterfacePlateau implements Observer {
 			}
 
 			else if(Obs instanceof ControllerPlateau) {
-				if(arg.equals("New")) {
-					frame.dispose();
-				}
-				
-				else if(arg.equals("Thread")) {
+				if(arg.equals("Thread")) {
 					this.thread.interrupt();
 					this.joueur.setVueTexte(new VueTexte());
 				}
