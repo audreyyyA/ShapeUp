@@ -13,6 +13,11 @@ import Modèle.MainJoueur;
 
 
 
+/**
+ * @author ALCARAZ, DUTOUR
+ * Classe contenant toutes les vues textes qui seront affichees dans la console
+ * 
+ */
 public class VueTexte extends Observable implements Runnable {
 
 	public static String QUITTER = "Quit";
@@ -80,6 +85,10 @@ public class VueTexte extends Observable implements Runnable {
 		this.thread.interrupt();
 	}
 	
+	/**
+	 * Permet de chosir la carte de la main du joueur a poser
+	 * @param la main du joueur
+	 */
 	public void choixCartePose(MainJoueur main) {
 		int index = 0;
 		
@@ -140,7 +149,10 @@ public class VueTexte extends Observable implements Runnable {
 		}
 	}
 
-	
+	/**
+	 * Permet de choisir l'abscisse de pose
+	 * @throws si l'abscisse est incorrect
+	 */
 	public void choixXPose() {
 		
 		int x = 0;
@@ -175,9 +187,12 @@ public class VueTexte extends Observable implements Runnable {
 		} catch (IOException e) {}
 	}
 
-	
+	/**
+	 * Permet de choisir l'ordonnee de pose
+	 * @throws si l'ordonnee est incorrect
+	 */
 	public void choixYPose() {
-		//this.yPose = 0;
+		
 		int y = 0;
 		this.setChanged();
 		this.notifyObservers(this.thread);
@@ -212,10 +227,20 @@ public class VueTexte extends Observable implements Runnable {
 		} catch (IOException e) {}
 	}
 
+	/**
+	 * Indique qu'il est impossible de poser la carte
+	 */
+	
 	public void poseCarteImpossible() {
 		System.out.println("Tu ne peux pas poser de carte ici");
 	}
 
+	/**
+	 * Demande à l'utilisateur s'il veut déplacer une carte
+	 * @param le joueur 
+	 * @throws s'il ne repond ni par O (oui) ou N (non)
+	 */
+	
 	public void askDeplacer(Joueur j) {
 		System.out.print("Voulez vous déplacer une carte ? (O/N) ");
 		String s = null;
@@ -253,6 +278,11 @@ public class VueTexte extends Observable implements Runnable {
 		}
 	}
 
+	/**
+	 * Permet de choisir l'ordonnee de la carte à deplacer
+	 * @throws si l'ordonnee n'existe pas ou s'il est incorrect
+	 * 
+	 */
 	public void choixYDeplacer() {
 		this.yDeplacer = 0;
 		this.setChanged();
@@ -287,6 +317,12 @@ public class VueTexte extends Observable implements Runnable {
 		} catch (IOException e) {}
 	}
 
+	/**
+	 * Permet de choisir l'abscisse de la carte à deplacer
+	 * @throws si l'abscisse n'existe pas ou s'il est incorrect
+	 * 
+	 */
+	
 	public void choixXDeplacer() {
 		this.xDeplacer = 0;
 		this.setChanged();
@@ -321,14 +357,28 @@ public class VueTexte extends Observable implements Runnable {
 		} catch (IOException e) {}
 	}
 
+	/**
+	 * Indique qu'un emplacement est vide
+	 */
 	public void noCard() {
 		System.out.println("Tu as choisis un emplacement sans cartes !\n");
 	}
 
+	/**
+	 * Indique la carte qui va etre deplacee
+	 * 
+	 * @param la carte en question
+	 */
+	
 	public void carteVoulue(Carte carte) {
 		System.out.println("la carte que tu veux déplacer : " + carte);
 	}
 
+	/**
+	 * Indique le contenu de la main d'un joueur
+	 * 
+	 * @param liste de cartes de la main
+	 */
 	public void afficherMain(ArrayList<Carte> cartes) {
 		System.out.print("\n        ");
 		for(int i=0; i<cartes.size(); i++) {
@@ -337,14 +387,29 @@ public class VueTexte extends Observable implements Runnable {
 		System.out.println("\nTa main : " + cartes+"\n");
 	}
 
+	/**
+	 * Indique le tour actuel et le nom du joueur qui doit jouer
+	 * 
+	 * @param numero du tour et nom du joueur
+	 */
 	public void printTour(int nbTour, String name) {
 		System.out.println("Tour "+nbTour/2+" - "+ name+ "\n");
 	}
 
+	/**
+	 * Indique la carte defaussee
+	 * 
+	 * @param la carte en question
+	 */
 	public void carteDefausse(Carte carte) {
 		System.out.println("La carte défaussée était "+ carte);
 	}
 
+	/**
+	 * Affiche les joueurs a egalite de la manche
+	 * 
+	 * @param liste des joueurs a egalite
+	 */
 	public void printGagnantManche(ArrayList<Joueur> gagnant) {
 		if(gagnant.size()>1) { 
 			System.out.print("Les joueurs gagnants à égalité de cette manche sont : ");
@@ -357,6 +422,11 @@ public class VueTexte extends Observable implements Runnable {
 		}
 	}
 
+	/**
+	 * Affiche les points remportes
+	 * 
+	 * @param la liste des joueurs
+	 */
 	public void printPoints(ArrayList<Joueur> tabJoueur) {
 		for(Joueur t : tabJoueur) {
 			System.out.println("Carte victoire de " + t.getNom() + "à cette manche était : " + t.getCarteVictoire());
@@ -364,39 +434,81 @@ public class VueTexte extends Observable implements Runnable {
 		}
 	}
 
+	/**
+	 * Indique par quel joueur la partie a ete gagnee
+	 * 
+	 * @param le joueur gagnant
+	 */
 	public void printGagnantPartie(Joueur gagnant) {
 		System.out.println("Bravo ! Le joueur gagnant de la partie est : " + gagnant.getNom());
 	}
 
+	/**
+	 * Affiche les differents scores
+	 * 
+	 * @param la liste des joueurs de la partie
+	 */
 	public void afficherScore(ArrayList<Joueur> tabJoueur) {
 		System.out.println("Voici le tableau des scores :");
 		for(Joueur j : tabJoueur) {
 			System.out.println(j.toString());
 		}
-		
-		
 	}
 
+	/**
+	 * Affiche un message indiquant que la pioche est vide
+	 * 
+	 */
 	public void piocheVide() {
 		System.out.println("La pioche est vide");
 	}
 	
+	/**
+	 * Affiche un message indiquant que la carte a ete posee
+	 * 
+	 * @param la carte posee et son emplacement
+	 * 
+	 */
 	public void poseCarte(Carte carte, int x, int y) {
 		System.out.println("La carte : "+carte+" a été posée en "+x+","+y);
 	}
 	
+	/**
+	 * Affiche un message indiquant que la case est deja prise
+	 * 
+	 */
 	public void casePrise() {
 		System.out.println("Cette case est déjà prise");
 	}
 	
+	/**
+	 * Affiche un message indiquant que l'IA va poser une carte
+	 * 
+	 * @param le nom du joueur virtuel 
+	 * 
+	 */
 	public void avantPoseIA(Joueur j) {
 		System.out.println("Le joueur virtuel " + j.getNom() + " va poser une carte ...");
 	}
 	
+	/**
+	 * Affiche un message indiquant quelle carte va poser l'IA ainsi que l'endroit
+	 * 
+	 * @param la carte posee et son abscisse et ordonnee
+	 * @see
+	 * 
+	 */
 	public void poseIA(Carte carte, int xMax, int yMax) {
 		System.out.println("il pose la carte : " + carte + " en : " + xMax + " , " + yMax);
 	}
 	
+	/**
+	 * Affiche un message indiquant quelle carte va déplacer l'IA ainsi que l'endroit
+	 * 
+	 * @param la carte deplacee et son abscisse et ordonnee
+	 * @see
+	 * 
+	 */
 	public void deplacementIA(Carte carte, int xMax, int yMax) {
 		System.out.println("il deplace la carte : " + carte + " en : " + xMax + " , " + yMax);
 	}

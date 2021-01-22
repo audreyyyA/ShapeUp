@@ -39,6 +39,12 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
+/**
+ * @author ALCARAZ, DUTOUR
+ * Classe permettant d'afficher la vue graphique du plateau 
+ * 
+ */
+
 @SuppressWarnings("deprecation")
 public class InterfacePlateau implements Observer {
 
@@ -55,23 +61,14 @@ public class InterfacePlateau implements Observer {
 	private ArrayList<JPanel> cartes = new ArrayList<>();
 	private Plateau plateau;
 	private FormePlateau forme;
-	
 
-	/**
-	 * Launch the application.
-	 */
-
-
-	/**
-	 * Create the application.
-	 */
 	public InterfacePlateau(FormePlateau forme) {
 		this.forme = forme;
 		this.initialize();
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initialise le contenu des "frame" soit de l'interface
 	 */
 	private void initialize() {
 		frame = new JFrame();
@@ -203,6 +200,10 @@ public class InterfacePlateau implements Observer {
 		this.controller.addObserver(this);
 	}
 
+	/**
+	 * Permet d'afficher la main du joueur 
+	 * @param la main du joueur actif  et le numero
+	 */
 	public void drawMain(ArrayList<Carte> mainJoueur,int num) {
 		for(int i=0; i<mainJoueur.size();i++) {
 			if(mainJoueur.get(i) == null) {
@@ -236,7 +237,10 @@ public class InterfacePlateau implements Observer {
 		this.controller.cardHandler(cartes);
 	}
 
-
+	/**
+	 * Permet d'afficher une carte sur le plateau selon sa couleur et sa forme
+	 * @param la carte et la taille
+	 */
 	public JPanel CarteToJPanel(Carte c,int size) {
 		if(c.getForme() == FormeCarte.ROND) {
 			if(c.isRempli()) {
@@ -317,6 +321,10 @@ public class InterfacePlateau implements Observer {
 		return null;
 	}
 
+	/**
+	 * Permet d'initialiser le plateau selon sa taille et sa forme
+	 * @param la taille le plateau et sa forme
+	 */
 	public void drawPlateau(int size, JPanel Plateau, FormePlateau forme) {
 		if(forme == FormePlateau.HEXAGONE) {
 			int i = 5;
@@ -432,7 +440,10 @@ public class InterfacePlateau implements Observer {
 		}
 	}
 
-
+	/**
+	 * Permet de mettre à jour le contenu du plateau selon son contenu
+	 * @param le contenu du plateau
+	 */
 	public void updatePlateau(ArrayList<ArrayList<Carte>> remplissageCarte) {
 		for(ArrayList<Shapes> subList : remplissagePlateau) {
 			for(Shapes cases : subList) {
@@ -462,6 +473,10 @@ public class InterfacePlateau implements Observer {
 		this.plateauCarte.repaint();
 	}
 
+	/**
+	 * Met à jour l'interface plateau 
+	 * @param les classes observables notifiant des changements
+	 */
 	@Override
 	public void update(Observable Obs, Object arg) {
 

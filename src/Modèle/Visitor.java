@@ -3,6 +3,9 @@ package Modèle;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * Super Classe permettant de calculer les differents points durant une partie
+ */
 public class Visitor implements IVisitor{
 
 	@Override
@@ -11,6 +14,10 @@ public class Visitor implements IVisitor{
 		return null;
 	}
 
+	/**
+	 * Permet de calculer les points des joueurs
+	 * @param la liste des joueurs et le plateau actuel
+	 */
 	@Override
 	public ArrayList<Joueur> calculnbPoints(ArrayList<Joueur> tabJoueur, Plateau plateau) {
 		// TODO Auto-generated method stub

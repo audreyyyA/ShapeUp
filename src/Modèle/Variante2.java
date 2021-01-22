@@ -3,8 +3,17 @@ package Modèle;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * @author ALCARAZ, DUTOUR
+ * Classe permettant de déterminer une 2e variante de jeu
+ * 
+ */
 public class Variante2 extends Regle{
 
+	/**
+	 * Demarre une manche en variante 2
+	 * @param la liste des joueurs et la pioche
+	 */
 	@Override
 	public void demarrerManche(ArrayList<Joueur> tabJoueur, Pioche pioche) {
 		// TODO Auto-generated method stub

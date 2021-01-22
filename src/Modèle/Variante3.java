@@ -3,11 +3,19 @@ package Modèle;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * @author ALCARAZ, DUTOUR
+ * Classe permettant de déterminer une 3e variante de jeu
+ * 
+ */
 public class Variante3 extends Regle{
 
+	/**
+	 * Demarre une manche en variante 3
+	 * @param la liste des joueurs et la pioche
+	 */
 	@Override
 	public void demarrerManche(ArrayList<Joueur> tabJoueur, Pioche pioche) {
-		// TODO Auto-generated method stub
 		
 		System.out.println("Dans le mode ultime, tu pioches deux cartes par tour et choisis laquelle tu veux poser. Tu défausses l'autre.");
 		System.out.println("1 fois dans la partie, tu as le droit de changer de carte victoire.");
@@ -24,6 +32,11 @@ public class Variante3 extends Regle{
 		return false;
 	}
 	
+	/**
+	 * Permet de joueur selon si le joueur est virtuel ou pas
+	 * @param le joueur, le numero du tour, la pioche, le plateau et l'objet IVisitor pour le calcul de nombres de points
+	 * @throws si l'action effectuee par le joueur lève une erreur
+	 */
 	public void jouer(Joueur joueur, int tour, Pioche pioche, Plateau plateau, IVisitor visitor) {
 		
 		Carte carte1 = joueur.piocherCarte(pioche);
@@ -101,6 +114,11 @@ public class Variante3 extends Regle{
 		}	
 	}
 	
+	/**
+	 * Permet de choisir de changer sa carte victoire au cours de la partie
+	 * @param le joueur actuel et la pioche 
+	 * @throws si l'index de la main est incorrect 
+	 */
 	public void changerCarteVictoire(Joueur j, Pioche pioche) {
 		
 		System.out.println("Quelle carte veux-tu pour remplacer ta carte victoire ?");

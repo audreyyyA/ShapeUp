@@ -11,6 +11,11 @@ import javax.swing.JPanel;
 
 import Modèle.FormePlateau;
 
+/**
+ * @author ALCARAZ, DUTOUR
+ * Classe permettant d'afficher la vue graphique des plateaux/cartes selon sa forme et courleur
+ * 
+ */
 public class Shapes extends JPanel{
 
 	private Color color;
@@ -37,6 +42,10 @@ public class Shapes extends JPanel{
 		this.pointille = pointille;
 	}
 
+	/**
+	 * Creer le plateau/carte selon sa forme et couleur
+	 * @param Object Graphics 
+	 */
 	public void draw(Graphics g) {
 		if(forme == Formes.HEXAGONE) {
 			Graphics2D g2d = (Graphics2D) g;
@@ -90,12 +99,6 @@ public class Shapes extends JPanel{
 		else if(forme == Formes.TRIANGLE) {
 			Graphics2D g2d = (Graphics2D) g;
 			Polygon Triangle = new Polygon();
-			
-			/*
-			Triangle.addPoint(x+5 , (int) (y + 5+ size*Math.cos(Math.toRadians(30))));
-			Triangle.addPoint(x +5+size/2, y);
-			Triangle.addPoint(x +5+ size,(int) (y + 5+ size*Math.cos(Math.toRadians(30))));
-			*/
 			
 			Triangle.addPoint(5+size/2, 10);
 			Triangle.addPoint(5, size);
@@ -151,6 +154,10 @@ public class Shapes extends JPanel{
 		}
 	}
 
+	/**
+	 * Change la couleur selon celle passee en parametre
+	 * @param la couleur 
+	 */
 	public void changeColor(Color color) {
 		this.color = color;
 		this.repaint();

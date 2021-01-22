@@ -47,6 +47,11 @@ import java.awt.Insets;
 import javax.swing.JProgressBar;
 import java.awt.Canvas;
 
+/**
+ * @author ALCARAZ, DUTOUR
+ * Classe permettant d'afficher la vue graphique de l'accueil du jeu
+ * 
+ */
 public class Accueil implements Observer {
 	
 	private JFrame frmShapeUp;
@@ -55,9 +60,6 @@ public class Accueil implements Observer {
 	private JTextField askName3;
 	private JTextField nbManche;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		
 		EventQueue.invokeLater(new Runnable() {
@@ -72,15 +74,12 @@ public class Accueil implements Observer {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public Accueil() {
 		initialize();
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initialise l'accueil graphique
 	 */
 	private void initialize() {
 		frmShapeUp = new JFrame();
