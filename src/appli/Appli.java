@@ -16,8 +16,8 @@ import Vue.Accueil;
 import Vue.InterfacePlateau;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Représente l'application générale du jeu
+ * @author ALCARAZ, DUTOUR
  * 
  */
 public class Appli implements Observer,Runnable {

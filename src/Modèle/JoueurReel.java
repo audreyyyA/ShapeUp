@@ -6,9 +6,8 @@ import java.util.Scanner;
 import Vue.VueTexte;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Représente un joueur réel 
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public class JoueurReel extends Joueur{
 	

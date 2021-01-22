@@ -23,9 +23,8 @@ import Vue.Accueil;
 import Vue.Shapes;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Représente le controleur dans le modèle MVC faisant le lien entre les classes du modèle et celles des vues du plateau
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public class ControllerPlateau extends Observable{
 

@@ -1,9 +1,8 @@
 package Modèle;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Enum des différentes directions des cartes sur un plateau
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public enum Direction {
 	DROITE,

@@ -40,9 +40,8 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Classe permettant d'afficher la vue graphique du plateau 
- * 
+ * @author ALCARAZ, DUTOUR
  */
 
 @SuppressWarnings("deprecation")

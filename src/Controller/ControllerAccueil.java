@@ -33,9 +33,8 @@ import Vue.InterfacePlateau;
 import appli.Appli;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Représente le controleur dans le modèle MVC faisant le lien entre les classes du modèle et celles des vues de l'accueil
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public class ControllerAccueil {
 	

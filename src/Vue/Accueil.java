@@ -48,9 +48,8 @@ import javax.swing.JProgressBar;
 import java.awt.Canvas;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Classe permettant d'afficher la vue graphique de l'accueil du jeu
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public class Accueil implements Observer {
 	

@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Super Classe définissant la manière de compter les points sur un plateau 
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public abstract class CalculPointForme implements IVisitor{
 

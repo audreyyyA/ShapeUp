@@ -3,9 +3,8 @@ package Modèle;
 import java.util.ArrayList;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Classe définissant la manière de compter les points sur un plateau en forme circulaire
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public class CalculPointCercle extends CalculPointForme {
 	

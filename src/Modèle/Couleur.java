@@ -1,9 +1,8 @@
 package Modèle;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Enum des différentes couleurs de cartes
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public enum Couleur {
 	

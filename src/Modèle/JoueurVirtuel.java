@@ -3,9 +3,8 @@ package Modèle;
 import java.util.Scanner;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Représente un joueur virtuel (IA)
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public class JoueurVirtuel extends Joueur{
 	

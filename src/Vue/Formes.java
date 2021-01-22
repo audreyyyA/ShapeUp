@@ -1,8 +1,7 @@
 package Vue;
 /**
- * @author ALCARAZ, DUTOUR
  * Enum des differentes formes de plateau ou de carte
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public enum Formes {
 	TRIANGLE,

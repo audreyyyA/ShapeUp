@@ -6,9 +6,8 @@ import java.util.Observable;
 import Vue.VueTexte;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Représente la main d'un joueur
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public class MainJoueur extends Observable{
 	

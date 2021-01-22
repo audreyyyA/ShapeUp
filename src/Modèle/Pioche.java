@@ -5,9 +5,8 @@ import java.util.Observable;
 import Vue.VueTexte;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Représente la pioche contenu dans une manche
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public class Pioche extends Observable{
 	

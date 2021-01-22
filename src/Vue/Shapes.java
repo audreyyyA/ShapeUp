@@ -12,9 +12,8 @@ import javax.swing.JPanel;
 import Modèle.FormePlateau;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Classe permettant d'afficher la vue graphique des plateaux/cartes selon sa forme et courleur
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public class Shapes extends JPanel{
 

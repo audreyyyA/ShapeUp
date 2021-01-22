@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Classe permettant de déterminer une 2e variante de jeu
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public class Variante2 extends Regle{
 

@@ -8,9 +8,8 @@ import Vue.VueTexte;
 import appli.Appli;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Classe représentant une partie
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public class Partie {
 	

@@ -1,9 +1,8 @@
 package Modèle;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Enum des différentes positions d'une carte
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public enum Position {
 	DROITE,

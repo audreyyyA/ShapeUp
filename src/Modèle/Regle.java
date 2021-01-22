@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Super classe des variantes de jeu et déterminant la manière dont se déroule une partie sans variante
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public abstract class Regle {
 	

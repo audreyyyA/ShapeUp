@@ -5,6 +5,7 @@ import java.util.Map;
 
 /**
  * Super Classe permettant de calculer les differents points durant une partie
+ * @author ALCARAZ, DUTOUR
  */
 public class Visitor implements IVisitor{
 

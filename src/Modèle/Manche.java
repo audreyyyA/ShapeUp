@@ -7,9 +7,8 @@ import java.util.Scanner;
 import Vue.VueTexte;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Représente une manche au sein d'une partie
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public class Manche extends Observable{
 	/**

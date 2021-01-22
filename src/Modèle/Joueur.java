@@ -10,9 +10,8 @@ import java.util.Scanner;
 import Vue.VueTexte;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Super classe représentant un joueur
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public abstract class Joueur extends Observable{
 	

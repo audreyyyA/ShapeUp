@@ -3,9 +3,8 @@ package Modèle;
 import java.util.ArrayList;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Classe représentant un plateau de type Rectangle et héritant de Plateau
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public class PlateauRectangle extends Plateau implements Cloneable{
 

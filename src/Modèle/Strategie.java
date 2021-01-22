@@ -1,9 +1,8 @@
 package Modèle;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Super Classe des Stratégie d'une IA
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public abstract class Strategie {
 	

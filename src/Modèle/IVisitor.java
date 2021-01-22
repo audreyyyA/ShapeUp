@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Interface de la classe visitor pour calculer les différents types de points au sein du jeu
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public interface IVisitor {
 

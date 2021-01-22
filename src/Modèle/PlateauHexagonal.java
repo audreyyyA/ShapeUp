@@ -3,9 +3,8 @@ package Modèle;
 import java.util.ArrayList;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Classe représentant un plateau de type Hexagone et héritant de Plateau
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public class PlateauHexagonal extends Plateau{
 

@@ -7,9 +7,8 @@ import java.util.Observable;
 import Vue.VueTexte;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Super classe des differents types de plateau
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public abstract class Plateau extends Observable implements Cloneable {
 	

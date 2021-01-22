@@ -11,12 +11,9 @@ import Modèle.Carte;
 import Modèle.Joueur;
 import Modèle.MainJoueur;
 
-
-
 /**
- * @author ALCARAZ, DUTOUR
  * Classe contenant toutes les vues textes qui seront affichees dans la console
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public class VueTexte extends Observable implements Runnable {
 

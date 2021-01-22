@@ -1,9 +1,8 @@
 package Modèle;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Enum des différentes formes de plateaux du jeu
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public enum FormePlateau {
 	

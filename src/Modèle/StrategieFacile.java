@@ -1,9 +1,8 @@
 package Modèle;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Classe permettant d'elaborer la strategie d'une IA (Joueur virtuel) en mode facile
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public class StrategieFacile extends Strategie implements Runnable{
 	

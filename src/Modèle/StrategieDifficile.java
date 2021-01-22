@@ -3,9 +3,8 @@ package Modèle;
 import java.util.ArrayList;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Classe permettant d'elaborer la strategie d'une IA (Joueur virtuel) en mode difficile
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public class StrategieDifficile extends Strategie implements Runnable{
 	

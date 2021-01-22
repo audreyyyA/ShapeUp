@@ -1,9 +1,8 @@
 package Modèle;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Classe représentant une carte du jeu
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public class Carte {
 	

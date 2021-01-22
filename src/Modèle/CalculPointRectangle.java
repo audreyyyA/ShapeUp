@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
- * @author ALCARAZ, DUTOUR
  * Classe définissant la manière de compter les points sur un plateau retangulaire
- * 
+ * @author ALCARAZ, DUTOUR
  */
 public class CalculPointRectangle extends CalculPointForme{
 	
