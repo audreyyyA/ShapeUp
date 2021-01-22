@@ -32,6 +32,11 @@ import Vue.Accueil;
 import Vue.InterfacePlateau;
 import appli.Appli;
 
+/**
+ * @author ALCARAZ, DUTOUR
+ * Représente le controleur dans le modèle MVC faisant le lien entre les classes du modèle et celles des vues de l'accueil
+ * 
+ */
 public class ControllerAccueil {
 	
 	private JPanel name1;

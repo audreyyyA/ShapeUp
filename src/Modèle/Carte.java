@@ -1,8 +1,16 @@
 package Modèle;
 
+/**
+ * @author ALCARAZ, DUTOUR
+ * Classe représentant une carte du jeu
+ * 
+ */
 public class Carte {
 	
-	
+	/**
+	 * @see fait référence à : Couleur, FormeCarte
+	 * 
+	 */
 	private Couleur couleur;
 	private FormeCarte forme;
 	private boolean rempli;

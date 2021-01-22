@@ -14,11 +14,12 @@ import Modèle.Variante1;
 import Modèle.Variante2;
 import Vue.Accueil;
 import Vue.InterfacePlateau;
-/*
+
+/**
+ * @author ALCARAZ, DUTOUR
+ * Représente l'application générale du jeu
  * 
  */
-
-
 public class Appli implements Observer,Runnable {
 
 	public static String QUITTER = "Quit";

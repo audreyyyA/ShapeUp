@@ -2,6 +2,11 @@ package Modèle;
 
 import java.util.ArrayList;
 
+/**
+ * @author ALCARAZ, DUTOUR
+ * Classe représentant un plateau de type Rectangle et héritant de Plateau
+ * 
+ */
 public class PlateauRectangle extends Plateau implements Cloneable{
 
 	public PlateauRectangle(FormePlateau forme) {
@@ -10,6 +15,11 @@ public class PlateauRectangle extends Plateau implements Cloneable{
 
 	}
 
+	/**
+	 * Permet d'effectuer les différents vérification sur le plateau avant de poser une carte
+	 * @return vrai ou faux si la carte peut être posée ou pas
+	 * @param l'abscisse et l'ordonnee de pose que le joueur a entré au préalable
+	 */
 	public boolean checkPose(int x,int y) {
 		if(x == -1 || y == -1 || y == this.remplissage.size() || x == this.remplissage.get(0).size()) {
 			return checkPosExtremite(x,y);		
@@ -24,6 +34,11 @@ public class PlateauRectangle extends Plateau implements Cloneable{
 		return false;
 	}
 
+	/**
+	 * Permet d'effectuer les différents vérification sur les extrémitées du plateau avant de poser une carte
+	 * @return vrai ou faux si la carte peut être posée ou pas
+	 * @param l'abscisse et l'ordonnee de pose que le joueur a entré au préalable
+	 */
 	private boolean checkPosExtremite(int x, int y) {
 
 		if(y==-1) {
@@ -87,6 +102,10 @@ public class PlateauRectangle extends Plateau implements Cloneable{
 		return false;
 	}
 
+	/**
+	 * Déplace les cartes du plateau si le joueur joue en dehors du plateau (et si cela est possible)
+	 * @param l'abscisse et l'ordonnee de pose que le joueur a entré au préalable
+	 */
 	public void deplacerPlateau(int x,int y) {
 
 		if(x == -1) { 
@@ -132,7 +151,10 @@ public class PlateauRectangle extends Plateau implements Cloneable{
 		}
 
 	}
-
+	
+	/**
+	 * Initialise le remplissage d'un plateau 
+	 */
 	public void initialiser() {
 
 		this.remplissage = new ArrayList<ArrayList<Carte>>();
@@ -150,7 +172,10 @@ public class PlateauRectangle extends Plateau implements Cloneable{
 		this.setChanged();
 		this.notifyObservers();
 	}
-
+	
+	/**
+	 * Affiche un plateau de type rectangle
+	 */
 	public void afficherPlateau() {
 
 		if(this.forme == FormePlateau.RECTANGLE){
@@ -176,6 +201,10 @@ public class PlateauRectangle extends Plateau implements Cloneable{
 		}
 	}
 
+	/**
+	 * Effectue une copie du plateau
+	 * @return Renvoie la copie du plateau
+	 */
 	public  Plateau copiePlateau() {
 
 		FormePlateau copieForme = FormePlateau.RECTANGLE;

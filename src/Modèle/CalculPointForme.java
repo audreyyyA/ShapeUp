@@ -3,6 +3,11 @@ package Modèle;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * @author ALCARAZ, DUTOUR
+ * Super Classe définissant la manière de compter les points sur un plateau 
+ * 
+ */
 public abstract class CalculPointForme implements IVisitor{
 
 	protected Map <Integer,Integer> pointRempli;
@@ -18,7 +23,9 @@ public abstract class CalculPointForme implements IVisitor{
 	} 
 	
 	/**
-	 * retourne le joueur ayec le meilleur score
+	 * Calcul le nombres de points de tous les joueurs
+	 * @param la liste des joueurs et le plateau
+	 * @return la liste du/des joueurs ayant le plus de points
 	 */
 	@Override
 	public ArrayList<Joueur> calculnbPoints(ArrayList <Joueur>tabJoueur, Plateau plateau) {

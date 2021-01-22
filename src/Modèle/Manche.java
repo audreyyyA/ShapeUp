@@ -6,7 +6,16 @@ import java.util.Scanner;
 
 import Vue.VueTexte;
 
+/**
+ * @author ALCARAZ, DUTOUR
+ * Représente une manche au sein d'une partie
+ * 
+ */
 public class Manche extends Observable{
+	/**
+	 * @see différents liens avec d'autres classes : liste de type joueurs gagnant, IVisitor, Carte, Pioche, Plateau, vue texte
+	 * 
+	 */
 	
 	private ArrayList<Joueur> gagnant;
 	private boolean estTerminé;
@@ -59,6 +68,10 @@ public class Manche extends Observable{
 		this.estTerminé = estTerminé;
 	}
 	
+	/**
+	 * Permet de chosir quelle méthode de création de plateau appliquer selon la forme du plateau
+	 * @param la forme du plateau souhaitée 
+	 */
 	public void creerPlateau(FormePlateau forme) {
 		switch(forme) {
 		case RECTANGLE:
@@ -80,6 +93,10 @@ public class Manche extends Observable{
 		}	
 	}
 	
+	/**
+	 * Permet de démarrer une manche 
+	 * @param la liste des joueurs et la règle de jeu
+	 */
 	public void demarrerManche(ArrayList<Joueur> tabJoueur, Regle regle) {
 		
 		this.setChanged();
@@ -99,6 +116,10 @@ public class Manche extends Observable{
 		this.finManche(tabJoueur);
 	}
 	
+	/**
+	 * Parcours la liste des joueurs et les fait jouer tant que la manche n'est pas terminée
+	 * @param la liste des joueurs et la règle de jeu
+	 */
 	@SuppressWarnings("deprecation")
 	public void jouer(ArrayList<Joueur> tabJoueur, Regle regle) {
 		
@@ -130,6 +151,10 @@ public class Manche extends Observable{
 		this.nbTour = nbTour;
 	}
 
+	/**
+	 * Permet de mettre fin à une manche
+	 * @param la liste des joueurs de la partie
+	 */
 	public void finManche(ArrayList<Joueur> tabJoueur) {
 		this.vueTexte.carteDefausse(this.carteDefausse);
 		//comptage des points des joueurs

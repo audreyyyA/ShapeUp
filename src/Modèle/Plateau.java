@@ -6,11 +6,16 @@ import java.util.Observable;
 
 import Vue.VueTexte;
 
+/**
+ * @author ALCARAZ, DUTOUR
+ * Super classe des differents types de plateau
+ * 
+ */
 public abstract class Plateau extends Observable implements Cloneable {
 	
 	protected FormePlateau forme;
 	protected ArrayList<ArrayList<Carte>> remplissage;
-	private VueTexte vueTexte = new VueTexte();
+	protected VueTexte vueTexte = new VueTexte();
 	
 	public Plateau(FormePlateau forme){
 		this.forme = forme;
@@ -45,6 +50,10 @@ public abstract class Plateau extends Observable implements Cloneable {
 		
 	}
 	
+	/**
+	 * Effectue une copie d'un plateau
+	 * @param la liste de carte contenue sur un plateau
+	 */
 	public void setRemplissageTotalCopie(ArrayList<ArrayList<Carte>> liste) {
 		
 		for(int y = 0; y < liste.size(); y++) {
@@ -90,10 +99,10 @@ public abstract class Plateau extends Observable implements Cloneable {
 	
 	public abstract void afficherPlateau();
 	public abstract void initialiser();
+	
 	/*
 	 * Methode de clonage d'un plateau
 	 * @return : une instance clone d'un plateau 
 	 */
-	
 	public abstract Plateau copiePlateau();
 }

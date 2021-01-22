@@ -3,11 +3,21 @@ package Modèle;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * @author ALCARAZ, DUTOUR
+ * Super classe des variantes de jeu et déterminant la manière dont se déroule une partie sans variante
+ * 
+ */
 public abstract class Regle {
 	
 	public abstract void demarrerManche(ArrayList<Joueur> tabJoueur, Pioche pioche);
 	public abstract boolean isDone(Manche manche);
 	
+	/**
+	 * Logique de jeu d'une partie avec une règle classique
+	 * @param le joueur j, le numero du tour, la pioche, le palteau, le visitor pour le nombre de points
+	 * @throws erreur possible selon les actions effectuées par le joueur (IA ou réel)
+	 */
 	public void jouer(Joueur joueur, int tour, Pioche pioche, Plateau plateau, IVisitor visitor) {
 		
 		Carte c = joueur.piocherCarte(pioche);
@@ -57,6 +67,11 @@ public abstract class Regle {
 		
 	}
 	
+	/**
+	 * Initialise la liste des joueurs 
+	 * @return retourne une liste de type joueur
+	 * @throws erreur possible sur le choix du nombre de joueurs (IA ou réels) ainsi que sur leur nom puis leur création
+	 */
 	public ArrayList<Joueur> initJoueur(){
 		
 		ArrayList<Joueur> t = new ArrayList<>();

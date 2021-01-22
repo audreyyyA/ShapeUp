@@ -2,6 +2,11 @@ package Modèle;
 
 import java.util.ArrayList;
 
+/**
+ * @author ALCARAZ, DUTOUR
+ * Classe représentant un plateau de type Cercle et héritant de Plateau
+ * 
+ */
 public class PlateauCercle extends Plateau{
 
 	public PlateauCercle(FormePlateau forme) {
@@ -9,7 +14,11 @@ public class PlateauCercle extends Plateau{
 		this.initialiser();
 	}
 
-	
+	/**
+	 * Permet d'effectuer les différents vérification sur le plateau avant de poser une carte
+	 * @return vrai ou faux si la carte peut être posée ou pas
+	 * @param l'abscisse et l'ordonnee de pose que le joueur a entré au préalable
+	 */
 	@Override
 	public boolean checkPose(int x, int y) {
 	
@@ -49,7 +58,11 @@ public class PlateauCercle extends Plateau{
 
 	}
  
-	
+	/**
+	 * Permet d'effectuer les différents vérification sur les extrémitées du plateau avant de poser une carte
+	 * @return vrai ou faux si la carte peut être posée ou pas
+	 * @param l'abscisse et l'ordonnee de pose que le joueur a entré au préalable
+	 */
 	private boolean checkPosExtremite(int x, int y) {
 		int milieu = this.remplissage.get(this.remplissage.size()-1).size()/2;
 		int xOpposite = 0;
@@ -67,7 +80,10 @@ public class PlateauCercle extends Plateau{
 		return false;
 	}
 	
-	
+	/**
+	 * Déplace les cartes du plateau si le joueur joue en dehors du plateau (et si cela est possible)
+	 * @param l'abscisse et l'ordonnee de pose que le joueur a entré au préalable
+	 */
 	@Override
 	public void deplacerPlateau(int x, int y) {
 		// TODO Auto-generated method stub
@@ -119,10 +135,12 @@ public class PlateauCercle extends Plateau{
 
 	@Override
 	public void afficherPlateau() {
-		// TODO Auto-generated method stub
 		System.out.println(this.remplissage);
 	}
 
+	/**
+	 * Initialise le remplissage d'un plateau 
+	 */
 	@Override
 	public void initialiser() {
 		// TODO Auto-generated method stub
@@ -140,7 +158,11 @@ public class PlateauCercle extends Plateau{
 		this.notifyObservers();
 	}
 
-	public  Plateau copiePlateau() {
+	/**
+	 * Effectue une copie du plateau
+	 * @return Renvoie la copie du plateau
+	 */
+	public Plateau copiePlateau() {
 		
 		FormePlateau copieForme = FormePlateau.CERCLE;
 		Plateau pCopie = new PlateauCercle(copieForme);

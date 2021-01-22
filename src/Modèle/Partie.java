@@ -7,8 +7,17 @@ import Vue.InterfacePlateau;
 import Vue.VueTexte;
 import appli.Appli;
 
+/**
+ * @author ALCARAZ, DUTOUR
+ * Classe représentant une partie
+ * 
+ */
 public class Partie {
 	
+	/**
+	 * @see liens avec les classes suivantes : Regle, Joueur, FormePlateau, Manche et VueTexte
+	 * 
+	 */
 	private boolean estTerminee;
 	private int nbManches;
 	private int numManche;
@@ -52,6 +61,10 @@ public class Partie {
 		this.numManche = numManche;
 	}
 	
+	/**
+	 * Permet de débuter une partie
+	 * @param L'interface représentant un plateau et l'application 
+	 */
 	public void debutPartie(InterfacePlateau interfacePlateau, Appli app) {
 		
 		while(!this.estTerminee) {	
@@ -83,6 +96,9 @@ public class Partie {
 		this.manche = manche;
 	}
 
+	/**
+	 * Met fin à une partie
+	 */
 	public void finPartie() {
 		
 		int tmp = 0;
@@ -97,6 +113,9 @@ public class Partie {
 		
 	}
 	
+	/**
+	 * Affiche les scores finaux de la partie
+	 */
 	public void afficherScore() {
 		this.vueTexte.afficherScore(this.tabJoueur);
 	}

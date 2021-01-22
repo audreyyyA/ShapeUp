@@ -2,12 +2,12 @@ package Modèle;
 
 import java.util.ArrayList;
 
+/**
+ * @author ALCARAZ, DUTOUR
+ * Classe permettant d'elaborer la strategie d'une IA (Joueur virtuel) en mode difficile
+ * 
+ */
 public class StrategieDifficile extends Strategie implements Runnable{
-	
-	/*
-	 * de manière random va choisir de déplacer une carte
-	 * va poser une carte en fonction du nombre de pts max que cela permet de créer 
-	 */
 	
 	private Thread thread;
 	
@@ -16,6 +16,12 @@ public class StrategieDifficile extends Strategie implements Runnable{
 		this.thread = t;
 		t.start();
 	}
+	
+	/**
+	 * Determine la maniere de jouer d'une IA en mode difficile
+	 * @param le plateau, le joueur IA, le numero du tour, le visitor pour calculer le nombre de points
+	 * @throws erreur possible au moment du sleep du thread
+	 */
 
 	@Override
 	public void Algorithme(Plateau p, Joueur j, int tour, IVisitor visitor) throws CloneNotSupportedException {
@@ -87,6 +93,11 @@ public class StrategieDifficile extends Strategie implements Runnable{
 		
 	}
 	
+	/**
+	 * Permet à une IA de se déplacer
+	 * @param le plateau, le joueur IA, le numero du tour, le visitor pour calculer le nombre de points
+	 */
+
 	public void AlgorithmeDeplacement(Plateau p, Joueur j, int tour, IVisitor visitor) throws CloneNotSupportedException{
 		
 		ArrayList<ArrayList<Integer>> listeIndex = new ArrayList<>();

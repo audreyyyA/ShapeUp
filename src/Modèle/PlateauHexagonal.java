@@ -2,6 +2,11 @@ package Modèle;
 
 import java.util.ArrayList;
 
+/**
+ * @author ALCARAZ, DUTOUR
+ * Classe représentant un plateau de type Hexagone et héritant de Plateau
+ * 
+ */
 public class PlateauHexagonal extends Plateau{
 
 	public PlateauHexagonal(FormePlateau forme) {
@@ -9,6 +14,11 @@ public class PlateauHexagonal extends Plateau{
 		this.initialiser();
 	}
 
+	/**
+	 * Permet d'effectuer les différents vérification sur le plateau avant de poser une carte
+	 * @return vrai ou faux si la carte peut être posée ou pas
+	 * @param l'abscisse et l'ordonnee de pose que le joueur a entré au préalable
+	 */
 	@Override
 	public boolean checkPose(int x, int y) {
 		if(x == -1 || y == -1 || y == this.remplissage.size() || x == this.remplissage.get(y).size()) {
@@ -39,7 +49,11 @@ public class PlateauHexagonal extends Plateau{
 		return false;
 	}
 	
-
+	/**
+	 * Permet d'effectuer les différents vérification sur les extrémitées du plateau avant de poser une carte
+	 * @return vrai ou faux si la carte peut être posée ou pas
+	 * @param l'abscisse et l'ordonnee de pose que le joueur a entré au préalable
+	 */
 	public Direction checkPosExtremiteHex(int x, int y) {
 		
 		if(y==-1) {
@@ -141,6 +155,10 @@ public class PlateauHexagonal extends Plateau{
 		return null;
 	}
 
+	/**
+	 * Déplace les cartes du plateau si le joueur joue en dehors du plateau (et si cela est possible)
+	 * @param l'abscisse et l'ordonnee de pose que le joueur a entré au préalable
+	 */
 	@Override
 	public void deplacerPlateau(Direction direction) {
 		
@@ -232,6 +250,9 @@ public class PlateauHexagonal extends Plateau{
 	}
 	
 
+	/**
+	 * Affiche un plateau de type hexagone
+	 */
 	@Override
 	public void afficherPlateau() {
 		
@@ -258,6 +279,9 @@ public class PlateauHexagonal extends Plateau{
 		
 	}
 
+	/**
+	 * Initialise le remplissage d'un plateau 
+	 */
 	@Override
 	public void initialiser() {
 
@@ -282,6 +306,10 @@ public class PlateauHexagonal extends Plateau{
 		this.notifyObservers();
 	}
 	
+	/**
+	 * Effectue une copie du plateau
+	 * @return Renvoie la copie du plateau
+	 */
 	public  Plateau copiePlateau() {
 		
 		FormePlateau copieForme = FormePlateau.HEXAGONE;

@@ -5,6 +5,11 @@ import java.util.Scanner;
 
 import Vue.VueTexte;
 
+/**
+ * @author ALCARAZ, DUTOUR
+ * Représente un joueur réel 
+ * 
+ */
 public class JoueurReel extends Joueur{
 	
 	private boolean CVchang;
@@ -124,6 +129,10 @@ public class JoueurReel extends Joueur{
 		
 	}
 	
+	/**
+	 * Permet au joueur de poser une carte
+	 * @param le plateau actuel et le numéro du tour
+	 */
 	public void poserCarte(Plateau plateauActuel, int tour) {
 		this.index=-1; 
 		boolean incorrectInput = true;
@@ -185,7 +194,9 @@ public class JoueurReel extends Joueur{
 		
 	}
 
-
+	/**
+	 * Demande au joueur s'il veut déplacer une carte
+	 */
 	public boolean askDeplacer(){
 		
 		this.setChanged();
@@ -196,6 +207,10 @@ public class JoueurReel extends Joueur{
 		return this.deplacer;	
 	}
 	
+	/**
+	 * Permet à un joueur réel de déplacer une carte
+	 * @param le plateau actuel
+	 */
 	public boolean deplacerCarte(Plateau plateau) {
 		boolean deplacer = true;
 		int xDeplacer=0,yDeplacer=0,xCarte=0,yCarte=0;

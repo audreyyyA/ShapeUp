@@ -5,6 +5,11 @@ import java.util.Observable;
 
 import Vue.VueTexte;
 
+/**
+ * @author ALCARAZ, DUTOUR
+ * Représente la main d'un joueur
+ * 
+ */
 public class MainJoueur extends Observable{
 	
 	private ArrayList<Carte> cartes;
@@ -23,18 +28,29 @@ public class MainJoueur extends Observable{
 		this.num = num;
 	}
 
+	/**
+	 * Ajoute une carte à la main
+	 * @param la carte à ajouter
+	 */
 	public void ajouterCarte(Carte newCard) {
 		cartes.add(newCard);
 		this.setChanged();
 		this.notifyObservers();
 	}
 	
+	/**
+	 * Retire une carte de la main
+	 * @param l'index de la main
+	 */
 	public void retirerCarte(int index) {
 		cartes.remove(index);
 		this.setChanged();
 		this.notifyObservers();
 	}
 	
+	/**
+	 * Permet d'afficher le contneu de la main
+	 */
 	public void afficherMain() {
 		VueTexte vue = new VueTexte();
 		vue.afficherMain(this.cartes);

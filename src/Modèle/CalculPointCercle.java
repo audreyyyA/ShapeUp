@@ -2,17 +2,32 @@ package Modèle;
 
 import java.util.ArrayList;
 
+/**
+ * @author ALCARAZ, DUTOUR
+ * Classe définissant la manière de compter les points sur un plateau en forme circulaire
+ * 
+ */
 public class CalculPointCercle extends CalculPointForme {
 	
 	public CalculPointCercle() {
 		super();
 	}
 	
+	/**
+	 * Calcul le nombres de points de tous les joueurs
+	 * @param la liste des joueurs et le plateau
+	 * @return la liste du/des joueurs ayant le plus de points
+	 */
 	public ArrayList<Joueur> calculnbPoints(ArrayList <Joueur>tabJoueur, Plateau plateau) {
 		
 		return super.calculnbPoints(tabJoueur, plateau);
 	}
 	
+	/**
+	 * Calcule les points d'un joueur à la fin d'une manche selon sa carte victoire et les cartes présentes sur le plateau
+	 * @param la carte victoire du joueur et le plateau
+	 * @return retourne le nombre de points
+	 */
 	public int calculPointJoueur(Carte CV, Plateau plateau) {
 		boolean rempli = CV.isRempli();
 		Couleur color = CV.getCouleur();

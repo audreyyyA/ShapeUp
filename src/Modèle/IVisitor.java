@@ -3,6 +3,11 @@ package Modèle;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * @author ALCARAZ, DUTOUR
+ * Interface de la classe visitor pour calculer les différents types de points au sein du jeu
+ * 
+ */
 public interface IVisitor {
 
 	public ArrayList<Joueur> calculnbPoints(ArrayList <Joueur>tabJoueur, Plateau plateau);

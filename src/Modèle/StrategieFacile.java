@@ -1,12 +1,25 @@
 package Modèle;
 
-public class StrategieFacile extends Strategie{
+/**
+ * @author ALCARAZ, DUTOUR
+ * Classe permettant d'elaborer la strategie d'une IA (Joueur virtuel) en mode facile
+ * 
+ */
+public class StrategieFacile extends Strategie implements Runnable{
 	
+	private Thread thread;
 	
-	/*
-	 * va seulement poser une carte en fonction du nombre de pts max que cela permet de créer 
-	 */
+	public StrategieFacile() {
+		Thread t = new Thread(this);
+		this.thread = t;
+		t.start();
+	}
 
+	/**
+	 * Determine la maniere de jouer d'une IA en mode facile
+	 * @param le plateau, le joueur IA, le numero du tour, le visitor pour calculer le nombre de points
+	 * @throws erreur possible au moment du sleep du thread
+	 */
 	@Override
 	public void Algorithme(Plateau p, Joueur j, int tour, IVisitor visitor) throws CloneNotSupportedException {
 		
@@ -16,7 +29,7 @@ public class StrategieFacile extends Strategie{
 		boolean tour1boucle = true;
 		Carte carte = j.getMain().getCarte(j.getMain().getCartes().size()-1);
 		
-		System.out.println("Le joueur virtuel " + j.getNom() + " va poser une carte ...");
+		j.vueTexte.avantPoseIA(j);
 		
 		for(int y = 0; y<p.getRemplissage().size(); y++) {
 			for(int x = 0; x<p.getRemplissage().get(y).size(); x++) {
@@ -60,9 +73,22 @@ public class StrategieFacile extends Strategie{
 			}
 		}
 		
-		System.out.println("il pose la carte : " + carte + " en : " + xMax + " , " + yMax);
+		try {
+			this.thread.sleep(2000);
+		} catch (InterruptedException e) {
+			System.out.println("interrupt");
+			return;
+		}
+		
+		j.vueTexte.poseIA(carte, xMax, yMax);
 		p.setCarte(xMax, yMax, carte);
 		j.getMain().retirerCarte(0);
+		
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
 		
 	}
 	

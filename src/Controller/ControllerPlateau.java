@@ -22,6 +22,11 @@ import Modèle.Plateau;
 import Vue.Accueil;
 import Vue.Shapes;
 
+/**
+ * @author ALCARAZ, DUTOUR
+ * Représente le controleur dans le modèle MVC faisant le lien entre les classes du modèle et celles des vues du plateau
+ * 
+ */
 public class ControllerPlateau extends Observable{
 
 	private ArrayList<ArrayList<Shapes>> remplissagePlateau;
@@ -58,6 +63,10 @@ public class ControllerPlateau extends Observable{
 		this.notifyObservers("Thread");
 	}
 
+	/**
+	 * Notifie et effectue les changements nécessaires lorsqu'une carte va être déplacée
+	 * @param l'abscisse et  l'ordonnée pour déplacer la carte
+	 */
 	private void NotifyChoixCarteDeplacer(int x,int y) {
 		ArrayList<Integer> l = new ArrayList<>();
 		l.add(3);
@@ -67,6 +76,10 @@ public class ControllerPlateau extends Observable{
 		this.notifyObservers(l);
 	}
 	
+	/**
+	 * Notifie et effectue les changements nécessaires lorsqu'une carte va être placée
+	 * @param l'abscisse et  l'ordonnée pour placer la carte
+	 */
 	private void NotifyChoixPlacement(int x,int y) {
 		ArrayList<Integer> l = new ArrayList<>();
 		l.add(4);
@@ -81,6 +94,10 @@ public class ControllerPlateau extends Observable{
 		this.notifyObservers("CV");
 	}
 	
+	 /**
+	 * Notifie et effectue les changements nécessaires lorsque les emplacements ont été vérifié
+	 * @param l'abscisse et  l'ordonnée de l'emplacement
+	 */
 	private void NotifyCheck(int x,int y) {
 		ArrayList<Integer> l = new ArrayList<>();
 		l.add(0);
@@ -90,6 +107,10 @@ public class ControllerPlateau extends Observable{
 		this.notifyObservers(l);
 	}
 
+	/**
+	 * Notifie et effectue les changements nécessaires lorsque les emplacements ont été vérifié pour déplacer une carte
+	 * @param l'abscisse et  l'ordonnée de l'emplacement
+	 */
 	private void NotifyCheckDeplacement(int x,int y) {
 		ArrayList<Integer> l = new ArrayList<>();
 		l.add(2);
@@ -99,6 +120,10 @@ public class ControllerPlateau extends Observable{
 		this.notifyObservers(l);
 	}
 	
+	/**
+	 * Notifie et effectue les changements nécessaires lorsque les emplacements ont été vérifié pour poser une carte
+	 * @param l'abscisse et  l'ordonnée de l'emplacement
+	 */
 	private void NotifyPose(int x,int y) {
 		ArrayList<Integer> l = new ArrayList<>();
 		l.add(1);
@@ -108,6 +133,10 @@ public class ControllerPlateau extends Observable{
 		this.notifyObservers(l);
 	}
 
+	/**
+	 * Notifie et effectue les changements nécessaires lorsqu'une carte va être déplacée
+	 * @param boolean si la carte a été déplacée ou pas
+	 */
 	private void NotifyDeplacer(boolean deplacer) {
 		this.setChanged();
 		if(deplacer) {
@@ -136,6 +165,9 @@ public class ControllerPlateau extends Observable{
 		initializeHandler();
 	}
 
+	/**
+	 * Initialise pour l'interface graphique du plateau
+	 */
 	public void initializeHandler() {
 		for(ArrayList<Shapes> subList : remplissagePlateau) {
 			for(Shapes cases : subList) {
@@ -232,6 +264,10 @@ public class ControllerPlateau extends Observable{
 
 	}
 
+	/**
+	 * Initialise ... 
+	 * @param les cartes
+	 */
 	public void cardHandler(ArrayList<JPanel> cartes) {
 		for(JPanel carte : cartes) {
 			carte.addMouseListener(new MouseAdapter() {

@@ -4,8 +4,17 @@ import java.util.Observable;
 
 import Vue.VueTexte;
 
+/**
+ * @author ALCARAZ, DUTOUR
+ * Représente la pioche contenu dans une manche
+ * 
+ */
 public class Pioche extends Observable{
 	
+	/**
+	 * @see lien avec : Carte et VueTexte
+	 * 
+	 */
 	private int nbCarteRestantes;
 	private ArrayList<Carte> listeCarte;
 	private VueTexte vueTexte = new VueTexte();
@@ -16,7 +25,9 @@ public class Pioche extends Observable{
 		this.initialiser();
 	}
 	
-	
+	/**
+	 * Permet de piocher une carte au hasard 
+	 */
 	public Carte getRandomCarte() {
 		if(this.nbCarteRestantes == 0) {
 			this.vueTexte.piocheVide();
@@ -38,6 +49,9 @@ public class Pioche extends Observable{
 		return this.listeCarte;
 	}
 	
+	/**
+	 * Initialise la pioche en ajoutant chaque carte
+	 */
 	public void initialiser() {
 		this.listeCarte = new ArrayList<Carte>();
 			

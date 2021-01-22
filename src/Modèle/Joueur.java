@@ -10,12 +10,10 @@ import java.util.Scanner;
 import Vue.VueTexte;
 
 /**
+ * @author ALCARAZ, DUTOUR
+ * Super classe représentant un joueur
  * 
- * @author dedeyy
- * @version 1.0
- *
  */
-
 public abstract class Joueur extends Observable{
 	
 	private String nom;
@@ -104,9 +102,12 @@ public abstract class Joueur extends Observable{
 		this.main = main;
 	}
 	
+	/**
+	 * Permet de picoher une carte au hasard dans la pioche
+	 * @param la pioche du jeu
+	 */
 	public Carte piocherCarte(Pioche pioche) {
 		Carte newCard = pioche.getRandomCarte();
-		//this.main.ajouterCarte(newCard);
 		return newCard;
 	}
 	
@@ -124,9 +125,6 @@ public abstract class Joueur extends Observable{
 		this.vueTexte = vueTexte;
 	}
 	
-	/*
-	 * DEPLACé DANS JOUEUR reel !
-	 */
 	public abstract void poserCarte(Plateau plateauActuel, int tour);
 	
 	
