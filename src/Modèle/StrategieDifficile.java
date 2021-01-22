@@ -18,7 +18,7 @@ public class StrategieDifficile extends Strategie implements Runnable{
 	
 	/**
 	 * Determine la maniere de jouer d'une IA en mode difficile
-	 * @param le plateau, le joueur IA, le numero du tour, le visitor pour calculer le nombre de points
+	 * @param le plateau Plateau p, le joueur IA Joueur j, le numero du tour int tour, le visitor IVisitor visitor pour calculer le nombre de points
 	 * @throws erreur possible au moment du sleep du thread
 	 */
 

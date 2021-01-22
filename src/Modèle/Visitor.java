@@ -17,7 +17,7 @@ public class Visitor implements IVisitor{
 
 	/**
 	 * Permet de calculer les points des joueurs
-	 * @param la liste des joueurs et le plateau actuel
+	 * @param la liste des joueurs ArrayList<Joueur> tabJoueur et le Plateau plateau actuel
 	 */
 	@Override
 	public ArrayList<Joueur> calculnbPoints(ArrayList<Joueur> tabJoueur, Plateau plateau) {

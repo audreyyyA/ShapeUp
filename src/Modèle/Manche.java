@@ -69,7 +69,7 @@ public class Manche extends Observable{
 	
 	/**
 	 * Permet de chosir quelle méthode de création de plateau appliquer selon la forme du plateau
-	 * @param la forme du plateau souhaitée 
+	 * @param la forme du plateau souhaitée FormePlateau forme
 	 */
 	public void creerPlateau(FormePlateau forme) {
 		switch(forme) {
@@ -94,7 +94,7 @@ public class Manche extends Observable{
 	
 	/**
 	 * Permet de démarrer une manche 
-	 * @param la liste des joueurs et la règle de jeu
+	 * @param la liste des joueurs ArrayList<Joueur> tabJoueur et la règle de jeu Regle regle
 	 */
 	public void demarrerManche(ArrayList<Joueur> tabJoueur, Regle regle) {
 		
@@ -117,7 +117,7 @@ public class Manche extends Observable{
 	
 	/**
 	 * Parcours la liste des joueurs et les fait jouer tant que la manche n'est pas terminée
-	 * @param la liste des joueurs et la règle de jeu
+	 * @param la liste des joueurs ArrayList<Joueur> tabJoueur et la règle de jeu Regle regle
 	 */
 	@SuppressWarnings("deprecation")
 	public void jouer(ArrayList<Joueur> tabJoueur, Regle regle) {
@@ -152,7 +152,7 @@ public class Manche extends Observable{
 
 	/**
 	 * Permet de mettre fin à une manche
-	 * @param la liste des joueurs de la partie
+	 * @param la liste des joueurs ArrayList<Joueur> tabJoueur de la partie
 	 */
 	public void finManche(ArrayList<Joueur> tabJoueur) {
 		this.vueTexte.carteDefausse(this.carteDefausse);

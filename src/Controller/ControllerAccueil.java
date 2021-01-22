@@ -521,8 +521,7 @@ public class ControllerAccueil {
 		
 		/**
 		 * Au clic : Vérifie que tous les paramètres ont bien étés remplis
-		 * et lance la partie.
-		 * Si il manque des paramètres, les mettre en rouge
+		 * et lance la partie
 		 */
 		this.creerPartie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -201,7 +201,7 @@ public class InterfacePlateau implements Observer {
 
 	/**
 	 * Permet d'afficher la main du joueur 
-	 * @param la main du joueur actif  et le numero
+	 * @param la main du joueur actif ArrayList<Carte> mainJoueur et le numero int num
 	 */
 	public void drawMain(ArrayList<Carte> mainJoueur,int num) {
 		for(int i=0; i<mainJoueur.size();i++) {
@@ -238,7 +238,7 @@ public class InterfacePlateau implements Observer {
 
 	/**
 	 * Permet d'afficher une carte sur le plateau selon sa couleur et sa forme
-	 * @param la carte et la taille
+	 * @param la Carte c et la taille int size
 	 */
 	public JPanel CarteToJPanel(Carte c,int size) {
 		if(c.getForme() == FormeCarte.ROND) {
@@ -322,7 +322,7 @@ public class InterfacePlateau implements Observer {
 
 	/**
 	 * Permet d'initialiser le plateau selon sa taille et sa forme
-	 * @param la taille le plateau et sa forme
+	 * @param la taille int size le Plateau plateau et sa FormePlateau forme
 	 */
 	public void drawPlateau(int size, JPanel Plateau, FormePlateau forme) {
 		if(forme == FormePlateau.HEXAGONE) {
@@ -441,7 +441,7 @@ public class InterfacePlateau implements Observer {
 
 	/**
 	 * Permet de mettre à jour le contenu du plateau selon son contenu
-	 * @param le contenu du plateau
+	 * @param le contenu du plateau ArrayList<ArrayList<Carte>> remplissageCarte
 	 */
 	public void updatePlateau(ArrayList<ArrayList<Carte>> remplissageCarte) {
 		for(ArrayList<Shapes> subList : remplissagePlateau) {
@@ -474,7 +474,7 @@ public class InterfacePlateau implements Observer {
 
 	/**
 	 * Met à jour l'interface plateau 
-	 * @param les classes observables notifiant des changements
+	 * @param les classes observables notifiant des changements Observable Obs, Object arg
 	 */
 	@Override
 	public void update(Observable Obs, Object arg) {

@@ -23,7 +23,7 @@ public abstract class CalculPointForme implements IVisitor{
 	
 	/**
 	 * Calcul le nombres de points de tous les joueurs
-	 * @param la liste des joueurs et le plateau
+	 * @param la liste des joueurs ArrayList<Joueur>tabJoueur et le Plateau plateau
 	 * @return la liste du/des joueurs ayant le plus de points
 	 */
 	@Override

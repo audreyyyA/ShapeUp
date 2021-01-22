@@ -11,7 +11,7 @@ public class Variante2 extends Regle{
 
 	/**
 	 * Demarre une manche en variante 2
-	 * @param la liste des joueurs et la pioche
+	 * @param la liste des joueurs ArrayList<Joueur> tabJoueur et la Pioche pioche
 	 */
 	@Override
 	public void demarrerManche(ArrayList<Joueur> tabJoueur, Pioche pioche) {

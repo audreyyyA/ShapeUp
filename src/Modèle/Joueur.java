@@ -103,7 +103,7 @@ public abstract class Joueur extends Observable{
 	
 	/**
 	 * Permet de picoher une carte au hasard dans la pioche
-	 * @param la pioche du jeu
+	 * @param la pioche du jeu Pioche pioche
 	 */
 	public Carte piocherCarte(Pioche pioche) {
 		Carte newCard = pioche.getRandomCarte();

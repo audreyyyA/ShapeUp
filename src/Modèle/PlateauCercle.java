@@ -16,7 +16,7 @@ public class PlateauCercle extends Plateau{
 	/**
 	 * Permet d'effectuer les différents vérification sur le plateau avant de poser une carte
 	 * @return vrai ou faux si la carte peut être posée ou pas
-	 * @param l'abscisse et l'ordonnee de pose que le joueur a entré au préalable
+	 * @param l'abscisse int x et l'ordonnee int y de pose que le joueur a entré au préalable
 	 */
 	@Override
 	public boolean checkPose(int x, int y) {
@@ -60,7 +60,7 @@ public class PlateauCercle extends Plateau{
 	/**
 	 * Permet d'effectuer les différents vérification sur les extrémitées du plateau avant de poser une carte
 	 * @return vrai ou faux si la carte peut être posée ou pas
-	 * @param l'abscisse et l'ordonnee de pose que le joueur a entré au préalable
+	 * @param l'abscisse int x et l'ordonnee int y de pose que le joueur a entré au préalable
 	 */
 	private boolean checkPosExtremite(int x, int y) {
 		int milieu = this.remplissage.get(this.remplissage.size()-1).size()/2;
@@ -81,7 +81,7 @@ public class PlateauCercle extends Plateau{
 	
 	/**
 	 * Déplace les cartes du plateau si le joueur joue en dehors du plateau (et si cela est possible)
-	 * @param l'abscisse et l'ordonnee de pose que le joueur a entré au préalable
+	 * @param l'abscisse int x et l'ordonnee int y de pose que le joueur a entré au préalable
 	 */
 	@Override
 	public void deplacerPlateau(int x, int y) {

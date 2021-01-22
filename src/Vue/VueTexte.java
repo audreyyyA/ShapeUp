@@ -84,7 +84,7 @@ public class VueTexte extends Observable implements Runnable {
 	
 	/**
 	 * Permet de chosir la carte de la main du joueur a poser
-	 * @param la main du joueur
+	 * @param la main du joueur MainJoueur main
 	 */
 	public void choixCartePose(MainJoueur main) {
 		int index = 0;
@@ -234,7 +234,7 @@ public class VueTexte extends Observable implements Runnable {
 
 	/**
 	 * Demande à l'utilisateur s'il veut déplacer une carte
-	 * @param le joueur 
+	 * @param le Joueur j
 	 * @throws s'il ne repond ni par O (oui) ou N (non)
 	 */
 	
@@ -363,8 +363,7 @@ public class VueTexte extends Observable implements Runnable {
 
 	/**
 	 * Indique la carte qui va etre deplacee
-	 * 
-	 * @param la carte en question
+	 * @param la carte en question Carte carte
 	 */
 	
 	public void carteVoulue(Carte carte) {
@@ -374,7 +373,7 @@ public class VueTexte extends Observable implements Runnable {
 	/**
 	 * Indique le contenu de la main d'un joueur
 	 * 
-	 * @param liste de cartes de la main
+	 * @param liste de cartes de la main ArrayList<Carte> cartes
 	 */
 	public void afficherMain(ArrayList<Carte> cartes) {
 		System.out.print("\n        ");
@@ -387,7 +386,7 @@ public class VueTexte extends Observable implements Runnable {
 	/**
 	 * Indique le tour actuel et le nom du joueur qui doit jouer
 	 * 
-	 * @param numero du tour et nom du joueur
+	 * @param numero du tour et nom du joueur int nbTour, String name
 	 */
 	public void printTour(int nbTour, String name) {
 		System.out.println("Tour "+nbTour/2+" - "+ name+ "\n");
@@ -396,7 +395,7 @@ public class VueTexte extends Observable implements Runnable {
 	/**
 	 * Indique la carte defaussee
 	 * 
-	 * @param la carte en question
+	 * @param la carte en question Carte carte
 	 */
 	public void carteDefausse(Carte carte) {
 		System.out.println("La carte défaussée était "+ carte);
@@ -405,7 +404,7 @@ public class VueTexte extends Observable implements Runnable {
 	/**
 	 * Affiche les joueurs a egalite de la manche
 	 * 
-	 * @param liste des joueurs a egalite
+	 * @param liste des joueurs a egalite ArrayList<Joueur> gagnant
 	 */
 	public void printGagnantManche(ArrayList<Joueur> gagnant) {
 		if(gagnant.size()>1) { 
@@ -422,7 +421,7 @@ public class VueTexte extends Observable implements Runnable {
 	/**
 	 * Affiche les points remportes
 	 * 
-	 * @param la liste des joueurs
+	 * @param la liste des joueurs ArrayList<Joueur> tabJoueur
 	 */
 	public void printPoints(ArrayList<Joueur> tabJoueur) {
 		for(Joueur t : tabJoueur) {
@@ -434,7 +433,7 @@ public class VueTexte extends Observable implements Runnable {
 	/**
 	 * Indique par quel joueur la partie a ete gagnee
 	 * 
-	 * @param le joueur gagnant
+	 * @param le joueur gagnant Joueur gagnant
 	 */
 	public void printGagnantPartie(Joueur gagnant) {
 		System.out.println("Bravo ! Le joueur gagnant de la partie est : " + gagnant.getNom());
@@ -443,7 +442,7 @@ public class VueTexte extends Observable implements Runnable {
 	/**
 	 * Affiche les differents scores
 	 * 
-	 * @param la liste des joueurs de la partie
+	 * @param la liste des joueurs de la partie ArrayList<Joueur> tabJoueur
 	 */
 	public void afficherScore(ArrayList<Joueur> tabJoueur) {
 		System.out.println("Voici le tableau des scores :");
@@ -463,7 +462,7 @@ public class VueTexte extends Observable implements Runnable {
 	/**
 	 * Affiche un message indiquant que la carte a ete posee
 	 * 
-	 * @param la carte posee et son emplacement
+	 * @param la carte posee et son emplacement Carte carte, int x, int y
 	 * 
 	 */
 	public void poseCarte(Carte carte, int x, int y) {
@@ -481,7 +480,7 @@ public class VueTexte extends Observable implements Runnable {
 	/**
 	 * Affiche un message indiquant que l'IA va poser une carte
 	 * 
-	 * @param le nom du joueur virtuel 
+	 * @param le nom du joueur virtuel Joueur j
 	 * 
 	 */
 	public void avantPoseIA(Joueur j) {
@@ -491,7 +490,7 @@ public class VueTexte extends Observable implements Runnable {
 	/**
 	 * Affiche un message indiquant quelle carte va poser l'IA ainsi que l'endroit
 	 * 
-	 * @param la carte posee et son abscisse et ordonnee
+	 * @param la carte posee et son abscisse et ordonnee Carte carte, int xMax, int yMax
 	 * @see
 	 * 
 	 */
@@ -501,9 +500,7 @@ public class VueTexte extends Observable implements Runnable {
 	
 	/**
 	 * Affiche un message indiquant quelle carte va déplacer l'IA ainsi que l'endroit
-	 * 
-	 * @param la carte deplacee et son abscisse et ordonnee
-	 * @see
+	 * @param la carte deplacee et son abscisse et ordonnee Carte carte, int xMax, int yMax
 	 * 
 	 */
 	public void deplacementIA(Carte carte, int xMax, int yMax) {

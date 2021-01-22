@@ -62,7 +62,7 @@ public class Partie {
 	
 	/**
 	 * Permet de débuter une partie
-	 * @param L'interface représentant un plateau et l'application 
+	 * @param L'interface représentant un plateau InterfacePlateau interfacePlateau et l'application Appli app
 	 */
 	public void debutPartie(InterfacePlateau interfacePlateau, Appli app) {
 		

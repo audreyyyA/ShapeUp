@@ -67,7 +67,7 @@ public class ControllerPlateau extends Observable{
 
 	/**
 	 * Notifie et effectue les changements nécessaires lorsqu'une carte va être déplacée
-	 * @param l'abscisse et  l'ordonnée pour déplacer la carte
+	 * @param l'abscisse int x et  l'ordonnée int y 
 	 */
 	private void NotifyChoixCarteDeplacer(int x,int y) {
 		ArrayList<Integer> l = new ArrayList<>();
@@ -80,7 +80,7 @@ public class ControllerPlateau extends Observable{
 	
 	/**
 	 * Notifie et effectue les changements nécessaires lorsqu'une carte va être placée
-	 * @param l'abscisse et  l'ordonnée pour placer la carte
+	 * @param l'abscisse int x et  l'ordonnée int y
 	 */
 	private void NotifyChoixPlacement(int x,int y) {
 		ArrayList<Integer> l = new ArrayList<>();
@@ -101,7 +101,7 @@ public class ControllerPlateau extends Observable{
 	
 	 /**
 	 * Notifie et effectue les changements nécessaires lorsque les emplacements ont été vérifié
-	 * @param l'abscisse et  l'ordonnée de l'emplacement
+	 * @param l'abscisse int x et  l'ordonnée int y de l'emplacement
 	 */
 	private void NotifyCheck(int x,int y) {
 		ArrayList<Integer> l = new ArrayList<>();
@@ -114,7 +114,7 @@ public class ControllerPlateau extends Observable{
 
 	/**
 	 * Notifie et effectue les changements nécessaires lorsque les emplacements ont été vérifié pour déplacer une carte
-	 * @param l'abscisse et  l'ordonnée de l'emplacement
+	 * @param l'abscisse int x et  l'ordonnée int y de l'emplacement
 	 */
 	private void NotifyCheckDeplacement(int x,int y) {
 		ArrayList<Integer> l = new ArrayList<>();
@@ -127,7 +127,7 @@ public class ControllerPlateau extends Observable{
 	
 	/**
 	 * Notifie et effectue les changements nécessaires lorsque les emplacements ont été vérifié pour poser une carte
-	 * @param l'abscisse et  l'ordonnée de l'emplacement
+	 * @param l'abscisse int x et  l'ordonnée int y de l'emplacement
 	 */
 	private void NotifyPose(int x,int y) {
 		ArrayList<Integer> l = new ArrayList<>();
@@ -140,7 +140,7 @@ public class ControllerPlateau extends Observable{
 
 	/**
 	 * Notifie et effectue les changements nécessaires lorsqu'une carte va être déplacée
-	 * @param boolean si la carte a été déplacée ou pas
+	 * @param boolean deplacer si la carte a été déplacée ou pas
 	 */
 	private void NotifyDeplacer(boolean deplacer) {
 		this.setChanged();

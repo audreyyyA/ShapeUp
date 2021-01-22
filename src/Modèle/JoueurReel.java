@@ -130,7 +130,7 @@ public class JoueurReel extends Joueur{
 	
 	/**
 	 * Permet au joueur de poser une carte
-	 * @param le plateau actuel et le numéro du tour
+	 * @param le plateau actuel Plateau plateauActuel et le numéro du tour int tour
 	 */
 	public void poserCarte(Plateau plateauActuel, int tour) {
 		this.index=-1; 
@@ -208,7 +208,7 @@ public class JoueurReel extends Joueur{
 	
 	/**
 	 * Permet à un joueur réel de déplacer une carte
-	 * @param le plateau actuel
+	 * @param le plateau actuel Plateau plateau
 	 */
 	public boolean deplacerCarte(Plateau plateau) {
 		boolean deplacer = true;

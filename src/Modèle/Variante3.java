@@ -11,7 +11,7 @@ public class Variante3 extends Regle{
 
 	/**
 	 * Demarre une manche en variante 3
-	 * @param la liste des joueurs et la pioche
+	 * @param la liste des joueurs ArrayList<Joueur> tabJoueur et la Pioche pioche
 	 */
 	@Override
 	public void demarrerManche(ArrayList<Joueur> tabJoueur, Pioche pioche) {
@@ -33,7 +33,7 @@ public class Variante3 extends Regle{
 	
 	/**
 	 * Permet de joueur selon si le joueur est virtuel ou pas
-	 * @param le joueur, le numero du tour, la pioche, le plateau et l'objet IVisitor pour le calcul de nombres de points
+	 * @param Joueur joueur, int tour, Pioche pioche, Plateau plateau, IVisitor visitor
 	 * @throws si l'action effectuee par le joueur lève une erreur
 	 */
 	public void jouer(Joueur joueur, int tour, Pioche pioche, Plateau plateau, IVisitor visitor) {
@@ -115,7 +115,7 @@ public class Variante3 extends Regle{
 	
 	/**
 	 * Permet de choisir de changer sa carte victoire au cours de la partie
-	 * @param le joueur actuel et la pioche 
+	 * @param le joueur actuel Joueur j et la Pioche pioche 
 	 * @throws si l'index de la main est incorrect 
 	 */
 	public void changerCarteVictoire(Joueur j, Pioche pioche) {

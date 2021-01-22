@@ -29,7 +29,7 @@ public class MainJoueur extends Observable{
 
 	/**
 	 * Ajoute une carte à la main
-	 * @param la carte à ajouter
+	 * @param la carte à ajouter Carte newCard
 	 */
 	public void ajouterCarte(Carte newCard) {
 		cartes.add(newCard);
@@ -39,7 +39,7 @@ public class MainJoueur extends Observable{
 	
 	/**
 	 * Retire une carte de la main
-	 * @param l'index de la main
+	 * @param l'index de la main int index
 	 */
 	public void retirerCarte(int index) {
 		cartes.remove(index);

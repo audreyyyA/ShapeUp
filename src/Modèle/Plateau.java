@@ -51,7 +51,7 @@ public abstract class Plateau extends Observable implements Cloneable {
 	
 	/**
 	 * Effectue une copie d'un plateau
-	 * @param la liste de carte contenue sur un plateau
+	 * @param la liste de carte contenue sur un plateau ArrayList<ArrayList<Carte>> liste
 	 */
 	public void setRemplissageTotalCopie(ArrayList<ArrayList<Carte>> liste) {
 		

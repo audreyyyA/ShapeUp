@@ -15,7 +15,7 @@ public class CalculPointRectangle extends CalculPointForme{
 	
 	/**
 	 * Calcul le nombres de points de tous les joueurs
-	 * @param la liste des joueurs et le plateau
+	 * @param la liste des joueurs ArrayList<Joueur>tabJoueur et le Plateau plateau
 	 * @return la liste du/des joueurs ayant le plus de points
 	 */
 	public ArrayList<Joueur> calculnbPoints(ArrayList <Joueur>tabJoueur, Plateau plateau) {
@@ -25,7 +25,7 @@ public class CalculPointRectangle extends CalculPointForme{
 	
 	/**
 	 * Calcule les points d'un joueur à la fin d'une manche selon sa carte victoire et les cartes présentes sur le plateau
-	 * @param la carte victoire du joueur et le plateau
+	 * @param la carte victoire Carte CV du joueur et le Plateau plateau
 	 * @return retourne le nombre de points
 	 */
 	public int calculPointJoueur(Carte CV,Plateau plateau) {

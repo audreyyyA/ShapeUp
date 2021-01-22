@@ -43,7 +43,7 @@ public class Shapes extends JPanel{
 
 	/**
 	 * Creer le plateau/carte selon sa forme et couleur
-	 * @param Object Graphics 
+	 * @param Object Graphics g
 	 */
 	public void draw(Graphics g) {
 		if(forme == Formes.HEXAGONE) {
@@ -155,7 +155,7 @@ public class Shapes extends JPanel{
 
 	/**
 	 * Change la couleur selon celle passee en parametre
-	 * @param la couleur 
+	 * @param la couleur Color color
 	 */
 	public void changeColor(Color color) {
 		this.color = color;
