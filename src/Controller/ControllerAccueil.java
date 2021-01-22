@@ -119,8 +119,15 @@ public class ControllerAccueil {
 		initialiserHandler();
 	}
 	
+	/**
+	 * Initialise les actions listeners
+	 */
+	
 	public void initialiserHandler() {
 		
+		/**
+		 * Affiche la première ligne de création de joueurs et chache les autres
+		 */
 		this.button1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				button1.setBackground(new Color(78,168,50));
@@ -133,6 +140,9 @@ public class ControllerAccueil {
 			}
 		});
 		
+		/**
+		 * Affiche les deux premières lignes de création de joueurs et chache les autres
+		 */
 		this.button2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				button1.setBackground(Color.WHITE);
@@ -145,6 +155,9 @@ public class ControllerAccueil {
 			}
 		});
 		
+		/**
+		 * Affiche les trois lignes de création de joueurs et chache les autres
+		 */
 		this.button3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				button1.setBackground(Color.WHITE);
@@ -157,6 +170,9 @@ public class ControllerAccueil {
 			}
 		});
 		
+		/**
+		 * Augmente de 1 le nombre de manche
+		 */
 		this.btnPlus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -166,6 +182,9 @@ public class ControllerAccueil {
 			}
 		});
 		
+		/**
+		 * Diminue de 1 le nombre de manche
+		 */
 		this.btnMoins.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -177,6 +196,12 @@ public class ControllerAccueil {
 			}
 		});
 		
+		/**
+		 * Action Listener sur l'image de l'hexagone
+		 * Au clic : Met l'image de l'hexagone en vert et selectionne l'hexagone comme type de plateau de jeu
+		 * A l'entrée de la souris : Met l'image de l'hexagone en vert
+		 * A la sortie de la souris : Remet l'image de l'hexagone en blanc
+		 */
 		this.Hexagone.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				Hexagone.setIcon(new ImageIcon(Accueil.class.getResource("/images/hexagone_green.png")));
@@ -186,6 +211,7 @@ public class ControllerAccueil {
 				
 				forme = FormePlateau.HEXAGONE;
 			}
+
 			public void mouseEntered(MouseEvent e) {
 				Hexagone.setIcon(new ImageIcon(Accueil.class.getResource("/images/hexagone_green.png")));
 			}
@@ -197,6 +223,12 @@ public class ControllerAccueil {
 			}
 		});
 		
+		/**
+		 * Action Listener sur l'image du rectangle
+		 * Au clic : Met l'image du rectangle en vert et selectionne l'hexagone comme type de plateau de jeu
+		 * A l'entrée de la souris : Met l'image du rectanlge en vert
+		 * A la sortie de la souris : Remet l'image du rectangle en blanc
+		 */
 		this.Rectangle.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				Rectangle.setIcon(new ImageIcon(Accueil.class.getResource("/images/rectangle_green.png")));
@@ -219,6 +251,12 @@ public class ControllerAccueil {
 			
 		});
 		
+		/**
+		 * Action Listener sur l'image du cercle
+		 * Au clic : Met l'image de cercle en vert et selectionne l'hexagone comme type de plateau de jeu
+		 * A l'entrée de la souris : Met l'image du cerlce en vert
+		 * A la sortie de la souris : Remet l'image du cercle en blanc
+		 */
 		this.Cercle.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				Cercle.setIcon(new ImageIcon(Accueil.class.getResource("/images/cercle_green.png")));
@@ -239,6 +277,9 @@ public class ControllerAccueil {
 			}
 		});
 		
+		/**
+		 * Checkbox qui met le jeu en mode normal au clic et décoche la checbox du mode avancé
+		 */
 		this.checkNormal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(checkNormal.isOpaque()) {
@@ -253,6 +294,9 @@ public class ControllerAccueil {
 			}
 		});
 		
+		/**
+		 * Checkbox qui met le jeu en mode avancé au clic et décoche la checbox du mode normal
+		 */
 		this.checkAdvance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(checkAdvance.isOpaque()) {
@@ -267,6 +311,12 @@ public class ControllerAccueil {
 			}
 		});
 		
+		/**
+		 * Action Listener sur le texte Jeu Libre
+		 * Au clic : Met la couleur de police en vert et met jeu libre comme type de plateau
+		 * A l'entrée de la souris : Met la couleur de police en vert
+		 * A la sortie de la souris : Remet Met la couleur de police en blanc
+		 */
 		this.jeuLibre.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				Cercle.setIcon(new ImageIcon(Accueil.class.getResource("/images/cercle_reverse.png")));
@@ -287,6 +337,10 @@ public class ControllerAccueil {
 			}
 		});
 		
+		/**
+		 * Au clic : Met le joueur 1 en tant qu'IA. Si la checbox était déjà 
+		 * selectionnée, repasse le joueur 1 en joueur réel
+		 */
 		this.chckbxIa1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(chckbxIa1.isOpaque()) {
@@ -308,6 +362,10 @@ public class ControllerAccueil {
 			}
 		});
 		
+		/**
+		 * Au clic : Met le joueur 2 en tant qu'IA. Si la checbox était déjà 
+		 * selectionnée, repasse le joueur 2 en joueur réel
+		 */
 		this.chckbxIa2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(chckbxIa2.isOpaque()) {
@@ -329,6 +387,10 @@ public class ControllerAccueil {
 			}
 		});
 		
+		/**
+		 * Au clic : Met le joueur 3 en tant qu'IA. Si la checbox était déjà 
+		 * selectionnée, repasse le joueur 3 en joueur réel
+		 */
 		this.chckbxIa3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(chckbxIa3.isOpaque()) {
@@ -350,6 +412,10 @@ public class ControllerAccueil {
 			}
 		});
 		
+		/**
+		 * Au clic : Met la difficulté du joueur virtuel 1 en mode facile et 
+		 * décoche la checbox de l'IA difficle
+		 */
 		this.IAFacile1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(IAFacile1.isOpaque()) {
@@ -364,6 +430,10 @@ public class ControllerAccueil {
 			}
 		});
 		
+		/**
+		 * Au clic : Met la difficulté du joueur virtuel 2 en mode facile et 
+		 * décoche la checbox de l'IA difficle
+		 */
 		this.IAFacile2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(IAFacile2.isOpaque()) {
@@ -378,6 +448,10 @@ public class ControllerAccueil {
 			}
 		});
 		
+		/**
+		 * Au clic : Met la difficulté du joueur virtuel 3 en mode facile et 
+		 * décoche la checbox de l'IA difficle
+		 */
 		this.IAFacile3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(IAFacile3.isOpaque()) {
@@ -392,6 +466,10 @@ public class ControllerAccueil {
 			}
 		});
 		
+		/**
+		 * Au clic : Met la difficulté du joueur virtuel 1 en mode difficile et 
+		 * décoche la checbox de l'IA facile
+		 */
 		this.IADifficile1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(IADifficile1.isOpaque()) {
@@ -406,6 +484,10 @@ public class ControllerAccueil {
 			}
 		});
 		
+		/**
+		 * Au clic : Met la difficulté du joueur virtuel 2 en mode difficile et 
+		 * décoche la checbox de l'IA facile
+		 */
 		this.IADifficile2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(IADifficile2.isOpaque()) {
@@ -420,6 +502,10 @@ public class ControllerAccueil {
 			}
 		});
 		
+		/**
+		 * Au clic : Met la difficulté du joueur virtuel 3 en mode difficile et 
+		 * décoche la checbox de l'IA facile
+		 */
 		this.IADifficile3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(IADifficile3.isOpaque()) {
@@ -434,7 +520,11 @@ public class ControllerAccueil {
 			}
 		});
 		
-		
+		/**
+		 * Au clic : Vérifie que tous les paramètres ont bien étés remplis
+		 * et lance la partie.
+		 * Si il manque des paramètres, les mettre en rouge
+		 */
 		this.creerPartie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Regle regle = null;

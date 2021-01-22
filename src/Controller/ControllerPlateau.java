@@ -58,6 +58,9 @@ public class ControllerPlateau extends Observable{
 		this.deplacement = deplacement;
 	}
 
+	/**
+	 * Notifie l'observer d'arrêter le thread
+	 */
 	private void NotifyThread() {
 		this.setChanged();
 		this.notifyObservers("Thread");
@@ -89,6 +92,9 @@ public class ControllerPlateau extends Observable{
 		this.notifyObservers(l);
 	}
 	
+	/**
+	 * Notifie l'observer d'afficher ou cacher la carte victoire
+	 */
 	private void NotifySeeCV() {
 		this.setChanged();
 		this.notifyObservers("CV");
@@ -213,6 +219,7 @@ public class ControllerPlateau extends Observable{
 			}
 		}
 
+		
 		this.carteVictoireDos.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				NotifySeeCV();
@@ -265,7 +272,7 @@ public class ControllerPlateau extends Observable{
 	}
 
 	/**
-	 * Initialise ... 
+	 * Permet de sélectionner des cartes dans sa main 
 	 * @param les cartes
 	 */
 	public void cardHandler(ArrayList<JPanel> cartes) {
